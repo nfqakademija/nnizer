@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContractorRepository")
- * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
+ * @UniqueEntity(fields={"username"}, message="existing.account")
  */
 class Contractor implements UserInterface
 {
@@ -55,6 +55,9 @@ class Contractor implements UserInterface
      */
     private $phone_number;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +73,10 @@ class Contractor implements UserInterface
         return (string) $this->username;
     }
 
+    /**
+     * @param string $username
+     * @return $this
+     */
     public function setUsername(string $username): self
     {
         $this->username = $username;
@@ -89,6 +96,10 @@ class Contractor implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array $roles
+     * @return $this
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -104,6 +115,10 @@ class Contractor implements UserInterface
         return (string) $this->password;
     }
 
+    /**
+     * @param string $password
+     * @return $this
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -124,15 +139,21 @@ class Contractor implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+         $this->plainPassword = null;
     }
 
+    /**
+     * @return string|null
+     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
+    /**
+     * @param string $firstname
+     * @return $this
+     */
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
@@ -140,11 +161,18 @@ class Contractor implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
+    /**
+     * @param string $lastname
+     * @return $this
+     */
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
@@ -152,11 +180,18 @@ class Contractor implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     * @return $this
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -164,11 +199,18 @@ class Contractor implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPhoneNumber(): ?string
     {
         return $this->phone_number;
     }
 
+    /**
+     * @param string|null $phone_number
+     * @return $this
+     */
     public function setPhoneNumber(?string $phone_number): self
     {
         $this->phone_number = $phone_number;

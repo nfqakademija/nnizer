@@ -1,0 +1,10 @@
+username.empty: Įveskite savo slapyvardį
+username.short: Slapyvardis privalo būti bent 4 simbolių ilgio
+password.empty: Įveskite savo slaptažodį
+password.short: Jūsų slaptažodis privalo būti bent 6 simbolių ilgio
+firstname.empty: Įveskite savo vardą
+firstname.short: Vardas per trumpas
+lastname.empty: Įveskite savo pavardę
+lastname.short: Pavardė per trumpa
+email.blank: Įveskite savo el. paštą
+existing.account: Toks naudotojas jau egzistuoja

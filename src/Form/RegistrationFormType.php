@@ -19,20 +19,32 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
-            ->add('username')
+            ->add('username', TextType::class, [
+                'empty_data' => '',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'username.empty',
+                    ]),
+                    new Length([
+                        'min' => 2,
+                        'minMessage' => 'username.short',
+                        'max' => 32,
+                    ])
+                ]
+            ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'password.empty',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
+                        'minMessage' => 'password.short',
                         'max' => 4096,
                     ]),
                 ],
@@ -40,11 +52,11 @@ class RegistrationFormType extends AbstractType
             ->add('firstname', TextType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your firstname',
+                        'message' => 'firstname.empty',
                     ]),
                     new Length([
                         'min' => 2,
-                        'minMessage' => 'Are you sure your firstname has only 1 letter?',
+                        'minMessage' => 'firstname.short',
                         'max' => 32,
                     ])
                 ]
@@ -52,11 +64,11 @@ class RegistrationFormType extends AbstractType
             ->add('lastname', TextType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your lastname',
+                        'message' => 'lastname.empty',
                     ]),
                     new Length([
                         'min' => 2,
-                        'minMessage' => 'Are you sure your lastname has only 1 letter?',
+                        'minMessage' => 'lastname.short',
                         'max' => 32,
                     ])
                 ]
@@ -64,19 +76,17 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your email',
+                        'message' => 'email.blank',
                     ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Seems like your email is too short. (Min. {{ limit }} characters)',
-                        'max' => 64,
-                    ])
                 ]
             ])
             ->add('phoneNumber', NumberType::class)
         ;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

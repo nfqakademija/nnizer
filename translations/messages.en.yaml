@@ -1,0 +1,16 @@
+hello: Hello, %name%!
+register: Register
+register.button: Register
+log.in: Login
+logged.in.as: You are currently logged in as %user%
+logout: Log out
+please.sign.in: Please sign in
+username: Username
+password: Password
+sign.in: Sign in
+Username: Username*
+Firstname: Firstname *
+Lastname: Lastname *
+Email: Email *
+Phone number: Phone number
+Plain password: Password *

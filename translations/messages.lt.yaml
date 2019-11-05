@@ -1,0 +1,16 @@
+hello: Sveiki, %name%!
+register: Registracija
+register.button: Registruotis
+log.in: Prisijungti
+logged.in.as: Jūs šiuo metu esate prisijungęs kaip %user%
+logout: Atsijungti
+please.sign.in: Prašome prisijungti
+username: Vartotojo vardas
+password: Slaptažodis
+sign.in: Prisijungti
+Username: Vartotojo vardas *
+Firstname: Jūsų vardas *
+Lastname: Jūsų pavardė *
+Email: El. paštas *
+Phone number: Telefono numeris
+Plain password: Slaptažodis *
