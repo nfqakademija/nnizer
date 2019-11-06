@@ -10,6 +10,7 @@ class ContractorController extends AbstractController
 {
     /**
      * @Route("/contractor", name="contractor")
+     * @return Response
      */
     public function index(): Response
     {

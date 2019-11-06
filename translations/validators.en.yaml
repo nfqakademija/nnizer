@@ -1,10 +1,16 @@
-username.empty: Please fill in your username
-username.short: Your username must be at least 4 letters long
-password.empty: Please fill in the password
-password.short: The password is too short
-firstname.empty: Please enter your firstname
-firstname.short: How can your firstname have 1 letter?
-lastname.empty: Please enter your lastname
-lastname.short: How can your lastname have 1 letter?
-email.blank: Please enter your email
-existing.account: This username is already taken
+username:
+  empty: Please fill in your username
+  short: Your username must be at least 4 letters long
+  existing: This username is already taken
+password:
+  empty: Please fill in the password
+  short: The password is too short
+firstname:
+  empty: Please enter your firstname
+  short: How can your firstname have 1 letter?
+lastname:
+  empty: Please enter your lastname
+  short: How can your lastname have 1 letter?
+email:
+  blank: Please enter your email
+  invalid: Please make sure your email contains '@' and '.'

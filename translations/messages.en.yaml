@@ -1,16 +1,21 @@
-hello: Hello, %name%!
-register: Register
-register.button: Register
-log.in: Login
-logged.in.as: You are currently logged in as %user%
-logout: Log out
-please.sign.in: Please sign in
-username: Username
-password: Password
-sign.in: Sign in
-Username: Username*
-Firstname: Firstname *
-Lastname: Lastname *
-Email: Email *
-Phone number: Phone number
-Plain password: Password *
+contractor:
+  hello: Hello, %name%!
+
+login:
+  login: Login
+  logged_in_as: You are currently logged in as %user%
+  logout: Log out
+  please_signin: Please sign in
+  username: Username
+  password: Password
+  signin: Sign in
+
+registration_form:
+  register: Register
+  register.button: Register
+  username: Username *
+  firstname: Firstname *
+  lastname: Lastname *
+  email: Email *
+  phoneNumber: Phone number
+  plainPassword: Password *

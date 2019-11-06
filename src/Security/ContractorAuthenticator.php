@@ -51,7 +51,7 @@ class ContractorAuthenticator extends AbstractFormLoginAuthenticator
      * @param Request $request
      * @return bool
      */
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
         return 'app_login' === $request->attributes->get('_route')
             && $request->isMethod('POST');
@@ -61,7 +61,7 @@ class ContractorAuthenticator extends AbstractFormLoginAuthenticator
      * @param Request $request
      * @return array|mixed
      */
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): array
     {
         $credentials = [
             'username' => $request->request->get('username'),
@@ -104,7 +104,7 @@ class ContractorAuthenticator extends AbstractFormLoginAuthenticator
      * @param UserInterface $user
      * @return bool
      */
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
@@ -115,7 +115,7 @@ class ContractorAuthenticator extends AbstractFormLoginAuthenticator
      * @param string $providerKey
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response|null
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
@@ -127,7 +127,7 @@ class ContractorAuthenticator extends AbstractFormLoginAuthenticator
     /**
      * @return string
      */
-    protected function getLoginUrl()
+    protected function getLoginUrl(): string
     {
         return $this->urlGenerator->generate('app_login');
     }

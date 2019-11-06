@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{  "register"|trans }}{% endblock %}
+{% block title %}{{ "registration_form.register"|trans }}{% endblock %}
 
 {% block body %}
-    <h1>{{  "register"|trans }}</h1>
+    <h1>{{ "registration_form.register"|trans }}</h1>
 
     {{ form_start(registrationForm, { attr: {novalidate: 'novalidate' }}) }}
         {{ form_row(registrationForm.username) }}
@@ -13,6 +13,6 @@
         {{ form_row(registrationForm.phoneNumber) }}
         {{ form_row(registrationForm.plainPassword) }}
 
-        <button class="btn">{{ "register.button"|trans }}</button>
+        <button class="btn">{{ "registration_form.register.button"|trans }}</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

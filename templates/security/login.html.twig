@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ "log.in"|trans }}{% endblock %}
+{% block title %}{{ "login.login"|trans }}{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -10,22 +10,22 @@
 
     {% if app.user %}
         <div class="mb-3">
-            {{ "logged.in.as"|trans({'%user%': app.user.username}, "messages") }}, <a href="{{ path('app_logout') }}">{{ "logout"|trans }}</a>
+            {{ "login.logged_in_as"|trans({'%user%': app.user.username}, "messages") }}, <a href="{{ path('app_logout') }}">{{ "login.logout"|trans }}</a>
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">{{ "please.sign.in"|trans }}</h1>
-    <label for="inputUsername" class="sr-only">{{ "username"|trans }}</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="{{ "username"|trans }}" required autofocus>
-    <label for="inputPassword" class="sr-only">{{ "password"|trans }}</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="{{ "password"|trans }}" required>
+    <h1 class="h3 mb-3 font-weight-normal">{{ "login.please_signin"|trans }}</h1>
+    <label for="inputUsername" class="sr-only">{{ "login.username"|trans }}</label>
+    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="{{ "login.username"|trans }}" required autofocus>
+    <label for="inputPassword" class="sr-only">{{ "login.password"|trans }}</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="{{ "login.password"|trans }}" required>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
 
     <button class="btn btn-lg btn-primary" type="submit">
-        {{ "sign.in"|trans }}
+        {{ "login.signin"|trans }}
     </button>
 </form>
 {% endblock %}

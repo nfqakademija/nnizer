@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -22,6 +23,7 @@ class RegistrationFormType extends AbstractType
 
         $builder
             ->add('username', TextType::class, [
+                'label' => 'registration_form.username',
                 'empty_data' => '',
                 'constraints' => [
                     new NotBlank([
@@ -37,6 +39,7 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'label' => 'registration_form.plainPassword',
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
@@ -50,6 +53,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('firstname', TextType::class, [
+                'label' => 'registration_form.firstname',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'firstname.empty',
@@ -62,6 +66,7 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('lastname', TextType::class, [
+                'label' => 'registration_form.lastname',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'lastname.empty',
@@ -74,13 +79,19 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('email', EmailType::class, [
+                'label' => 'registration_form.email',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'email.blank',
                     ]),
+                    new Email([
+                        'message' => 'email.invalid',
+                    ])
                 ]
             ])
-            ->add('phoneNumber', NumberType::class)
+            ->add('phoneNumber', NumberType::class, [
+                'label' => 'registration_form.phoneNumber',
+            ])
         ;
     }
 

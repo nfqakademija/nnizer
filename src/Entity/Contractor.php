@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContractorRepository")
- * @UniqueEntity(fields={"username"}, message="existing.account")
+ * @UniqueEntity(fields={"username"}, message="username.existing")
  */
 class Contractor implements UserInterface
 {
@@ -97,7 +97,7 @@ class Contractor implements UserInterface
     }
 
     /**
-     * @param array $roles
+     * @param string[] $roles
      * @return $this
      */
     public function setRoles(array $roles): self
