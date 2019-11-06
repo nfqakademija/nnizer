@@ -1,7 +1,7 @@
-contractor:
+contractor_page:
   hello: Hello, %name%!
 
-login:
+login_page:
   login: Login
   logged_in_as: You are currently logged in as %user%
   logout: Log out

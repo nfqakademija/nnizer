@@ -1,7 +1,7 @@
-contractor:
+contractor_page:
   hello: Sveiki, %name%!
 
-login:
+login_page:
   login: Prisijungimas
   logged_in_as: Jūs šiuo metu esate prisijungęs kaip %user%
   logout: Atsijungti
@@ -15,7 +15,7 @@ registration_form:
   register.button: Registruotis
   username: Vartotojo vardas *
   firstname: Jūsų vardas *
-  lastname: Jūsų pavardė
+  lastname: Jūsų pavardė *
   email: El. paštas *
   phoneNumber: Telefono numeris
   plainPassword: Slaptažodis *
