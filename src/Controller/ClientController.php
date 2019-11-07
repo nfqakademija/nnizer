@@ -16,6 +16,7 @@ class ClientController extends AbstractController
      * @Route("/new-client", name="app_client_register")
      * @param Request $request
      * @return Response
+     * @throws \Exception
      */
     public function register(
         Request $request
@@ -34,12 +35,10 @@ class ClientController extends AbstractController
             // do anything else you need here, like send an email
 
             return new RedirectResponse($this->generateUrl('home'));
-
         }
 
         return $this->render('client/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
-
 }
