@@ -14,3 +14,8 @@ lastname:
 email:
   blank: Please enter your email
   invalid: Please make sure your email contains '@' and '.'
+date:
+  unchosen: Visit date not picked
+  invalid: Visit date invalid
+provider:
+  empty: You did not choose a service provider

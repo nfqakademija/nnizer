@@ -19,3 +19,5 @@ registration_form:
   email: Email *
   phoneNumber: Phone number
   plainPassword: Password *
+  provider: Service provider
+  date: Visit date

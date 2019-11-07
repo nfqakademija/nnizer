@@ -14,3 +14,8 @@ lastname:
 email:
   blank: Įveskite savo el. paštą
   invalid: Įvestas neteisingas el. pašto adresas
+date:
+  unchosen: Vizito laikas nepasirinktas
+  invalid: Vizito laikas neteisingas
+provider:
+  empty: Nepasirinktas paslaugos teikėjas

@@ -19,3 +19,5 @@ registration_form:
   email: El. paštas *
   phoneNumber: Telefono numeris
   plainPassword: Slaptažodis *
+  provider: Paslaugos teikėjas
+  date: Vizito data
