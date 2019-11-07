@@ -8,8 +8,8 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: App\Entity\Client
-                property: uuid
+                class: App\Entity\Contractor
+                property: username
         # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
