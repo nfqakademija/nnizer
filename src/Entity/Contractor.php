@@ -59,16 +59,6 @@ class Contractor implements UserInterface
     private $phone_number;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
-
-    /**
      * @return int|null
      */
     public function getId(): ?int
