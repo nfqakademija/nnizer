@@ -60,8 +60,8 @@
         with_items: "{{ deployment.linked_directories + deployment.linked_files }}"
 
       - name: Migrate the database
-          shell: bin/console doctrine:migrations:migrate --no-interaction --env=prod
-          args:
+        shell: bin/console doctrine:migrations:migrate --no-interaction --env=prod
+        args:
             chdir: "{{ deploy_helper.new_release_path }}"
 
       - name: "Warm up application cache" # <-- Symfony specific task, to be ready for new version
