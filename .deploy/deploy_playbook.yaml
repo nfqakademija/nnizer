@@ -60,7 +60,7 @@
         with_items: "{{ deployment.linked_directories + deployment.linked_files }}"
 
       - name: Migrate the database
-          shell: bin/console doctrine:migrations:migrate
+          shell: bin/console doctrine:migrations:migrate --no-interaction --env=prod
           args:
             chdir: "{{ deploy_helper.new_release_path }}"
 
