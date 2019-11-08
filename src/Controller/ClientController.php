@@ -67,6 +67,5 @@ class ClientController extends AbstractController
         ;
 
         $mailer->send($message);
-
     }
 }
