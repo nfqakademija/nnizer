@@ -19,25 +19,27 @@ class ClientController extends AbstractController
      * @var TranslatorInterface
      */
     private $translator;
-
+    /**
+     * @var MailerService
+     */
+    private $mailer;
     /**
      * ClientController constructor.
      * @param TranslatorInterface $translator
      */
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator, MailerService $mailer)
     {
         $this->translator = $translator;
+        $this->mailer = $mailer;
     }
     /**
      * @Route("/new-client", name="app_client_register")
      * @param Request $request
-     * @param MailerService $mailer
      * @return Response
      * @throws Exception
      */
     public function register(
-        Request $request,
-        MailerService $mailer
+        Request $request
     ): Response {
         $user = new Client();
         $form = $this->createForm(ClientRegistrationFormType::class, $user);
@@ -50,22 +52,29 @@ class ClientController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
-            $renderedTemplate = $this->renderView(
-                'emails/client-register.html.twig',
-                ['user' => $user->getFirstname()]
-            );
-            $mailer->sendMail(
-                $renderedTemplate,
-                $this->translator->trans('mailer.title.registration'),
-                $user->getEmail()
-            );
+            $this->sendSuccessfulRegistrationEmail($user->getFirstname(), $user->getEmail());
 
-            return new RedirectResponse($this->generateUrl('home'));
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('client/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @param string $firstname
+     * @param string $email
+     */
+    private function sendSuccessfulRegistrationEmail(string $firstname, string $email): void
+    {
+        $this->mailer->sendMail(
+            $this->renderView(
+                'emails/client-register.html.twig',
+                ['user' => $firstname]
+            ),
+            $this->translator->trans('mailer.title.registration'),
+            $email
+        );
     }
 }
