@@ -21,3 +21,8 @@ registration_form:
   plainPassword: Password *
   provider: Service provider
   date: Visit date
+
+mailer:
+  title:
+    registration: You have successfully registered
+  greeting: Hello %user%! You have successfully registered.

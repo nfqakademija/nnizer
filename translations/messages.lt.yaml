@@ -21,3 +21,8 @@ registration_form:
   plainPassword: Slaptažodis *
   provider: Paslaugos teikėjas
   date: Vizito data
+
+mailer:
+  title:
+    registration: Registracija sėkminga
+  greeting: Sveiki, %user%! Jūsų registracija sėkminga.
