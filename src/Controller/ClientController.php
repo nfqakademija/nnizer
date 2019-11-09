@@ -4,27 +4,40 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Form\ClientRegistrationFormType;
+use App\Service\MailerService;
 use Exception;
-use Swift_Mailer;
-use Swift_SmtpTransport;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ClientController extends AbstractController
 {
     /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * ClientController constructor.
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+    /**
      * @Route("/new-client", name="app_client_register")
      * @param Request $request
-     * @param Swift_Mailer $mailer
+     * @param MailerService $mailer
      * @return Response
      * @throws Exception
      */
     public function register(
         Request $request,
-        Swift_Mailer $mailer
+        MailerService $mailer
     ): Response {
         $user = new Client();
         $form = $this->createForm(ClientRegistrationFormType::class, $user);
@@ -38,7 +51,15 @@ class ClientController extends AbstractController
             $entityManager->flush();
 
             // do anything else you need here, like send an email
-            $this->sendActivationEmail($user, $mailer);
+            $renderedTemplate = $this->renderView(
+                'emails/client-register.html.twig',
+                ['user' => $user->getFirstname()]
+            );
+            $mailer->sendMail(
+                $renderedTemplate,
+                $this->translator->trans('mailer.title.registration'),
+                $user->getEmail()
+            );
 
             return new RedirectResponse($this->generateUrl('home'));
         }
@@ -46,26 +67,5 @@ class ClientController extends AbstractController
         return $this->render('client/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @param Client $client
-     * @param Swift_Mailer $mailer
-     */
-    public function sendActivationEmail(Client $client, Swift_Mailer $mailer): void
-    {
-        $message = (new \Swift_Message('NNIZER reservation'))
-            ->setFrom('nnizernfq@gmail.com')
-            ->setTo($client->getEmail())
-            ->setBody(
-                $this->renderView(
-                    'emails/client-register.html.twig',
-                    ['name' => $client->getFirstname()]
-                ),
-                'text/html'
-            )
-        ;
-
-        $mailer->send($message);
     }
 }
