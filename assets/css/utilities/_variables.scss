@@ -1,1 +1,29 @@
-/** VARIABLES **/
+$base-line-height: 1.45;
+$base-font-size: 16px;
+
+// Responsive breakpoints
+$breakpoint-xl: 1200px;
+$breakpoint-lg: 992px;
+$breakpoint-md: 768px;
+$breakpoint-sm: 576px;
+
+// Container sizes depending on screen
+$container-sm: 540px;
+$container-mg: 720px;
+$container-lg: 960px;
+$container-xl: 1140px;
+
+// Colors
+$color-white: #fff;
+$color-grey-1: #9E9E9E;
+$color-grey-2: #F2EFEA;
+$color-black: #1a1a1a;
+$color-yellow: #FFC600;
+
+// z-index with maps
+// NOTE: will expand later.
+$z-index: (
+    modal: 200,
+    dropdown: 100,
+    below: -1
+);

@@ -3,16 +3,27 @@
 {% block title %}{{ "registration_form.register"|trans }}{% endblock %}
 
 {% block body %}
-    <h1>{{ "registration_form.register"|trans }}</h1>
+    <div class="sign-up container">
+        <div class="row">
+            <div class="sign-up__form col-md-5">
+                <a href="/login">Already registered? Click to login</a>
+                <h2>{{ "registration_form.register"|trans }}</h2>
+                {{ form_start(registrationForm, { attr: {novalidate: 'novalidate' }}) }}
 
-    {{ form_start(registrationForm, { attr: {novalidate: 'novalidate' }}) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.phoneNumber) }}
-        {{ form_row(registrationForm.plainPassword) }}
+                {{ form_row(registrationForm.username) }}
+                {{ form_row(registrationForm.firstname) }}
+                {{ form_row(registrationForm.lastname) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.phoneNumber) }}
+                {{ form_row(registrationForm.plainPassword) }}
+                <button class="btn">{{ "registration_form.register.button"|trans }}</button>
 
-        <button class="btn">{{ "registration_form.register.button"|trans }}</button>
-    {{ form_end(registrationForm) }}
+                {{ form_end(registrationForm) }}
+            </div>
+            <div class="sign-up__hero col-xs-12 col-md-7">
+                <img src="../../assets/img/illiustration-signup.svg" alt="">
+            </div>
+
+        </div>
+       
 {% endblock %}

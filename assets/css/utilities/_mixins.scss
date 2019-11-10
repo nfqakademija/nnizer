@@ -1,1 +1,34 @@
-/** MIXINS **/
+// Mixin for responsive breakpoints handling
+// Example usage @include breakpoint(sm) { display:none }; - where sm is small device (>=567px)
+@mixin breakpoint($bp) {
+    @if $bp == xl {
+      @media only screen and (min-width: $breakpoint-xl) {
+        @content;
+      }
+    } @else if $bp == lg {
+      @media only screen and (min-width: $breakpoint-lg) {
+        @content;
+      }
+    } @else if $bp == md {
+      @media only screen and (min-width: $breakpoint-md) {
+        @content;
+      }
+    } @else if $bp == sm {
+      @media only screen and (min-width: $breakpoint-sm) {
+        @content;
+      }
+    }
+  }
+  
+  // Mixin for responsive breakpoints handling
+  // Example usage @include boxShadow(1rem, 1rem, 1rem, 0) - returns box-shadow: 1rem 1rem 1rem 0 rgba(0, 0, 0, 0.16);
+  @mixin boxShadow($x, $y, $blur, $spread) {
+    box-shadow: $x $y $blur $spread rgba(0, 0, 0, 0.16);
+  }
+  
+  // Mixin for getting key from z-indexes map
+  // Example usage @include z-index(modal) where modal is 200 - returns z-index: 200;
+  @mixin z-index($key) {
+    z-index: map-get($z-index, $key);
+  }
+  
