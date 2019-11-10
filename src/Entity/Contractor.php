@@ -56,7 +56,7 @@ class Contractor implements UserInterface
     /**
      * @ORM\Column(type="string", length=16, nullable=true)
      */
-    private $phone_number;
+    private $phoneNumber;
 
     /**
      * @return int|null
@@ -207,16 +207,16 @@ class Contractor implements UserInterface
      */
     public function getPhoneNumber(): ?string
     {
-        return $this->phone_number;
+        return $this->phoneNumber;
     }
 
     /**
-     * @param string|null $phone_number
+     * @param string|null $phoneNumber
      * @return $this
      */
-    public function setPhoneNumber(?string $phone_number): self
+    public function setPhoneNumber(?string $phoneNumber): self
     {
-        $this->phone_number = $phone_number;
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }

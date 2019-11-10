@@ -22,6 +22,11 @@ registration_form:
   provider: Service provider
   date: Visit date
 
+reservation:
+  cancelled: Your reservation has been cancelled
+  verified: Your reservation has been verified
+  expired: Your activation key has already expired
+
 mailer:
   title:
     registration: You have successfully registered

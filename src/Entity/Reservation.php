@@ -39,22 +39,22 @@ class Reservation
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $fk_contractor;
+    private $fkContractor;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $visit_date;
+    private $visitDate;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_verified;
+    private $isVerified;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $verification_key;
+    private $verificationKey;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -136,16 +136,16 @@ class Reservation
      */
     public function getFkContractor(): ?string
     {
-        return $this->fk_contractor;
+        return $this->fkContractor;
     }
 
     /**
-     * @param string $fk_contractor
+     * @param string $fkContractor
      * @return $this
      */
-    public function setFkContractor(string $fk_contractor): self
+    public function setFkContractor(string $fkContractor): self
     {
-        $this->fk_contractor = $fk_contractor;
+        $this->fkContractor = $fkContractor;
 
         return $this;
     }
@@ -155,16 +155,16 @@ class Reservation
      */
     public function getVisitDate(): ?\DateTimeInterface
     {
-        return $this->visit_date;
+        return $this->visitDate;
     }
 
     /**
-     * @param \DateTimeInterface $visit_date
+     * @param \DateTimeInterface $visitDate
      * @return $this
      */
-    public function setVisitDate(\DateTimeInterface $visit_date): self
+    public function setVisitDate(\DateTimeInterface $visitDate): self
     {
-        $this->visit_date = $visit_date;
+        $this->visitDate = $visitDate;
 
         return $this;
     }
@@ -174,16 +174,16 @@ class Reservation
      */
     public function getIsVerified(): ?bool
     {
-        return $this->is_verified;
+        return $this->isVerified;
     }
 
     /**
-     * @param bool $is_verified
+     * @param bool $isVerified
      * @return $this
      */
-    public function setIsVerified(bool $is_verified): self
+    public function setIsVerified(bool $isVerified): self
     {
-        $this->is_verified = $is_verified;
+        $this->isVerified = $isVerified;
 
         return $this;
     }
@@ -193,16 +193,16 @@ class Reservation
      */
     public function getVerificationKey(): ?string
     {
-        return $this->verification_key;
+        return $this->verificationKey;
     }
 
     /**
-     * @param string|null $verification_key
+     * @param string|null $verificationKey
      * @return $this
      */
-    public function setVerificationKey(?string $verification_key): self
+    public function setVerificationKey(?string $verificationKey): self
     {
-        $this->verification_key = $verification_key;
+        $this->verificationKey = $verificationKey;
 
         return $this;
     }

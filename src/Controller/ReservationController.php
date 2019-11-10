@@ -103,7 +103,7 @@ class ReservationController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
-            'verification_key' => $slug,
+            'verificationKey' => $slug,
         ]);
 
         if ($reservation != null && !$reservation->getIsVerified()) {
@@ -117,12 +117,12 @@ class ReservationController extends AbstractController
                 );
                 $this->addFlash(
                     'notice',
-                    'Your reservation has been verified'
+                    $this->translator->trans('reservation.verified')
                 );
             } else {
                 $this->addFlash(
                     'notice',
-                    'Your activation key has already expired'
+                    $this->translator->trans('reservation.expired')
                 );
             }
         }
@@ -162,7 +162,7 @@ class ReservationController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
-            'verification_key' => $slug,
+            'verificationKey' => $slug,
         ]);
 
         if ($reservation != null && !$reservation->getIsCancelled()) {
@@ -170,7 +170,7 @@ class ReservationController extends AbstractController
             $this->sendSuccessfulCancellationEmail($reservation->getFirstName(), $reservation->getEmail());
             $this->addFlash(
                 'notice',
-                'Your reservation has been cancelled'
+                $this->translator->trans('reservation.cancelled')
             );
         }
 
