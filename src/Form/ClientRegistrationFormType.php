@@ -79,8 +79,7 @@ class ClientRegistrationFormType extends AbstractType
                         'message' => 'email.invalid',
                     ])
                 ]
-            ])
-        ;
+            ]);
     }
 
     /**

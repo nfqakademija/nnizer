@@ -89,8 +89,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('phoneNumber', TelType::class, [
                 'label' => 'registration_form.phoneNumber',
-            ])
-        ;
+            ]);
     }
 
     /**
