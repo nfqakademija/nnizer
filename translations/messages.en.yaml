@@ -25,4 +25,14 @@ registration_form:
 mailer:
   title:
     registration: You have successfully registered
-  greeting: Hello %user%! You have successfully registered.
+    cancellation: Your reservation has been cancelled
+    verification: You have verified your reservation
+  greeting: Hello %user%!
+  verification:
+    button: Verify
+    verify: Verify your reservation
+    success: Your reservation has been successfully verified
+  cancellation:
+    button: Cancel
+    cancel: Cancel your reservation
+    success: Your reservation has been successfully cancelled

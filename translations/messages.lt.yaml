@@ -25,4 +25,14 @@ registration_form:
 mailer:
   title:
     registration: Registracija sėkminga
-  greeting: Sveiki, %user%! Jūsų registracija sėkminga.
+    cancellation: Jūsų rezervacija atšaukta
+    verification: Jūs patvirtinote savo rezervaciją
+  greeting: Sveiki, %user%!
+  verification:
+    button: Patvirtinti
+    verify: Patvirtinkite savo rezervaciją
+    success: Jūsų rezervacija patvirtinta sėkmingai
+  cancellation:
+    button: Atšaukti
+    cancel: Atšaukti savo rezervaciją galite čia
+    success: Jūsų rezervacija sėkmingai atšaukta

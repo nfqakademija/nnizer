@@ -4,12 +4,13 @@ namespace App\Entity;
 
 use App\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Client
+class Reservation
 {
     use TimestampableTrait;
 
@@ -56,9 +57,14 @@ class Client
     private $verification_key;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private $cancel_key;
+    private $verificationKeyExpirationDate;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isCancelled;
 
     /**
      * @return int|null
@@ -202,30 +208,49 @@ class Client
     }
 
     /**
-     * @return string|null
+     * @return string
+     * @throws Exception
      */
-    public function getCancelKey(): ?string
+    public function generateActivationKey(): string
     {
-        return $this->cancel_key;
+        return sha1(random_bytes(10));
     }
 
     /**
-     * @param string|null $cancel_key
+     * @return \DateTimeInterface|null
+     */
+    public function getVerificationKeyExpirationDate(): ?\DateTimeInterface
+    {
+        return $this->verificationKeyExpirationDate;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $verificationKeyExpirationDate
      * @return $this
      */
-    public function setCancelKey(?string $cancel_key): self
+    public function setVerificationKeyExpirationDate(?\DateTimeInterface $verificationKeyExpirationDate): self
     {
-        $this->cancel_key = $cancel_key;
+        $this->verificationKeyExpirationDate = $verificationKeyExpirationDate;
 
         return $this;
     }
 
     /**
-     * @return string
-     * @throws \Exception
+     * @return bool|null
      */
-    public function generateActivationKey(): string
+    public function getIsCancelled(): ?bool
     {
-        return sha1(random_bytes(10));
+        return $this->isCancelled;
+    }
+
+    /**
+     * @param bool|null $isCancelled
+     * @return $this
+     */
+    public function setIsCancelled(?bool $isCancelled): self
+    {
+        $this->isCancelled = $isCancelled;
+
+        return $this;
     }
 }
