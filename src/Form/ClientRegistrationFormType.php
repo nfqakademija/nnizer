@@ -22,7 +22,7 @@ class ClientRegistrationFormType extends AbstractType
     {
 
         $builder
-            ->add('fk_contractor', TextType::class, [
+            ->add('contractor', TextType::class, [
                 'label' => 'registration_form.provider',
                 'data' => 'Provider 123',
                 'constraints' => [
@@ -31,7 +31,7 @@ class ClientRegistrationFormType extends AbstractType
                     ]),
                 ]
             ])
-            ->add('visit_date', DateTimeType::class, [
+            ->add('visitDate', DateTimeType::class, [
                 'label' => 'registration_form.date',
                 'data' => new \DateTime('now'),
                 'constraints' => [
@@ -53,6 +53,7 @@ class ClientRegistrationFormType extends AbstractType
                         'min' => 2,
                         'minMessage' => 'firstname.short',
                         'max' => 32,
+                        'maxMessage' => 'firstname.long',
                     ])
                 ]
             ])
@@ -66,6 +67,7 @@ class ClientRegistrationFormType extends AbstractType
                         'min' => 2,
                         'minMessage' => 'lastname.short',
                         'max' => 32,
+                        'maxMessage' => 'lastname.long',
                     ])
                 ]
             ])

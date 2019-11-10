@@ -4,4 +4,4 @@
 
 {{  "mailer.verification.success"|trans }}
 {{ "mailer.cancellation.cancel"|trans }}
-<a href="{{ absolute_url(path('client_cancel', {slug: key})) }}">{{ "mailer.cancellation.button"|trans }}</a>
+<a href="{{ absolute_url(path('client_cancel', {verificationKey: key})) }}">{{ "mailer.cancellation.button"|trans }}</a>

@@ -39,7 +39,7 @@ class Reservation
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $fkContractor;
+    private $contractor;
 
     /**
      * @ORM\Column(type="datetime")
@@ -49,7 +49,7 @@ class Reservation
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isVerified;
+    private $isVerified = false;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -64,7 +64,7 @@ class Reservation
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $isCancelled;
+    private $isCancelled = false;
 
     /**
      * @return int|null
@@ -134,18 +134,18 @@ class Reservation
     /**
      * @return string|null
      */
-    public function getFkContractor(): ?string
+    public function getContractor(): ?string
     {
-        return $this->fkContractor;
+        return $this->contractor;
     }
 
     /**
-     * @param string $fkContractor
+     * @param string $contractor
      * @return $this
      */
-    public function setFkContractor(string $fkContractor): self
+    public function setContractor(string $contractor): self
     {
-        $this->fkContractor = $fkContractor;
+        $this->contractor = $contractor;
 
         return $this;
     }

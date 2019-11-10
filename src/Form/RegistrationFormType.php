@@ -31,6 +31,7 @@ class RegistrationFormType extends AbstractType
                         'min' => 2,
                         'minMessage' => 'username.short',
                         'max' => 32,
+                        'maxMessage' => 'username.long',
                     ])
                 ]
             ])
@@ -47,6 +48,7 @@ class RegistrationFormType extends AbstractType
                         'min' => 6,
                         'minMessage' => 'password.short',
                         'max' => 4096,
+                        'maxMessage' => 'password.long',
                     ]),
                 ],
             ])
@@ -60,6 +62,7 @@ class RegistrationFormType extends AbstractType
                         'min' => 2,
                         'minMessage' => 'firstname.short',
                         'max' => 32,
+                        'maxMessage' => 'firstname.long',
                     ])
                 ]
             ])
@@ -73,6 +76,7 @@ class RegistrationFormType extends AbstractType
                         'min' => 2,
                         'minMessage' => 'lastname.short',
                         'max' => 32,
+                        'maxMessage' => 'lastname.long',
                     ])
                 ]
             ])
