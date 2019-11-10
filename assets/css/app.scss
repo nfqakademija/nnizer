@@ -1,14 +1,12 @@
-// customize some Bootstrap variables
-$primary: darken(#428bca, 20%);
+@import './base/_reset';
 
-// the ~ allows you to reference things in node_modules
-@import '~bootstrap/scss/bootstrap';
+@import './components/_buttons';
 
-.nfq-academy {
-  margin: 20px auto;
-  text-align: center;
-  font-size: 96px;
-  font-weight: 100;
-  font-family: 'Lato', serif;
-  color: red;
-}
+@import './layout/_grid';
+
+@import './pages/home';
+
+@import './utilities/functions';
+@import './utilities/helpers';
+@import './utilities/mixins';
+@import './utilities/variables';
