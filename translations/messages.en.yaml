@@ -19,7 +19,14 @@ registration_form:
   email: Email *
   phoneNumber: Phone number
   plainPassword: Password *
-
+  provider: Service provider
+  date: Visit date
+  
+reservation:
+  cancelled: Your reservation has been cancelled
+  verified: Your reservation has been verified
+  expired: Your activation key has already expired
+  
 email:
   registration:
     greeting: Hi, %name%!

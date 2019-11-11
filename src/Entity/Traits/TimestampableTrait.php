@@ -15,6 +15,7 @@ trait TimestampableTrait
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
     /**
      * @return \DateTimeInterface|null
      */
@@ -52,6 +53,7 @@ trait TimestampableTrait
 
         return $this;
     }
+
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
