@@ -2,55 +2,46 @@
 
 namespace App\Form;
 
-use App\Entity\Contractor;
+use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 
-class RegistrationFormType extends AbstractType
+class ClientRegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
         $builder
-            ->add('username', TextType::class, [
-                'label' => 'registration_form.username',
-                'empty_data' => '',
+            ->add('contractor', TextType::class, [
+                'label' => 'registration_form.provider',
+                'data' => 'Provider 123',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'username.empty',
+                        'message' => 'provider.empty',
                     ]),
-                    new Length([
-                        'min' => 2,
-                        'minMessage' => 'username.short',
-                        'max' => 32,
-                        'maxMessage' => 'username.long',
-                    ])
                 ]
             ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'label' => 'registration_form.plainPassword',
-                'mapped' => false,
+            ->add('visitDate', DateTimeType::class, [
+                'label' => 'registration_form.date',
+                'data' => new \DateTime('now'),
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'password.empty',
+                        'message' => 'date.unchosen',
                     ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'password.short',
-                        'max' => 4096,
-                        'maxMessage' => 'password.long',
-                    ]),
-                ],
+                    new DateTime([
+                        'message' => 'date.invalid',
+                    ])
+                ]
             ])
             ->add('firstname', TextType::class, [
                 'label' => 'registration_form.firstname',
@@ -90,9 +81,6 @@ class RegistrationFormType extends AbstractType
                         'message' => 'email.invalid',
                     ])
                 ]
-            ])
-            ->add('phoneNumber', TelType::class, [
-                'label' => 'registration_form.phoneNumber',
             ]);
     }
 
@@ -102,7 +90,7 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Contractor::class,
+            'data_class' => Reservation::class,
         ]);
     }
 }

@@ -1,0 +1,6 @@
+<h3>{{ "mailer.title.registration"|trans }}</h3>
+
+{{ "mailer.greeting"|trans({'%user%': user}, "messages") }}
+
+{{  "mailer.verification.verify"|trans }}
+<a href="{{ absolute_url(path('client_activate', {verificationKey: key})) }}">{{ "mailer.verification.button"|trans }}</a>
