@@ -22,26 +22,23 @@ registration_form:
   provider: Paslaugos teikėjas
   date: Vizito data
 
-mailer:
-  title:
-    registration: Registracija sėkminga
-    cancellation: Jūsų rezervacija atšaukta
-    verification: Jūs patvirtinote savo rezervaciją
-  greeting: Sveiki, %user%!
-  verification:
-    button: Patvirtinti
-    verify: Patvirtinkite savo rezervaciją
-    success: Jūsų rezervacija patvirtinta sėkmingai
-  cancellation:
-    button: Atšaukti
-    cancel: Atšaukti savo rezervaciją galite čia
-    success: Jūsų rezervacija sėkmingai atšaukta
+flash:
+  reservation:
+    cancelled: Jūsų rezervacija buvo atšaukti
+    verified: Jūsų rezervacija buvo patvirtinta
+    expired: Jūsų aktyvacijos raktas nebegalioja
+  signup:
+    verified: Jūsų paskyra aktyvuota
 
 email:
   heading:
-    registered: Sveikiname! Jūsų rezervacija beveik atlikta
+    signup: Sveikiname užsiregistravus!
+    registered: Vienas žingsnis iki sėkmingos rezervacijos
     verified: Sėkmingai patvirtinote savo rezervaciją!
     cancelled: Jūsų rezervacija buvo atšaukta
+  signup:
+    verify-email: Patvirtinti e. paštą
+    text: Džiaugemės, kad prisijungėte prie NNIZER komandos! Tikimės, kad mėgausitės naudodamiesi šia platforma. Norėdami pradėti savo veiklą, patvirtinkite paštą paspaudę mygtuką žemiau.
   verification:
     text: Viskas! Daugiau niekuo jums nereikia rūpintis - viskuo pasirūpinsime mes. Vis dėlto, jeigu nuspręsite, kad pasirinktu laiku atvykti negalėsite, prašome pranešti savo paslaugos teikėjui ir atšaukti savo rezervaciją.
   registration:

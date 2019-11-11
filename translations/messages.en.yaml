@@ -21,17 +21,24 @@ registration_form:
   plainPassword: Password *
   provider: Service provider
   date: Visit date
-  
-reservation:
-  cancelled: Your reservation has been cancelled
-  verified: Your reservation has been verified
-  expired: Your activation key has already expired
+
+flash:
+  reservation:
+    cancelled: Your reservation has been cancelled
+    verified: Your reservation has been verified
+    expired: Your activation key has already expired
+  signup:
+    verified: Your account has been verified
   
 email:
   heading:
-    registered: Congratulations! You're a one click away
+    signup: Congratulations! You're a one click away
+    registered: One more step to confirm your reservation
     verified: Cool! Your reservation has been successfully verified
     cancelled: Oh no! Your reservation is no longed active!
+  signup:
+    verify-email: Verify my email
+    text: We're so glad that you joined NNIZER team! We hope that you'll enjoy the ride with us. Let's kick off your business with verifying your account email. Press the button below.
   verification:
     text: There is nothing else you have to worry about - we are taking care of your reservation. However, if you think that you won't be able to show up, please let your service provider know about this and cancel your reservation.
   registration:

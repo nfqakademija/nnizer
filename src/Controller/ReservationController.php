@@ -101,12 +101,12 @@ class ReservationController extends AbstractController
                 $this->sendSuccessfulVerificationEmail($reservation, $translator, $mailer);
                 $this->addFlash(
                     'notice',
-                    $translator->trans('reservation.verified')
+                    $translator->trans('flash.reservation.verified')
                 );
             } else {
                 $this->addFlash(
                     'notice',
-                    $translator->trans('reservation.expired')
+                    $translator->trans('flash.reservation.expired')
                 );
             }
         }
@@ -162,7 +162,7 @@ class ReservationController extends AbstractController
             $this->sendSuccessfulCancellationEmail($reservation, $translator, $mailer);
             $this->addFlash(
                 'notice',
-                $translator->trans('reservation.cancelled')
+                $translator->trans('flash.reservation.cancelled')
             );
         }
 

@@ -60,6 +60,16 @@ class Contractor implements UserInterface
     private $phoneNumber;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $verificationKey;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -218,6 +228,53 @@ class Contractor implements UserInterface
     public function setPhoneNumber(?string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getVerificationKey(): ?string
+    {
+        return $this->verificationKey;
+    }
+
+    /**
+     * @param string $verificationKey
+     * @return $this
+     */
+    public function setVerificationKey(string $verificationKey): self
+    {
+        $this->verificationKey = $verificationKey;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function generateVerificationKey()
+    {
+        return sha1(random_bytes(10));
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    /**
+     * @param bool $isVerified
+     * @return $this
+     */
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
