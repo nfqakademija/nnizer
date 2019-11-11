@@ -13,9 +13,9 @@ login_page:
 registration_form:
   register: Register
   register.button: Register
-  username: Username *
-  firstname: Firstname *
-  lastname: Lastname *
-  email: Email *
+  username: Username
+  firstname: First Name
+  lastname: Last Name
+  email: Email Address
   phoneNumber: Phone number
-  plainPassword: Password *
+  plainPassword: Password

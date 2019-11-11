@@ -1,0 +1,29 @@
+.sign-up {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    
+    & .row {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__hero {
+        display: none;
+
+        img {
+            width: 100%;
+        }
+
+        @include breakpoint(md) {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            right: 0;
+            height: 100vh;
+            width: 80%;
+            background: $color-yellow;
+        }
+    }
+}
