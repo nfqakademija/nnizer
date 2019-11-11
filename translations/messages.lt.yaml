@@ -20,3 +20,20 @@ registration_form:
   email: El. paštas *
   phoneNumber: Telefono numeris
   plainPassword: Slaptažodis *
+  provider: Paslaugos teikėjas
+  date: Vizito data
+
+mailer:
+  title:
+    registration: Registracija sėkminga
+    cancellation: Jūsų rezervacija atšaukta
+    verification: Jūs patvirtinote savo rezervaciją
+  greeting: Sveiki, %user%!
+  verification:
+    button: Patvirtinti
+    verify: Patvirtinkite savo rezervaciją
+    success: Jūsų rezervacija patvirtinta sėkmingai
+  cancellation:
+    button: Atšaukti
+    cancel: Atšaukti savo rezervaciją galite čia
+    success: Jūsų rezervacija sėkmingai atšaukta
