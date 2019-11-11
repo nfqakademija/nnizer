@@ -3,16 +3,58 @@
 {% block title %}{{ "registration_form.register"|trans }}{% endblock %}
 
 {% block body %}
-    <h1>{{ "registration_form.register"|trans }}</h1>
+    <div class="sign-up container">
+        <div class="row">
+            <div class="sign-up__form col-md-6 col-lg-5">
+                <a href="/login" class="sign-up__login-link link">{{ "registration.already-registered"|trans }}</a>
+                <h1>{{ "registration_form.register"|trans }}</h1>
 
-    {{ form_start(registrationForm, { attr: {novalidate: 'novalidate' }}) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.phoneNumber) }}
-        {{ form_row(registrationForm.plainPassword) }}
+                {{ form_start(registrationForm, { attr: {novalidate: 'novalidate', class: 'form'}}) }}
+                <div class="form__fields">
+                    <div class="form__field form__field--half">
+                        {{ form_widget(registrationForm.firstname) }}
+                        {{ form_label(registrationForm.firstname) }}
+                    </div>
+                    {{ form_errors(registrationForm.firstname) }}
 
-        <button class="btn">{{ "registration_form.register.button"|trans }}</button>
-    {{ form_end(registrationForm) }}
+                    <div class="form__field form__field--half">
+                        {{ form_widget(registrationForm.lastname) }}
+                        {{ form_label(registrationForm.lastname) }}
+                    </div>
+                </div>
+                {{ form_errors(registrationForm.lastname) }}
+
+                 <div class="form__field">
+                    {{ form_widget(registrationForm.username) }}
+                    {{ form_label(registrationForm.username) }}
+                </div>
+                {{ form_errors(registrationForm.username) }}
+
+                 <div class="form__field">
+                    {{ form_widget(registrationForm.email) }}
+                    {{ form_label(registrationForm.email) }}
+                </div>
+                {{ form_errors(registrationForm.email) }}
+
+                 <div class="form__field">
+                    {{ form_widget(registrationForm.phoneNumber) }}
+                    {{ form_label(registrationForm.phoneNumber) }}
+                </div>
+                {{ form_errors(registrationForm.phoneNumber) }}
+
+                <div class="form__field">
+                    {{ form_widget(registrationForm.plainPassword) }}
+                    {{ form_label(registrationForm.plainPassword) }}
+                </div>
+                {{ form_errors(registrationForm.plainPassword) }}
+
+                <button class="btn btn--full">{{ "registration_form.register.button"|trans }}</button>
+
+                {{ form_end(registrationForm) }}
+            </div>
+            <div class="sign-up__hero col-md-6 col-lg-6">
+                <img src="{{ asset('build/images/illiustration-signup.svg') }}" alt="Man jumping into water">
+            </div>
+        </div>
+       
 {% endblock %}

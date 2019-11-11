@@ -1,12 +1,16 @@
+@import './utilities/functions';
+@import './utilities/variables';
+@import './utilities/helpers';
+@import './utilities/mixins';
+
 @import './base/reset';
+@import './base/typography';
 
 @import './components/buttons';
+@import './components/links';
+@import './components/form';
 
 @import './layout/grid';
 
 @import './pages/home';
-
-@import './utilities/functions';
-@import './utilities/helpers';
-@import './utilities/mixins';
-@import './utilities/variables';
+@import './pages/signup';

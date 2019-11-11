@@ -11,6 +11,7 @@ login_page:
   signin: Prisijungti
 
 registration_form:
+  already-registered: Jau užsiregistravote? Spauskite, norėdami prisijungti
   register: Registracija
   register.button: Registruotis
   username: Vartotojo vardas *

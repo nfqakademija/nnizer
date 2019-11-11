@@ -1,0 +1,61 @@
+.form {
+    font-size: 0.875rem;
+
+    &__fields {
+        display: block;
+
+        & > div {
+            width: 100%;
+        }
+
+        & > div:first-child {
+            margin-right: rem(30px);
+        }
+
+        @include breakpoint(md) {
+            display: flex;
+
+            & > div {
+                width: 100%;
+            }
+        }
+    }
+
+    &__field {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    input {
+        min-height: rem(40px);
+        width: 100%;
+        padding-left: rem(12px);
+        border-radius: rem(2px);    
+        box-shadow: 0 0 rem(2px) rgba(0,0,0,0.5);
+        border: 1px solid $color-grey-2;
+    }
+
+    label {
+        position: absolute;
+        left: rem(14px);
+        top: 50%;
+        transform: translateY(-50%);
+        color: $color-grey-1;
+        background:white;
+        transition: all 0.2s ease-in-out;
+    }
+
+    input:focus,
+    input:valid {
+        box-shadow: none;
+        border: 1px solid $color-yellow;
+
+        ~label {
+            top: rem(0);
+            padding: 0 rem(2px);
+            font-size: rem(12px);
+        }
+    }
+
+
+}
