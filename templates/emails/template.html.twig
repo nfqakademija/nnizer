@@ -420,9 +420,8 @@
                                                         align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;"
                                                 >
 
-                                                    <div
-                                                            style="font-family:Poppins, Helvetica;font-size:20px;font-weight:bold;line-height:1;text-align:left;color:#1A1A1A;"
-                                                    >{{ "email.registration.congratulations"|trans }} 🚀</div>
+                                                    {% block heading %}
+                                                    {% endblock %}
 
                                                 </td>
                                             </tr>
@@ -434,7 +433,7 @@
 
                                                     <div
                                                             style="font-family:Poppins, Helvetica;font-size:16px;line-height:1;text-align:left;color:#637381;"
-                                                    >{{ "email.registration.greeting"|trans({'%name%': name}, 'messages')}} 👋🏻</div>
+                                                    >{{ "email.registration.greeting"|trans({'%name%': user}, 'messages')}} 👋🏻</div>
 
                                                 </td>
                                             </tr>

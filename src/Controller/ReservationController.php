@@ -64,9 +64,11 @@ class ReservationController extends AbstractController
                 [
                     'user' => $reservation->getFirstname(),
                     'key' => $reservation->getVerificationKey(),
+                    'date' => $reservation->getVisitDate()->format('Y-m-d H-i'),
+                    'provider' => $reservation->getContractor()
                 ]
             ),
-            $translatorInterface->trans('mailer.title.registration'),
+            $translatorInterface->trans('email.heading.registered'),
             $reservation->getEmail()
         );
     }
@@ -130,7 +132,7 @@ class ReservationController extends AbstractController
                     'key' => $reservation->getVerificationKey(),
                 ]
             ),
-            $translatorInterface->trans('mailer.title.registration'),
+            $translatorInterface->trans('email.heading.verified'),
             $reservation->getEmail()
         );
     }
@@ -182,7 +184,7 @@ class ReservationController extends AbstractController
                 'emails/client-cancel.html.twig',
                 ['user' => $reservation->getFirstname()]
             ),
-            $translatorInterface->trans('mailer.title.registration'),
+            $translatorInterface->trans('email.heading.cancelled'),
             $reservation->getEmail()
         );
     }

@@ -28,9 +28,20 @@ reservation:
   expired: Your activation key has already expired
   
 email:
+  heading:
+    registered: Congratulations! You're a one click away
+    verified: Cool! Your reservation has been successfully verified
+    cancelled: Oh no! Your reservation is no longed active!
+  verification:
+    text: There is nothing else you have to worry about - we are taking care of your reservation. However, if you think that you won't be able to show up, please let your service provider know about this and cancel your reservation.
   registration:
     greeting: Hi, %name%!
-    text: We're so glad that you joined NNIZER team! We hope that we you'll enjoy the ride with us. Let's kick off your business with verifying your account email. Press the button below.
+    text: We're so glad that you have registered a visit on NNIZER! Just press the button below to confirm that your visit details are correct.
+  cancellation:
+    text: Seems like either you or your service provider had cancelled your reservation. You can check other available registrations on our homepage.
+  details:
+    provider: Service provider - %provider%
+    date: Visit date - %date%
   privacy: Privacy
   unsubscribe: Unsubscribe
   copyright: NNIZER Inc., All Rights Reserved.
@@ -39,4 +50,5 @@ email:
   link-alternative: or click the link
   button:
     verify: Verify my reservation
-  congratulations: Congratulations! You're a one click away
+    cancel: Cancel my reservation
+    home: NNIZER
