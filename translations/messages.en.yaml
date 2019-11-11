@@ -23,22 +23,40 @@ registration_form:
   provider: Service provider
   date: Visit date
 
-reservation:
-  cancelled: Your reservation has been cancelled
-  verified: Your reservation has been verified
-  expired: Your activation key has already expired
-
-mailer:
-  title:
-    registration: You have successfully registered
-    cancellation: Your reservation has been cancelled
-    verification: You have verified your reservation
-  greeting: Hello %user%!
+flash:
+  reservation:
+    cancelled: Your reservation has been cancelled
+    verified: Your reservation has been verified
+    expired: Your activation key has already expired
+  signup:
+    verified: Your account has been verified
+  
+email:
+  heading:
+    signup: Congratulations! You're a one click away
+    registered: One more step to confirm your reservation
+    verified: Cool! Your reservation has been successfully verified
+    cancelled: Oh no! Your reservation is no longed active!
+  signup:
+    verify-email: Verify my email
+    text: We're so glad that you joined NNIZER team! We hope that you'll enjoy the ride with us. Let's kick off your business with verifying your account email. Press the button below.
   verification:
-    button: Verify
-    verify: Verify your reservation
-    success: Your reservation has been successfully verified
+    text: There is nothing else you have to worry about - we are taking care of your reservation. However, if you think that you won't be able to show up, please let your service provider know about this and cancel your reservation.
+  registration:
+    greeting: Hi, %name%!
+    text: We're so glad that you have registered a visit on NNIZER! Just press the button below to confirm that your visit details are correct.
   cancellation:
-    button: Cancel
-    cancel: Cancel your reservation
-    success: Your reservation has been successfully cancelled
+    text: Seems like either you or your service provider had cancelled your reservation. You can check other available registrations on our homepage.
+  details:
+    provider: Service provider - %provider%
+    date: Visit date - %date%
+  privacy: Privacy
+  unsubscribe: Unsubscribe
+  copyright: NNIZER Inc., All Rights Reserved.
+  agreement: You are receiving this email advertisement because you registered with NNIZER and agreed to receive emails from us regarding new features, events and special offers.
+  withlove: With 💛, NNIZER team
+  link-alternative: or click the link
+  button:
+    verify: Verify my reservation
+    cancel: Cancel my reservation
+    home: NNIZER

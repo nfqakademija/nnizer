@@ -23,17 +23,40 @@ registration_form:
   provider: Paslaugos teikėjas
   date: Vizito data
 
-mailer:
-  title:
-    registration: Registracija sėkminga
-    cancellation: Jūsų rezervacija atšaukta
-    verification: Jūs patvirtinote savo rezervaciją
-  greeting: Sveiki, %user%!
+flash:
+  reservation:
+    cancelled: Jūsų rezervacija buvo atšaukti
+    verified: Jūsų rezervacija buvo patvirtinta
+    expired: Jūsų aktyvacijos raktas nebegalioja
+  signup:
+    verified: Jūsų paskyra aktyvuota
+
+email:
+  heading:
+    signup: Sveikiname užsiregistravus!
+    registered: Vienas žingsnis iki sėkmingos rezervacijos
+    verified: Sėkmingai patvirtinote savo rezervaciją!
+    cancelled: Jūsų rezervacija buvo atšaukta
+  signup:
+    verify-email: Patvirtinti e. paštą
+    text: Džiaugemės, kad prisijungėte prie NNIZER komandos! Tikimės, kad mėgausitės naudodamiesi šia platforma. Norėdami pradėti savo veiklą, patvirtinkite paštą paspaudę mygtuką žemiau.
   verification:
-    button: Patvirtinti
-    verify: Patvirtinkite savo rezervaciją
-    success: Jūsų rezervacija patvirtinta sėkmingai
+    text: Viskas! Daugiau niekuo jums nereikia rūpintis - viskuo pasirūpinsime mes. Vis dėlto, jeigu nuspręsite, kad pasirinktu laiku atvykti negalėsite, prašome pranešti savo paslaugos teikėjui ir atšaukti savo rezervaciją.
+  registration:
+    greeting: Labas, %name%!
+    text: Mes labai džiaugiamės, kad pasirinkote NNIZER savo rezervacijai atlikti. Viskas, ką jums dar reikia padaryti, tai paspausti patvirtinimo nuorodą apačioje.
   cancellation:
-    button: Atšaukti
-    cancel: Atšaukti savo rezervaciją galite čia
-    success: Jūsų rezervacija sėkmingai atšaukta
+    text: Panašu, kad jūs arba jūsų rezervuotos paslaugos teikėjas nusprendė atšaukti jūsų rezervaciją. Galite patikrinti kitus laisvus laikus mūsų puslapyje.
+  details:
+    provider: Paslaugos teikėjas - %provider%
+    date: Rezervacijos data - %date%
+  privacy: Privatumo politika
+  unsubscribe: Neprenumeruoti
+  copyright: NNIZER Inc., visos teisės saugomos.
+  agreement: Jūs gaunate šiuos laiškus, nes užsiregistravote NNIZER ir sutikote gauti laiškus iš mūsų apie naują funkcionalumą, renginius ir specialius pasiūlymus.
+  withlove: Su 💛, NNIZER komanda
+  link-alternative: arba paspauskite nuorodą
+  button:
+    verify: Patvirtinti rezervaciją
+    cancel: Atšaukti rezervaciją
+    home: NNIZER

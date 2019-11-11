@@ -64,9 +64,11 @@ class ReservationController extends AbstractController
                 [
                     'user' => $reservation->getFirstname(),
                     'key' => $reservation->getVerificationKey(),
+                    'date' => $reservation->getVisitDate()->format('Y-m-d H-i'),
+                    'provider' => $reservation->getContractor()
                 ]
             ),
-            $translatorInterface->trans('mailer.title.registration'),
+            $translatorInterface->trans('email.heading.registered'),
             $reservation->getEmail()
         );
     }
@@ -99,12 +101,12 @@ class ReservationController extends AbstractController
                 $this->sendSuccessfulVerificationEmail($reservation, $translator, $mailer);
                 $this->addFlash(
                     'notice',
-                    $translator->trans('reservation.verified')
+                    $translator->trans('flash.reservation.verified')
                 );
             } else {
                 $this->addFlash(
                     'notice',
-                    $translator->trans('reservation.expired')
+                    $translator->trans('flash.reservation.expired')
                 );
             }
         }
@@ -130,7 +132,7 @@ class ReservationController extends AbstractController
                     'key' => $reservation->getVerificationKey(),
                 ]
             ),
-            $translatorInterface->trans('mailer.title.registration'),
+            $translatorInterface->trans('email.heading.verified'),
             $reservation->getEmail()
         );
     }
@@ -160,7 +162,7 @@ class ReservationController extends AbstractController
             $this->sendSuccessfulCancellationEmail($reservation, $translator, $mailer);
             $this->addFlash(
                 'notice',
-                $translator->trans('reservation.cancelled')
+                $translator->trans('flash.reservation.cancelled')
             );
         }
 
@@ -182,7 +184,7 @@ class ReservationController extends AbstractController
                 'emails/client-cancel.html.twig',
                 ['user' => $reservation->getFirstname()]
             ),
-            $translatorInterface->trans('mailer.title.registration'),
+            $translatorInterface->trans('email.heading.cancelled'),
             $reservation->getEmail()
         );
     }
