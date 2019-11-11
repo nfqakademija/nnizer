@@ -11,6 +11,7 @@ login_page:
   signin: Sign in
 
 registration_form:
+  already-registered: Already registered? Click to login
   register: Register
   register.button: Register
   username: Username
