@@ -241,12 +241,13 @@ class Contractor implements UserInterface
     }
 
     /**
-     * @param string $verificationKey
+     * @ORM\PrePersist()
      * @return $this
+     * @throws \Exception
      */
-    public function setVerificationKey(string $verificationKey): self
+    public function setVerificationKey(): self
     {
-        $this->verificationKey = $verificationKey;
+        $this->verificationKey = $this->generateVerificationKey();
 
         return $this;
     }

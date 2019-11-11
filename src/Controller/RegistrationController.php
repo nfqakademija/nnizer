@@ -48,15 +48,12 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $user->setVerificationKey($user->generateVerificationKey());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
             $this->sendSignupEmail($user, $translator, $mailer);
-
-            // do anything else you need here, like send an email
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,

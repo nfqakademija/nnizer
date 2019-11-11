@@ -1,27 +1,24 @@
 {% extends '/emails/template.html.twig' %}
 
 {% block heading %}
-    <div
-            style="font-family:Poppins, Helvetica;font-size:20px;font-weight:bold;line-height:1;text-align:left;color:#1A1A1A;"
-    >{{ "email.heading.verified"|trans }} 🚀</div>
+    <div style="font-family:Poppins, Helvetica;font-size:20px;font-weight:bold;line-height:1;text-align:left;color:#1A1A1A;">
+        {{ "email.heading.verified"|trans }} 🚀
+    </div>
 {% endblock %}
 {% block text %}
-    <div
-            style="font-family:Poppins, Helvetica;font-size:16px;line-height:24px;text-align:left;color:#637381;"
-    >{{ "email.verification.text"|trans }}</div>
-
-
+    <div style="font-family:Poppins, Helvetica;font-size:16px;line-height:24px;text-align:left;color:#637381;">
+        {{ "email.verification.text"|trans }}
+    </div>
 {% endblock %}
 
 
 {% block button %}
-    <td
-            align="center" bgcolor="#FFC600" role="presentation" style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#FFC600;" valign="middle"
-    >
-        <a
-                href="{{ absolute_url(path('client_cancel', {verificationKey: key})) }}" style="display:inline-block;background:#FFC600;color:#1A1A1A;font-family:Poppins, Helvetica;font-size:16px;font-weight:600;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;" target="_blank"
-        >
-            {{"email.button.cancel"|trans}}
+    <td align="center" bgcolor="#FFC600" role="presentation"
+        style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#FFC600;" valign="middle">
+        <a href="{{ absolute_url(path('client_cancel', {verificationKey: key})) }}"
+           style="display:inline-block;background:#FFC600;color:#1A1A1A;font-family:Poppins, Helvetica;font-size:16px;font-weight:600;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
+           target="_blank">
+            {{ "email.button.cancel"|trans }}
         </a>
     </td>
 {% endblock %}
