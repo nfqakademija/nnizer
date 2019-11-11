@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="App\Repository\ContractorRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(fields={"username"}, message="username.existing")
  */
 class Contractor implements UserInterface
@@ -142,7 +143,7 @@ class Contractor implements UserInterface
      */
     public function eraseCredentials()
     {
-         $this->plainPassword = null;
+        // If you store any temporary, sensitive data on the user, clear it here
     }
 
     /**
