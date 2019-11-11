@@ -19,3 +19,17 @@ registration_form:
   email: Email *
   phoneNumber: Phone number
   plainPassword: Password *
+
+email:
+  registration:
+    greeting: Hi, %name%!
+    text: We're so glad that you joined NNIZER team! We hope that we you'll enjoy the ride with us. Let's kick off your business with verifying your account email. Press the button below.
+  privacy: Privacy
+  unsubscribe: Unsubscribe
+  copyright: NNIZER Inc., All Rights Reserved.
+  agreement: You are receiving this email advertisement because you registered with NNIZER and agreed to receive emails from us regarding new features, events and special offers.
+  withlove: With 💛, NNIZER team
+  link-alternative: or click the link
+  button:
+    verify: Verify my reservation
+  congratulations: Congratulations! You're a one click away
