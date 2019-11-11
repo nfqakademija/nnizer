@@ -1,0 +1,7 @@
+<h3>{{ "mailer.title.verification"|trans }}</h3>
+
+{{ "mailer.greeting"|trans({'%user%': user}, "messages") }}
+
+{{  "mailer.verification.success"|trans }}
+{{ "mailer.cancellation.cancel"|trans }}
+<a href="{{ absolute_url(path('client_cancel', {verificationKey: key})) }}">{{ "mailer.cancellation.button"|trans }}</a>

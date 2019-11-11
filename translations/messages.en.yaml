@@ -19,3 +19,25 @@ registration_form:
   email: Email *
   phoneNumber: Phone number
   plainPassword: Password *
+  provider: Service provider
+  date: Visit date
+
+reservation:
+  cancelled: Your reservation has been cancelled
+  verified: Your reservation has been verified
+  expired: Your activation key has already expired
+
+mailer:
+  title:
+    registration: You have successfully registered
+    cancellation: Your reservation has been cancelled
+    verification: You have verified your reservation
+  greeting: Hello %user%!
+  verification:
+    button: Verify
+    verify: Verify your reservation
+    success: Your reservation has been successfully verified
+  cancellation:
+    button: Cancel
+    cancel: Cancel your reservation
+    success: Your reservation has been successfully cancelled

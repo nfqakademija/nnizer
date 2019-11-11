@@ -1,16 +1,25 @@
 username:
   empty: Įveskite savo slapyvardį
   short: Slapyvardis privalo būti bent 4 simbolių ilgio
+  long: Slapyvardis negali būti ilgesnis nei 32 simboliai
   existing: Toks naudotojas jau egzistuoja
 password:
   empty: Įveskite savo slaptažodį
   short: Jūsų slaptažodis privalo būti bent 6 simbolių ilgio
+  long: Slaptažodis negali būti ilgesnis nei 4096 simboliai
 firstname:
   empty: Įveskite savo vardą
   short: Vardas per trumpas
+  long: Jūsų vardas negali būti ilgesnis nei 32 simboliai
 lastname:
   empty: Įveskite savo pavardę
   short: Pavardė per trumpa
+  long: Jūsų pavardė negali būti ilgesnė nei 32 simboliai
 email:
   blank: Įveskite savo el. paštą
   invalid: Įvestas neteisingas el. pašto adresas
+date:
+  unchosen: Vizito laikas nepasirinktas
+  invalid: Vizito laikas neteisingas
+provider:
+  empty: Nepasirinktas paslaugos teikėjas
