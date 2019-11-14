@@ -57,7 +57,7 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/contractor/{contractorUsername}/get-clients/")
+     * @Route("/api/contractor/{contractorUsername}/get-clients/", methods="GET")
      * @param string $contractorUsername
      * @param SerializerService $json
      * @return Response
@@ -76,18 +76,16 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/contractor/{contractorUsername}/cancel/{id}")
+     * @Route("/api/contractor/{contractorUsername}/cancel/{id}", methods="PATCH")
      * @param string $contractorUsername
      * @param int $reservationId
      * @param MailerService $mailer
-     * @param TranslatorInterface $translator
      * @return JsonResponse
      */
     public function cancelReservation(
         string $contractorUsername,
         int $reservationId,
-        MailerService $mailer,
-        TranslatorInterface $translator
+        MailerService $mailer
     ): JsonResponse {
         $entityManager = $this->getDoctrine()->getManager();
         $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
@@ -107,18 +105,16 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/contractor/{contractorUsername}/verify/{id}")
+     * @Route("/api/contractor/{contractorUsername}/verify/{id}", methods="PATCH")
      * @param string $contractorUsername
      * @param int $reservationId
      * @param MailerService $mailer
-     * @param TranslatorInterface $translator
      * @return JsonResponse
      */
     public function verifyReservation(
         string $contractorUsername,
         int $reservationId,
-        MailerService $mailer,
-        TranslatorInterface $translator
+        MailerService $mailer
     ): JsonResponse {
         $entityManager= $this->getDoctrine()->getManager();
         $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
