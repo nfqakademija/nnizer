@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contractor;
 use App\Entity\Reservation;
-use App\Service\JsonService;
+use App\Service\SerializerService;
 use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -59,12 +59,12 @@ class ContractorController extends AbstractController
     /**
      * @Route("/api/contractor/{contractorUsername}/get-clients/")
      * @param string $contractorUsername
-     * @param JsonService $json
+     * @param SerializerService $json
      * @return Response
      */
     public function getReservations(
         string $contractorUsername,
-        JsonService $json
+        SerializerService $json
     ): Response {
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -78,26 +78,26 @@ class ContractorController extends AbstractController
     /**
      * @Route("/api/contractor/{contractorUsername}/cancel/{id}")
      * @param string $contractorUsername
-     * @param string $id
+     * @param int $reservationId
      * @param MailerService $mailer
      * @param TranslatorInterface $translator
      * @return JsonResponse
      */
     public function cancelReservation(
         string $contractorUsername,
-        string $id,
+        int $reservationId,
         MailerService $mailer,
         TranslatorInterface $translator
     ): JsonResponse {
         $entityManager = $this->getDoctrine()->getManager();
         $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
             'contractor' => $contractorUsername,
-            'id' => $id,
+            'id' => $reservationId,
             'isCancelled' => false,
         ]);
-        if ($reservation != null) {
+        if ($reservation !== null) {
             $reservation->setIsCancelled(true);
-            $mailer->sendSuccessfulCancellationEmail($reservation, $translator);
+            $mailer->sendSuccessfulCancellationEmail($reservation);
             $entityManager->flush();
 
             return new JsonResponse();
@@ -109,26 +109,26 @@ class ContractorController extends AbstractController
     /**
      * @Route("/api/contractor/{contractorUsername}/verify/{id}")
      * @param string $contractorUsername
-     * @param string $id
+     * @param int $reservationId
      * @param MailerService $mailer
      * @param TranslatorInterface $translator
      * @return JsonResponse
      */
     public function verifyReservation(
         string $contractorUsername,
-        string $id,
+        int $reservationId,
         MailerService $mailer,
         TranslatorInterface $translator
     ): JsonResponse {
         $entityManager= $this->getDoctrine()->getManager();
         $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
             'contractor' => $contractorUsername,
-            'id' => $id,
+            'id' => $reservationId,
             'isVerified' => false,
         ]);
-        if ($reservation != null) {
+        if ($reservation !== null) {
             $reservation->setIsVerified(true);
-            $mailer->sendSuccessfulVerificationEmail($reservation, $translator);
+            $mailer->sendSuccessfulVerificationEmail($reservation);
             $entityManager->flush();
 
             return new JsonResponse();

@@ -37,7 +37,7 @@ class ReservationController extends AbstractController
             $reservation->setVerificationKeyExpirationDate((new \DateTime('now'))->modify('+15 minutes'));
             $entityManager->persist($reservation);
             $entityManager->flush();
-            $mailer->sendSuccessfulRegistrationEmail($reservation, $translator);
+            $mailer->sendSuccessfulRegistrationEmail($reservation);
 
             return $this->redirectToRoute('home');
         }
@@ -72,7 +72,7 @@ class ReservationController extends AbstractController
             if ($now < $reservation->getVerificationKeyExpirationDate()) {
                 $reservation->setIsVerified(true);
                 $entityManager->flush();
-                $mailer->sendSuccessfulVerificationEmail($reservation, $translator);
+                $mailer->sendSuccessfulVerificationEmail($reservation);
                 $this->addFlash(
                     'notice',
                     $translator->trans('flash.reservation.verified')
@@ -110,7 +110,7 @@ class ReservationController extends AbstractController
         if ($reservation != null && !$reservation->getIsCancelled()) {
             $reservation->setIsCancelled(true);
             $entityManager->flush();
-            $mailer->sendSuccessfulCancellationEmail($reservation, $translator);
+            $mailer->sendSuccessfulCancellationEmail($reservation);
             $this->addFlash(
                 'notice',
                 $translator->trans('flash.reservation.cancelled')

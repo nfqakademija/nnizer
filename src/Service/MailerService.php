@@ -19,16 +19,22 @@ class MailerService extends AbstractController
      * @var ParameterBagInterface
      */
     private $params;
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
 
     /**
      * MailerService constructor.
      * @param Swift_Mailer $mailer
      * @param ParameterBagInterface $params
+     * @param TranslatorInterface $translator
      */
-    public function __construct(Swift_Mailer $mailer, ParameterBagInterface $params)
+    public function __construct(Swift_Mailer $mailer, ParameterBagInterface $params, TranslatorInterface $translator)
     {
         $this->mailer = $mailer;
         $this->params = $params;
+        $this->translator = $translator;
     }
 
     /**
@@ -50,11 +56,9 @@ class MailerService extends AbstractController
 
     /**
      * @param Reservation $reservation
-     * @param TranslatorInterface $translatorInterface
      */
     public function sendSuccessfulRegistrationEmail(
-        Reservation $reservation,
-        TranslatorInterface $translatorInterface
+        Reservation $reservation
     ): void {
         $this->sendMail(
             $this->renderView(
@@ -66,17 +70,16 @@ class MailerService extends AbstractController
                     'provider' => $reservation->getContractor()
                 ]
             ),
-            $translatorInterface->trans('email.heading.registered'),
+            $this->translator->trans('email.heading.registered'),
             $reservation->getEmail()
         );
     }
+
     /**
      * @param Reservation $reservation
-     * @param TranslatorInterface $translatorInterface
      */
     public function sendSuccessfulVerificationEmail(
-        Reservation $reservation,
-        TranslatorInterface $translatorInterface
+        Reservation $reservation
     ): void {
         $this->sendMail(
             $this->renderView(
@@ -86,24 +89,23 @@ class MailerService extends AbstractController
                     'key' => $reservation->getVerificationKey(),
                 ]
             ),
-            $translatorInterface->trans('email.heading.verified'),
+            $this->translator->trans('email.heading.verified'),
             $reservation->getEmail()
         );
     }
+
     /**
      * @param Reservation $reservation
-     * @param TranslatorInterface $translatorInterface
      */
     public function sendSuccessfulCancellationEmail(
-        Reservation $reservation,
-        TranslatorInterface $translatorInterface
+        Reservation $reservation
     ): void {
         $this->sendMail(
             $this->renderView(
                 'emails/client-cancel.html.twig',
                 ['user' => $reservation->getFirstname()]
             ),
-            $translatorInterface->trans('email.heading.cancelled'),
+            $this->translator->trans('email.heading.cancelled'),
             $reservation->getEmail()
         );
     }

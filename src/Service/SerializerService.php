@@ -5,7 +5,7 @@ namespace App\Service;
 
 use Symfony\Component\Serializer\SerializerInterface;
 
-class JsonService
+class SerializerService
 {
     /**
      * @var SerializerInterface
@@ -22,7 +22,7 @@ class JsonService
     }
 
     /**
-     * @param $object
+     * @param object $object
      * @param array $groups
      * @return array
      */
