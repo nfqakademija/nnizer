@@ -26,3 +26,4 @@ security:
 
     access_control:
           - { path: ^/contractor, roles: ROLE_USER }
+          - { path: ^/api/contractor, roles: ROLE_USER }
