@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository")
@@ -18,21 +19,25 @@ class Reservation
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"Default"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"Default"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"Default"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"Default"})
      */
     private $email;
 
@@ -43,11 +48,13 @@ class Reservation
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"Default"})
      */
     private $visitDate;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"Default"})
      */
     private $isVerified = false;
 
@@ -63,6 +70,7 @@ class Reservation
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"Default"})
      */
     private $isCancelled = false;
 
