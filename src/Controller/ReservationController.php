@@ -37,8 +37,7 @@ class ReservationController extends AbstractController
             $reservation->setVerificationKeyExpirationDate((new \DateTime('now'))->modify('+15 minutes'));
             $entityManager->persist($reservation);
             $entityManager->flush();
-
-            $this->sendSuccessfulRegistrationEmail($reservation, $translator, $mailer);
+            $mailer->sendSuccessfulRegistrationEmail($reservation);
 
             return $this->redirectToRoute('home');
         }
@@ -46,31 +45,6 @@ class ReservationController extends AbstractController
         return $this->render('client/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @param Reservation $reservation
-     * @param TranslatorInterface $translatorInterface
-     * @param MailerService $mailerService
-     */
-    public function sendSuccessfulRegistrationEmail(
-        Reservation $reservation,
-        TranslatorInterface $translatorInterface,
-        MailerService $mailerService
-    ): void {
-        $mailerService->sendMail(
-            $this->renderView(
-                'emails/client-register.html.twig',
-                [
-                    'user' => $reservation->getFirstname(),
-                    'key' => $reservation->getVerificationKey(),
-                    'date' => $reservation->getVisitDate()->format('Y-m-d H-i'),
-                    'provider' => $reservation->getContractor()
-                ]
-            ),
-            $translatorInterface->trans('email.heading.registered'),
-            $reservation->getEmail()
-        );
     }
 
     /**
@@ -98,7 +72,7 @@ class ReservationController extends AbstractController
             if ($now < $reservation->getVerificationKeyExpirationDate()) {
                 $reservation->setIsVerified(true);
                 $entityManager->flush();
-                $this->sendSuccessfulVerificationEmail($reservation, $translator, $mailer);
+                $mailer->sendSuccessfulVerificationEmail($reservation);
                 $this->addFlash(
                     'notice',
                     $translator->trans('flash.reservation.verified')
@@ -112,29 +86,6 @@ class ReservationController extends AbstractController
         }
 
         return $this->redirectToRoute('home');
-    }
-
-    /**
-     * @param Reservation $reservation
-     * @param TranslatorInterface $translatorInterface
-     * @param MailerService $mailerService
-     */
-    private function sendSuccessfulVerificationEmail(
-        Reservation $reservation,
-        TranslatorInterface $translatorInterface,
-        MailerService $mailerService
-    ): void {
-        $mailerService->sendMail(
-            $this->renderView(
-                'emails/client-verified.html.twig',
-                [
-                    'user' => $reservation->getFirstname(),
-                    'key' => $reservation->getVerificationKey(),
-                ]
-            ),
-            $translatorInterface->trans('email.heading.verified'),
-            $reservation->getEmail()
-        );
     }
 
     /**
@@ -159,7 +110,7 @@ class ReservationController extends AbstractController
         if ($reservation != null && !$reservation->getIsCancelled()) {
             $reservation->setIsCancelled(true);
             $entityManager->flush();
-            $this->sendSuccessfulCancellationEmail($reservation, $translator, $mailer);
+            $mailer->sendSuccessfulCancellationEmail($reservation);
             $this->addFlash(
                 'notice',
                 $translator->trans('flash.reservation.cancelled')
@@ -167,25 +118,5 @@ class ReservationController extends AbstractController
         }
 
         return $this->redirectToRoute('home');
-    }
-
-    /**
-     * @param Reservation $reservation
-     * @param TranslatorInterface $translatorInterface
-     * @param MailerService $mailerService
-     */
-    private function sendSuccessfulCancellationEmail(
-        Reservation $reservation,
-        TranslatorInterface $translatorInterface,
-        MailerService $mailerService
-    ): void {
-        $mailerService->sendMail(
-            $this->renderView(
-                'emails/client-cancel.html.twig',
-                ['user' => $reservation->getFirstname()]
-            ),
-            $translatorInterface->trans('email.heading.cancelled'),
-            $reservation->getEmail()
-        );
     }
 }

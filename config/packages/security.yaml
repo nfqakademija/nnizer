@@ -25,4 +25,5 @@ security:
                 target: app_login
 
     access_control:
-          - { path: ^/contractor, roles: ROLE_USER }
+          - { path: ^/contractor, roles: ROLE_CONTRACTOR }
+          - { path: ^/api/contractor, roles: ROLE_CONTRACTOR }

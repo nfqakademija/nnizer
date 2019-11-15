@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Contractor;
+use App\Entity\Reservation;
+use App\Service\SerializerService;
 use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -51,5 +54,82 @@ class ContractorController extends AbstractController
         }
 
         return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route("/api/contractor/{contractorUsername}/get-clients/", methods="GET")
+     * @param string $contractorUsername
+     * @param SerializerService $json
+     * @return Response
+     */
+    public function getReservations(
+        string $contractorUsername,
+        SerializerService $json
+    ): Response {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $reservations = $entityManager->getRepository(Reservation::class)->findBy([
+            'contractor' => $contractorUsername,
+        ]);
+
+        return new Jsonresponse($json->getResponse($reservations));
+    }
+
+    /**
+     * @Route("/api/contractor/{contractorUsername}/cancel/{id}", methods="PATCH")
+     * @param string $contractorUsername
+     * @param int $reservationId
+     * @param MailerService $mailer
+     * @return JsonResponse
+     */
+    public function cancelReservation(
+        string $contractorUsername,
+        int $reservationId,
+        MailerService $mailer
+    ): JsonResponse {
+        $entityManager = $this->getDoctrine()->getManager();
+        $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
+            'contractor' => $contractorUsername,
+            'id' => $reservationId,
+            'isCancelled' => false,
+        ]);
+        if ($reservation !== null) {
+            $reservation->setIsCancelled(true);
+            $mailer->sendSuccessfulCancellationEmail($reservation);
+            $entityManager->flush();
+
+            return new JsonResponse();
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    /**
+     * @Route("/api/contractor/{contractorUsername}/verify/{id}", methods="PATCH")
+     * @param string $contractorUsername
+     * @param int $reservationId
+     * @param MailerService $mailer
+     * @return JsonResponse
+     */
+    public function verifyReservation(
+        string $contractorUsername,
+        int $reservationId,
+        MailerService $mailer
+    ): JsonResponse {
+        $entityManager= $this->getDoctrine()->getManager();
+        $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
+            'contractor' => $contractorUsername,
+            'id' => $reservationId,
+            'isVerified' => false,
+        ]);
+        if ($reservation !== null) {
+            $reservation->setIsVerified(true);
+            $mailer->sendSuccessfulVerificationEmail($reservation);
+            $entityManager->flush();
+
+            return new JsonResponse();
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
     }
 }
