@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Reservation;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
@@ -20,6 +21,24 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
+    /**
+     * @param string $contractor
+     * @param DateTime $from
+     * @param DateTime $to
+     * @return Reservation[] Returns an array of Reservation objects
+     */
+    public function findByDateInterval(string $contractor, DateTime $from, DateTime $to): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.contractor = :contractor')
+            ->andWhere('c.visitDate > :from')
+            ->andWhere('c.visitDate < :to')
+            ->setParameters(['contractor' => $contractor, 'from' => $from, 'to' => $to])
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Client[] Returns an array of Client objects
     //  */

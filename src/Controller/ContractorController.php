@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContractorController extends AbstractController
@@ -128,6 +129,33 @@ class ContractorController extends AbstractController
             $entityManager->flush();
 
             return new JsonResponse();
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    /**
+     * @Route("/api/contractor/{contractorUsername}/get-clients/{date}")
+     * @param string $contractorUsername
+     * @param string $date
+     * @param SerializerService $json
+     * @return JsonResponse
+     */
+    public function getReservationsByDay(
+        string $contractorUsername,
+        string $date,
+        SerializerService $json
+    ): JsonResponse {
+        $dateFrom = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(0, 0, 0);
+        $dateTo = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(23, 59, 59);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $reservations = $entityManager
+            ->getRepository(Reservation::class)
+            ->findByDateInterval($contractorUsername, $dateFrom, $dateTo);
+
+        if ($reservations !== null) {
+            return new Jsonresponse($json->getResponse($reservations));
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
