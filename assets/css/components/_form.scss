@@ -8,7 +8,8 @@
             width: 100%;
         }
 
-        & > div:first-child {
+        & > div:first-child,
+        & > ul:first-child {
             margin-right: rem(30px);
         }
 
@@ -24,6 +25,12 @@
     &__field {
         position: relative;
         margin-bottom: 1rem;
+    }
+
+    &__error {
+        position: relative;
+        top: rem(-12px);
+        color: #D8000C;
     }
 
     input {
