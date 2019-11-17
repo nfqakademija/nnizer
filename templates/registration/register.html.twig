@@ -6,7 +6,7 @@
     <div class="sign-up container">
         <div class="row">
             <div class="sign-up__form col-md-6 col-lg-5">
-                <a href="/login" class="sign-up__login-link link">{{ "registration_form.already-registered"|trans }}</a>
+                <a href="/login" class="sign-up__login-link link link--underline">{{ "registration_form.already-registered"|trans }}</a>
                 <h1>{{ "registration_form.register"|trans }}</h1>
 
                 {{ form_start(registrationForm, { attr: {novalidate: 'novalidate', class: 'form'}}) }}
@@ -24,19 +24,19 @@
                 </div>
                 {{ form_errors(registrationForm.lastname) }}
 
-                 <div class="form__field">
+                <div class="form__field">
                     {{ form_widget(registrationForm.username) }}
                     {{ form_label(registrationForm.username) }}
                 </div>
                 {{ form_errors(registrationForm.username) }}
 
-                 <div class="form__field">
+                <div class="form__field">
                     {{ form_widget(registrationForm.email) }}
                     {{ form_label(registrationForm.email) }}
                 </div>
                 {{ form_errors(registrationForm.email) }}
 
-                 <div class="form__field">
+                <div class="form__field">
                     {{ form_widget(registrationForm.phoneNumber) }}
                     {{ form_label(registrationForm.phoneNumber) }}
                 </div>
@@ -56,5 +56,4 @@
                 <img src="{{ asset('build/images/illiustration-signup.svg') }}" alt="Man jumping into water">
             </div>
         </div>
-       
 {% endblock %}

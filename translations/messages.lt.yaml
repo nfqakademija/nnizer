@@ -5,13 +5,14 @@ login_page:
   login: Prisijungimas
   logged_in_as: Jūs šiuo metu esate prisijungęs kaip %user%
   logout: Atsijungti
-  please_signin: Prašome prisijungti
   username: Vartotojo vardas
   password: Slaptažodis
   signin: Prisijungti
+  forgot_pass: Pamiršote slaptažodį?
+  not_registered: Dar neturite paskyros? Spauskite, norėdami užsiregistruoti!
 
 registration_form:
-  already-registered: Jau užsiregistravote? Spauskite, norėdami prisijungti
+  already-registered: Jau užsiregistravote? Spauskite, norėdami prisijungti!
   register: Registracija
   register.button: Registruotis
   username: Vartotojo vardas *

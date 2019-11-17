@@ -3,29 +3,45 @@
 {% block title %}{{ "login_page.login"|trans }}{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <div class="login">
+        <div class="container">
+            <div class="login__window col-lg-5">
+                <form method="post" class="form">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            {{ "login_page.logged_in_as"|trans({'%user%': app.user.username}, "messages") }}, <a href="{{ path('app_logout') }}">{{ "login_page.logout"|trans }}</a>
+                    {% if app.user %}
+                        <div class="mb-3">
+                            {{ "login_page.logged_in_as"|trans({'%user%': app.user.username}, "messages") }}, <a href="{{ path('app_logout') }}">{{ "login_page.logout"|trans }}</a>
+                        </div>
+                    {% endif %}
+
+                    <a href="/register" class="login__register-link link link--underline">{{ "login_page.not_registered"|trans }}</a>
+                    <h1>{{ "login_page.login"|trans }}</h1>
+
+                    <div class="form__field">
+                        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
+                        <label for="inputUsername" class="sr-only">{{ "login_page.username"|trans }}</label>
+                    </div>
+
+                    <div class="form__field">
+                        <input type="password" name="password" id="inputPassword" class="form-control" required>
+                        <label for="inputPassword" class="sr-only">{{ "login_page.password"|trans }}</label>
+                    </div>
+
+                    <a href="#" class="login__forgot-link link">{{ "login_page.forgot_pass"|trans }}</a>
+
+
+                    <input type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    <button class="btn btn--full" type="submit">
+                        {{ "login_page.signin"|trans }}
+                    </button>
+                </form>
+            </div>
         </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">{{ "login_page.please_signin"|trans }}</h1>
-    <label for="inputUsername" class="sr-only">{{ "login_page.username"|trans }}</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="{{ "login_page.username"|trans }}" required autofocus>
-    <label for="inputPassword" class="sr-only">{{ "login_page.password"|trans }}</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="{{ "login_page.password"|trans }}" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        {{ "login_page.signin"|trans }}
-    </button>
-</form>
+    </div>
 {% endblock %}
