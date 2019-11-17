@@ -23,42 +23,42 @@ class ContractorSettings
     private $contractor;
 
     /**
-     * @ORM\Column(type="dateinterval")
+     * @ORM\Column(type="string")
      */
     private $Monday;
 
     /**
-     * @ORM\Column(type="dateinterval")
+     * @ORM\Column(type="string")
      */
     private $Tuesday;
 
     /**
-     * @ORM\Column(type="dateinterval")
+     * @ORM\Column(type="string")
      */
     private $Wednesday;
 
     /**
-     * @ORM\Column(type="dateinterval")
+     * @ORM\Column(type="string")
      */
     private $Thursday;
 
     /**
-     * @ORM\Column(type="dateinterval")
+     * @ORM\Column(type="string")
      */
     private $Friday;
 
     /**
-     * @ORM\Column(type="dateinterval")
+     * @ORM\Column(type="string")
      */
     private $Saturday;
 
     /**
-     * @ORM\Column(type="dateinterval")
+     * @ORM\Column(type="string")
      */
     private $Sunday;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="dateinterval")
      */
     private $visitDuration;
 
@@ -90,18 +90,18 @@ class ContractorSettings
     }
 
     /**
-     * @return \DateInterval|null
+     * @return string|null
      */
-    public function getMonday(): ?\DateInterval
+    public function getMonday(): ?string
     {
         return $this->Monday;
     }
 
     /**
-     * @param \DateInterval $Monday
+     * @param string $Monday
      * @return $this
      */
-    public function setMonday(\DateInterval $Monday): self
+    public function setMonday(string $Monday): self
     {
         $this->Monday = $Monday;
 
@@ -109,18 +109,18 @@ class ContractorSettings
     }
 
     /**
-     * @return \DateInterval|null
+     * @return string|null
      */
-    public function getTuesday(): ?\DateInterval
+    public function getTuesday(): ?string
     {
         return $this->Tuesday;
     }
 
     /**
-     * @param \DateInterval $Tuesday
+     * @param string $Tuesday
      * @return $this
      */
-    public function setTuesday(\DateInterval $Tuesday): self
+    public function setTuesday(string $Tuesday): self
     {
         $this->Tuesday = $Tuesday;
 
@@ -128,18 +128,18 @@ class ContractorSettings
     }
 
     /**
-     * @return \DateInterval|null
+     * @return string|null
      */
-    public function getWednesday(): ?\DateInterval
+    public function getWednesday(): ?string
     {
         return $this->Wednesday;
     }
 
     /**
-     * @param \DateInterval $Wednesday
+     * @param string $Wednesday
      * @return $this
      */
-    public function setWednesday(\DateInterval $Wednesday): self
+    public function setWednesday(string $Wednesday): self
     {
         $this->Wednesday = $Wednesday;
 
@@ -147,18 +147,18 @@ class ContractorSettings
     }
 
     /**
-     * @return \DateInterval|null
+     * @return string|null
      */
-    public function getThursday(): ?\DateInterval
+    public function getThursday(): ?string
     {
         return $this->Thursday;
     }
 
     /**
-     * @param \DateInterval $Thursday
+     * @param string $Thursday
      * @return $this
      */
-    public function setThursday(\DateInterval $Thursday): self
+    public function setThursday(string $Thursday): self
     {
         $this->Thursday = $Thursday;
 
@@ -166,18 +166,18 @@ class ContractorSettings
     }
 
     /**
-     * @return \DateInterval|null
+     * @return string|null
      */
-    public function getFriday(): ?\DateInterval
+    public function getFriday(): ?string
     {
         return $this->Friday;
     }
 
     /**
-     * @param \DateInterval $Friday
+     * @param string $Friday
      * @return $this
      */
-    public function setFriday(\DateInterval $Friday): self
+    public function setFriday(string $Friday): self
     {
         $this->Friday = $Friday;
 
@@ -185,18 +185,18 @@ class ContractorSettings
     }
 
     /**
-     * @return \DateInterval|null
+     * @return string|null
      */
-    public function getSaturday(): ?\DateInterval
+    public function getSaturday(): ?string
     {
         return $this->Saturday;
     }
 
     /**
-     * @param \DateInterval $Saturday
+     * @param string $Saturday
      * @return $this
      */
-    public function setSaturday(\DateInterval $Saturday): self
+    public function setSaturday(string $Saturday): self
     {
         $this->Saturday = $Saturday;
 
@@ -204,18 +204,18 @@ class ContractorSettings
     }
 
     /**
-     * @return \DateInterval|null
+     * @return string|null
      */
-    public function getSunday(): ?\DateInterval
+    public function getSunday(): ?string
     {
         return $this->Sunday;
     }
 
     /**
-     * @param \DateInterval $Sunday
+     * @param string $Sunday
      * @return $this
      */
-    public function setSunday(\DateInterval $Sunday): self
+    public function setSunday(string $Sunday): self
     {
         $this->Sunday = $Sunday;
 
@@ -223,18 +223,18 @@ class ContractorSettings
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return \DateInterval|null
      */
-    public function getVisitDuration(): ?\DateTimeInterface
+    public function getVisitDuration(): ?\DateInterval
     {
         return $this->visitDuration;
     }
 
     /**
-     * @param \DateTimeInterface $visitDuration
+     * @param \DateInterval $visitDuration
      * @return $this
      */
-    public function setVisitDuration(\DateTimeInterface $visitDuration): self
+    public function setVisitDuration(\DateInterval $visitDuration): self
     {
         $this->visitDuration = $visitDuration;
 
