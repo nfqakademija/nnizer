@@ -17,7 +17,7 @@
                         </div>
                     {% endif %}
 
-                    <a href="/register" class="login__register-link link link--underline">{{ "login_page.not_registered"|trans }}</a>
+                    <a href="{{ path('app_register') }}" class="login__register-link link link--underline">{{ "login_page.not_registered"|trans }}</a>
                     <h1>{{ "login_page.login"|trans }}</h1>
 
                     <div class="form__field">
