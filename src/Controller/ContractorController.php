@@ -4,11 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Contractor;
 use App\Entity\Reservation;
+use App\Repository\ReservationRepository;
 use App\Service\SerializerService;
 use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -25,19 +25,16 @@ class ContractorController extends AbstractController
             'controller_name' => 'ContractorController',
         ]);
     }
+
     /**
      * @Route("/contractor/activate/{verificationKey}", name="contractor_activate", methods="GET")
-     * @param Request $request
      * @param string $verificationKey
      * @param TranslatorInterface $translator
-     * @param MailerService $mailer
      * @return Response
      */
     public function activate(
-        Request $request,
         string $verificationKey,
-        TranslatorInterface $translator,
-        MailerService $mailer
+        TranslatorInterface $translator
     ): Response {
         $entityManager = $this->getDoctrine()->getManager();
         $user = $entityManager->getRepository(Contractor::class)->findOneBy([
@@ -128,6 +125,32 @@ class ContractorController extends AbstractController
             $entityManager->flush();
 
             return new JsonResponse();
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    /**
+     * @Route("/api/contractor/{contractorUsername}/get-clients/{date}")
+     * @param string $contractorUsername
+     * @param string $date
+     * @param SerializerService $json
+     * @param ReservationRepository $reservationsRepository
+     * @return JsonResponse
+     */
+    public function getReservationsByDay(
+        string $contractorUsername,
+        string $date,
+        SerializerService $json,
+        ReservationRepository $reservationsRepository
+    ): JsonResponse {
+        $dateFrom = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(0, 0, 0);
+        $dateTo = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(23, 59, 59);
+
+        $reservations = $reservationsRepository->findByDateInterval($contractorUsername, $dateFrom, $dateTo);
+
+        if ($reservations !== null) {
+            return new Jsonresponse($json->getResponse($reservations));
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
