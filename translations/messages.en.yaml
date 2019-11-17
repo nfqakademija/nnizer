@@ -5,13 +5,14 @@ login_page:
   login: Login
   logged_in_as: You are currently logged in as %user%
   logout: Log out
-  please_signin: Please sign in
   username: Username
   password: Password
-  signin: Sign in
+  signin: Login
+  forgot_pass: Forgot password?
+  not_registered: Don't have account? Click to register!
 
 registration_form:
-  already-registered: Already registered? Click to login
+  already-registered: Already registered? Click to login!
   register: Register
   register.button: Register
   username: Username
