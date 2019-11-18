@@ -1,7 +1,8 @@
 .container {
   height: 100%;
-  margin: 0 auto;
+  width: 100%;	
   padding: 0 rem(16px);
+  margin: 0 auto;
 
   &--fluid {
     max-width: none;
@@ -28,6 +29,14 @@
     max-width: $container-xl;
   }
 }
+
+.container {	
+  width: 100%;	
+  padding-right: 15px;	
+  padding-left: 15px;	
+  // margin-right: auto;	
+  // margin-left: auto;	
+}	
 
  html {
   box-sizing: border-box;
