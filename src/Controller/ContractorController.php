@@ -144,10 +144,15 @@ class ContractorController extends AbstractController
         SerializerService $json,
         ReservationRepository $reservationsRepository
     ): JsonResponse {
-        $dateFrom = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(0, 0, 0);
-        $dateTo = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(23, 59, 59);
+        if ((preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $date))) {
+            $dateFrom = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(0, 0, 0);
+            $dateTo = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(23, 59, 59);
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
+        }
 
         $reservations = $reservationsRepository->findByDateInterval($contractorUsername, $dateFrom, $dateTo);
+
 
         if ($reservations !== null) {
             return new Jsonresponse($json->getResponse($reservations));
