@@ -1,6 +1,13 @@
 contractor_page:
   hello: Sveiki, %name%!
 
+home:
+  header: NNIZER projektas
+
+navigation:
+  login: Prisijungti
+  signup: Užsiregistruoti
+
 login_page:
   login: Prisijungimas
   logged_in_as: Jūs šiuo metu esate prisijungęs kaip %user%

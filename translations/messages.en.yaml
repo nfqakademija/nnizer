@@ -1,6 +1,13 @@
 contractor_page:
   hello: Hello, %name%!
 
+home:
+  header: NNIZER project
+
+navigation:
+  login: Login
+  signup: Sign up
+
 login_page:
   login: Login
   logged_in_as: You are currently logged in as %user%
