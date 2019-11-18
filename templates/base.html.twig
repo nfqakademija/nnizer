@@ -10,6 +10,17 @@
         {% endblock %}
     </head>
     <body>
+        <header class="header">
+            <div class="container">
+                 <div class="header__left">
+                    <img src="{{ asset('build/images/nnizer-logo.svg') }}" alt="nnizer type logotype" class="header__logo">
+                 </div>
+                 <div class="header__right">
+                    <a href="{{ path('app_register') }}" class="btn">sign up</a>
+                    <a href="{{ path('app_login') }}" class="btn btn--secondary">login</a>
+                 </div>
+            </div>
+        </header>
         {% block body %}{% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}

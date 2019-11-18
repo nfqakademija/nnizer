@@ -1,0 +1,20 @@
+.header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: rem(96px);
+    background: transparent;
+    z-index: 1;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__right {
+        a:first-child {
+            margin-right: rem(16px)
+        }
+    }
+}
