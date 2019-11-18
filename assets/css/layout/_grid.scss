@@ -1,10 +1,14 @@
 .container {
   height: 100%;
-  padding: 0 1.25rem;
   margin: 0 auto;
+  padding: 0 rem(16px);
 
-  &-fluid {
+  &--fluid {
     max-width: none;
+  }
+
+  &--top-spacing {
+    margin-top: rem(112px);
   }
 
   @include breakpoint(sm) {
@@ -34,22 +38,6 @@
 *::before,
 *::after {
   box-sizing: inherit;
-}
-
-.container {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.container-fluid {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 .row {

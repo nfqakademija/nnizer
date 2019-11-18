@@ -3,6 +3,9 @@
 {% block title %} {{ "home.header"|trans }} {% endblock %}
 
 {% block body %}
-   <div class="container">
+   <div class="container container--top-spacing">
+        {% if is_granted('ROLE_CONTRACTOR') == false %}
+            <h1>You're just one form away. Sign in and let us handle your reservations immediately! 👋🏻</h1>
+        {% endif %}
    </div>
 {% endblock %}
