@@ -7,6 +7,7 @@ home:
 navigation:
   login: Prisijungti
   signup: Užsiregistruoti
+  logout: Atsijungti
 
 login_page:
   login: Prisijungimas

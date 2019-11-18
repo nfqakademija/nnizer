@@ -16,8 +16,12 @@
                      <a href="{{ path('home') }}"><img src="{{ asset('build/images/nnizer-logo.svg') }}" alt="nnizer type logotype" class="header__logo"></a>
                  </div>
                  <div class="header__right">
-                     <a href="{{ path('app_register') }}" class="btn">{{ "navigation.signup"|trans }}</a>
-                    <a href="{{ path('app_login') }}" class="btn btn--secondary">{{ "navigation.login"|trans }}</a>
+                     {% if is_granted('ROLE_CONTRACTOR') %}
+                         <a class="btn" href="{{ path('app_logout') }}">{{ "navigation.logout"|trans }}</a>
+                     {% else %}
+                         <a href="{{ path('app_register') }}" class="btn">{{ "navigation.signup"|trans }}</a>
+                         <a href="{{ path('app_login') }}" class="btn btn--secondary">{{ "navigation.login"|trans }}</a>
+                     {% endif %}
                  </div>
             </div>
         </header>
