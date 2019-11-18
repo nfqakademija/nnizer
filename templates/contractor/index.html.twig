@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ "contractor_page.hello"|trans({'%name%': controller_name}, "messages") }}{% endblock %}
+{% block title %} {{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}{% endblock %}
 
 {% block body %}
-
+<div class="container container--top-spacing">
+    <h1>{{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}</h1>
+</div>
 {% endblock %}
