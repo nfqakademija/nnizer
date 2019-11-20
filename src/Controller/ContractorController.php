@@ -21,10 +21,20 @@ class ContractorController extends AbstractController
 {
     /**
      * @Route("/contractor", name="contractor")
+     * @param UserInterface $user
      * @return Response
      */
-    public function index(): Response
+    public function index(UserInterface $user): Response
     {
+        $settings = $this->getDoctrine()
+            ->getRepository(ContractorSettings::class)
+            ->findOneBy(['contractor' => $user->getId()
+            ]);
+        
+        if ($settings === null) {
+            return $this->redirectToRoute('contractor_settings');
+        }
+
         return $this->render('contractor/index.html.twig', [
             'controller_name' => 'ContractorController',
         ]);
@@ -42,19 +52,17 @@ class ContractorController extends AbstractController
         $form = $this->createForm(ContractorSettingsType::class, $settings);
         $form->handleRequest($request);
 
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $contractor = $this
-                ->getDoctrine()
+            $contractor = $this->getDoctrine()
                 ->getRepository(Contractor::class)
                 ->findOneBy([
-                    'username' => $user->getUsername()
+                    'id' => $user->getId()
                 ]);
             $settings->setContractor($contractor);
             $entityManager->persist($settings);
             $entityManager->flush();
+
             return $this->redirectToRoute('contractor');
         }
 
