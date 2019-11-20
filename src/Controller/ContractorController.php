@@ -3,14 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Contractor;
+use App\Entity\ContractorSettings;
 use App\Entity\Reservation;
+use App\Form\ContractorSettingsType;
 use App\Repository\ReservationRepository;
 use App\Service\SerializerService;
 use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContractorController extends AbstractController
@@ -23,6 +27,39 @@ class ContractorController extends AbstractController
     {
         return $this->render('contractor/index.html.twig', [
             'controller_name' => 'ContractorController',
+        ]);
+    }
+
+    /**
+     * @Route("/contractor/settings", name="contractor_settings")
+     * @param Request $request
+     * @param UserInterface $user
+     * @return Response
+     */
+    public function settings(Request $request, UserInterface $user): Response
+    {
+        $settings = new ContractorSettings();
+        $form = $this->createForm(ContractorSettingsType::class, $settings);
+        $form->handleRequest($request);
+
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $contractor = $this
+                ->getDoctrine()
+                ->getRepository(Contractor::class)
+                ->findOneBy([
+                    'username' => $user->getUsername()
+                ]);
+            $settings->setContractor($contractor);
+            $entityManager->persist($settings);
+            $entityManager->flush();
+            return $this->redirectToRoute('contractor');
+        }
+
+        return $this->render('contractor/settings.html.twig', [
+            'settingsForm' => $form->createView(),
         ]);
     }
 

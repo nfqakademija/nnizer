@@ -15,78 +15,81 @@ class ContractorSettingsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $pattern = '/([0-1][0-9]|2[0-4]):[0-5][0-9] \- ([0-1][0-9]|2[0-4]):[0-5][0-9]/';
         $builder
             ->add('Monday', TextType::class, [
-                'label' => 'registration_form.provider',
-                'data' => 'Provider 123',
+                'label' => 'settings_form.Monday-workhours',
+                'data' => '07:00 - 17:00',
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
-                        'pattern' => '([0-1][0-9]|2[0-4]):[0-5][0-9] - ([0-1][0-9]|2[0-4]):[0-5][0-9]',
+                        'pattern' => $pattern,
                     ])
                 ]
             ])
             ->add('Tuesday', TextType::class, [
-                'label' => 'registration_form.provider',
-                'data' => 'Provider 123',
+                'label' => 'settings_form.Tuesday-workhours',
+                'data' => '07:00 - 17:00',
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
-                        'pattern' => '([0-1][0-9]|2[0-4]):[0-5][0-9] - ([0-1][0-9]|2[0-4]):[0-5][0-9]',
+                        'pattern' => $pattern,
                     ])
                 ]
             ])
             ->add('Wednesday', TextType::class, [
-                'label' => 'registration_form.provider',
-                'data' => 'Provider 123',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'provider.empty',
-                    ]),
-                ]
-            ])
-            ->add('Thursday', TextType::class, [
-                'label' => 'registration_form.provider',
-                'data' => 'Provider 123',
+                'label' => 'settings_form.Wednesday-workhours',
+                'data' => '07:00 - 17:00',
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
-                        'pattern' => '([0-1][0-9]|2[0-4]):[0-5][0-9] - ([0-1][0-9]|2[0-4]):[0-5][0-9]',
+                        'pattern' => $pattern,
+                    ])
+                ]
+            ])
+            ->add('Thursday', TextType::class, [
+                'label' => 'settings_form.Thursday-workhours',
+                'data' => '07:00 - 17:00',
+                'constraints' => [
+                    new Regex([
+                        'message' => 'settings.regex',
+                        'pattern' => $pattern,
                     ])
                 ]
             ])
             ->add('Friday', TextType::class, [
-                'label' => 'registration_form.provider',
-                'data' => 'Provider 123',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'provider.empty',
-                    ]),
-                ]
-            ])
-            ->add('Saturday', TextType::class, [
-                'label' => 'registration_form.provider',
-                'data' => 'Provider 123',
+                'label' => 'settings_form.Friday-workhours',
+                'data' => '07:00 - 17:00',
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
-                        'pattern' => '([0-1][0-9]|2[0-4]):[0-5][0-9] - ([0-1][0-9]|2[0-4]):[0-5][0-9]',
+                        'pattern' => $pattern,
+                    ])
+                ]
+            ])
+            ->add('Saturday', TextType::class, [
+                'label' => 'settings_form.Saturday-workhours',
+                'data' => '07:00 - 17:00',
+                'constraints' => [
+                    new Regex([
+                        'message' => 'settings.regex',
+                        'pattern' => $pattern,
                     ])
                 ]
             ])
             ->add('Sunday', TextType::class, [
-                'label' => 'registration_form.provider',
-                'data' => 'Provider 123',
+                'label' => 'settings_form.Sunday-workhours',
+                'data' => '07:00 - 17:00',
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
-                        'pattern' => '([0-1][0-9]|2[0-4]):[0-5][0-9] - ([0-1][0-9]|2[0-4]):[0-5][0-9]',
+                        'pattern' => $pattern,
                     ])
                 ]
             ])
             ->add('visitDuration', NumberType::class, [
-                'label' => 'registration_form.provider',
-                'data' => 'Provider 123',
+                'label' => 'settings_form.visitDuration',
+                'data' => '20',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'settings.empty',

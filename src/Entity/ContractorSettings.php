@@ -58,7 +58,7 @@ class ContractorSettings
     private $Sunday;
 
     /**
-     * @ORM\Column(type="dateinterval")
+     * @ORM\Column(type="integer")
      */
     private $visitDuration;
 
@@ -223,18 +223,18 @@ class ContractorSettings
     }
 
     /**
-     * @return \DateInterval|null
+     * @return int|null
      */
-    public function getVisitDuration(): ?\DateInterval
+    public function getVisitDuration(): ?int
     {
         return $this->visitDuration;
     }
 
     /**
-     * @param \DateInterval $visitDuration
+     * @param int $visitDuration
      * @return $this
      */
-    public function setVisitDuration(\DateInterval $visitDuration): self
+    public function setVisitDuration(int $visitDuration): self
     {
         $this->visitDuration = $visitDuration;
 
