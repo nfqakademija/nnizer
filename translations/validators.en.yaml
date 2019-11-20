@@ -23,3 +23,6 @@ date:
   invalid: Visit date invalid
 provider:
   empty: You did not choose a service provider
+settings:
+  regex: "Your input must look like this: 09:00 - 17:00"
+  empty: This value must not be empty
