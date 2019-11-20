@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap');
 
-html * {
-    font-family: 'Poppins', sans-serif;
+html,
+body {
+  font-family: 'Poppins', sans-serif;
 }
 
 h1 {
-    font-size: rem(48px);
-    font-weight: bold;
-    margin-bottom: rem(45px);
-    line-height: calc(3rem * 1.25rem);
+  font-size: rem(48px);
+  font-weight: bold;
+  line-height: calc(3rem * 1.25);
+  margin-bottom: rem(45px);
 }
 
 h2 {
-    font-size: rem(36px);
-    line-height: rem(36px * 1.4);
+  font-size: rem(36px);
+  line-height: rem(36px * 1.4);
 }

@@ -1,24 +1,24 @@
 .header {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: rem(96px);
-    background: transparent;
-    z-index: 1;
+  background: transparent;
+  height: rem(96px);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 
-    .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+  .container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
 
-    &__right {
-        a:first-child {
-            margin-right: rem(16px)
-        }
+  &__right {
+    a:first-child {
+      margin-right: rem(16px);
     }
+  }
 
-    &__logo {
-        height: rem(24px);
-    }
+  &__logo {
+    height: rem(24px);
+  }
 }

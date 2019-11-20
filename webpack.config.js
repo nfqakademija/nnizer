@@ -1,5 +1,6 @@
 var Encore = require('@symfony/webpack-encore');
-const CopyPlugin = require('copy-webpack-plugin');
+var StyleLintPlugin = require('stylelint-webpack-plugin');
+var CopyPlugin = require('copy-webpack-plugin');
 
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
@@ -26,6 +27,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
+    .addEntry('react', './assets/js/react.jsx')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -57,24 +59,14 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
+    .enableReactPreset()
 
-    // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
-
-    // uncomment to get integrity="..." attributes on your script & link tags
-    // requires WebpackEncoreBundle 1.4 or higher
-    //.enableIntegrityHashes(Encore.isProduction())
-
-    // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
-
-    // uncomment if you use API Platform Admin (composer req api-admin)
-    //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
 
-    .addPlugin(new CopyPlugin([
-        { from: './assets/images', to: 'images' }
-    ]))
-;
+    .addPlugin(
+        new CopyPlugin([
+            { from: './assets/images', to: 'images' }
+        ])
+    );
 
 module.exports = Encore.getWebpackConfig();

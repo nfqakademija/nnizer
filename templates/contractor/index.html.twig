@@ -3,7 +3,14 @@
 {% block title %} {{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}{% endblock %}
 
 {% block body %}
-<div class="container container--top-spacing">
-    <h2>{{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}</h2>
-</div>
+    <div class="container container--top-spacing">
+        <h2>{{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}</h2>
+
+        <ul id="contractor__rezervations">
+        </ul>
+    </div>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('react') }}
+    {% endblock %}
 {% endblock %}
