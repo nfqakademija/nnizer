@@ -30,7 +30,7 @@ class ContractorController extends AbstractController
             ->getRepository(ContractorSettings::class)
             ->findOneBy(['contractor' => $user->getId()
             ]);
-        
+
         if ($settings === null) {
             return $this->redirectToRoute('contractor_settings');
         }
