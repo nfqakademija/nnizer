@@ -3,14 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Contractor;
+use App\Entity\ContractorSettings;
 use App\Entity\Reservation;
+use App\Form\ContractorSettingsType;
 use App\Repository\ReservationRepository;
 use App\Service\SerializerService;
 use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContractorController extends AbstractController
@@ -21,8 +25,47 @@ class ContractorController extends AbstractController
      */
     public function index(): Response
     {
+        $settings = $this->getDoctrine()
+            ->getRepository(ContractorSettings::class)
+            ->findOneBy(['contractor' => $this->getUser()->getId()
+            ]);
+
+        if ($settings === null) {
+            return $this->redirectToRoute('contractor_settings');
+        }
+
         return $this->render('contractor/index.html.twig', [
             'controller_name' => 'ContractorController',
+        ]);
+    }
+
+    /**
+     * @Route("/contractor/settings", name="contractor_settings")
+     * @param Request $request
+     * @return Response
+     */
+    public function settings(Request $request): Response
+    {
+        $settings = new ContractorSettings();
+        $form = $this->createForm(ContractorSettingsType::class, $settings);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $contractor = $this->getDoctrine()
+                ->getRepository(Contractor::class)
+                ->findOneBy([
+                    'id' => $this->getUser()->getId()
+                ]);
+            $settings->setContractor($contractor);
+            $entityManager->persist($settings);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('contractor');
+        }
+
+        return $this->render('contractor/settings.html.twig', [
+            'settingsForm' => $form->createView(),
         ]);
     }
 
@@ -144,15 +187,31 @@ class ContractorController extends AbstractController
         SerializerService $json,
         ReservationRepository $reservationsRepository
     ): JsonResponse {
-        $dateFrom = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(0, 0, 0);
-        $dateTo = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(23, 59, 59);
+        if ($this->validateDate($date, 'Y-m-d')) {
+            $dateFrom = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(0, 0, 0);
+            $dateTo = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(23, 59, 59);
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
+        }
 
         $reservations = $reservationsRepository->findByDateInterval($contractorUsername, $dateFrom, $dateTo);
+
 
         if ($reservations !== null) {
             return new Jsonresponse($json->getResponse($reservations));
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
+    }
+
+    /**
+     * @param string $date
+     * @param string $format
+     * @return bool
+     */
+    private function validateDate(string $date, string $format = 'Y-m-d H:i:s'): bool
+    {
+        $d = \DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
     }
 }
