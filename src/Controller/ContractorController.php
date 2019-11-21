@@ -21,14 +21,13 @@ class ContractorController extends AbstractController
 {
     /**
      * @Route("/contractor", name="contractor")
-     * @param UserInterface $user
      * @return Response
      */
-    public function index(UserInterface $user): Response
+    public function index(): Response
     {
         $settings = $this->getDoctrine()
             ->getRepository(ContractorSettings::class)
-            ->findOneBy(['contractor' => $user->getId()
+            ->findOneBy(['contractor' => $this->getUser()->getId()
             ]);
 
         if ($settings === null) {
@@ -43,10 +42,9 @@ class ContractorController extends AbstractController
     /**
      * @Route("/contractor/settings", name="contractor_settings")
      * @param Request $request
-     * @param UserInterface $user
      * @return Response
      */
-    public function settings(Request $request, UserInterface $user): Response
+    public function settings(Request $request): Response
     {
         $settings = new ContractorSettings();
         $form = $this->createForm(ContractorSettingsType::class, $settings);
@@ -57,7 +55,7 @@ class ContractorController extends AbstractController
             $contractor = $this->getDoctrine()
                 ->getRepository(Contractor::class)
                 ->findOneBy([
-                    'id' => $user->getId()
+                    'id' => $this->getUser()->getId()
                 ]);
             $settings->setContractor($contractor);
             $entityManager->persist($settings);
@@ -189,7 +187,7 @@ class ContractorController extends AbstractController
         SerializerService $json,
         ReservationRepository $reservationsRepository
     ): JsonResponse {
-        if ((preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $date))) {
+        if ($this->validateDate($date, 'Y-m-d')) {
             $dateFrom = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(0, 0, 0);
             $dateTo = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(23, 59, 59);
         } else {
@@ -204,5 +202,16 @@ class ContractorController extends AbstractController
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
+    }
+
+    /**
+     * @param string $date
+     * @param string $format
+     * @return bool
+     */
+    private function validateDate(string $date, string $format = 'Y-m-d H:i:s'): bool
+    {
+        $d = \DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
     }
 }

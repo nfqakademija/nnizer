@@ -19,7 +19,9 @@ class ContractorSettingsType extends AbstractType
         $builder
             ->add('Monday', TextType::class, [
                 'label' => 'settings_form.Monday-workhours',
-                'data' => '07:00 - 17:00',
+                'attr' => [
+                    'placeholder' => '07:00 - 17:00',
+                ],
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -29,7 +31,9 @@ class ContractorSettingsType extends AbstractType
             ])
             ->add('Tuesday', TextType::class, [
                 'label' => 'settings_form.Tuesday-workhours',
-                'data' => '07:00 - 17:00',
+                'attr' => [
+                    'placeholder' => '07:00 - 17:00',
+                ],
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -39,7 +43,9 @@ class ContractorSettingsType extends AbstractType
             ])
             ->add('Wednesday', TextType::class, [
                 'label' => 'settings_form.Wednesday-workhours',
-                'data' => '07:00 - 17:00',
+                'attr' => [
+                    'placeholder' => '07:00 - 17:00',
+                ],
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -49,7 +55,9 @@ class ContractorSettingsType extends AbstractType
             ])
             ->add('Thursday', TextType::class, [
                 'label' => 'settings_form.Thursday-workhours',
-                'data' => '07:00 - 17:00',
+                'attr' => [
+                    'placeholder' => '07:00 - 17:00',
+                ],
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -59,7 +67,9 @@ class ContractorSettingsType extends AbstractType
             ])
             ->add('Friday', TextType::class, [
                 'label' => 'settings_form.Friday-workhours',
-                'data' => '07:00 - 17:00',
+                'attr' => [
+                    'placeholder' => '07:00 - 17:00',
+                ],
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -69,7 +79,9 @@ class ContractorSettingsType extends AbstractType
             ])
             ->add('Saturday', TextType::class, [
                 'label' => 'settings_form.Saturday-workhours',
-                'data' => '07:00 - 17:00',
+                'attr' => [
+                    'placeholder' => '07:00 - 17:00',
+                ],
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -79,7 +91,9 @@ class ContractorSettingsType extends AbstractType
             ])
             ->add('Sunday', TextType::class, [
                 'label' => 'settings_form.Sunday-workhours',
-                'data' => '07:00 - 17:00',
+                'attr' => [
+                    'placeholder' => '07:00 - 17:00',
+                ],
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -88,8 +102,10 @@ class ContractorSettingsType extends AbstractType
                 ]
             ])
             ->add('visitDuration', NumberType::class, [
+                'attr' => [
+                    'placeholder' => '20',
+                ],
                 'label' => 'settings_form.visitDuration',
-                'data' => '20',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'settings.empty',
