@@ -23,43 +23,42 @@ class Review
     private $contractor;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $authorFirstname;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $authorLastname;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $stars;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\Reservation", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $reservation;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
-    public function getId(): ?int
+    /**
+     * @return int
+     */
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @return Contractor|null
+     * @return Contractor
      */
-    public function getContractor(): ?Contractor
+    public function getContractor(): Contractor
     {
         return $this->contractor;
     }
 
     /**
-     * @param Contractor|null $contractor
+     * @param Contractor $contractor
      * @return $this
      */
-    public function setContractor(?Contractor $contractor): self
+    public function setContractor(Contractor $contractor): self
     {
         $this->contractor = $contractor;
 
@@ -67,47 +66,9 @@ class Review
     }
 
     /**
-     * @return string|null
+     * @return int
      */
-    public function getAuthorFirstname(): ?string
-    {
-        return $this->authorFirstname;
-    }
-
-    /**
-     * @param string $authorFirstname
-     * @return $this
-     */
-    public function setAuthorFirstname(string $authorFirstname): self
-    {
-        $this->authorFirstname = $authorFirstname;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getAuthorLastname(): ?string
-    {
-        return $this->authorLastname;
-    }
-
-    /**
-     * @param string $authorLastname
-     * @return $this
-     */
-    public function setAuthorLastname(string $authorLastname): self
-    {
-        $this->authorLastname = $authorLastname;
-
-        return $this;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getStars(): ?int
+    public function getStars(): int
     {
         return $this->stars;
     }
@@ -124,17 +85,29 @@ class Review
     }
 
     /**
-     * @return string|null
+     * @return Reservation
      */
+    public function getReservation(): Reservation
+    {
+        return $this->reservation;
+    }
+
+    /**
+     * @param Reservation $reservation
+     * @return $this
+     */
+    public function setReservation(Reservation $reservation): self
+    {
+        $this->reservation = $reservation;
+
+        return $this;
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string|null $description
-     * @return $this
-     */
     public function setDescription(?string $description): self
     {
         $this->description = $description;

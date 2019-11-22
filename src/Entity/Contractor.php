@@ -336,25 +336,8 @@ class Contractor implements UserInterface
     public function addReview(Review $review): self
     {
         if (!$this->reviews->contains($review)) {
-            $this->reviews[] = $review;
+            $this->reviews->add($review);
             $review->setContractor($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Review $review
-     * @return $this
-     */
-    public function removeReview(Review $review): self
-    {
-        if ($this->reviews->contains($review)) {
-            $this->reviews->removeElement($review);
-            // set the owning side to null (unless already changed)
-            if ($review->getContractor() === $this) {
-                $review->setContractor(null);
-            }
         }
 
         return $this;
