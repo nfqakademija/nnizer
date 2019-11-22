@@ -8,7 +8,6 @@ use App\Service\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SendReviewFormsCommand extends Command
@@ -37,16 +36,16 @@ class SendReviewFormsCommand extends Command
 
     protected function configure()
     {
-        $this->setDescription('Sends an email with review form to all completed reservations');
+        $this->setDescription('Sends an email with review form to all reservations that should ' .
+                                'have already been completed');
     }
 
     /**
-     * @param InputInterface $input
      * @param OutputInterface $output
      * @return int|void|null
      * @throws Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(OutputInterface $output)
     {
         $reservations = $this->em->getRepository(Reservation::class)
             ->findByInComplete(new \DateTime('now'));
