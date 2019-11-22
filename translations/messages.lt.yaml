@@ -69,3 +69,14 @@ email:
     verify: Patvirtinti rezervaciją
     cancel: Atšaukti rezervaciją
     home: NNIZER
+
+settings_form:
+  Monday-workhours: Pirmadienio darbo valandos
+  Tuesday-workhours: Antradienio darbo valandos
+  Wednesday-workhours: Trečiadienio darbo valandos
+  Thursday-workhours: Ketvirtadienio darbo valandos
+  Friday-workhours: Penktadienio darbo valandos
+  Saturday-workhours: Šeštadienio darbo valandos
+  Sunday-workhours: Sekmadienio darbo valandos
+  visitDuration: Vizito trukmė
+  Submit: Pateikti

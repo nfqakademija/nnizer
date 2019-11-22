@@ -23,3 +23,6 @@ date:
   invalid: Vizito laikas neteisingas
 provider:
   empty: Nepasirinktas paslaugos teikėjas
+settings:
+  regex: "Darbo laiką privaloma įvesti tokiu formatu: 09:00 - 17:00"
+  empty: Šis laukelis privalo būti užpildytas

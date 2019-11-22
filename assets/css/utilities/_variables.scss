@@ -15,17 +15,17 @@ $container-xl: 1140px;
 
 // Colors
 $color-white: #fff;
-$color-grey-1: #9E9E9E;
-$color-grey-2: #F2EFEA;
+$color-grey-1: #9e9e9e;
+$color-grey-2: #f2efea;
 $color-black: #1a1a1a;
-$color-yellow: #FFC600;
+$color-yellow: #ffc600;
 
 // z-index with maps
 // NOTE: will expand later.
 $z-index: (
-    above: 500,
-    modal: 200,
-    dropdown: 100,
-    link: 1,
-    below: -1
+  above: 500,
+  modal: 200,
+  dropdown: 100,
+  link: 1,
+  below: -1
 );

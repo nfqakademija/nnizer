@@ -70,6 +70,11 @@ class Contractor implements UserInterface
     private $isVerified = false;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ContractorSettings", mappedBy="contractor", cascade={"persist", "remove"})
+     */
+    private $settings;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -276,6 +281,30 @@ class Contractor implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return ContractorSettings|null
+     */
+    public function getSettings(): ?ContractorSettings
+    {
+        return $this->settings;
+    }
+
+    /**
+     * @param ContractorSettings $settings
+     * @return $this
+     */
+    public function setSettings(ContractorSettings $settings): self
+    {
+        $this->settings = $settings;
+
+        // set the owning side of the relation if necessary
+        if ($settings->getContractor() !== $this) {
+            $settings->setContractor($this);
+        }
 
         return $this;
     }
