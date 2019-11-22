@@ -75,6 +75,11 @@ class Reservation
     private $isCancelled = false;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isCompleted = false;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -258,6 +263,25 @@ class Reservation
     public function setIsCancelled(?bool $isCancelled): self
     {
         $this->isCancelled = $isCancelled;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsCompleted(): bool
+    {
+        return $this->isCompleted;
+    }
+
+    /**
+     * @param bool $isCompleted
+     * @return $this
+     */
+    public function setIsCompleted(bool $isCompleted): self
+    {
+        $this->isCompleted = $isCompleted;
 
         return $this;
     }
