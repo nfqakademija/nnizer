@@ -109,4 +109,19 @@ class MailerService extends AbstractController
             $reservation->getEmail()
         );
     }
+    /**
+     * @param Reservation $reservation
+     */
+    public function sendReviewEmail(
+        Reservation $reservation
+    ): void {
+        $this->sendMail(
+            $this->renderView(
+                'emails/client-review.html.twig',
+                ['id' => $reservation->getId(), 'user' => $reservation->getFirstname()]
+            ),
+            $this->translator->trans('email.heading.review'),
+            $reservation->getEmail()
+        );
+    }
 }

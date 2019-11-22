@@ -6,7 +6,6 @@ use App\Entity\Reservation;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\ORM\NonUniqueResultException;
 
 /**
  * @method Reservation|null find($id, $lockMode = null, $lockVersion = null)
@@ -42,15 +41,15 @@ class ReservationRepository extends ServiceEntityRepository
 
     /**
      * @param DateTime $now
-     * @return array
+     * @return Reservation[] Returns an array of Reservation objects
      */
     public function findByInComplete(DateTime $now): array
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.isVerified = true')
-            ->andWhere('c.isCompleted = false')
+            ->where('c.isVerified = 1')
+            ->andWhere('c.isCompleted = 0')
             ->andWhere('c.visitDate < :now')
-            ->setParameters(['now' => $now])
+            ->setParameter('now', $now)
             ->getQuery()
             ->getResult()
             ;

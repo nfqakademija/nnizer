@@ -52,8 +52,8 @@ class SendReviewFormsCommand extends Command
             ->findByInComplete(new \DateTime('now'));
 
         foreach ($reservations as $reservation) {
-            $this->mailer->sendSuccessfulCancellationEmail($reservation);
-            $reservation->setIsCompleted(1);
+            $this->mailer->sendReviewEmail($reservation);
+            $reservation->setIsCompleted(true);
             $this->em->persist($reservation);
             $this->em->flush();
         }
