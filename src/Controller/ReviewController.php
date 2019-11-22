@@ -25,7 +25,11 @@ class ReviewController extends AbstractController
         if (!preg_match('/^[0-5]$/', $starCount)) {
             return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
         }
+
         $reservation = $this->getReservationObject($id);
+        if ($reservation === null) {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
 
         if (!$this->reviewAlreadyExists($reservation)) {
             $review = new Review();
@@ -54,12 +58,14 @@ class ReviewController extends AbstractController
     public function addDescription(Request $request, int $id): JsonResponse
     {
         $description = $request->get('description');
-
         if ($description === null) {
             return new JsonResponse(null, Response::HTTP_NO_CONTENT);
         }
 
         $reservation = $this->getReservationObject($id);
+        if ($reservation === null) {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
 
         if ($this->reviewAlreadyExists($reservation)) {
             $review = $this->getDoctrine()
@@ -90,9 +96,9 @@ class ReviewController extends AbstractController
 
     /**
      * @param int $id
-     * @return Reservation
+     * @return Reservation|null
      */
-    private function getReservationObject(int $id): Reservation
+    private function getReservationObject(int $id): ?Reservation
     {
         return $this->getDoctrine()
             ->getRepository(Reservation::class)
