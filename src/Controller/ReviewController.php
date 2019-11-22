@@ -75,9 +75,10 @@ class ReviewController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($review);
             $entityManager->flush();
+            return new JsonResponse();
         }
 
-        return new JsonResponse();
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
 
