@@ -39,6 +39,22 @@ class ReservationRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    /**
+     * @param DateTime $now
+     * @return array
+     */
+    public function findByInComplete(DateTime $now): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.isVerified = true')
+            ->andWhere('c.isCompleted = false')
+            ->andWhere('c.visitDate < :now')
+            ->setParameters(['now' => $now])
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Client[] Returns an array of Client objects
     //  */
