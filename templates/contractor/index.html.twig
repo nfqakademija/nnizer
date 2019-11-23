@@ -1,14 +1,37 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
 {% block title %} {{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}{% endblock %}
 
 {% block body %}
-    <div class="container container--top-spacing">
-        <h2>{{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}</h2>
-
-        <ul id="contractor__reservations">
+    <nav class="sidenav">
+        <img src="{{ asset('build/images/nnizer-logo.svg') }}" alt="nnizer type logotype" class="sidenav__logo">
+        <ul class="sidenav__links">
+            <li class="sidenav__link -active">
+                <i class="icon-people"></i>
+                Reservations
+            </li>
+            <li class="sidenav__link">
+                <i class="icon-manage"></i>
+                Management
+            </li>
+            <li class="sidenav__link">
+                <i class="icon-reviews"></i>
+                Reviews
+            </li>
+            <li class="sidenav__link">
+                <i class="icon-statistics"></i>
+                Statistics
+            </li>
+            <li class="sidenav__link">
+                <i class="icon-settings"></i>
+                Settings
+            </li>
         </ul>
-    </div>
+    </nav>
+
+    <main class="main">
+        <h2>{{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}</h2>
+    </main>
 
     {% block javascripts %}
         {{ encore_entry_script_tags('react') }}

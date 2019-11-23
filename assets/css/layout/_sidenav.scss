@@ -1,0 +1,55 @@
+.sidenav {
+  align-items: center;
+  background-color: $color-white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: flex-start;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: rem(160px);
+
+  &__logo {
+    margin: rem(48px) 0;
+  }
+
+  &__links {
+    width: 100%;
+  }
+
+  &__link {
+    align-items: center;
+    color: $color-icons;
+    display: flex;
+    flex-direction: column;
+    font-size: rem(14px);
+    font-weight: 600;
+    letter-spacing: rem(2px);
+    margin-bottom: rem(16px);
+    padding: rem(16px) 0;
+    text-transform: uppercase;
+    width: 100%;
+
+    i {
+      font-size: rem(20px);
+      margin-bottom: rem(12px);
+    }
+
+    &.-active {
+      background: $color-admin;
+      color: $color-black;
+      position: relative;
+
+      &::before {
+        background-color: $color-yellow;
+        content: '';
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: rem(4px);
+      }
+    }
+  }
+}

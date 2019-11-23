@@ -1,13 +1,12 @@
 /* stylelint-disable */
-*,
-*::after,
-*::before {
+html {
   box-sizing: border-box !important;
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2 ease-in-out;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit !important;
 }
 
 html,
@@ -152,15 +151,6 @@ input[type='search']::-webkit-search-results-button,
 input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
   -moz-appearance: none;
-}
-
-input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  border: none;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
 }
 
 textarea {

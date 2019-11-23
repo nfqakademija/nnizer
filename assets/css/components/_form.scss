@@ -1,8 +1,10 @@
 .form {
   font-size: 0.875rem;
+  margin: 0 rem(1px);
 
   &__fields {
     display: block;
+    position: relative;
 
     & > div {
       width: 100%;
@@ -28,7 +30,7 @@
   }
 
   &__error {
-    color: #d8000c;
+    color: $color-red-2;
     position: relative;
     top: rem(-12px);
   }
@@ -49,7 +51,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    transition: all 0.2s ease-in-out;
+
+    @include transition(font-size 0.2s, padding 0.2s, top 0.2s);
   }
 
   input:focus,

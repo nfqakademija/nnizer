@@ -12,7 +12,8 @@
   position: relative;
   text-decoration: none;
   text-transform: uppercase;
-  transition: all 0.2s ease-in-out;
+
+  @include transition(transform 0.2s, background-color 0.2s);
 
   &::after {
     border: 2px solid $color-yellow;
@@ -23,8 +24,9 @@
     opacity: 0;
     position: absolute;
     top: 0;
-    transition: all 0.2s ease-in-out;
     width: 100%;
+
+    @include transition(transform 0.2s, opacity 0.2s);
   }
 
   &:hover {
@@ -41,7 +43,7 @@
   background: none;
 
   &:hover {
-    background: $color-yellow;
+    background-color: $color-yellow;
   }
 }
 
