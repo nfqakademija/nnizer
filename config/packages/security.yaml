@@ -20,9 +20,6 @@ security:
             guard:
                 authenticators:
                     - App\Security\ContractorAuthenticator
-            logout:
-                path: app_logout
-                target: app_login
 
     access_control:
           - { path: ^/contractor, roles: ROLE_CONTRACTOR }
