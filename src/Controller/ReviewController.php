@@ -40,18 +40,19 @@ class ReviewController extends AbstractController
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
     }
+
     /**
      * @Route("/api/reservation/{key}/review/star/{starCount}",
      *     name="review_star", methods="GET", requirements={"starCount"="[1-5]"})
      * @param string $key
      * @param int $starCount
-     * @return JsonResponse
+     * @return Response
      */
-    public function setStars(string $key, int $starCount): JsonResponse
+    public function setStars(string $key, int $starCount): Response
     {
         $reservation = $this->getReservationObject($key);
         if ($reservation === null) {
-            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+            return $this->redirectToRoute('home');
         }
 
         if (!$this->reviewAlreadyExists($reservation)) {
@@ -69,25 +70,25 @@ class ReviewController extends AbstractController
         $entityManager->persist($review);
         $entityManager->flush();
 
-        return new JsonResponse();
+        return $this->redirectToRoute('home');
     }
 
     /**
      * @Route("/api/reservation/{key}/review", name="review_description", methods="GET")
      * @param Request $request
      * @param string $key
-     * @return JsonResponse
+     * @return Response
      */
-    public function addDescription(Request $request, string $key): JsonResponse
+    public function addDescription(Request $request, string $key): Response
     {
         $description = $request->get('description');
         if ($description === null) {
-            return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+            return $this->redirectToRoute('home');
         }
 
         $reservation = $this->getReservationObject($key);
         if ($reservation === null) {
-            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+            return $this->redirectToRoute('home');
         }
 
         if ($this->reviewAlreadyExists($reservation)) {
@@ -101,7 +102,7 @@ class ReviewController extends AbstractController
             return new JsonResponse();
         }
 
-        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        return $this->redirectToRoute('home');
     }
 
 
