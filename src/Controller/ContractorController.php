@@ -96,39 +96,53 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/contractor/{contractorUsername}/get-clients/", methods="GET")
-     * @param string $contractorUsername
+     * @Route("/api/contractor/{contractorKey}/get-clients/", methods="GET")
+     * @param string $contractorKey
      * @param SerializerService $json
      * @return Response
      */
     public function getReservations(
-        string $contractorUsername,
+        string $contractorKey,
         SerializerService $json
     ): Response {
-
         $entityManager = $this->getDoctrine()->getManager();
+        $contractor = $this->getContractorByKey($contractorKey);
         $reservations = $entityManager->getRepository(Reservation::class)->findBy([
-            'contractor' => $contractorUsername,
+            'contractor' => $contractor->getUsername(),
         ]);
 
         return new Jsonresponse($json->getResponse($reservations));
     }
 
     /**
-     * @Route("/api/contractor/{contractorUsername}/cancel/{id}", methods="PATCH")
-     * @param string $contractorUsername
+     * @param string $key
+     * @return Contractor
+     */
+    private function getContractorByKey(string $key): Contractor
+    {
+        return $this->getDoctrine()->getRepository(Contractor::class)
+            ->findOneBy(
+                [
+                    'verificationKey' => $key
+                ]
+            );
+    }
+    /**
+     * @Route("/api/contractor/{contractorKey}/cancel/{id}", methods="PATCH")
+     * @param string $contractorKey
      * @param int $reservationId
      * @param MailerService $mailer
      * @return JsonResponse
      */
     public function cancelReservation(
-        string $contractorUsername,
+        string $contractorKey,
         int $reservationId,
         MailerService $mailer
     ): JsonResponse {
         $entityManager = $this->getDoctrine()->getManager();
+        $contractor = $this->getContractorByKey($contractorKey);
         $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
-            'contractor' => $contractorUsername,
+            'contractor' => $contractor->getUsername(),
             'id' => $reservationId,
             'isCancelled' => false,
         ]);
@@ -144,20 +158,21 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/contractor/{contractorUsername}/verify/{id}", methods="PATCH")
-     * @param string $contractorUsername
+     * @Route("/api/contractor/{contractorKey}/verify/{id}", methods="PATCH")
+     * @param string $contractorKey
      * @param int $reservationId
      * @param MailerService $mailer
      * @return JsonResponse
      */
     public function verifyReservation(
-        string $contractorUsername,
+        string $contractorKey,
         int $reservationId,
         MailerService $mailer
     ): JsonResponse {
         $entityManager= $this->getDoctrine()->getManager();
+        $contractor = $this->getContractorByKey($contractorKey);
         $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
-            'contractor' => $contractorUsername,
+            'contractor' => $contractor->getUsername(),
             'id' => $reservationId,
             'isVerified' => false,
         ]);
@@ -173,15 +188,15 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/contractor/{contractorUsername}/get-clients/{date}")
-     * @param string $contractorUsername
+     * @Route("/api/contractor/{contractorKey}/get-clients/{date}", methods="GET")
+     * @param string $contractorKey
      * @param string $date
      * @param SerializerService $json
      * @param ReservationRepository $reservationsRepository
      * @return JsonResponse
      */
     public function getReservationsByDay(
-        string $contractorUsername,
+        string $contractorKey,
         string $date,
         SerializerService $json,
         ReservationRepository $reservationsRepository
@@ -192,8 +207,8 @@ class ContractorController extends AbstractController
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
         }
-
-        $reservations = $reservationsRepository->findByDateInterval($contractorUsername, $dateFrom, $dateTo);
+        $contractor = $this->getContractorByKey($contractorKey);
+        $reservations = $reservationsRepository->findByDateInterval($contractor->getUsername(), $dateFrom, $dateTo);
 
 
         if ($reservations !== null) {

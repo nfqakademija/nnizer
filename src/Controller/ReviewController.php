@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Contractor;
 use App\Entity\Reservation;
 use App\Entity\Review;
+use App\Service\SerializerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,14 +15,39 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReviewController extends AbstractController
 {
     /**
+     * @Route("/api/contractor/{contractorKey}/get-reviews/", name="GET")
+     * @param string $contractorKey
+     * @param SerializerService $json
+     * @return JsonResponse
+     */
+    public function getReviews(string $contractorKey, SerializerService $json): JsonResponse
+    {
+        $contractor = $this->getDoctrine()->getRepository(Contractor::class)
+                        ->findOneBy(
+                            [
+                                'verificationKey' => $contractorKey
+                            ]
+                        );
+        if ($contractor === null) {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
+
+        $reviews = $contractor->getReviews();
+
+        if ($reviews !== null) {
+            return new Jsonresponse($json->getResponse($reviews));
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+    /**
      * @Route("/api/reservation/{key}/review/star/{starCount}",
      *     name="review_star", methods="GET", requirements={"starCount"="[1-5]"})
-     * @param Request $request
      * @param string $key
      * @param int $starCount
      * @return JsonResponse
      */
-    public function setStars(Request $request, string $key, int $starCount): JsonResponse
+    public function setStars(string $key, int $starCount): JsonResponse
     {
         $reservation = $this->getReservationObject($key);
         if ($reservation === null) {

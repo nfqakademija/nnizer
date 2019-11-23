@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReviewRepository")
@@ -24,17 +25,20 @@ class Review
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"Default"})
      */
     private $stars;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Reservation", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"Default"})
      */
     private $reservation;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"Default"})
      */
     private $description;
 
