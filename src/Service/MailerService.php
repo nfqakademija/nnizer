@@ -118,7 +118,7 @@ class MailerService extends AbstractController
         $this->sendMail(
             $this->renderView(
                 'emails/client-review.html.twig',
-                ['id' => $reservation->getId(), 'user' => $reservation->getFirstname()]
+                ['hash' => $reservation->getVerificationKey(), 'user' => $reservation->getFirstname()]
             ),
             $this->translator->trans('email.heading.review'),
             $reservation->getEmail()

@@ -14,19 +14,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReviewController extends AbstractController
 {
     /**
-     * @Route("/api/reservation/{id}/review/star/{starCount}", name="review_star", methods="GET")
+     * @Route("/api/reservation/{key}/review/star/{starCount}",
+     *     name="review_star", methods="GET", requirements={"starCount"="[1-5]"})
      * @param Request $request
-     * @param int $id
+     * @param string $key
      * @param int $starCount
      * @return JsonResponse
      */
-    public function setStars(Request $request, int $id, int $starCount): JsonResponse
+    public function setStars(Request $request, string $key, int $starCount): JsonResponse
     {
-        if (!preg_match('/^[0-5]$/', $starCount)) {
-            return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
-        }
-
-        $reservation = $this->getReservationObject($id);
+        $reservation = $this->getReservationObject($key);
         if ($reservation === null) {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
@@ -50,19 +47,19 @@ class ReviewController extends AbstractController
     }
 
     /**
-     * @Route("/api/reservation/{id}/review", name="review_description", methods="GET")
+     * @Route("/api/reservation/{key}/review", name="review_description", methods="GET")
      * @param Request $request
-     * @param int $id
+     * @param string $key
      * @return JsonResponse
      */
-    public function addDescription(Request $request, int $id): JsonResponse
+    public function addDescription(Request $request, string $key): JsonResponse
     {
         $description = $request->get('description');
         if ($description === null) {
             return new JsonResponse(null, Response::HTTP_NO_CONTENT);
         }
 
-        $reservation = $this->getReservationObject($id);
+        $reservation = $this->getReservationObject($key);
         if ($reservation === null) {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
@@ -96,14 +93,14 @@ class ReviewController extends AbstractController
     }
 
     /**
-     * @param int $id
+     * @param string $key
      * @return Reservation|null
      */
-    private function getReservationObject(int $id): ?Reservation
+    private function getReservationObject(string $key): ?Reservation
     {
         return $this->getDoctrine()
             ->getRepository(Reservation::class)
-            ->find($id);
+            ->findOneBy(['verificationKey' => $key]);
     }
 
     /**
