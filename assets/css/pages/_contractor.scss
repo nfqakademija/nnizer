@@ -1,8 +1,48 @@
 .admin {
   background-color: $color-admin;
 
-  .main {
-    margin-left: rem(160px);
-    padding: 0 rem(64px);
+  .panel {
+    min-height: 250vh;
+    padding: rem(16px) rem(32px);
+    position: relative;
+
+    @include transition(margin-left 0.3s);
+
+    @include breakpoint(md) {
+      margin-left: rem(160px);
+      padding: rem(48px) rem(64px);
+      transition-property: none;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.5);
+      height: 100%;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      width: 100%;
+
+      @include transition(margin-left 0.3s, opacity 0.5s);
+      @include z-index(overlay);
+
+      @include breakpoint(md) {
+        display: none;
+      }
+    }
+
+    &.-nav-open {
+      margin-left: rem(240px);
+
+      .overlay {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      @include breakpoint(md) {
+        margin-left: rem(160px);
+      }
+    }
   }
 }

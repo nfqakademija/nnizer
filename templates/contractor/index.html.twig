@@ -3,7 +3,8 @@
 {% block title %} {{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}{% endblock %}
 
 {% block body %}
-    <nav class="sidenav">
+    <nav class="sidenav js-sidenav">
+        <i class="icon-cross sidenav__close js-sidenav-close"></i>
         <img src="{{ asset('build/images/nnizer-logo.svg') }}" alt="nnizer type logotype" class="sidenav__logo">
         <ul class="sidenav__links">
             <li class="sidenav__link -active">
@@ -26,14 +27,26 @@
                 <i class="icon-settings"></i>
                 Settings
             </li>
+            <li class="sidenav__link">
+                <i class="icon-help"></i>
+                Help desk
+            </li>
+            <li class="sidenav__link">
+                <i class="icon-logout"></i>
+                Log out
+            </li>
         </ul>
     </nav>
 
-    <main class="main">
-        <h2>{{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}</h2>
-    </main>
+    <div class="panel js-panel">
+        <div class="overlay js-overlay"></div>
+        <header>
+            <i class="icon-cross js-toggler"></i>
+        </header>
+        <h2>Reservations</h2>
+    </div>
 
     {% block javascripts %}
-        {{ encore_entry_script_tags('react') }}
+        {{ encore_entry_script_tags('admin') }}
     {% endblock %}
 {% endblock %}
