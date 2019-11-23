@@ -9,6 +9,7 @@ use App\Form\ContractorSettingsType;
 use App\Repository\ReservationRepository;
 use App\Service\SerializerService;
 use App\Service\MailerService;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -202,6 +203,47 @@ class ContractorController extends AbstractController
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
+    }
+
+    /**
+     * @Route("/api/contractor/{contractorKey}/new-client", methods="POST")
+     * @param Request $request
+     * @param string $contractorKey
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function addReservation(
+        Request $request,
+        string $contractorKey
+    ): JsonResponse {
+        $firstname = $request->get('firstname');
+        $lastname = $request->get('lastname');
+        $email = $request->get('email');
+        $visitDate = new \DateTime($request->get('visitDate'));
+
+        if (!$firstname || !$lastname || !$email || !$visitDate) {
+            return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $reservation = new Reservation();
+        $reservation->setEmail($email);
+        $reservation->setFirstname($firstname);
+        $reservation->setLastname($lastname);
+        $reservation->setVisitDate($visitDate);
+        $reservation->setVerificationKey($reservation->generateActivationKey());
+        $reservation->setVerificationKeyExpirationDate((new \DateTime('now'))->modify('+15 minutes'));
+        $contractor = $this->getDoctrine()->getRepository(Contractor::class)
+            ->findOneBy(
+                [
+                    'verificationKey' => $contractorKey
+                ]
+            );
+        $reservation->setContractor($contractor->getUsername());
+        $entityManager->persist($reservation);
+        $entityManager->flush();
+
+        return new JsonResponse();
     }
 
     /**
