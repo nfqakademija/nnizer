@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -10,9 +11,9 @@ class LocaleSubscriber implements EventSubscriberInterface
 {
     private $defaultLocale;
 
-    public function __construct($defaultLocale = 'en')
+    public function __construct(ContainerInterface $container)
     {
-        $this->defaultLocale = $defaultLocale;
+        $this->defaultLocale = $container->getParameter('default_locale');
     }
 
     public function onKernelRequest(RequestEvent $event)

@@ -80,3 +80,7 @@ settings_form:
   Sunday-workhours: Sekmadienio darbo valandos
   visitDuration: Vizito trukmė
   Submit: Pateikti
+
+locales:
+  lt: Lietuvių k.
+  en: Anglų k.

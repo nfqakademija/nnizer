@@ -26,8 +26,8 @@
             </div>
         </header>
         <footer style="position: fixed; bottom: 10%; left: 20px; width: 100%; font-size: 20px">
-            <a href="{{ path('language', {lang: 'lt'}) }}">Lietuviškai</a>
-            <a href="{{ path('language', {lang: 'en'}) }}">English</a>
+            <a href="{{ path('language', {lang: 'lt'}) }}">{{ "locales.lt"|trans }}</a>
+            <a href="{{ path('language', {lang: 'en'}) }}">{{ "locales.en"|trans }}</a>
         </footer>
         {% block body %}{% endblock %}
         {% block javascripts %}

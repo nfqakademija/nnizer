@@ -82,3 +82,7 @@ settings_form:
   visitDuration: Visit duration
   submit: Submit
 
+locales:
+  lt: Lithuanian
+  en: English
+
