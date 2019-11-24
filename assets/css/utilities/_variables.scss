@@ -15,10 +15,11 @@ $container-xl: 1140px;
 
 // z-index with maps
 $z-index: (
-  above: 500,
-  modal: 200,
-  dropdown: 100,
-  overlay: 50,
+  above: 100,
+  modal: 50,
+  sidenav: 20,
+  dropdown: 10,
+  overlay: 5,
   link: 1,
   below: -1
 );

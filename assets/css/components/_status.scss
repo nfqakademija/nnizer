@@ -1,0 +1,20 @@
+.status {
+  border-radius: rem(4px);
+  font-size: rem(14px);
+  letter-spacing: rem(1px);
+  padding: rem(12px);
+  text-transform: uppercase;
+
+  &.-done {
+    background-color: $color-success-bg;
+    color: $color-success-text;
+  }
+
+  &.-full {
+    width: 100%;
+
+    @include breakpoint(lg) {
+      width: 70%;
+    }
+  }
+}

@@ -1,0 +1,156 @@
+.reservations {
+  .row {
+    display: block;
+    margin: 0;
+    width: 100%;
+
+    @include breakpoint(lg) {
+      display: flex;
+    }
+  }
+
+  &__labels {
+    display: none;
+
+    @include breakpoint(lg) {
+      display: flex;
+    }
+  }
+
+  &__label {
+    color: $color-grey-3;
+    display: flex;
+    font-size: rem(12px);
+    justify-content: center;
+    letter-spacing: rem(2px);
+    padding: rem(8px) 0;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  &__row {
+    position: relative;
+    align-items: stretch;
+    background: $color-white;
+    border-radius: rem(6px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: rem(24px);
+
+    .row:first-child {
+      flex: 1;
+    }
+
+    @include breakpoint (lg) {
+      overflow: hidden;
+    }
+  }
+
+  &__item {
+    align-items: center;
+    display: flex;
+    font-size: rem(16px);
+    justify-content: flex-start;
+    padding: rem(8px) rem(16px);
+    text-align: center;
+    width: 100%;
+
+    .item__icon {
+      font-size: rem(16px);
+      margin-right: rem(12px);
+    }
+
+    @include breakpoint(lg) {
+      font-size: rem(14px);
+      justify-content: center;
+      min-height: rem(64px);
+      padding: 0;
+    }
+
+    &:first-child {
+      background-color: $color-yellow;
+      display: flex;
+      font-weight: 600;
+      justify-content: center;
+      margin-bottom: rem(16px);
+      padding: rem(16px) rem(8px);
+
+      @include breakpoint(lg) {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    &:last-child {
+      display: none;
+
+      @include breakpoint(lg) {
+        display: flex;
+      }
+    }
+  }
+
+  &__edit {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 0;
+    justify-content: center;
+    opacity: 0;
+    width: 100%;
+
+    @include transition(height 0.3s, padding 0.3s, opacity 0.3s);
+
+    .edit {
+      &__heading {
+        font-size: rem(18px);
+        font-weight: 600;
+      }
+
+      &__time-left {
+        font-size: rem(14px);
+        margin: rem(8px) 0 rem(16px) 0;
+      }
+    }
+
+    &.-open {
+      height: rem(140px);
+      opacity: 1;
+      padding: rem(16px) 0;
+    }
+  }
+
+  &__btn {
+    display: none;
+    background: $color-yellow;
+    border: none;
+    border-radius: rem(10px);
+    height: rem(40px);
+    width: rem(40px);
+    justify-content: center;
+    align-items: center;    
+
+    .btn__icon {
+      font-size: rem(16px);
+    }
+
+    &.-mobile {
+      display: flex;
+      position: absolute;
+      top: rem(-20px);
+      right: rem(-10px);
+      border: rem(2px) solid $color-admin;
+
+      @include z-index(above);
+    }
+
+    @include breakpoint(lg) {
+      display: flex;
+
+      &.-mobile {
+        display: none;
+      }
+    }
+  }
+}

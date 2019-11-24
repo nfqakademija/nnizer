@@ -3,16 +3,18 @@
   font-family: 'nnizer-set';
   font-style: normal;
   font-weight: normal;
-  src: url('../../fonts/nnizer-set.eot?t6e2rh');
+  src: url('../../fonts/nnizer-icons.eot?t6e2rh');
   src:
-    url('../../fonts/nnizer-set.eot?t6e2rh#iefix') format('embedded-opentype'),
-    url('../../fonts/nnizer-set.ttf?t6e2rh') format('truetype'),
-    url('../../fonts/nnizer-set.woff?t6e2rh') format('woff'),
-    url('../../fonts/nnizer-set.svg?t6e2rh#nnizer-set') format('svg');
+    url('../../fonts/nnizer-icons.eot?t6e2rh#iefix') format('embedded-opentype'),
+    url('../../fonts/nnizer-icons.ttf?t6e2rh') format('truetype'),
+    url('../../fonts/nnizer-icons.woff?t6e2rh') format('woff'),
+    url('../../fonts/nnizer-icons.svg?t6e2rh#nnizer-icons') format('svg');
 }
 
 [class^='icon-'],
-[class*=' icon-'] {
+[class*=' icon-'],
+*::after,
+*::before {
   font-family: 'nnizer-set' !important;  /* stylelint-disable-line */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -21,6 +23,11 @@
   font-weight: normal;
   line-height: 1;
   text-transform: none;
+}
+
+[class^='icon-'],
+[class*=' icon-'] {
+  font-size: 20px;
 }
 
 .icon-add::before {
@@ -97,4 +104,8 @@
 
 .icon-tick::before {
   content: '\e912';
+}
+
+.icon-menu::before {
+  content: '\e913';
 }

@@ -29,3 +29,13 @@
     max-width: $container-xl;
   }
 }
+
+.admin-container {
+  padding-left: rem(16px);
+  padding-right: rem(16px);
+
+  @include breakpoint(md) {
+    padding-left: rem(32px);
+    padding-right: rem(32px);
+  }
+}
