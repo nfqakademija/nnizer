@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\Traits\TimestampableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -73,6 +75,22 @@ class Contractor implements UserInterface
      * @ORM\OneToOne(targetEntity="App\Entity\ContractorSettings", mappedBy="contractor", cascade={"persist", "remove"})
      */
     private $settings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="contractor", orphanRemoval=true)
+     */
+    private $reviews;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Reservation", mappedBy="contractor", orphanRemoval=true)
+     */
+    private $reservations;
+
+    public function __construct()
+    {
+        $this->reviews = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -304,6 +322,67 @@ class Contractor implements UserInterface
         // set the owning side of the relation if necessary
         if ($settings->getContractor() !== $this) {
             $settings->setContractor($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Review[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * @param Review $review
+     * @return $this
+     */
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setContractor($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    /**
+     * @param Reservation $reservation
+     * @return $this
+     */
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setContractor($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Reservation $reservation
+     * @return $this
+     */
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->contains($reservation)) {
+            $this->reservations->removeElement($reservation);
+            // set the owning side to null (unless already changed)
+            if ($reservation->getContractor() === $this) {
+                $reservation->setContractor(null);
+            }
         }
 
         return $this;

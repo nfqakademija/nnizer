@@ -6,6 +6,7 @@ use App\Entity\Contractor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\ORMException;
 
 /**
  * @method Contractor|null find($id, $lockMode = null, $lockVersion = null)
@@ -33,6 +34,19 @@ class ContractorRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    /**
+     * @param Contractor $contractor
+     */
+    public function save(Contractor $contractor): void
+    {
+        try {
+            $this->_em->persist($contractor);
+            $this->_em->flush();
+        } catch (ORMException $e) {
+        }
+    }
+  
     // /**
     //  * @return Contractor[] Returns an array of Contractor objects
     //  */

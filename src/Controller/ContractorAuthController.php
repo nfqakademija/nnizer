@@ -21,7 +21,6 @@ class ContractorAuthController extends AbstractController
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
-
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
@@ -29,6 +28,7 @@ class ContractorAuthController extends AbstractController
 
     /**
      * @Route("/logout", name="app_logout")
+     * @throws \Exception
      */
     public function logout()
     {

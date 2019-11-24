@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\ContractorSettings;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\ORMException;
 
 /**
  * @method ContractorSettings|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +19,16 @@ class ContractorSettingsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, ContractorSettings::class);
     }
+
+    public function save(ContractorSettings $contractorSettings)
+    {
+        try {
+            $this->_em->persist($contractorSettings);
+            $this->_em->flush();
+        } catch (ORMException $e) {
+        }
+    }
+
 
     // /**
     //  * @return ContractorSettings[] Returns an array of ContractorSettings objects

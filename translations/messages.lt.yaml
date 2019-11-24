@@ -17,10 +17,10 @@ login_page:
   password: Slaptažodis
   signin: Prisijungti
   forgot_pass: Pamiršote slaptažodį?
-  not_registered: Dar neturite paskyros? Spauskite, norėdami užsiregistruoti!
+  not_registered: Dar neturite paskyros? Užsiregistruokite!
 
 registration_form:
-  already-registered: Jau užsiregistravote? Spauskite, norėdami prisijungti!
+  already-registered: Jau užsiregistravote? Prisijunkite!
   register: Registracija
   register.button: Registruotis
   username: Vartotojo vardas *
@@ -46,6 +46,7 @@ email:
     registered: Vienas žingsnis iki sėkmingos rezervacijos
     verified: Sėkmingai patvirtinote savo rezervaciją!
     cancelled: Jūsų rezervacija buvo atšaukta
+    review: Kaip praėjo jūsų vizitas?
   signup:
     verify-email: Patvirtinti e. paštą
     text: Džiaugemės, kad prisijungėte prie NNIZER komandos! Tikimės, kad mėgausitės naudodamiesi šia platforma. Norėdami pradėti savo veiklą, patvirtinkite paštą paspaudę mygtuką žemiau.
@@ -80,3 +81,7 @@ settings_form:
   Sunday-workhours: Sekmadienio darbo valandos
   visitDuration: Vizito trukmė
   Submit: Pateikti
+
+locales:
+  lt: Lietuvių k.
+  en: Anglų k.

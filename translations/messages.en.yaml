@@ -46,6 +46,7 @@ email:
     registered: One more step to confirm your reservation
     verified: Cool! Your reservation has been successfully verified
     cancelled: Oh no! Your reservation is no longed active!
+    review: Let us know how it went!
   signup:
     verify-email: Verify my email
     text: We're so glad that you joined NNIZER team! We hope that you'll enjoy the ride with us. Let's kick off your business with verifying your account email. Press the button below.
@@ -81,4 +82,8 @@ settings_form:
   Sunday-workhours: Working hours on Sunday
   visitDuration: Visit duration
   submit: Submit
+
+locales:
+  lt: Lithuanian
+  en: English
 
