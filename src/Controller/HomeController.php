@@ -28,7 +28,7 @@ class HomeController extends AbstractController
     {
         if ($request->headers->get('referer') && $lang !== null) {
             $request->getSession()->set('_locale', $lang);
-            
+
             return $this->redirect($request->headers->get('referer'));
         } else {
             return $this->redirectToRoute('home');

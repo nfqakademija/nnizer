@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\ContractorSettings;
-use App\Entity\Reservation;
 use App\Form\ContractorSettingsType;
 use App\Repository\ContractorRepository;
-use App\Repository\ContractorSettingsRepository;
 use App\Repository\ReservationRepository;
 use App\Service\SerializerService;
 use App\Service\MailerService;
@@ -57,7 +55,7 @@ class ContractorController extends AbstractController
                 'id' => $this->getUser()->getId()
             ]);
             $settings->setContractor($contractor);
-            $this->getDoctrine()->getRepository(ContractorSettingsRepository::class)->save($settings);
+            $this->getDoctrine()->getRepository(ContractorSettings::class)->save($settings);
 
             return $this->redirectToRoute('contractor');
         }
