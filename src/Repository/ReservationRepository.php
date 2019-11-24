@@ -2,11 +2,13 @@
 
 namespace App\Repository;
 
+use App\Entity\Contractor;
 use App\Entity\Reservation;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\ORMException;
+use Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\P1;
 
 /**
  * @method Reservation|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,12 +24,12 @@ class ReservationRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $contractor
+     * @param Contractor $contractor
      * @param DateTime $from
      * @param DateTime $to
      * @return Reservation[] Returns an array of Reservation objects
      */
-    public function findByDateInterval(string $contractor, DateTime $from, DateTime $to): array
+    public function findByDateInterval(Contractor $contractor, DateTime $from, DateTime $to): array
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.contractor = :contractor')
@@ -38,6 +40,34 @@ class ReservationRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
             ;
+    }
+
+    /**
+     * @param DateTime $now
+     * @return Reservation[] Returns an array of Reservation objects
+     */
+    public function findByInComplete(DateTime $now): array
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.isVerified = 1')
+            ->andWhere('c.isCompleted = 0')
+            ->andWhere('c.visitDate < :now')
+            ->setParameter('now', $now)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @param Reservation $reservation
+     */
+    public function save(Reservation $reservation): void
+    {
+        try {
+            $this->_em->persist($reservation);
+            $this->_em->flush();
+        } catch (ORMException $e) {
+        }
     }
     // /**
     //  * @return Client[] Returns an array of Client objects
