@@ -42,11 +42,6 @@ class Reservation
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $contractor;
-
-    /**
      * @ORM\Column(type="datetime")
      * @Groups({"Default"})
      */
@@ -78,6 +73,12 @@ class Reservation
      * @ORM\Column(type="boolean")
      */
     private $isCompleted = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Contractor", inversedBy="reservations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $contractor;
 
     /**
      * @return int|null
@@ -140,25 +141,6 @@ class Reservation
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getContractor(): ?string
-    {
-        return $this->contractor;
-    }
-
-    /**
-     * @param string $contractor
-     * @return $this
-     */
-    public function setContractor(string $contractor): self
-    {
-        $this->contractor = $contractor;
 
         return $this;
     }
@@ -282,6 +264,25 @@ class Reservation
     public function setIsCompleted(bool $isCompleted): self
     {
         $this->isCompleted = $isCompleted;
+
+        return $this;
+    }
+
+    /**
+     * @return Contractor|null
+     */
+    public function getContractor(): ?Contractor
+    {
+        return $this->contractor;
+    }
+
+    /**
+     * @param Contractor|null $Contractor
+     * @return $this
+     */
+    public function setContractor(?Contractor $Contractor): self
+    {
+        $this->contractor = $Contractor;
 
         return $this;
     }

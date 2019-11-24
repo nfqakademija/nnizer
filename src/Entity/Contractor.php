@@ -81,9 +81,15 @@ class Contractor implements UserInterface
      */
     private $reviews;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Reservation", mappedBy="contractor", orphanRemoval=true)
+     */
+    private $reservations;
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     /**
@@ -338,6 +344,45 @@ class Contractor implements UserInterface
         if (!$this->reviews->contains($review)) {
             $this->reviews->add($review);
             $review->setContractor($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    /**
+     * @param Reservation $reservation
+     * @return $this
+     */
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setContractor($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Reservation $reservation
+     * @return $this
+     */
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->contains($reservation)) {
+            $this->reservations->removeElement($reservation);
+            // set the owning side to null (unless already changed)
+            if ($reservation->getContractor() === $this) {
+                $reservation->setContractor(null);
+            }
         }
 
         return $this;

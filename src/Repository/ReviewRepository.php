@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Reservation;
 use App\Entity\Review;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\ORMException;
 
 /**
  * @method Review|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +20,32 @@ class ReviewRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Review::class);
+    }
+
+    /**
+     * @param Reservation $reservation
+     * @return Review|null
+     * @throws NonUniqueResultException
+     */
+    public function findOneByReservation(Reservation $reservation): ?Review
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.reservation = :reservation')
+            ->setParameter('reservation', $reservation)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * @param Review $review
+     */
+    public function save(Review $review): void
+    {
+        try {
+            $this->_em->persist($review);
+            $this->_em->flush();
+        } catch (ORMException $e) {
+        }
     }
 
     // /**

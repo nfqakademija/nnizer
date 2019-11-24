@@ -18,7 +18,7 @@ class Review
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Contractor", inversedBy="reviews")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Contractor", inversedBy="reviews", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $contractor;

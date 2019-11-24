@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\Contractor;
 use App\Entity\ContractorSettings;
 use App\Entity\Reservation;
 use App\Form\ContractorSettingsType;
+use App\Repository\ContractorRepository;
+use App\Repository\ContractorSettingsRepository;
 use App\Repository\ReservationRepository;
 use App\Service\SerializerService;
 use App\Service\MailerService;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,24 +43,21 @@ class ContractorController extends AbstractController
     /**
      * @Route("/contractor/settings", name="contractor_settings")
      * @param Request $request
+     * @param ContractorRepository $contractorRepository
      * @return Response
      */
-    public function settings(Request $request): Response
+    public function settings(Request $request, ContractorRepository $contractorRepository): Response
     {
         $settings = new ContractorSettings();
         $form = $this->createForm(ContractorSettingsType::class, $settings);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $contractor = $this->getDoctrine()
-                ->getRepository(Contractor::class)
-                ->findOneBy([
-                    'id' => $this->getUser()->getId()
-                ]);
+            $contractor = $contractorRepository->findOneBy([
+                'id' => $this->getUser()->getId()
+            ]);
             $settings->setContractor($contractor);
-            $entityManager->persist($settings);
-            $entityManager->flush();
+            $this->getDoctrine()->getRepository(ContractorSettingsRepository::class)->save($settings);
 
             return $this->redirectToRoute('contractor');
         }
@@ -72,20 +71,21 @@ class ContractorController extends AbstractController
      * @Route("/contractor/activate/{verificationKey}", name="contractor_activate", methods="GET")
      * @param string $verificationKey
      * @param TranslatorInterface $translator
+     * @param ContractorRepository $contractorRepository
      * @return Response
      */
     public function activate(
         string $verificationKey,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        ContractorRepository $contractorRepository
     ): Response {
-        $entityManager = $this->getDoctrine()->getManager();
-        $user = $entityManager->getRepository(Contractor::class)->findOneBy([
+        $user = $contractorRepository->findOneBy([
             'verificationKey' => $verificationKey,
         ]);
 
         if ($user != null && !$user->getIsVerified()) {
             $user->setIsVerified(true);
-            $entityManager->flush();
+            $contractorRepository->save($user);
             $this->addFlash(
                 'notice',
                 $translator->trans('flash.signup.verified')
@@ -99,57 +99,49 @@ class ContractorController extends AbstractController
      * @Route("/api/contractor/{contractorKey}/get-clients/", methods="GET")
      * @param string $contractorKey
      * @param SerializerService $json
+     * @param ContractorRepository $contractorRepository
      * @return Response
+     * @throws NonUniqueResultException
      */
     public function getReservations(
         string $contractorKey,
-        SerializerService $json
+        SerializerService $json,
+        ContractorRepository $contractorRepository
     ): Response {
-        $entityManager = $this->getDoctrine()->getManager();
-        $contractor = $this->getContractorByKey($contractorKey);
-        $reservations = $entityManager->getRepository(Reservation::class)->findBy([
-            'contractor' => $contractor->getUsername(),
-        ]);
+        $contractor = $contractorRepository->findOneByKey($contractorKey);
+        $reservations = $contractor->getReservations();
 
         return new Jsonresponse($json->getResponse($reservations));
     }
 
     /**
-     * @param string $key
-     * @return Contractor
-     */
-    private function getContractorByKey(string $key): Contractor
-    {
-        return $this->getDoctrine()->getRepository(Contractor::class)
-            ->findOneBy(
-                [
-                    'verificationKey' => $key
-                ]
-            );
-    }
-    /**
-     * @Route("/api/contractor/{contractorKey}/cancel/{id}", methods="PATCH")
+     * @Route("/api/contractor/{contractorKey}/cancel/{reservationId}", methods="GET")
      * @param string $contractorKey
      * @param int $reservationId
      * @param MailerService $mailer
+     * @param ContractorRepository $contractorRepository
+     * @param ReservationRepository $reservationRepository
      * @return JsonResponse
+     * @throws NonUniqueResultException
      */
     public function cancelReservation(
         string $contractorKey,
         int $reservationId,
-        MailerService $mailer
+        MailerService $mailer,
+        ContractorRepository $contractorRepository,
+        ReservationRepository $reservationRepository
     ): JsonResponse {
-        $entityManager = $this->getDoctrine()->getManager();
-        $contractor = $this->getContractorByKey($contractorKey);
-        $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
-            'contractor' => $contractor->getUsername(),
+        $contractor = $contractorRepository->findOneByKey($contractorKey);
+        $reservation = $reservationRepository->findOneBy([
+            'contractor' => $contractor,
             'id' => $reservationId,
             'isCancelled' => false,
         ]);
+
         if ($reservation !== null) {
             $reservation->setIsCancelled(true);
+            $reservationRepository->save($reservation);
             $mailer->sendSuccessfulCancellationEmail($reservation);
-            $entityManager->flush();
 
             return new JsonResponse();
         } else {
@@ -158,28 +150,33 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/contractor/{contractorKey}/verify/{id}", methods="PATCH")
+     * @Route("/api/contractor/{contractorKey}/verify/{reservationId}", methods="GET")
      * @param string $contractorKey
      * @param int $reservationId
      * @param MailerService $mailer
+     * @param ContractorRepository $contractorRepository
+     * @param ReservationRepository $reservationRepository
      * @return JsonResponse
+     * @throws NonUniqueResultException
      */
     public function verifyReservation(
         string $contractorKey,
         int $reservationId,
-        MailerService $mailer
+        MailerService $mailer,
+        ContractorRepository $contractorRepository,
+        ReservationRepository $reservationRepository
     ): JsonResponse {
-        $entityManager= $this->getDoctrine()->getManager();
-        $contractor = $this->getContractorByKey($contractorKey);
-        $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
-            'contractor' => $contractor->getUsername(),
+        $contractor = $contractorRepository->findOneByKey($contractorKey);
+        $reservation = $reservationRepository->findOneBy([
+            'contractor' => $contractor,
             'id' => $reservationId,
             'isVerified' => false,
         ]);
+
         if ($reservation !== null) {
             $reservation->setIsVerified(true);
+            $reservationRepository->save($reservation);
             $mailer->sendSuccessfulVerificationEmail($reservation);
-            $entityManager->flush();
 
             return new JsonResponse();
         } else {
@@ -193,13 +190,16 @@ class ContractorController extends AbstractController
      * @param string $date
      * @param SerializerService $json
      * @param ReservationRepository $reservationsRepository
+     * @param ContractorRepository $contractorRepository
      * @return JsonResponse
+     * @throws NonUniqueResultException
      */
     public function getReservationsByDay(
         string $contractorKey,
         string $date,
         SerializerService $json,
-        ReservationRepository $reservationsRepository
+        ReservationRepository $reservationsRepository,
+        ContractorRepository $contractorRepository
     ): JsonResponse {
         if ($this->validateDate($date, 'Y-m-d')) {
             $dateFrom = (\DateTime::createFromFormat('Y-n-d', $date))->setTime(0, 0, 0);
@@ -207,9 +207,8 @@ class ContractorController extends AbstractController
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
         }
-        $contractor = $this->getContractorByKey($contractorKey);
-        $reservations = $reservationsRepository->findByDateInterval($contractor->getUsername(), $dateFrom, $dateTo);
-
+        $contractor = $contractorRepository->findOneByKey($contractorKey);
+        $reservations = $reservationsRepository->findByDateInterval($contractor, $dateFrom, $dateTo);
 
         if ($reservations !== null) {
             return new Jsonresponse($json->getResponse($reservations));

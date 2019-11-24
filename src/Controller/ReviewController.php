@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Entity\Contractor;
 use App\Entity\Reservation;
 use App\Entity\Review;
+use App\Repository\ContractorRepository;
+use App\Repository\ReviewRepository;
 use App\Service\SerializerService;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,27 +21,21 @@ class ReviewController extends AbstractController
      * @Route("/api/contractor/{contractorKey}/get-reviews/", name="GET")
      * @param string $contractorKey
      * @param SerializerService $json
+     * @param ContractorRepository $contractorRepository
      * @return JsonResponse
+     * @throws NonUniqueResultException
      */
-    public function getReviews(string $contractorKey, SerializerService $json): JsonResponse
-    {
-        $contractor = $this->getDoctrine()->getRepository(Contractor::class)
-                        ->findOneBy(
-                            [
-                                'verificationKey' => $contractorKey
-                            ]
-                        );
-        if ($contractor === null) {
+    public function getReviews(
+        string $contractorKey,
+        SerializerService $json,
+        ContractorRepository $contractorRepository
+    ): JsonResponse {
+        $contractor = $contractorRepository->findOneByKey($contractorKey);
+        if ($contractor === null || $contractor->getReviews()->isEmpty()) {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
 
-        $reviews = $contractor->getReviews();
-
-        if ($reviews !== null) {
-            return new Jsonresponse($json->getResponse($reviews));
-        } else {
-            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
-        }
+        return new Jsonresponse($json->getResponse($contractor->getReviews()));
     }
 
     /**
@@ -46,11 +43,12 @@ class ReviewController extends AbstractController
      *     name="review_star", methods="GET", requirements={"starCount"="[1-5]"})
      * @param string $key
      * @param int $starCount
+     * @param ReviewRepository $reviewRepository
      * @return Response
      */
-    public function setStars(string $key, int $starCount): Response
+    public function setStars(string $key, int $starCount, ReviewRepository $reviewRepository): Response
     {
-        $reservation = $this->getReservationObject($key);
+        $reservation = $this->getReservationByKey($key);
         if ($reservation === null) {
             return $this->redirectToRoute('home');
         }
@@ -58,17 +56,13 @@ class ReviewController extends AbstractController
         if (!$this->reviewAlreadyExists($reservation)) {
             $review = new Review();
             $review->setReservation($reservation);
-            $contractor = $this->getContractorObject($reservation->getContractor());
+            $contractor = $reservation->getContractor();
             $contractor->addReview($review);
         } else {
-            $review = $this->getDoctrine()
-                ->getRepository(Review::class)
-                ->findOneBy(['reservation' => $reservation]);
+            $review = $reviewRepository->findOneBy(['reservation' => $reservation]);
         }
         $review->setStars($starCount);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($review);
-        $entityManager->flush();
+        $reviewRepository->save($review);
 
         return $this->redirectToRoute('home');
     }
@@ -77,28 +71,22 @@ class ReviewController extends AbstractController
      * @Route("/api/reservation/{key}/review", name="review_description", methods="GET")
      * @param Request $request
      * @param string $key
+     * @param ReviewRepository $reviewRepository
      * @return Response
+     * @throws NonUniqueResultException
      */
-    public function addDescription(Request $request, string $key): Response
+    public function addDescription(Request $request, string $key, ReviewRepository $reviewRepository): Response
     {
         $description = $request->get('description');
-        if ($description === null) {
+        $reservation = $this->getReservationByKey($key);
+        if ($description === null || $reservation === null) {
             return $this->redirectToRoute('home');
         }
 
-        $reservation = $this->getReservationObject($key);
-        if ($reservation === null) {
-            return $this->redirectToRoute('home');
-        }
-
-        if ($this->reviewAlreadyExists($reservation)) {
-            $review = $this->getDoctrine()
-                ->getRepository(Review::class)
-                ->findOneBy(['reservation' => $reservation]);
+        $review = $reviewRepository->findOneByReservation($reservation);
+        if ($review !== null) {
             $review->setDescription($description);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($review);
-            $entityManager->flush();
+            $reviewRepository->save($review);
             return new JsonResponse();
         }
 
@@ -123,21 +111,10 @@ class ReviewController extends AbstractController
      * @param string $key
      * @return Reservation|null
      */
-    private function getReservationObject(string $key): ?Reservation
+    private function getReservationByKey(string $key): ?Reservation
     {
         return $this->getDoctrine()
             ->getRepository(Reservation::class)
             ->findOneBy(['verificationKey' => $key]);
-    }
-
-    /**
-     * @param string $username
-     * @return Contractor
-     */
-    private function getContractorObject(string $username): Contractor
-    {
-        return $this->getDoctrine()
-            ->getRepository(Contractor::class)
-            ->findOneBy(['username' => $username]);
     }
 }

@@ -66,8 +66,8 @@ class MailerService extends AbstractController
                 [
                     'user' => $reservation->getFirstname(),
                     'key' => $reservation->getVerificationKey(),
-                    'date' => $reservation->getVisitDate()->format('Y-m-d H-i'),
-                    'provider' => $reservation->getContractor()
+                    'date' => $reservation->getVisitDate()->format('Y-m-d H:i'),
+                    'provider' => $reservation->getContractor()->getUsername()
                 ]
             ),
             $this->translator->trans('email.heading.registered'),
