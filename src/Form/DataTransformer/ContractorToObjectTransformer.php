@@ -33,7 +33,7 @@ class ContractorToObjectTransformer implements DataTransformerInterface
         if (null === $contractor) {
             return '';
         }
-        dump($contractor);
+
         return $contractor->getUsername();
     }
 

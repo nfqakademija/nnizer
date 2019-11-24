@@ -56,9 +56,8 @@ class SendReviewFormsCommand extends Command
             $this->mailer->sendReviewEmail($reservation);
             $reservation->setIsCompleted(true);
             $this->em->persist($reservation);
-            $this->em->flush();
         }
-
+        $this->em->flush();
         $output->write("Done!");
     }
 }

@@ -364,7 +364,7 @@ class Contractor implements UserInterface
     public function addReservation(Reservation $reservation): self
     {
         if (!$this->reservations->contains($reservation)) {
-            $this->reservations[] = $reservation;
+            $this->reservations->add($reservation);
             $reservation->setContractor($this);
         }
 
