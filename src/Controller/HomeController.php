@@ -22,14 +22,13 @@ class HomeController extends AbstractController
     /**
      * @Route("/lang/{lang}", name="language")
      * @param Request $request
-     * @param $lang
+     * @param string $lang
      * @return Response
      */
-    public function setLanguage(Request $request, $lang): Response
+    public function setLanguage(Request $request, string $lang): Response
     {
         if ($request->headers->get('referer') && $lang !== null) {
             $request->getSession()->set('_locale', $lang);
-            
             return $this->redirect($request->headers->get('referer'));
         } else {
             return $this->redirectToRoute('home');
