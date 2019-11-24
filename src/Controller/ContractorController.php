@@ -20,7 +20,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ContractorController extends AbstractController
 {
     /**
-     * @Route("/contractor", name="contractor")
+     * @Route("/{reactRouting}", name="contractor", requirements={"reactRouting"=".+"}, defaults={"reactRouting": null})
      * @return Response
      */
     public function index(): Response

@@ -29,7 +29,6 @@
   }
 
   &__row {
-    position: relative;
     align-items: stretch;
     background: $color-white;
     border-radius: rem(6px);
@@ -37,6 +36,7 @@
     flex-direction: column;
     justify-content: center;
     margin-bottom: rem(24px);
+    position: relative;
 
     .row:first-child {
       flex: 1;
@@ -112,6 +112,12 @@
         font-size: rem(14px);
         margin: rem(8px) 0 rem(16px) 0;
       }
+
+      &__actions {
+        display: flex;
+        justify-content: space-evenly;
+        width: 50%;
+      }
     }
 
     &.-open {
@@ -122,25 +128,25 @@
   }
 
   &__btn {
-    display: none;
+    align-items: center;
     background: $color-yellow;
     border: none;
     border-radius: rem(10px);
+    display: none;
     height: rem(40px);
-    width: rem(40px);
     justify-content: center;
-    align-items: center;    
+    width: rem(40px);
 
     .btn__icon {
       font-size: rem(16px);
     }
 
     &.-mobile {
+      border: rem(2px) solid $color-admin;
       display: flex;
       position: absolute;
-      top: rem(-20px);
       right: rem(-10px);
-      border: rem(2px) solid $color-admin;
+      top: rem(-20px);
 
       @include z-index(above);
     }

@@ -20,8 +20,6 @@ const toggleSidebar = () => {
   toggleScrolling(sidenav.classList.contains('-open'));
 };
 
-
-
 export default function initListeners() {
   const elements = [toggleBtn, closeBtn, overlay];
   elements.forEach((el) => el.addEventListener('click', toggleSidebar));

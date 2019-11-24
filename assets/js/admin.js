@@ -1,9 +1,10 @@
-import initSidenav from './modals/admin/sidenav';
-import initSearch from './modals/admin/search';
-import initEditRow from './modals/admin/edit-row';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import Panel from './components/admin/Panel';
 
 require('../css/admin.scss');
 
-initSidenav();
-initSearch();
-initEditRow();
+render(
+  <Panel />,
+  document.getElementById('admin'),
+);
