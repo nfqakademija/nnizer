@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Contractor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
 
 /**
  * @method Contractor|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +20,19 @@ class ContractorRepository extends ServiceEntityRepository
         parent::__construct($registry, Contractor::class);
     }
 
+    /**
+     * @param string $key
+     * @return Contractor|null
+     * @throws NonUniqueResultException
+     */
+    public function findOneByKey(string $key): ?Contractor
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.verificationKey = :key')
+            ->setParameter('key', $key)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
     // /**
     //  * @return Contractor[] Returns an array of Contractor objects
     //  */

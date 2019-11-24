@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\ORMException;
 
 /**
  * @method Reservation|null find($id, $lockMode = null, $lockVersion = null)
@@ -39,6 +40,19 @@ class ReservationRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    /**
+     * @param Reservation $reservation
+     */
+    public function save(Reservation $reservation): void
+    {
+        try {
+            $this->_em->persist($reservation);
+            $this->_em->flush();
+        } catch (ORMException $e) {
+        }
+    }
+
     // /**
     //  * @return Client[] Returns an array of Client objects
     //  */

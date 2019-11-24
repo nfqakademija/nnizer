@@ -7,6 +7,7 @@ use App\Entity\ContractorSettings;
 use App\Entity\Reservation;
 use App\Form\ContractorSettingsType;
 use App\Repository\ReservationRepository;
+use App\Service\ReservationFactory;
 use App\Service\SerializerService;
 use App\Service\MailerService;
 use Exception;
@@ -209,12 +210,14 @@ class ContractorController extends AbstractController
      * @Route("/api/contractor/{contractorKey}/new-client", methods="POST")
      * @param Request $request
      * @param string $contractorKey
+     * @param ReservationFactory $reservationFactory
      * @return JsonResponse
      * @throws Exception
      */
     public function addReservation(
         Request $request,
-        string $contractorKey
+        string $contractorKey,
+        ReservationFactory $reservationFactory
     ): JsonResponse {
         $firstname = $request->get('firstname');
         $lastname = $request->get('lastname');
@@ -225,23 +228,16 @@ class ContractorController extends AbstractController
             return new JsonResponse(null, Response::HTTP_NO_CONTENT);
         }
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $reservation = new Reservation();
-        $reservation->setEmail($email);
-        $reservation->setFirstname($firstname);
-        $reservation->setLastname($lastname);
-        $reservation->setVisitDate($visitDate);
-        $reservation->setVerificationKey($reservation->generateActivationKey());
-        $reservation->setVerificationKeyExpirationDate((new \DateTime('now'))->modify('+15 minutes'));
+        $reservation = $reservationFactory->createReservation(
+            $email,
+            $firstname,
+            $lastname,
+            $visitDate
+        );
         $contractor = $this->getDoctrine()->getRepository(Contractor::class)
-            ->findOneBy(
-                [
-                    'verificationKey' => $contractorKey
-                ]
-            );
+            ->findOneByKey($contractorKey);
         $reservation->setContractor($contractor->getUsername());
-        $entityManager->persist($reservation);
-        $entityManager->flush();
+        $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
 
         return new JsonResponse();
     }
