@@ -22,7 +22,8 @@ security:
                     - App\Security\ContractorAuthenticator
             logout:
                 path: app_logout
-                target: app_login
+                invalidate_session: false
+                success_handler: App\Security\LogoutHandler
 
     access_control:
           - { path: ^/contractor, roles: ROLE_CONTRACTOR }
