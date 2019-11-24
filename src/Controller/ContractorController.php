@@ -6,8 +6,10 @@ use App\Entity\ContractorSettings;
 use App\Form\ContractorSettingsType;
 use App\Repository\ContractorRepository;
 use App\Repository\ReservationRepository;
+use App\Service\ReservationFactory;
 use App\Service\SerializerService;
 use App\Service\MailerService;
+use Exception;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -213,6 +215,42 @@ class ContractorController extends AbstractController
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
+    }
+
+    /**
+     * @Route("/api/contractor/{contractorKey}/new-client", methods="POST")
+     * @param Request $request
+     * @param string $contractorKey
+     * @param ReservationFactory $reservationFactory
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function addReservation(
+        Request $request,
+        string $contractorKey,
+        ReservationFactory $reservationFactory
+    ): JsonResponse {
+        $firstname = $request->get('firstname');
+        $lastname = $request->get('lastname');
+        $email = $request->get('email');
+        $visitDate = new \DateTime($request->get('visitDate'));
+
+        if (!$firstname || !$lastname || !$email || !$visitDate) {
+            return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+        }
+
+        $reservation = $reservationFactory->createReservation(
+            $email,
+            $firstname,
+            $lastname,
+            $visitDate
+        );
+        $contractor = $this->getDoctrine()->getRepository(Contractor::class)
+            ->findOneByKey($contractorKey);
+        $reservation->setContractor($contractor->getUsername());
+        $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
+
+        return new JsonResponse();
     }
 
     /**

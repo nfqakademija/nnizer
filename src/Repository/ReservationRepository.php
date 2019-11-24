@@ -7,6 +7,7 @@ use App\Entity\Reservation;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
 use Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\P1;
 
@@ -69,6 +70,7 @@ class ReservationRepository extends ServiceEntityRepository
         } catch (ORMException $e) {
         }
     }
+
     // /**
     //  * @return Client[] Returns an array of Client objects
     //  */
