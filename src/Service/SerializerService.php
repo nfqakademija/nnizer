@@ -35,6 +35,7 @@ class SerializerService
                 'groups' => $groups
             ]
         );
+
         return $data;
     }
 }

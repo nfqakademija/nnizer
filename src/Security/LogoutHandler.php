@@ -25,6 +25,7 @@ class LogoutHandler implements LogoutSuccessHandlerInterface
         $lang = $request->getSession()->get('_locale');
         $request->getSession()->invalidate();
         $request->getSession()->set('_locale', $lang);
+
         return new RedirectResponse($this->router->generate('home'));
     }
 }
