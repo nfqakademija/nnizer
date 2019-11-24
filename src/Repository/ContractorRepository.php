@@ -46,6 +46,7 @@ class ContractorRepository extends ServiceEntityRepository
         } catch (ORMException $e) {
         }
     }
+
     // /**
     //  * @return Contractor[] Returns an array of Contractor objects
     //  */
