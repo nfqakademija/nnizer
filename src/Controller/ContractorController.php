@@ -19,8 +19,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContractorController extends AbstractController
 {
-    /**
-     * @Route("/{reactRouting}", name="contractor", requirements={"reactRouting"=".+"}, defaults={"reactRouting": null})
+      /**
+     * @Route("/contractor", name="contractor")
+     * @param UserInterface $user
      * @return Response
      */
     public function index(): Response

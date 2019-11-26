@@ -3,8 +3,8 @@
 {% block title %} {{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}{% endblock %}
 
 {% block body %}
-    <div id="admin">
-    </div>
+    <div id="admin" data-username="{{ app.user.username }}">
+    </div> 
     {% block javascripts %}
         {{ encore_entry_script_tags('admin') }}
     {% endblock %}
