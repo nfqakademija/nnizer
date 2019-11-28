@@ -30,8 +30,11 @@ class ReservationController extends AbstractController
         $form = $this->createForm(ClientRegistrationFormType::class, $reservation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $reservation->setVisitDate(new \DateTime($request->get('visitDate')));
+        $visitDate = new \DateTime($request->get('visitDate'));
+        $currentDate = (new \DateTime('now'))->modify('+2 hours'); //+2 hours because server timezone is different
+
+        if ($form->isSubmitted() && $form->isValid() && $visitDate > $currentDate) {
+            $reservation->setVisitDate($visitDate);
             $reservation->setVerificationKey($reservation->generateActivationKey());
             $reservation->setVerificationKeyExpirationDate((new \DateTime('now'))->modify('+15 minutes'));
             $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
