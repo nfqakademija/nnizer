@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Contractor;
 use App\Entity\ContractorSettings;
+use App\Entity\Reservation;
 use App\Form\ContractorSettingsType;
 use App\Repository\ContractorRepository;
 use App\Repository\ReservationRepository;
@@ -22,7 +24,6 @@ class ContractorController extends AbstractController
 {
       /**
      * @Route("/contractor", name="contractor")
-     * @param UserInterface $user
      * @return Response
      */
     public function index(): Response
@@ -248,7 +249,7 @@ class ContractorController extends AbstractController
         );
         $contractor = $this->getDoctrine()->getRepository(Contractor::class)
             ->findOneByKey($contractorKey);
-        $reservation->setContractor($contractor->getUsername());
+        $reservation->setContractor($contractor);
         $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
 
         return new JsonResponse();
