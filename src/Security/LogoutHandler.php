@@ -13,18 +13,25 @@ class LogoutHandler implements LogoutSuccessHandlerInterface
      */
     private $router;
     /**
+     * @var string
+     */
+    private $defaultLocale;
+
+    /**
      * LogoutHandler constructor.
      * @param RouterInterface $router
+     * @param string $defaultLocale
      */
-    public function __construct(RouterInterface $router)
+    public function __construct(RouterInterface $router, string $defaultLocale)
     {
         $this->router = $router;
+        $this->defaultLocale = $defaultLocale;
     }
     public function onLogoutSuccess(Request $request)
     {
-        $lang = $request->getSession()->get('_locale');
+        $lang = $request->getSession()->get('_locale', $this->defaultLocale);
         $request->getSession()->invalidate();
-        $request->getSession()->set('_locale', $lang ?? 'en');
+        $request->getSession()->set('_locale', $lang);
 
         return new RedirectResponse($this->router->generate('home'));
     }
