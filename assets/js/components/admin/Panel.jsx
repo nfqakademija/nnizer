@@ -9,7 +9,7 @@ import axios from 'axios';
 import Sidenav from './Sidenav';
 import PanelHeader from './PanelHeader';
 import Reservations from './Reservations';
-import Reviews from './Reviews'
+import Reviews from './Reviews';
 import Management from './Management';
 import Statistics from './Statistics';
 import Settings from './Settings';
@@ -19,10 +19,10 @@ const Panel = () => {
   const [isNavOpen, toggleNav] = useState(false);
   const [reservations, setReservations] = useState([]);
 
-  const fetchData = () => {
-    const panel = document.querySelector('#admin');
-    const { key } = panel.dataset;
+  const panel = document.querySelector('#admin');
+  const { key } = panel.dataset;
 
+  const fetchData = () => {
     axios.get(`/api/contractor/${key}/get-clients/`)
       .then((response) => {
         setReservations(response.data);
@@ -52,15 +52,14 @@ const Panel = () => {
           />
           <PanelHeader isOpen={isNavOpen} toggleNav={toggleNav} />
           <Switch>
-            
-            <Route path="/contractor/reservations" component={() => <Reservations reservations={reservations} />} />
+            <Route path="/contractor/reservations" component={() => <Reservations reservations={reservations} userKey={key} fetchData={fetchData} />} />
             <Route path="/contractor/manage" component={Management} />
             <Route path="/contractor/settings" component={Settings} />
             <Route path="/contractor/reviews" component={Reviews} />
             <Route path="/contractor/statistics" component={Statistics} />
             <Route path="/contractor/settings" component={Settings} />
             <Route path="/contractor/help" component={Help} />
-            <Route path="*" component={() => <Reservations reservations={reservations} />} />
+            <Route path="*" component={() => <Reservations reservations={reservations} userKey={key} fetchData={fetchData} />} />
           </Switch>
         </div>
       </div>

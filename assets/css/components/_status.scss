@@ -5,16 +5,22 @@
   padding: rem(12px);
   text-transform: uppercase;
 
-  &.-done {
+  &.-pending {
     background-color: $color-success-bg;
     color: $color-success-text;
   }
 
+  &.-cancelled {
+    background-color: $color-error-bg;
+    color: $color-error-text;
+  }
+
+  &.-not-confirmed {
+    background-color: $color-warning-bg;
+    color: $color-warning-text;
+  }
+
   &.-full {
     width: 100%;
-
-    @include breakpoint(lg) {
-      width: 70%;
-    }
   }
 }

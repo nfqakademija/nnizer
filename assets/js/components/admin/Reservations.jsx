@@ -4,8 +4,7 @@ import ReservationRow from './ReservationRow';
 
 
 const Reservations = (props) => {
-  const { reservations } = props;
-  console.log(reservations);
+  const { reservations, userKey, fetchData } = props;
 
   return (
     <div className="panel__content admin-container">
@@ -24,11 +23,14 @@ const Reservations = (props) => {
         {reservations.map((reservation) => (
           <ReservationRow
             key={reservation.id}
+            userKey={userKey}
+            id={reservation.id}
             date={reservation.visitDate}
-            name={reservation.firstname + reservation.lastname}
+            name={`${reservation.firstname} ${reservation.lastname}`}
             email={reservation.email}
             isVerified={reservation.isVerified}
             isCancelled={reservation.isCancelled}
+            fetchData={fetchData}
           />
         ))}
       </ul>
@@ -38,6 +40,8 @@ const Reservations = (props) => {
 
 Reservations.propTypes = {
   reservations: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  userKey: PropTypes.string.isRequired,
+  fetchData: PropTypes.func.isRequired,
 };
 
 export default Reservations;
