@@ -27,11 +27,13 @@ const Sidenav = (props) => {
         onClick={() => toggleNav(!isOpen)}
         onKeyPress={() => toggleNav(!isOpen)}
       />
-      <img
-        src={logoPath}
-        alt="nnizer typo logotype"
-        className="sidenav__logo"
-      />
+      <a href="/">
+        <img
+          src={logoPath}
+          alt="nnizer typo logotype"
+          className="sidenav__logo"
+        />
+      </a>
       <ul className="sidenav__links">
         <li className="sidenav__link -active">
           <NavLink to="/contractor/reservations" onClick={() => toggleNav(false)}>
@@ -70,7 +72,7 @@ const Sidenav = (props) => {
           </NavLink>
         </li>
         <li className="sidenav__link">
-          <a href="/" onClick={() => toggleNav(false)}>
+          <a href="/logout" onClick={() => toggleNav(false)}>
             <i className="icon-logout" />
             Log out
           </a>

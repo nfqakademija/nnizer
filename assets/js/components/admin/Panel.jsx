@@ -5,10 +5,15 @@ import {
   Route,
 } from 'react-router-dom';
 import axios from 'axios';
+
 import Sidenav from './Sidenav';
 import PanelHeader from './PanelHeader';
 import Reservations from './Reservations';
+import Reviews from './Reviews'
+import Management from './Management';
+import Statistics from './Statistics';
 import Settings from './Settings';
+import Help from './Help';
 
 const Panel = () => {
   const [isNavOpen, toggleNav] = useState(false);
@@ -16,9 +21,9 @@ const Panel = () => {
 
   const fetchData = () => {
     const panel = document.querySelector('#admin');
-    const { username } = panel.dataset;
+    const { key } = panel.dataset;
 
-    axios.get(`/api/contractor/${username}/get-clients/`)
+    axios.get(`/api/contractor/${key}/get-clients/`)
       .then((response) => {
         setReservations(response.data);
       })
@@ -28,7 +33,6 @@ const Panel = () => {
   };
 
   useEffect(() => {
-    console.log('panel component re-render');
     fetchData();
   },
   [isNavOpen]);
@@ -48,8 +52,15 @@ const Panel = () => {
           />
           <PanelHeader isOpen={isNavOpen} toggleNav={toggleNav} />
           <Switch>
+            
             <Route path="/contractor/reservations" component={() => <Reservations reservations={reservations} />} />
+            <Route path="/contractor/manage" component={Management} />
             <Route path="/contractor/settings" component={Settings} />
+            <Route path="/contractor/reviews" component={Reviews} />
+            <Route path="/contractor/statistics" component={Statistics} />
+            <Route path="/contractor/settings" component={Settings} />
+            <Route path="/contractor/help" component={Help} />
+            <Route path="*" component={() => <Reservations reservations={reservations} />} />
           </Switch>
         </div>
       </div>
