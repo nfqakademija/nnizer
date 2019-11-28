@@ -3,15 +3,24 @@
 {% block title %}{{ "registration_form.register"|trans }}{% endblock %}
 
 {% block body %}
-    <h1>{{ "registration_form.register"|trans }}</h1>
+    <div class="container container--top-spacing">
+        <h1>{{ "registration_form.register"|trans }}</h1>
 
-    {{ form_start(registrationForm, { attr: {novalidate: 'novalidate' }}) }}
-        {{ form_row(registrationForm.contractor) }}
-        {{ form_row(registrationForm.visitDate) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.email) }}
+        {{ form_start(registrationForm, { attr: {novalidate: 'novalidate' }}) }}
+            {{ form_row(registrationForm.contractor) }}
+            {{ form_row(registrationForm.visitDate) }}
+            Date Picker (react)
+            <div id="datepicker">
+            </div>
+            {{ form_row(registrationForm.firstname) }}
+            {{ form_row(registrationForm.lastname) }}
+            {{ form_row(registrationForm.email) }}
 
-        <button class="btn">{{ "registration_form.register.button"|trans }}</button>
-    {{ form_end(registrationForm) }}
+            <button class="btn">{{ "registration_form.register.button"|trans }}</button>
+        {{ form_end(registrationForm) }}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('form') }}
+        {% endblock %}
+    </div>
 {% endblock %}
