@@ -1,0 +1,50 @@
+.search {
+  align-items: center;
+  color: $color-icons;
+  display: flex;
+  margin-left: auto;
+  margin-right: rem(8px);
+  position: relative;
+  width: 36px;
+
+  @include transition(width 0.2s);
+
+  @include breakpoint(md) {
+    margin-left: 0;
+    margin-right: auto;
+    width: auto;
+  }
+
+  input[type='search'] {
+    @extend .remove-default-input;
+
+    height: 100%;
+    margin-left: rem(16px);
+    width: 0;
+
+    &:focus,
+    &:valid {
+      width: 100%;
+    }
+  }
+
+  &::after {
+    background-color: $color-grey-3;
+    bottom: rem(1px);
+    content: '';
+    height: rem(1px);
+    position: absolute;
+    width: 0;
+
+    @include transition(width 0.2s);
+  }
+
+  &:focus-within,
+  input:valid ~ & {
+    width: 200px;
+
+    &::after {
+      width: 100%;
+    }
+  }
+}

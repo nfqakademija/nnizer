@@ -1,0 +1,33 @@
+.admin {
+  background-color: $color-admin;
+}
+
+.panel {
+  min-height: 250vh;
+  position: relative;
+
+  @include transition(transform 0.3s);
+
+  @include breakpoint(md) {
+    margin-left: rem(160px);
+    transition-property: none;
+  }
+
+  &.-nav-open {
+    overflow-y: hidden;
+    transform: translateX(rem(240px));
+
+    .overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @include breakpoint(md) {
+      margin-left: rem(160px);
+    }
+  }
+
+  &__content {
+    padding-top: rem(32px);
+  }
+}

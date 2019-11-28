@@ -1,16 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
 {% block title %} {{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}{% endblock %}
 
 {% block body %}
-    <div class="container container--top-spacing">
-        <h2>{{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}</h2>
-
-        <ul id="contractor__reservations">
-        </ul>
-    </div>
-
+    <div id="admin" data-key="{{ app.user.verificationKey }}">
+    </div> 
     {% block javascripts %}
-        {{ encore_entry_script_tags('react') }}
+        {{ encore_entry_script_tags('admin') }}
     {% endblock %}
 {% endblock %}

@@ -3,6 +3,7 @@
   border: solid rem(2px) $color-yellow;
   border-radius: rem(2px);
   color: $color-black;
+  display: inline-block;
   font-size: rem(14px);
   font-weight: 600;
   letter-spacing: rem(2px);
@@ -12,7 +13,8 @@
   position: relative;
   text-decoration: none;
   text-transform: uppercase;
-  transition: all 0.2s ease-in-out;
+
+  @include transition(transform 0.2s, background-color 0.2s);
 
   &::after {
     border: 2px solid $color-yellow;
@@ -23,8 +25,9 @@
     opacity: 0;
     position: absolute;
     top: 0;
-    transition: all 0.2s ease-in-out;
     width: 100%;
+
+    @include transition(transform 0.2s, opacity 0.2s);
   }
 
   &:hover {
@@ -35,16 +38,60 @@
       transform: translate(rem(8px), rem(-8px));
     }
   }
-}
 
-.btn--secondary {
-  background: none;
+  &--secondary {
+    background: none;
 
-  &:hover {
-    background: $color-yellow;
+    &:hover {
+      background-color: $color-yellow;
+    }
+  }
+
+  &--full {
+    width: 100%;
   }
 }
 
-.btn--full {
-  width: 100%;
+.panel-btn {
+  border: none;
+  border-radius: rem(2px);
+  font-size: rem(14px);
+  font-weight: 600;
+  letter-spacing: rem(1px);
+  min-width: rem(128px);
+  padding: rem(8px) rem(12px);
+  text-transform: uppercase;
+
+  &::before {
+    font-size: rem(14px);
+    margin-right: rem(8px);
+  }
+
+  &.-filter {
+    background-color: $color-yellow;
+  }
+
+  &.-success {
+    background-color: $color-success-bg;
+    border: 2px solid $color-success-bg;
+    color: $color-success-text;
+
+    &::before {
+      content: '\e912';
+    }
+  }
+
+  &.-cancel {
+    border: 2px solid $color-error-bg;
+    color: $color-error-text;
+
+    &::before {
+      content: '\e903';
+    }
+  }
+
+  &.-warning {
+    border: 2px solid $color-warning-bg;
+    color: $color-warning-text;
+  }
 }

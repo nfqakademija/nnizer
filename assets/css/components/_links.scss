@@ -7,6 +7,7 @@
   position: relative;
   text-decoration: none;
 
+  @include transition(color 0.2s);
   @include z-index(link);
 
   &--underline {
@@ -20,6 +21,7 @@
       width: calc(100% + 4px);
 
       @include z-index(below);
+      @include transition(width 0.2s);
     }
   }
 

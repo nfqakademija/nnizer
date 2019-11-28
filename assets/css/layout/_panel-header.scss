@@ -1,0 +1,46 @@
+.panel__header {
+  background-color: $color-white;
+  box-shadow: 0 0 rem(5px) rgba(0, 0, 0, 0.24);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: rem(16px);
+  padding-top: rem(16px);
+
+  @include breakpoint(md) {
+    background-color: $color-admin;
+    padding-bottom: rem(24px);
+    padding-top: rem(24px);
+  }
+
+  .header {
+    &__toggler {
+      background: none;
+      border: none;
+      display: flex;
+
+      @include breakpoint(md) {
+        display: none;
+      }
+    }
+
+    &__person {
+      align-items: center;
+      display: flex;
+
+      img {
+        height: rem(40px);
+        width: rem(40px);
+      }
+
+      span {
+        display: none;
+
+        @include breakpoint(md) {
+          display: block;
+          margin-left: rem(16px);
+        }
+      }
+    }
+  }
+}

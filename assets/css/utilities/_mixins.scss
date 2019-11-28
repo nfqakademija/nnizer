@@ -25,3 +25,10 @@
 @mixin z-index($key) {
   z-index: map-get($z-index, $key);
 }
+
+// Mixin for getting transition properties
+// Example usage @include transition(transform 0.2s, background-color 0.2s) - returns : transform 0.2s, background-color 0.2s;
+@mixin transition($x...) {
+  transition: $x;
+  transition-timing-function: ease-in-out;
+}
