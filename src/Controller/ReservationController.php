@@ -31,6 +31,7 @@ class ReservationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $reservation->setVisitDate(new \DateTime($request->get('visitDate')));
             $reservation->setVerificationKey($reservation->generateActivationKey());
             $reservation->setVerificationKeyExpirationDate((new \DateTime('now'))->modify('+15 minutes'));
             $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);

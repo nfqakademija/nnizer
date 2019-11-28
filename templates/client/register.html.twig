@@ -8,8 +8,7 @@
 
         {{ form_start(registrationForm, { attr: {novalidate: 'novalidate' }}) }}
             {{ form_row(registrationForm.contractor) }}
-            {{ form_row(registrationForm.visitDate) }}
-            Date Picker (react)
+            {{ "registration_form.date"|trans }}
             <div id="datepicker">
             </div>
             {{ form_row(registrationForm.firstname) }}
