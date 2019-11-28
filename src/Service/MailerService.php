@@ -66,8 +66,8 @@ class MailerService extends AbstractController
                 [
                     'user' => $reservation->getFirstname(),
                     'key' => $reservation->getVerificationKey(),
-                    'date' => $reservation->getVisitDate()->format('Y-m-d H-i'),
-                    'provider' => $reservation->getContractor()
+                    'date' => $reservation->getVisitDate()->format('Y-m-d H:i'),
+                    'provider' => $reservation->getContractor()->getUsername()
                 ]
             ),
             $this->translator->trans('email.heading.registered'),
@@ -106,6 +106,21 @@ class MailerService extends AbstractController
                 ['user' => $reservation->getFirstname()]
             ),
             $this->translator->trans('email.heading.cancelled'),
+            $reservation->getEmail()
+        );
+    }
+    /**
+     * @param Reservation $reservation
+     */
+    public function sendReviewEmail(
+        Reservation $reservation
+    ): void {
+        $this->sendMail(
+            $this->renderView(
+                'emails/client-review.html.twig',
+                ['hash' => $reservation->getVerificationKey(), 'user' => $reservation->getFirstname()]
+            ),
+            $this->translator->trans('email.heading.review'),
             $reservation->getEmail()
         );
     }

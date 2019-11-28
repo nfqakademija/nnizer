@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Reservation;
 use App\Form\ClientRegistrationFormType;
+use App\Repository\ReservationRepository;
 use App\Service\MailerService;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,14 +18,12 @@ class ReservationController extends AbstractController
     /**
      * @Route("/new-client", name="app_client_register")
      * @param Request $request
-     * @param TranslatorInterface $translator
      * @param MailerService $mailer
      * @return Response
      * @throws Exception
      */
     public function register(
         Request $request,
-        TranslatorInterface $translator,
         MailerService $mailer
     ): Response {
         $reservation = new Reservation();
@@ -32,11 +31,9 @@ class ReservationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
             $reservation->setVerificationKey($reservation->generateActivationKey());
             $reservation->setVerificationKeyExpirationDate((new \DateTime('now'))->modify('+15 minutes'));
-            $entityManager->persist($reservation);
-            $entityManager->flush();
+            $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
             $mailer->sendSuccessfulRegistrationEmail($reservation);
 
             return $this->redirectToRoute('home');
@@ -49,29 +46,28 @@ class ReservationController extends AbstractController
 
     /**
      * @Route("/activate/{verificationKey}", name="client_activate", methods="GET")
-     * @param Request $request
      * @param string $verificationKey
      * @param TranslatorInterface $translator
      * @param MailerService $mailer
+     * @param ReservationRepository $reservationRepository
      * @return Response
      * @throws Exception
      */
     public function activate(
-        Request $request,
         string $verificationKey,
         TranslatorInterface $translator,
-        MailerService $mailer
+        MailerService $mailer,
+        ReservationRepository $reservationRepository
     ): Response {
-        $entityManager = $this->getDoctrine()->getManager();
-        $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
-            'verificationKey' => $verificationKey,
+        $reservation = $reservationRepository->findOneBy([
+            'verificationKey' => $verificationKey
         ]);
 
         if ($reservation != null && !$reservation->getIsVerified()) {
             $now = new \DateTime('now');
             if ($now < $reservation->getVerificationKeyExpirationDate()) {
                 $reservation->setIsVerified(true);
-                $entityManager->flush();
+                $reservationRepository->save($reservation);
                 $mailer->sendSuccessfulVerificationEmail($reservation);
                 $this->addFlash(
                     'notice',
@@ -90,26 +86,25 @@ class ReservationController extends AbstractController
 
     /**
      * @Route("/cancel/{verificationKey}", name="client_cancel", methods="GET")
-     * @param Request $request
      * @param string $verificationKey
      * @param TranslatorInterface $translator
      * @param MailerService $mailer
+     * @param ReservationRepository $reservationRepository
      * @return Response
      */
     public function cancel(
-        Request $request,
         string $verificationKey,
         TranslatorInterface $translator,
-        MailerService $mailer
+        MailerService $mailer,
+        ReservationRepository $reservationRepository
     ): Response {
-        $entityManager = $this->getDoctrine()->getManager();
-        $reservation = $entityManager->getRepository(Reservation::class)->findOneBy([
+        $reservation = $reservationRepository->findOneBy([
             'verificationKey' => $verificationKey,
         ]);
 
         if ($reservation != null && !$reservation->getIsCancelled()) {
             $reservation->setIsCancelled(true);
-            $entityManager->flush();
+            $reservationRepository->save($reservation);
             $mailer->sendSuccessfulCancellationEmail($reservation);
             $this->addFlash(
                 'notice',

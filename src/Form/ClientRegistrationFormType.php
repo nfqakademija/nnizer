@@ -3,11 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Reservation;
+use App\Form\DataTransformer\ContractorToObjectTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,13 +17,31 @@ use Symfony\Component\Validator\Constraints\Length;
 
 class ClientRegistrationFormType extends AbstractType
 {
+    /**
+     * @var ContractorToObjectTransformer
+     */
+    private $transformer;
+
+    /**
+     * ClientRegistrationFormType constructor.
+     * @param ContractorToObjectTransformer $transformer
+     */
+    public function __construct(ContractorToObjectTransformer $transformer)
+    {
+        $this->transformer = $transformer;
+    }
+
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @throws \Exception
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
         $builder
             ->add('contractor', TextType::class, [
                 'label' => 'registration_form.provider',
-                'data' => 'Provider 123',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'provider.empty',
@@ -82,6 +99,9 @@ class ClientRegistrationFormType extends AbstractType
                     ])
                 ]
             ]);
+
+        $builder->get('contractor')
+            ->addModelTransformer($this->transformer);
     }
 
     /**
