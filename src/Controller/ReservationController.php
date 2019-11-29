@@ -37,7 +37,6 @@ class ReservationController extends AbstractController
         MailerService $mailer,
         ReservationValidation $reservationValidation
     ): Response {
-
         $errors = $reservationValidation->validateInput($request);
 
         if (count($errors) === 0) {
@@ -53,7 +52,6 @@ class ReservationController extends AbstractController
             $contractor = $this->getDoctrine()->getRepository(Contractor::class)->find($contractor);
 
             $reservation->setContractor($contractor);
-
             $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
             $mailer->sendSuccessfulRegistrationEmail($reservation);
 
