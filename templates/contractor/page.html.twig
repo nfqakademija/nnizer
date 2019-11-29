@@ -17,7 +17,8 @@
             {% endfor %}
         {% endif %}
         <label for="visitDate">{{ "registration_form.date"|trans }}</label>
-        <input type="text" name="visitDate"><br>
+        <div id="datepicker">
+        </div>
         <label for="firstname">{{ "registration_form.firstname"|trans }}</label>
         <input type="text" name="firstname"><br>
         <label for="lastname">{{ "registration_form.lastname"|trans }}</label>
@@ -30,4 +31,7 @@
     </form>
 
 
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('form') }}
 {% endblock %}
