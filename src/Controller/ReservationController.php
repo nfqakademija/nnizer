@@ -2,10 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Contractor;
 use App\Entity\Reservation;
-use App\Form\ClientRegistrationFormType;
+use App\Service\ReservationValidation;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ConstraintViolationList;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Repository\ReservationRepository;
 use App\Service\MailerService;
+use App\Service\ReservationFactory;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,32 +23,44 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ReservationController extends AbstractController
 {
     /**
-     * @Route("/new-client", name="app_client_register")
+     * @Route("/new-reservation", name="app_new-reservation")
      * @param Request $request
+     * @param ReservationFactory $reservationFactory
      * @param MailerService $mailer
+     * @param ReservationValidation $reservationValidation
      * @return Response
      * @throws Exception
      */
     public function register(
         Request $request,
-        MailerService $mailer
+        ReservationFactory $reservationFactory,
+        MailerService $mailer,
+        ReservationValidation $reservationValidation
     ): Response {
-        $reservation = new Reservation();
-        $form = $this->createForm(ClientRegistrationFormType::class, $reservation);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $reservation->setVerificationKey($reservation->generateActivationKey());
-            $reservation->setVerificationKeyExpirationDate((new \DateTime('now'))->modify('+15 minutes'));
+        $errors = $reservationValidation->validateInput($request);
+
+        if (count($errors) === 0) {
+            $email = $request->get('email');
+            $firstname = $request->get('firstname');
+            $lastname = $request->get('lastname');
+            $contractor= $request->get('contractor');
+            $visitDate = $request->get('visitDate');
+
+            $reservation = $reservationFactory
+                ->createReservation($email, $firstname, $lastname, new \DateTime($visitDate));
+
+            $contractor = $this->getDoctrine()->getRepository(Contractor::class)->find($contractor);
+
+            $reservation->setContractor($contractor);
+
             $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
             $mailer->sendSuccessfulRegistrationEmail($reservation);
 
             return $this->redirectToRoute('home');
+        } else {
+            return $this->redirect($request->headers->get('referer'));
         }
-
-        return $this->render('client/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
     }
 
     /**

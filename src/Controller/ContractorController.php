@@ -7,6 +7,7 @@ use App\Entity\ContractorSettings;
 use App\Entity\Reservation;
 use App\Form\ContractorSettingsType;
 use App\Repository\ContractorRepository;
+use App\Repository\ContractorSettingsRepository;
 use App\Repository\ReservationRepository;
 use App\Service\ReservationFactory;
 use App\Service\SerializerService;
@@ -22,16 +23,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContractorController extends AbstractController
 {
-      /**
+    /**
      * @Route("/contractor", name="contractor")
+     * @param ContractorSettingsRepository $contractorSettingsRepository
      * @return Response
      */
-    public function index(): Response
+    public function index(ContractorSettingsRepository $contractorSettingsRepository): Response
     {
-        $settings = $this->getDoctrine()
-            ->getRepository(ContractorSettings::class)
-            ->findOneBy(['contractor' => $this->getUser()->getId()
-            ]);
+        $settings = $contractorSettingsRepository->findOneBy(['contractor' => $this->getUser()->getId()]);
 
         if ($settings === null) {
             return $this->redirectToRoute('contractor_settings');
@@ -41,6 +40,29 @@ class ContractorController extends AbstractController
             'controller_name' => 'ContractorController',
         ]);
     }
+
+    /**
+     * @Route("/c/{contractorUsername}", name="contractor-page")
+     * @param string $contractorUsername
+     * @param ContractorRepository $contractorRepository
+     * @return Response
+     */
+    public function contractorPage(
+        string $contractorUsername,
+        ContractorRepository $contractorRepository
+    ): Response {
+        $contractor = $contractorRepository->findOneBy(['username' => $contractorUsername]);
+
+        if ($contractor !== null) {
+            return $this->render('contractor/page.html.twig', [
+                'contractor'=> $contractor,
+                'errors' => [], //TODO
+            ]);
+        } else {
+            return $this->redirectToRoute('home');
+        }
+    }
+
 
     /**
      * @Route("/contractor/settings", name="contractor_settings")

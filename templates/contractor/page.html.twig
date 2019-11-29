@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contractor page{% endblock %}
+
+{% block body %}
+    <h1 style="margin-top: 10%">Contractor's page</h1>
+
+    <p>Service provider: {{ contractor.firstname }} {{ contractor.lastname }}</p>
+    <p>Email: {{ contractor.email }}</p>
+    <p>Phone number: {{ contractor.phoneNumber }}</p>
+
+    <h3 style="margin-top: 5%">Register: </h3>
+    <form method="POST" action="{{ path('app_new-reservation') }}">
+        {% if errors is defined %}
+            {% for error in errors %}
+                <p>{{ error|trans }}</p>
+            {% endfor %}
+        {% endif %}
+        <label for="visitDate">{{ "registration_form.date"|trans }}</label>
+        <input type="text" name="visitDate"><br>
+        <label for="firstname">{{ "registration_form.firstname"|trans }}</label>
+        <input type="text" name="firstname"><br>
+        <label for="lastname">{{ "registration_form.lastname"|trans }}</label>
+        <input type="text" name="lastname"><br>
+        <label for="email">{{ "registration_form.email"|trans }}</label>
+        <input type="email" name="email"><br>
+        <input type="hidden" name="contractor" value="{{ contractor.id }}">
+        <input type="submit" value="Submit">
+
+    </form>
+
+
+{% endblock %}
