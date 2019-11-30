@@ -14,6 +14,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass="App\Repository\ContractorRepository")
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(fields={"username"}, message="username.existing")
+ * @ORM\Table(
+ *      indexes={
+ *          @ORM\Index(name="idx_key", columns={"verification_key"})
+ *      }
+ * )
  */
 class Contractor implements UserInterface
 {
