@@ -303,8 +303,7 @@ class ContractorController extends AbstractController
         SerializerService $json
     ): JsonResponse {
         $contractor = $contractorRepository->findOneBy(['username' => $contractorUsername]);
-        $settings = $contractor->getSettings();
-        if ($contractor && $settings) {
+        if ($contractor && $settings = $contractor->getSettings()) {
             $reservations = $contractor->getReservations();
             $settings = $json->getResponse($settings);
             $days = ['days' => $this->restructuredDaysInfo(array_splice($settings, 0, 7))];
