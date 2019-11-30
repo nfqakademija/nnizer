@@ -291,19 +291,19 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/profile/{verificationKey}/working-hours", methods="GET")
-     * @param string $verificationKey
+     * @Route("/api/profile/{contractorUsername}/working-hours", methods="GET")
+     * @param string $contractorUsername
      * @param ContractorRepository $contractorRepository
      * @param SerializerService $json
      * @return JsonResponse
      * @throws NonUniqueResultException
      */
     public function getWorkingHoursAndTakenDates(
-        string $verificationKey,
+        string $contractorUsername,
         ContractorRepository $contractorRepository,
         SerializerService $json
     ): JsonResponse {
-        $contractor = $contractorRepository->findOneByKey($verificationKey);
+        $contractor = $contractorRepository->findOneBy(['username' => $contractorUsername]);
         $settings = $contractor->getSettings();
         if ($contractor && $settings) {
             $reservations = $contractor->getReservations();
