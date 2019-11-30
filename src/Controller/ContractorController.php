@@ -296,7 +296,6 @@ class ContractorController extends AbstractController
      * @param ContractorRepository $contractorRepository
      * @param SerializerService $json
      * @return JsonResponse
-     * @throws NonUniqueResultException
      */
     public function getWorkingHoursAndTakenDates(
         string $contractorUsername,
@@ -307,9 +306,11 @@ class ContractorController extends AbstractController
         $settings = $contractor->getSettings();
         if ($contractor && $settings) {
             $reservations = $contractor->getReservations();
-            $workingHours = $json->getResponse($settings);
+            $settings = $json->getResponse($settings);
+            $days = ['days' => $this->restructuredDaysInfo(array_splice($settings, 0, 7))];
+            $workingDays = ['workingDays' => $this->getWorkingDaysArray($days['days'])];
             $takenTimes = ['takenDates' => $this->toDatesArray($reservations)];
-            $result = $workingHours + $takenTimes;
+            $result = $workingDays + $days + $settings + $takenTimes;
 
             return new JsonResponse($result);
         } else {
@@ -328,5 +329,40 @@ class ContractorController extends AbstractController
             $dates[] = $reservation->getVisitDate()->format('Y-m-d H:i:s');
         }
         return $dates;
+    }
+
+    /**
+     * @param array $days
+     * @return array
+     */
+    private function getWorkingDaysArray(array $days): array
+    {
+        $workingDays = [];
+        $index = 0;
+        foreach ($days as $day) {
+            if ($day['isWorkday']) {
+                $workingDays[] = $index;
+            }
+            $index++;
+        }
+        return $workingDays;
+    }
+
+    /**
+     * @param array $settings
+     * @return array
+     */
+    private function restructuredDaysInfo(array $settings): array
+    {
+        $refactured = array();
+        foreach ($settings as $workingDay) {
+            $times = explode(" - ", $workingDay);
+            $refactured[] = [
+                    'startTime' => $times[0],
+                    'endTime' => $times[1],
+                    'isWorkday' => $times[0] !== $times[1],
+            ];
+        }
+        return $refactured;
     }
 }
