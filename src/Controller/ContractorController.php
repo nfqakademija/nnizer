@@ -12,6 +12,7 @@ use App\Repository\ReservationRepository;
 use App\Service\ReservationFactory;
 use App\Service\SerializerService;
 use App\Service\MailerService;
+use Doctrine\Common\Collections\Collection;
 use Exception;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -287,5 +288,45 @@ class ContractorController extends AbstractController
         $d = \DateTime::createFromFormat($format, $date);
 
         return $d && $d->format($format) == $date;
+    }
+
+    /**
+     * @Route("/api/profile/{verificationKey}/working-hours", methods="GET")
+     * @param string $verificationKey
+     * @param ContractorRepository $contractorRepository
+     * @param SerializerService $json
+     * @return JsonResponse
+     * @throws NonUniqueResultException
+     */
+    public function getWorkingHoursAndTakenDates(
+        string $verificationKey,
+        ContractorRepository $contractorRepository,
+        SerializerService $json
+    ): JsonResponse {
+        $contractor = $contractorRepository->findOneByKey($verificationKey);
+        $settings = $contractor->getSettings();
+        if ($contractor && $settings) {
+            $reservations = $contractor->getReservations();
+            $workingHours = $json->getResponse($settings);
+            $takenTimes = ['takenDates' => $this->toDatesArray($reservations)];
+            $result = $workingHours + $takenTimes;
+
+            return new JsonResponse($result);
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    /**
+     * @param Collection $reservations
+     * @return array
+     */
+    private function toDatesArray(Collection $reservations): array
+    {
+        $dates = [];
+        foreach ($reservations as $reservation) {
+            $dates[] = $reservation->getVisitDate()->format('Y-m-d H:i:s');
+        }
+        return $dates;
     }
 }
