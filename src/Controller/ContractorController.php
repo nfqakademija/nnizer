@@ -140,7 +140,7 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/contractor/{contractorKey}/cancel/{reservationId}", methods="GET")
+     * @Route("/api/contractor/{contractorKey}/cancel/{reservationId}", methods="PATCH")
      * @param string $contractorKey
      * @param int $reservationId
      * @param MailerService $mailer
@@ -175,7 +175,7 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/contractor/{contractorKey}/verify/{reservationId}", methods="GET")
+     * @Route("/api/contractor/{contractorKey}/verify/{reservationId}", methods="PATCH")
      * @param string $contractorKey
      * @param int $reservationId
      * @param MailerService $mailer
@@ -310,5 +310,4 @@ class ContractorController extends AbstractController
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
     }
-
 }
