@@ -9,10 +9,10 @@ use App\Form\ContractorSettingsType;
 use App\Repository\ContractorRepository;
 use App\Repository\ContractorSettingsRepository;
 use App\Repository\ReservationRepository;
+use App\Service\ContractorService;
 use App\Service\ReservationFactory;
 use App\Service\SerializerService;
 use App\Service\MailerService;
-use Doctrine\Common\Collections\Collection;
 use Exception;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -294,74 +294,21 @@ class ContractorController extends AbstractController
      * @Route("/api/profile/{contractorUsername}/working-hours", methods="GET")
      * @param string $contractorUsername
      * @param ContractorRepository $contractorRepository
-     * @param SerializerService $json
+     * @param ContractorService $contractorService
      * @return JsonResponse
      */
     public function getWorkingHoursAndTakenDates(
         string $contractorUsername,
         ContractorRepository $contractorRepository,
-        SerializerService $json
+        ContractorService $contractorService
     ): JsonResponse {
         $contractor = $contractorRepository->findOneBy(['username' => $contractorUsername]);
-        if ($contractor && $settings = $contractor->getSettings()) {
-            $reservations = $contractor->getReservations();
-            $settings = $json->getResponse($settings);
-            $days = ['days' => $this->restructuredDaysInfo(array_splice($settings, 0, 7))];
-            $workingDays = ['workingDays' => $this->getWorkingDaysArray($days['days'])];
-            $takenTimes = ['takenDates' => $this->toDatesArray($reservations)];
-            $result = $workingDays + $days + $settings + $takenTimes;
-
-            return new JsonResponse($result);
+        $response = $contractorService->generateContractorCalenderResponse($contractor);
+        if ($response) {
+            return new JsonResponse($response);
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
     }
 
-    /**
-     * @param Collection $reservations
-     * @return array
-     */
-    private function toDatesArray(Collection $reservations): array
-    {
-        $dates = [];
-        foreach ($reservations as $reservation) {
-            $dates[] = $reservation->getVisitDate()->format('Y-m-d H:i:s');
-        }
-        return $dates;
-    }
-
-    /**
-     * @param array $days
-     * @return array
-     */
-    private function getWorkingDaysArray(array $days): array
-    {
-        $workingDays = [];
-        $index = 0;
-        foreach ($days as $day) {
-            if ($day['isWorkday']) {
-                $workingDays[] = $index;
-            }
-            $index++;
-        }
-        return $workingDays;
-    }
-
-    /**
-     * @param array $settings
-     * @return array
-     */
-    private function restructuredDaysInfo(array $settings): array
-    {
-        $refactured = array();
-        foreach ($settings as $workingDay) {
-            $times = explode(" - ", $workingDay);
-            $refactured[] = [
-                    'startTime' => $times[0],
-                    'endTime' => $times[1],
-                    'isWorkday' => $times[0] !== $times[1],
-            ];
-        }
-        return $refactured;
-    }
 }
