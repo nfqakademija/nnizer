@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { format } from 'date-fns';
 
 const ReservationRow = (props) => {
   const [editOpen, editToggle] = useState(false);
@@ -35,18 +36,18 @@ const ReservationRow = (props) => {
   const cancelReservation = () => {
     // TODO change GET to PATCH after back-end changes
     // TODO add some kind of loading animation while it fetching
-    axios.get(`/api/contractor/${userKey}/cancel/${id}`)
+    axios.patch(`/api/contractor/${userKey}/cancel/${id}`)
       .then((response) => {
         fetchData();
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error); // To Do error handling
       });
   };
 
   const approveReservation = () => {
     // TODO change GET to PATCH after back-end changes
-    axios.get(`/api/contractor/${userKey}/verify/${id}`)
+    axios.patch(`/api/contractor/${userKey}/verify/${id}`)
       .then((response) => {
         fetchData();
       })
