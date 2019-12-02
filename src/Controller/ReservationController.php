@@ -4,12 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contractor;
 use App\Entity\Reservation;
-use App\Service\ReservationValidation;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\ConstraintViolationList;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Symfony\Component\Validator\Validation;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
+use App\Validator\ReservationValidation;
 use App\Repository\ReservationRepository;
 use App\Service\MailerService;
 use App\Service\ReservationFactory;
