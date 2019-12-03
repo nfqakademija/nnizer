@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { format } from 'date-fns';
+import { format, differenceInHours, isSameDay } from 'date-fns';
+import { parseISO, differenceInDays } from 'date-fns/esm';
 
 const ReservationRow = (props) => {
   const [editOpen, editToggle] = useState(false);
+  const [isDone, setDone] = useState(false);
   const {
     id,
     userKey,
@@ -15,26 +17,26 @@ const ReservationRow = (props) => {
     isCancelled,
     fetchData,
   } = props;
-  let status = '';
+  let statusClass = '';
   let statusText = '';
 
   const checkStatus = () => {
     if (isCancelled) {
       statusText = 'Cancelled';
-      status = 'cancelled';
+      statusClass = 'cancelled';
     } else if (isVerified) {
       statusText = 'Pending';
-      status = 'pending';
+      statusClass = 'pending';
+    } else if (isDone) {
+      statusText = 'Done';
+      statusClass = 'done';
     } else {
       statusText = 'Not confirmed';
-      status = 'not-confirmed';
+      statusClass = 'not-confirmed';
     }
   };
 
-  checkStatus();
-
   const cancelReservation = () => {
-    // TODO change GET to PATCH after back-end changes
     // TODO add some kind of loading animation while it fetching
     axios.patch(`/api/contractor/${userKey}/cancel/${id}`)
       .then((response) => {
@@ -46,7 +48,6 @@ const ReservationRow = (props) => {
   };
 
   const approveReservation = () => {
-    // TODO change GET to PATCH after back-end changes
     axios.patch(`/api/contractor/${userKey}/verify/${id}`)
       .then((response) => {
         fetchData();
@@ -56,8 +57,43 @@ const ReservationRow = (props) => {
       });
   };
 
+  const getLeftTime = (reservationDate) => {
+    let timeLeft = '';
+    const currentDate = new Date();
+
+    if (currentDate >= reservationDate) {
+      timeLeft = 'Expired';
+      setDone(true);
+    } else if (isSameDay(reservationDate, currentDate)) {
+      const diffInHours = differenceInHours(reservationDate, currentDate);
+      timeLeft = diffInHours + (diffInHours === 1 ? ' hour' : ' hours');
+    } else {
+      const diffInDays = differenceInDays(reservationDate, currentDate);
+      timeLeft = diffInDays + (diffInDays === 1 ? ' day' : ' days');
+    }
+    return timeLeft;
+  };
+
+  const formatEmail = () => {
+    const [username, provider] = email.split(/(?=@)/g);
+    return (
+      <>
+        {username}
+        <br className="show-lg" />
+        {provider}
+      </>
+    );
+  };
+
+  formatEmail();
+
+  checkStatus();
+
+  useEffect(() => {},
+    [editOpen]);
+
   return (
-    <li className="reservations__row">
+    <li className={`reservations__row ${editOpen ? '-editing' : ''}`}>
       <button
         type="button"
         className="reservations__btn -mobile js-edit"
@@ -66,40 +102,42 @@ const ReservationRow = (props) => {
         <i className="icon-edit btn__icon" />
       </button>
       <div className="row">
-        <div className="reservations__item col-lg-1">{date}</div>
+        <div className="reservations__item col-lg-1">
+          {format(parseISO(date), 'd MMM, Y EEEE')}
+        </div>
         <div className="reservations__item col-lg-3">
           <i className="icon-human item__icon hide-lg" />
           { name }
         </div>
         <div className="reservations__item col-lg-3">
           <i className="icon-email item__icon hide-lg" />
-          { email }
-          {/* <br className="show-lg" />
-          @gmail.com */}
+          {formatEmail()}
         </div>
         <div className="reservations__item col-lg-2">
           <i className="icon-phone item__icon hide-lg" />
           +370 627 93122
         </div>
         <div className="reservations__item col-lg-2">
-          <div className={`status -full + -${status}`}>
+          <div className={`status -full + -${statusClass}`}>
             { statusText }
           </div>
         </div>
         <div className="reservations__item col-lg-1">
           <button
             type="button"
-            className="reservations__btn js-edit"
+            className={`reservations__btn js-edit ${editOpen && '-open'}`}
             onClick={() => editToggle(!editOpen)}
           >
-            <i className="icon-edit btn__icon" />
+            <i className={`btn__icon icon-${editOpen ? 'cross' : 'edit'}`} />
           </button>
         </div>
       </div>
       <div className="row">
         <div className={`reservations__edit js-edit-window ${editOpen ? '-open' : ''}`}>
           <span className="edit__heading">Time left</span>
-          <span className="edit__time-left">approx. 5 hours</span>
+          <span className="edit__time-left">
+            {getLeftTime(parseISO(date))}
+          </span>
           <div className="edit__actions">
             {!isVerified
             && (
