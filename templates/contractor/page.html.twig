@@ -3,35 +3,66 @@
 {% block title %}Contractor page{% endblock %}
 
 {% block body %}
-    <h1 style="margin-top: 10%">Contractor's page</h1>
+    <div class="container container--top-spacing">
+        <h1 style="margin-top: 10%">Contractor's page</h1>
 
-    <p>Service provider: {{ contractor.firstname }} {{ contractor.lastname }}</p>
-    <p>Email: {{ contractor.email }}</p>
-    <p>Phone number: {{ contractor.phoneNumber }}</p>
+        <p>Service provider: {{ contractor.firstname }} {{ contractor.lastname }}</p>
+        <p>Email: {{ contractor.email }}</p>
+        <p>Phone number: {{ contractor.phoneNumber }}</p>
+       
+    </div>
 
-    <h3 style="margin-top: 5%">Register: </h3>
-    <form method="POST" action="{{ path('app_new-reservation') }}">
-        {% if errors is defined %}
-            {% for error in errors %}
-                <p>{{ error|trans }}</p>
-            {% endfor %}
-        {% endif %}
-        <label for="visitDate">{{ "registration_form.date"|trans }}</label>
-        <div id="datepicker">
-        </div>
-        <label for="firstname">{{ "registration_form.firstname"|trans }}</label>
-        <input type="text" name="firstname"><br>
-        <label for="lastname">{{ "registration_form.lastname"|trans }}</label>
-        <input type="text" name="lastname"><br>
-        <label for="email">{{ "registration_form.email"|trans }}</label>
-        <input type="email" name="email"><br>
-        <input type="hidden" name="contractor" value="{{ contractor.id }}">
-        <input type="submit" value="Submit">
+    <button data-micromodal-trigger="register-modal">Open</button>
 
-    </form>
 
+
+    <div class="modal micromodal-slide" id="register-modal" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+      <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+        <header class="modal__header">
+          <h2 class="modal__title" id="register-modal-title">
+            Select time and fill details! 📆 
+          </h2>
+          <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+        </header>
+        <main class="modal__content" id="register-modal-content">
+          <form class="form" method="POST" action="{{ path('app_new-reservation') }}">
+            {% if errors is defined %}
+                {% for error in errors %}
+                    <p>{{ error|trans }}</p>
+                {% endfor %}
+            {% endif %}
+            <div class="form__field">
+                {# <label for="visitDate">{{ "registration_form.date"|trans }}</label> #}
+                <div id="datepicker"></div>
+            </div>
+
+            <div class="form__field">
+                <input type="text" name="firstname" required />
+                <label for="firstname">{{ "registration_form.firstname"|trans }}</label>
+            </div>  
+
+            <div class="form__field">
+                <input type="text" name="lastname" required />
+                <label for="lastname">{{ "registration_form.lastname"|trans }}</label>
+            </div>
+
+            <div class="form__field">
+                <input type="email" name="email" required />
+                <label for="email">{{ "registration_form.email"|trans }}</label>
+            </div>
+
+            <input type="hidden" name="contractor" value="{{ contractor.id }}">
+            <button class="btn btn--full">Submit</button>
+        </form>
+        </main>
+      </div>
+    </div>
+  </div>
+        
 
 {% endblock %}
 {% block javascripts %}
-    {{ encore_entry_script_tags('form') }}
+    {{ encore_entry_script_tags('datepicker') }}
+    {{ encore_entry_script_tags('contractor') }}
 {% endblock %}

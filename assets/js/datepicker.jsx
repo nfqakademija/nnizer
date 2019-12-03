@@ -4,12 +4,10 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import { getDay, addDays, isSameDay } from 'date-fns';
 import { setHours, setMinutes } from 'date-fns/esm';
-// import { lt } from 'date-fns/locale/lt';
-// registerLocale('lt', lt);
 
 import('../../node_modules/react-datepicker/dist/react-datepicker.min.css');
 
-const Form = () => {
+const Datepicker = () => {
   const [startDate, setStartDate] = useState(0);
   const [data, setData] = useState([]);
   const [isFetched, setFetched] = useState(false);
@@ -82,6 +80,6 @@ const Form = () => {
 };
 
 render(
-  <Form />,
+  <Datepicker />,
   document.querySelector('#datepicker'),
 );

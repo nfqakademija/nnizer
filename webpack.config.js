@@ -28,9 +28,9 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('admin', './assets/js/admin.jsx')
-    .addEntry('form', './assets/js/form.jsx')
-    //.addEntry('page1', './assets/js/page1.js')
-    //.addEntry('page2', './assets/js/page2.js')
+    .addEntry('contractor', './assets/js/contractor.jsx')
+    .addEntry('datepicker', './assets/js/datepicker.jsx')
+
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

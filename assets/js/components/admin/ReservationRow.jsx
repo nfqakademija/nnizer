@@ -20,6 +20,12 @@ const ReservationRow = (props) => {
   let statusClass = '';
   let statusText = '';
 
+  const setExpired = () => {
+    if (parseISO(date) <= new Date()) {
+      setDone(true);
+    }
+  };
+
   const checkStatus = () => {
     if (isCancelled) {
       statusText = 'Cancelled';
@@ -61,9 +67,8 @@ const ReservationRow = (props) => {
     let timeLeft = '';
     const currentDate = new Date();
 
-    if (currentDate >= reservationDate) {
+    if (isDone || isCancelled) {
       timeLeft = 'Expired';
-      setDone(true);
     } else if (isSameDay(reservationDate, currentDate)) {
       const diffInHours = differenceInHours(reservationDate, currentDate);
       timeLeft = diffInHours + (diffInHours === 1 ? ' hour' : ' hours');
@@ -85,12 +90,12 @@ const ReservationRow = (props) => {
     );
   };
 
-  formatEmail();
-
   checkStatus();
 
-  useEffect(() => {},
-    [editOpen]);
+  useEffect(() => {
+    setExpired();
+  },
+  [editOpen]);
 
   return (
     <li className={`reservations__row ${editOpen ? '-editing' : ''}`}>
@@ -139,17 +144,17 @@ const ReservationRow = (props) => {
             {getLeftTime(parseISO(date))}
           </span>
           <div className="edit__actions">
-            {!isVerified
+            {(!isVerified && !isDone)
             && (
             <button
-              type="button" 
+              type="button"
               className="panel-btn -success"
               onClick={approveReservation}
             >
             Approve
             </button>
             )}
-            {!isCancelled
+            {(!isCancelled && !isDone)
             && (
             <button
               type="button"
