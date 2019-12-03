@@ -1,10 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { parseISO } from 'date-fns/esm';
 import ReservationRow from './ReservationRow';
 
 
 const Reservations = (props) => {
   const { reservations, userKey, fetchData } = props;
+
+  const sortReservationsASC = () => {
+    reservations.sort((a, b) => {
+      return parseISO(a.visitDate) > parseISO(b.visitDate) ? 1 : -1;
+    });
+  };
+
+  sortReservationsASC();
 
   return (
     <div className="panel__content admin-container">

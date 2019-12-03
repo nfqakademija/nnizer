@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContractorSettingsRepository")
@@ -24,41 +25,49 @@ class ContractorSettings
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"Default"})
      */
     private $Monday;
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"Default"})
      */
     private $Tuesday;
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"Default"})
      */
     private $Wednesday;
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"Default"})
      */
     private $Thursday;
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"Default"})
      */
     private $Friday;
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"Default"})
      */
     private $Saturday;
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"Default"})
      */
     private $Sunday;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"Default"})
      */
     private $visitDuration;
 

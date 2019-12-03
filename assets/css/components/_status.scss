@@ -5,7 +5,8 @@
   padding: rem(12px);
   text-transform: uppercase;
 
-  &.-pending {
+  &.-pending,
+  &.-done {
     background-color: $color-success-bg;
     color: $color-success-text;
   }

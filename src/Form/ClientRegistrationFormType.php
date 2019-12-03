@@ -48,18 +48,6 @@ class ClientRegistrationFormType extends AbstractType
                     ]),
                 ]
             ])
-            ->add('visitDate', DateTimeType::class, [
-                'label' => 'registration_form.date',
-                'data' => new \DateTime('now'),
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'date.unchosen',
-                    ]),
-                    new DateTime([
-                        'message' => 'date.invalid',
-                    ])
-                ]
-            ])
             ->add('firstname', TextType::class, [
                 'label' => 'registration_form.firstname',
                 'constraints' => [

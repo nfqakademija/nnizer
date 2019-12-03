@@ -7,7 +7,9 @@ use App\Entity\ContractorSettings;
 use App\Entity\Reservation;
 use App\Form\ContractorSettingsType;
 use App\Repository\ContractorRepository;
+use App\Repository\ContractorSettingsRepository;
 use App\Repository\ReservationRepository;
+use App\Service\ContractorService;
 use App\Service\ReservationFactory;
 use App\Service\SerializerService;
 use App\Service\MailerService;
@@ -22,16 +24,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContractorController extends AbstractController
 {
-      /**
+    /**
      * @Route("/contractor", name="contractor")
+     * @param ContractorSettingsRepository $contractorSettingsRepository
      * @return Response
      */
-    public function index(): Response
+    public function index(ContractorSettingsRepository $contractorSettingsRepository): Response
     {
-        $settings = $this->getDoctrine()
-            ->getRepository(ContractorSettings::class)
-            ->findOneBy(['contractor' => $this->getUser()->getId()
-            ]);
+        $settings = $contractorSettingsRepository->findOneBy(['contractor' => $this->getUser()->getId()]);
 
         if ($settings === null) {
             return $this->redirectToRoute('contractor_settings');
@@ -41,6 +41,29 @@ class ContractorController extends AbstractController
             'controller_name' => 'ContractorController',
         ]);
     }
+
+    /**
+     * @Route("/c/{contractorUsername}", name="contractor-page")
+     * @param string $contractorUsername
+     * @param ContractorRepository $contractorRepository
+     * @return Response
+     */
+    public function contractorPage(
+        string $contractorUsername,
+        ContractorRepository $contractorRepository
+    ): Response {
+        $contractor = $contractorRepository->findOneBy(['username' => $contractorUsername]);
+
+        if ($contractor !== null) {
+            return $this->render('contractor/page.html.twig', [
+                'contractor'=> $contractor,
+                'errors' => [], //TODO
+            ]);
+        } else {
+            return $this->redirectToRoute('home');
+        }
+    }
+
 
     /**
      * @Route("/contractor/settings", name="contractor_settings")
@@ -117,7 +140,7 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/contractor/{contractorKey}/cancel/{reservationId}", methods="GET")
+     * @Route("/api/contractor/{contractorKey}/cancel/{reservationId}", methods="PATCH")
      * @param string $contractorKey
      * @param int $reservationId
      * @param MailerService $mailer
@@ -152,7 +175,7 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/contractor/{contractorKey}/verify/{reservationId}", methods="GET")
+     * @Route("/api/contractor/{contractorKey}/verify/{reservationId}", methods="PATCH")
      * @param string $contractorKey
      * @param int $reservationId
      * @param MailerService $mailer
@@ -265,5 +288,26 @@ class ContractorController extends AbstractController
         $d = \DateTime::createFromFormat($format, $date);
 
         return $d && $d->format($format) == $date;
+    }
+
+    /**
+     * @Route("/api/profile/{contractorUsername}/working-hours", methods="GET")
+     * @param string $contractorUsername
+     * @param ContractorRepository $contractorRepository
+     * @param ContractorService $contractorService
+     * @return JsonResponse
+     */
+    public function getWorkingHoursAndTakenDates(
+        string $contractorUsername,
+        ContractorRepository $contractorRepository,
+        ContractorService $contractorService
+    ): JsonResponse {
+        $contractor = $contractorRepository->findOneBy(['username' => $contractorUsername]);
+        $response = $contractorService->generateContractorCalenderResponse($contractor);
+        if ($response) {
+            return new JsonResponse($response);
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
     }
 }
