@@ -39,16 +39,18 @@ const Datepicker = () => {
 
   const fetchData = () => {
     const contractorName = window.location.href.split('/').pop();
-
-    axios.get(`/api/profile/${contractorName}/working-hours/`)
-      .then((response) => {
+      axios({
+        method: 'get',
+        baseURL: window.location.protocol + "//" + window.location.host,
+        url: `/api/profile/${contractorName}/working-hours`,
+      }).then(response => {
         setData(response.data);
         setOffDays(getOffDays(response.data.days));
         setFetched(true);
       })
-      .catch((error) => {
-        console.log('error'); // TODO handle error display in UI
-      });
+          .catch(error => {
+            console.log(error) //TOOD - error handling
+          });
   };
 
   useEffect(() => {
