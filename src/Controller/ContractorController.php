@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Contractor;
 use App\Entity\ContractorSettings;
+use App\Entity\CoverPhoto;
+use App\Entity\ProfilePhoto;
 use App\Entity\Reservation;
 use App\Form\ContractorDetailsFormType;
 use App\Form\ContractorSettingsType;
@@ -104,8 +106,8 @@ class ContractorController extends AbstractController
         $contractor = $contractorRepository->findOneBy([
             'id' => $this->getUser()->getId()
         ]);
-        $form = $this->createForm(ContractorDetailsFormType::class, $contractor);
 
+        $form = $this->createForm(ContractorDetailsFormType::class, $contractor);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

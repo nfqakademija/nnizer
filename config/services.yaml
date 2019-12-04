@@ -6,8 +6,8 @@
 parameters:
     mailer_from: 'nfqnnizer@gmail.com'
     default_locale: 'en'
-    profile_images: /upload/profile
-    cover_images: /upload/cover
+    profile_images: /uploads/profile
+    cover_images: /uploads/cover
 
 services:
     # default configuration for services in *this* file

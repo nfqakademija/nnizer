@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -11,8 +13,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass="App\Repository\ProfilePhotoRepository")
  * @Vich\Uploadable()
  */
-class ProfilePhoto
+class ProfilePhoto implements Serializable
 {
+    use TimestampableTrait;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -27,7 +30,7 @@ class ProfilePhoto
     private $filename;
 
     /**
-     * @Vich\UploadableField(mapping="contractorsProfile", fileNameProperty="profilePhotoFilename")
+     * @Vich\UploadableField(mapping="contractorsProfile", fileNameProperty="filename")
      *
      * @var File
      */
@@ -75,10 +78,14 @@ class ProfilePhoto
 
     /**
      * @param File|null $profilePhoto
+     * @throws \Exception
      */
     public function setProfilePhoto(?File $profilePhoto)
     {
         $this->profilePhoto = $profilePhoto;
+        if ($profilePhoto) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
     /**
@@ -98,5 +105,22 @@ class ProfilePhoto
         $this->Contractor = $Contractor;
 
         return $this;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->filename
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            ) = unserialize($serialized);
     }
 }

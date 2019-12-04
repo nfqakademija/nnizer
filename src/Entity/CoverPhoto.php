@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -11,8 +13,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass="App\Repository\CoverPhotoRepository")
  * @Vich\Uploadable()
  */
-class CoverPhoto
+class CoverPhoto implements Serializable
 {
+    use TimestampableTrait;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -21,17 +24,17 @@ class CoverPhoto
     private $id;
 
     /**
-     * @Vich\UploadableField(mapping="contractorsCover", fileNameProperty="coverPhotoFilename")
-     *
-     * @var File
-     */
-    private $coverPhoto;
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"frontPage"})
      */
     private $filename;
+
+    /**
+     * @Vich\UploadableField(mapping="contractorsCover", fileNameProperty="filename")
+     *
+     * @var File
+     */
+    private $coverPhoto;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Contractor", inversedBy="coverPhoto", cascade={"persist", "remove"})
@@ -87,10 +90,14 @@ class CoverPhoto
 
     /**
      * @param File|null $coverPhoto
+     * @throws \Exception
      */
     public function setCoverPhoto(?File $coverPhoto = null): void
     {
         $this->coverPhoto = $coverPhoto;
+        if ($coverPhoto) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
     /**
@@ -99,5 +106,22 @@ class CoverPhoto
     public function getCoverPhoto(): ?File
     {
         return $this->coverPhoto;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->filename
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            ) = unserialize($serialized);
     }
 }

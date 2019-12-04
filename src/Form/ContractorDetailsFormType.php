@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ContractorDetailsFormType extends AbstractType
 {
@@ -60,23 +59,12 @@ class ContractorDetailsFormType extends AbstractType
                     'placeholder' => 'detailsForm.facebook.placeholder',
                 ],
             ])
-            ->add('coverPhoto', VichImageType::class, [
-                'label' => 'detailsForm.coverPhoto',
-                'required' => false,
-                'allow_delete' => false,
-                'download_uri' => false,
-                'image_uri' => false,
-                'asset_helper' => true,
-            ])
-            ->add('profilePhoto', VichImageType::class, [
+            ->add('coverPhoto', CoverPhotoType::class, [
                 'label' => 'detailsForm.profilePhoto',
-                'required' => false,
-                'allow_delete' => false,
-                'download_uri' => false,
-                'image_uri' => false,
-                'asset_helper' => true,
             ])
-        ;
+            ->add('profilePhoto', ProfilePhotoType::class, [
+                'label' => 'detailsForm.profilePhoto',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -85,5 +73,4 @@ class ContractorDetailsFormType extends AbstractType
             'data_class' => Contractor::class,
         ]);
     }
-
 }
