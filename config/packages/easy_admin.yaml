@@ -1,0 +1,53 @@
+easy_admin:
+  site_name: 'NNIZER'
+  user:
+    display_name: true
+    display_avatar: true
+
+  list:
+    title: 'List of %%entity_label%%'
+    actions:
+      - { name: edit, icon: pencil, label: Edit }
+      - { name: delete, icon: exclamation, label: Delete }
+      - { name: search, label: Search }
+      - { name: new, icon: plus, label: Add new  }
+  #      - { name: list, icon: list, label: List }
+
+  entities:
+    User:
+      class: App\Entity\User
+      list:
+        fields:
+          - 'id'
+          - 'email'
+          - 'roles'
+#          - { property: 'roles' }
+          - { property: 'password', label: 'Password hash' }
+      new:
+        fields:
+          - 'email'
+#          - { property: 'roles', type: 'string'  }
+#          - { property: 'roles', type: 'choice' }
+          - 'password'
+          - 'createdAt'
+          - 'updatedAt'
+      edit:
+        fields:
+          - 'email'
+#          - { property: 'roles', type: string }
+          - 'password'
+
+    Contractor:
+      class: App\Entity\Contractor
+      list:
+        fields:
+          - 'id'
+          - 'username'
+          - { property: 'roles' }
+          - { property: 'password', label: 'Password hash' }
+    ContractorSettings:
+      class: App\Entity\ContractorSettings
+    Reservation:
+      class: App\Entity\Reservation
+    Rewiev:
+      class: App\Entity\Review
