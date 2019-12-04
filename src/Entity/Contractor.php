@@ -22,7 +22,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *          @ORM\Index(name="idx_key", columns={"verification_key"})
  *      }
  * )
- * @Vich\Uploadable()
  */
 class Contractor implements UserInterface
 {
@@ -120,36 +119,20 @@ class Contractor implements UserInterface
     private $facebook;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"frontPage"})
-     */
-    private $coverPhotoFilename;
-
-    /**
-     * @Vich\UploadableField(mapping="contractorsCover", fileNameProperty="coverPhotoFilename")
-     *
-     * @var File
-     */
-    private $coverPhoto;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"frontPage"})
-     */
-    private $profilePhotoFilename;
-
-    /**
-     * @Vich\UploadableField(mapping="contractorsProfile", fileNameProperty="profilePhotoFilename")
-     *
-     * @var File
-     */
-    private $profilePhoto;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"frontPage"})
      */
     private $description;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ProfilePhoto", mappedBy="Contractor", cascade={"persist", "remove"})
+     */
+    private $profilePhoto;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\CoverPhoto", mappedBy="Contractor", cascade={"persist", "remove"})
+     */
+    private $coverPhoto;
     /**
      * Contractor constructor.
      */
@@ -515,76 +498,6 @@ class Contractor implements UserInterface
     /**
      * @return string|null
      */
-    public function getCoverPhotoFilename(): ?string
-    {
-        return $this->coverPhotoFilename;
-    }
-
-    /**
-     * @param string|null $coverPhotoFilename
-     * @return $this
-     */
-    public function setCoverPhotoFilename(?string $coverPhotoFilename): self
-    {
-        $this->coverPhotoFilename = $coverPhotoFilename;
-
-        return $this;
-    }
-
-    /**
-     * @param File|null $coverPhoto
-     */
-    public function setCoverPhoto(?File $coverPhoto = null): void
-    {
-        $this->coverPhoto = $coverPhoto;
-    }
-
-    /**
-     * @return File|null
-     */
-    public function getCoverPhoto(): ?File
-    {
-        return $this->coverPhoto;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getProfilePhotoFilename(): ?string
-    {
-        return $this->profilePhotoFilename;
-    }
-
-    /**
-     * @param string|null $profilePhotoFilename
-     * @return $this
-     */
-    public function setProfilePhotoFilename(?string $profilePhotoFilename): self
-    {
-        $this->profilePhotoFilename = $profilePhotoFilename;
-
-        return $this;
-    }
-
-    /**
-     * @return File|null
-     */
-    public function getProfilePhoto(): ?File
-    {
-        return $this->profilePhoto;
-    }
-
-    /**
-     * @param File|null $profilePhoto
-     */
-    public function setProfilePhoto(?File $profilePhoto)
-    {
-        $this->profilePhoto = $profilePhoto;
-    }
-
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
@@ -597,6 +510,54 @@ class Contractor implements UserInterface
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return ProfilePhoto|null
+     */
+    public function getProfilePhoto(): ?ProfilePhoto
+    {
+        return $this->profilePhoto;
+    }
+
+    /**
+     * @param ProfilePhoto $profilePhoto
+     * @return $this
+     */
+    public function setProfilePhoto(ProfilePhoto $profilePhoto): self
+    {
+        $this->profilePhoto = $profilePhoto;
+
+        // set the owning side of the relation if necessary
+        if ($profilePhoto->getContractor() !== $this) {
+            $profilePhoto->setContractor($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return CoverPhoto|null
+     */
+    public function getCoverPhoto(): ?CoverPhoto
+    {
+        return $this->coverPhoto;
+    }
+
+    /**
+     * @param CoverPhoto $coverPhoto
+     * @return $this
+     */
+    public function setCoverPhoto(CoverPhoto $coverPhoto): self
+    {
+        $this->coverPhoto = $coverPhoto;
+
+        // set the owning side of the relation if necessary
+        if ($coverPhoto->getContractor() !== $this) {
+            $coverPhoto->setContractor($this);
+        }
 
         return $this;
     }
