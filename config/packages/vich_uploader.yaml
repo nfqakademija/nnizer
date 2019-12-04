@@ -3,8 +3,8 @@ vich_uploader:
 
     mappings:
         contractorsProfile:
-            uri_prefix: /uploads/profile
-            upload_destination: '%kernel.project_dir%/public/uploads/profile'
+            uri_prefix: '%profile_images%'
+            upload_destination: '%kernel.project_dir%/public%profile_images%'
         contractorsCover:
-            uri_prefix: /uploads/cover
-            upload_destination: '%kernel.project_dir%/public/uploads/cover'
+            uri_prefix: '%cover_images%'
+            upload_destination: '%kernel.project_dir%/public%cover_images%'
