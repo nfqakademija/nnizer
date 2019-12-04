@@ -7,7 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\HasLifecycleCallbacks()
@@ -19,6 +22,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *          @ORM\Index(name="idx_key", columns={"verification_key"})
  *      }
  * )
+ * @Vich\Uploadable()
  */
 class Contractor implements UserInterface
 {
@@ -32,6 +36,7 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"frontPage"})
      */
     private $username;
     
@@ -48,21 +53,25 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=32)
+     * @Groups({"frontPage"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=32)
+     * @Groups({"frontPage"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups({"frontPage"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=16, nullable=true)
+     * @Groups({"frontPage"})
      */
     private $phoneNumber;
 
@@ -83,6 +92,7 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="contractor", orphanRemoval=true)
+     * @Groups({"frontPage"})
      */
     private $reviews;
 
@@ -91,6 +101,58 @@ class Contractor implements UserInterface
      */
     private $reservations;
 
+    /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     * @Groups({"frontPage"})
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"frontPage"})
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     * @Groups({"frontPage"})
+     */
+    private $facebook;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"frontPage"})
+     */
+    private $coverPhotoFilename;
+
+    /**
+     * @Vich\UploadableField(mapping="contractorsCover", fileNameProperty="coverPhotoFilename")
+     *
+     * @var File
+     */
+    private $coverPhoto;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"frontPage"})
+     */
+    private $profilePhotoFilename;
+
+    /**
+     * @Vich\UploadableField(mapping="contractorsProfile", fileNameProperty="profilePhotoFilename")
+     *
+     * @var File
+     */
+    private $profilePhoto;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"frontPage"})
+     */
+    private $description;
+    /**
+     * Contractor constructor.
+     */
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
@@ -389,6 +451,152 @@ class Contractor implements UserInterface
                 $reservation->setContractor(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     * @return $this
+     */
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    /**
+     * @param string|null $facebook
+     * @return $this
+     */
+    public function setFacebook(?string $facebook): self
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCoverPhotoFilename(): ?string
+    {
+        return $this->coverPhotoFilename;
+    }
+
+    /**
+     * @param string|null $coverPhotoFilename
+     * @return $this
+     */
+    public function setCoverPhotoFilename(?string $coverPhotoFilename): self
+    {
+        $this->coverPhotoFilename = $coverPhotoFilename;
+
+        return $this;
+    }
+
+    /**
+     * @param File|null $coverPhoto
+     */
+    public function setCoverPhoto(?File $coverPhoto = null): void
+    {
+        $this->coverPhoto = $coverPhoto;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getCoverPhoto(): ?File
+    {
+        return $this->coverPhoto;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getProfilePhotoFilename(): ?string
+    {
+        return $this->profilePhotoFilename;
+    }
+
+    /**
+     * @param string|null $profilePhotoFilename
+     * @return $this
+     */
+    public function setProfilePhotoFilename(?string $profilePhotoFilename): self
+    {
+        $this->profilePhotoFilename = $profilePhotoFilename;
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getProfilePhoto(): ?File
+    {
+        return $this->profilePhoto;
+    }
+
+    /**
+     * @param File|null $profilePhoto
+     */
+    public function setProfilePhoto(?File $profilePhoto)
+    {
+        $this->profilePhoto = $profilePhoto;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string|null $description
+     * @return $this
+     */
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

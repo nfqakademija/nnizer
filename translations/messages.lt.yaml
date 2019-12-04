@@ -82,6 +82,24 @@ settings_form:
   visitDuration: Vizito trukmė
   Submit: Pateikti
 
+detailsForm:
+  title: Detalės
+  submit: Pateikti
+  service:
+    title: Paslaugos pavadinimas
+    placeholder: Asmeninis vairuotojas
+  description:
+    title: Paslaugos aprašymas
+    placeholder: Išbandyk mano paslaugas ir nepasigailėk!
+  address:
+    title: Adresas
+    placeholder: Jūsų adresas
+  facebook:
+    title: Jūsų facebook puslapis
+    placeholder: '/manopuslapis'
+  coverPhoto: Viršelio nuotrauka
+  profilePhoto: Paskyros nuotrauka
+
 locales:
   lt: Lietuvių k.
   en: Anglų k.

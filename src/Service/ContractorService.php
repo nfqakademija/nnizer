@@ -30,11 +30,12 @@ class ContractorService
     {
         if ($contractor && $settings = $contractor->getSettings()) {
             $reservations = $contractor->getReservations();
+            $contractorDetails = $this->json->getResponse($contractor, ['frontPage']);
             $settings = $this->json->getResponse($settings);
             $days = ['days' => $this->restructuredDaysInfo(array_splice($settings, 0, 7))];
             $workingDays = ['workingDays' => $this->getWorkingDaysArray($days['days'])];
             $takenTimes = ['takenDates' => $this->toDatesArray($reservations)];
-            $result = $workingDays + $days + $settings + $takenTimes;
+            $result = $contractorDetails + $workingDays + $days + $settings + $takenTimes;
             return $result;
         } else {
             return null;
