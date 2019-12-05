@@ -12,6 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProfilePhotoRepository")
  * @Vich\Uploadable()
+ * @ORM\HasLifecycleCallbacks()
  */
 class ProfilePhoto implements Serializable
 {
@@ -62,7 +63,7 @@ class ProfilePhoto implements Serializable
      * @param string $filename
      * @return $this
      */
-    public function setFilename(string $filename): self
+    public function setFilename(?string $filename): self
     {
         $this->filename = $filename;
 
@@ -91,7 +92,7 @@ class ProfilePhoto implements Serializable
     /**
      * @return Contractor
      */
-    public function getContractor(): Contractor
+    public function getContractor(): ?Contractor
     {
         return $this->Contractor;
     }
@@ -107,20 +108,13 @@ class ProfilePhoto implements Serializable
         return $this;
     }
 
-    /** @see \Serializable::serialize() */
     public function serialize()
     {
-        return serialize(array(
-            $this->id,
-            $this->filename
-        ));
+        $this->profilePhoto = base64_encode($this->profilePhoto);
     }
 
-    /** @see \Serializable::unserialize() */
     public function unserialize($serialized)
     {
-        list (
-            $this->id,
-            ) = unserialize($serialized);
+        $this->profilePhoto = base64_decode($this->profilePhoto);
     }
 }
