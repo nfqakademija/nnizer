@@ -7,7 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\HasLifecycleCallbacks()
@@ -32,6 +35,7 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"frontPage"})
      */
     private $username;
     
@@ -48,21 +52,25 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=32)
+     * @Groups({"frontPage"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=32)
+     * @Groups({"frontPage"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups({"frontPage"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=16, nullable=true)
+     * @Groups({"frontPage"})
      */
     private $phoneNumber;
 
@@ -83,6 +91,7 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="contractor", orphanRemoval=true)
+     * @Groups({"frontPage"})
      */
     private $reviews;
 
@@ -91,6 +100,44 @@ class Contractor implements UserInterface
      */
     private $reservations;
 
+    /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     * @Groups({"frontPage"})
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     * @Groups({"frontPage"})
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     * @Groups({"frontPage"})
+     */
+    private $facebook;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Groups({"frontPage"})
+     */
+    private $description;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ProfilePhoto", mappedBy="Contractor", cascade={"persist", "remove"})
+     * @Groups({"frontPage"})
+     */
+    private $profilePhoto;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\CoverPhoto", mappedBy="Contractor", cascade={"persist", "remove"})
+     * @Groups({"frontPage"})
+     */
+    private $coverPhoto;
+    /**
+     * Contractor constructor.
+     */
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
@@ -388,6 +435,130 @@ class Contractor implements UserInterface
             if ($reservation->getContractor() === $this) {
                 $reservation->setContractor(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     * @return $this
+     */
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    /**
+     * @param string|null $facebook
+     * @return $this
+     */
+    public function setFacebook(?string $facebook): self
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string|null $description
+     * @return $this
+     */
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return ProfilePhoto|null
+     */
+    public function getProfilePhoto(): ?ProfilePhoto
+    {
+        return $this->profilePhoto;
+    }
+
+    /**
+     * @param ProfilePhoto $profilePhoto
+     * @return $this
+     */
+    public function setProfilePhoto(ProfilePhoto $profilePhoto): self
+    {
+        $this->profilePhoto = $profilePhoto;
+
+        // set the owning side of the relation if necessary
+        if ($profilePhoto->getContractor() !== $this) {
+            $profilePhoto->setContractor($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return CoverPhoto|null
+     */
+    public function getCoverPhoto(): ?CoverPhoto
+    {
+        return $this->coverPhoto;
+    }
+
+    /**
+     * @param CoverPhoto $coverPhoto
+     * @return $this
+     */
+    public function setCoverPhoto(CoverPhoto $coverPhoto): self
+    {
+        $this->coverPhoto = $coverPhoto;
+
+        // set the owning side of the relation if necessary
+        if ($coverPhoto->getContractor() !== $this) {
+            $coverPhoto->setContractor($this);
         }
 
         return $this;

@@ -26,3 +26,11 @@ provider:
 settings:
   regex: "Darbo laiką privaloma įvesti tokiu formatu: 09:00 - 17:00"
   empty: Šis laukelis privalo būti užpildytas
+
+detailsForm:
+  service:
+    empty: Jūsų paslauga privalo turėti pavadinimą!
+  description:
+    empty: Jūsų paslauga privalo turėti aprašymą!
+  address:
+    empty: Jūs privalote nurodyti savo adresą!

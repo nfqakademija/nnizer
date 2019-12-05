@@ -1,0 +1,12 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        contractorsProfile:
+            uri_prefix: '%profile_images%'
+            upload_destination: '%kernel.project_dir%/public%profile_images%'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        contractorsCover:
+            uri_prefix: '%cover_images%'
+            upload_destination: '%kernel.project_dir%/public%cover_images%'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
