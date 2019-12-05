@@ -66,12 +66,20 @@ class ContractorService
     {
         $refactured = array();
         foreach ($settings as $workingDay) {
-            $times = explode(" - ", $workingDay);
-            $refactured[] = [
-                'startTime' => $times[0],
-                'endTime' => $times[1],
-                'isWorkday' => $times[0] !== $times[1],
-            ];
+            if (strpos($workingDay, '-1') === false) {
+                $times = explode(" - ", $workingDay);
+                $refactured[] = [
+                    'startTime' => $times[0],
+                    'endTime' => $times[1],
+                    'isWorkday' => $times[0] !== $times[1],
+                ];
+            } else {
+                $refactured[] = [
+                    'startTime' => null,
+                    'endTime' => null,
+                    'isWorkday' => false,
+                ];
+            }
         }
         return $refactured;
     }
