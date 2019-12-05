@@ -52,8 +52,8 @@
   }
 
   &--header {
-    margin: 0;
     display: inline;
+    margin: 0;
     padding: rem(8px) rem(12px);
 
     @include breakpoint(md) {
