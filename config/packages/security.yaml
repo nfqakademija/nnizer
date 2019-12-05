@@ -9,7 +9,7 @@ security:
     app_user_provider:
       entity: { class: App\Entity\Contractor, property: username }
     app_admin_provider:
-      entity: {class: App\Entity\User, property: email }
+      entity: { class: App\Entity\User, property: email }
   firewalls:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -21,6 +21,10 @@ security:
         guard:
           authenticators:
             - App\Security\UserAuthenticator
+        logout:
+          path: admin_logout
+          invalidate_session: false
+          success_handler: App\Security\LogoutHandler
     main:
       anonymous: true
       provider: app_user_provider
@@ -34,6 +38,6 @@ security:
 
   access_control:
     - { path: /admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY}
-    - { path: ^/admin/*, role: ROLE_ADMIN }
+    - { path: ^/admin, role: ROLE_ADMIN }
     - { path: ^/contractor, roles: ROLE_CONTRACTOR }
     - { path: ^/api/contractor, roles: ROLE_CONTRACTOR }

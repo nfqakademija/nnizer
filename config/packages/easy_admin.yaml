@@ -1,7 +1,7 @@
 easy_admin:
   site_name: 'NNIZER'
   user:
-    display_name: true
+    name_property_path: 'name'
     display_avatar: true
 
   list:
@@ -11,7 +11,6 @@ easy_admin:
       - { name: delete, icon: exclamation, label: Delete }
       - { name: search, label: Search }
       - { name: new, icon: plus, label: Add new  }
-  #      - { name: list, icon: list, label: List }
 
   entities:
     User:
@@ -21,22 +20,9 @@ easy_admin:
           - 'id'
           - 'email'
           - 'roles'
-#          - { property: 'roles' }
-          - { property: 'password', label: 'Password hash' }
-      new:
-        fields:
-          - 'email'
-#          - { property: 'roles', type: 'string'  }
-#          - { property: 'roles', type: 'choice' }
-          - 'password'
+          - 'name'
           - 'createdAt'
-          - 'updatedAt'
-      edit:
-        fields:
-          - 'email'
-#          - { property: 'roles', type: string }
-          - 'password'
-
+#          - { property: 'password', label: 'Password hash' }
     Contractor:
       class: App\Entity\Contractor
       list:

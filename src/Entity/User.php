@@ -22,6 +22,7 @@ class User implements UserInterface
      */
     private $email;
 
+
     /**
      * @ORM\Column(type="json")
      */
@@ -43,21 +44,19 @@ class User implements UserInterface
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $username;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
     }
 
     /**
@@ -65,9 +64,20 @@ class User implements UserInterface
      *
      * @see UserInterface
      */
-    public function getUsername(): string
+    public function getEmail(): string
     {
         return (string)$this->email;
+    }
+
+    /**
+     * @param string $email
+     * @return $this
+     */
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -82,6 +92,10 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param string[] $roles
+     * @return $this
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -97,6 +111,10 @@ class User implements UserInterface
         return (string)$this->password;
     }
 
+    /**
+     * @param string $password
+     * @return $this
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -121,44 +139,66 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getUsername()
     {
-        return $this->createdAt;
+
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setUsername(?string $username): self
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
+        $this->username = $username;
 
         return $this;
     }
 
     /**
-     * Gets triggered only on insert
-     * @ORM\PrePersist
+     * @return mixed
      */
-    public function onPrePersist()
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @param mixed $createdAt
+     * @throws \Exception
+     */
+    public function setCreatedAt($createdAt): void
     {
         $this->createdAt = new \DateTime("now");
     }
 
     /**
-     * Gets triggered every time on update
-     * @ORM\PreUpdate
+     * @return mixed
      */
-    public function onPreUpdate()
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     * @param mixed $updatedAt
+     * @throws \Exception
+     */
+    public function setUpdatedAt($updatedAt): void
     {
         $this->updatedAt = new \DateTime("now");
     }
