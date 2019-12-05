@@ -23,8 +23,11 @@ const Panel = () => {
   const { key } = panel.dataset;
 
   const fetchData = () => {
-    axios.get(`/api/contractor/${key}/get-clients/`)
-      .then((response) => {
+    axios({
+      method: 'get',
+      baseURL: window.location.protocol + "//" + window.location.host,
+      url: `/api/contractor/${key}/get-clients/`
+    }).then((response) => {
         setReservations(response.data);
       })
       .catch((error) => {

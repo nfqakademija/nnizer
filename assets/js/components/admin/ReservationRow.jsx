@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { format, differenceInHours, isSameDay } from 'date-fns';
+import { format, differenceInHours, isSameDay, getDay } from 'date-fns';
 import { parseISO, differenceInDays } from 'date-fns/esm';
 
 const ReservationRow = (props) => {
@@ -90,6 +90,14 @@ const ReservationRow = (props) => {
     );
   };
 
+  const formatDate = () => {
+    const day = parseISO(date);
+    if (isSameDay(new Date(), day)) {
+      return `Today, ${format(day, 'HH:mm')}`;
+    }
+    return format(day, 'yyyy-MM-dd, HH:mm');
+  };
+
   checkStatus();
 
   useEffect(() => {
@@ -108,7 +116,9 @@ const ReservationRow = (props) => {
       </button>
       <div className="row">
         <div className="reservations__item col-lg-1">
-          {format(parseISO(date), 'd MMM, Y EEEE')}
+          {/* {format(parseISO(date), 'yyyy-MM-dd, HH:mm')}
+           */}
+          {formatDate()}
         </div>
         <div className="reservations__item col-lg-3">
           <i className="icon-human item__icon hide-lg" />
