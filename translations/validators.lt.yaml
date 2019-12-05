@@ -34,3 +34,6 @@ detailsForm:
     empty: Jūsų paslauga privalo turėti aprašymą!
   address:
     empty: Jūs privalote nurodyti savo adresą!
+  image:
+    invalid: Paveikslėlio formatas privalo būti JPG/PNG
+    large: Maksimalus paveikslėlio dydis yra 2 Mb

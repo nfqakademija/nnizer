@@ -25,7 +25,7 @@ class ProfilePhoto implements Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"frontPage"})
      */
     private $filename;

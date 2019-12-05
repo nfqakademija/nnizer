@@ -34,3 +34,6 @@ detailsForm:
     empty: You must describe your service!
   address:
     empty: You must have an address!
+  image:
+    invalid: Your image must be in JPG/PNG format
+    large: Your image must not exceed 2 Mb size limit

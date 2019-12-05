@@ -13,6 +13,8 @@
               - .env.local
           linked_directories: # <-- Common place to add your files, that should be reused between deployments
               - var/log
+              - '/public%profile_images%'
+              - '/public%cover_images%'
 
   tasks:
       - name: Initialize the deploy root and gather facts
