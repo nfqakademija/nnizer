@@ -3,18 +3,20 @@
 {% block title %}{{ "settings_form.title"|trans }}{% endblock %}
 
 {% block body %}
-    <h1>{{ "settings_form.title"|trans }}</h1>
+    <div class="container container--top-spacing">
+        <h1>{{ "settings_form.title"|trans }}</h1>
 
-    {{ form_start(settingsForm, { attr: {novalidate: 'novalidate' }}) }}
-    {{ form_row(settingsForm.Monday) }}
-    {{ form_row(settingsForm.Tuesday) }}
-    {{ form_row(settingsForm.Wednesday) }}
-    {{ form_row(settingsForm.Thursday) }}
-    {{ form_row(settingsForm.Friday) }}
-    {{ form_row(settingsForm.Saturday) }}
-    {{ form_row(settingsForm.Sunday) }}
-    {{ form_row(settingsForm.visitDuration) }}
+        {{ form_start(settingsForm, { attr: {novalidate: 'novalidate' }}) }}
+        {{ form_row(settingsForm.Monday) }}
+        {{ form_row(settingsForm.Tuesday) }}
+        {{ form_row(settingsForm.Wednesday) }}
+        {{ form_row(settingsForm.Thursday) }}
+        {{ form_row(settingsForm.Friday) }}
+        {{ form_row(settingsForm.Saturday) }}
+        {{ form_row(settingsForm.Sunday) }}
+        {{ form_row(settingsForm.visitDuration) }}
 
-    <button class="btn">{{ "settings_form.submit"|trans }}</button>
-    {{ form_end(settingsForm) }}
+        <button class="btn">{{ "settings_form.submit"|trans }}</button>
+        {{ form_end(settingsForm) }}
+    </div>
 {% endblock %}
