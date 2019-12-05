@@ -15,14 +15,14 @@ class ContractorSettingsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $pattern = '/([0-1][0-9]|2[0-4]):[0-5][0-9] \- ([0-1][0-9]|2[0-4]):[0-5][0-9]/';
+        $pattern = '/(([0-1][0-9]|2[0-4]):[0-5][0-9] \- ([0-1][0-9]|2[0-4]):[0-5][0-9])|(\-1)/';
         $builder
             ->add('Monday', TextType::class, [
                 'label' => 'settings_form.Monday-workhours',
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
-                'empty_data' => '00:00 - 00:00',
+                'empty_data' => '-1',
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -35,7 +35,7 @@ class ContractorSettingsType extends AbstractType
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
-                'empty_data' => '00:00 - 00:00',
+                'empty_data' => '-1',
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -48,7 +48,7 @@ class ContractorSettingsType extends AbstractType
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
-                'empty_data' => '00:00 - 00:00',
+                'empty_data' => '-1',
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -61,7 +61,7 @@ class ContractorSettingsType extends AbstractType
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
-                'empty_data' => '00:00 - 00:00',
+                'empty_data' => '-1',
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -74,7 +74,7 @@ class ContractorSettingsType extends AbstractType
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
-                'empty_data' => '00:00 - 00:00',
+                'empty_data' => '-1',
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -87,7 +87,7 @@ class ContractorSettingsType extends AbstractType
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
-                'empty_data' => '00:00 - 00:00',
+                'empty_data' => '-1',
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
@@ -100,7 +100,7 @@ class ContractorSettingsType extends AbstractType
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
-                'empty_data' => '00:00 - 00:00',
+                'empty_data' => '-1',
                 'constraints' => [
                     new Regex([
                         'message' => 'settings.regex',
