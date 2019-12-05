@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { format, differenceInHours, isSameDay, getDay } from 'date-fns';
+import { format, differenceInHours, isSameDay } from 'date-fns';
 import { parseISO, differenceInDays } from 'date-fns/esm';
 
 const ReservationRow = (props) => {
