@@ -33,4 +33,4 @@ yarn-error.log
 /phpcs.xml
 ###< squizlabs/php_codesniffer ###
 
-/uploads/
+/public/uploads/

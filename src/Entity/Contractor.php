@@ -126,11 +126,13 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\ProfilePhoto", mappedBy="Contractor", cascade={"persist", "remove"})
+     * @Groups({"frontPage"})
      */
     private $profilePhoto;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\CoverPhoto", mappedBy="Contractor", cascade={"persist", "remove"})
+     * @Groups({"frontPage"})
      */
     private $coverPhoto;
     /**
