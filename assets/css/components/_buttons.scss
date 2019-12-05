@@ -50,6 +50,17 @@
   &--full {
     width: 100%;
   }
+
+  &--header {
+    margin: 0;
+    display: inline;
+    padding: rem(8px) rem(12px);
+
+    @include breakpoint(md) {
+      display: inline-block;
+      padding: rem(16px) rem(24px);
+    }
+  }
 }
 
 .panel-btn {
