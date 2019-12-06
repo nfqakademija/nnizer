@@ -25,13 +25,13 @@ class Reservation
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"Default"})
+     * @Groups({"Default", "frontPage"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"Default"})
+     * @Groups({"Default", "frontPage"})
      */
     private $lastname;
 
@@ -43,7 +43,7 @@ class Reservation
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"Default"})
+     * @Groups({"Default", "frontPage"})
      */
     private $visitDate;
 

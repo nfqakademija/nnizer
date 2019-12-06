@@ -38,6 +38,12 @@
     margin-bottom: rem(24px);
     position: relative;
 
+    @include transition(box-shadow 0.2s);
+
+    &.-editing {
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    }
+
     .row:first-child {
       flex: 1;
     }
@@ -129,7 +135,7 @@
 
   &__btn {
     align-items: center;
-    background: $color-yellow;
+    background-color: $color-yellow;
     border: none;
     border-radius: rem(10px);
     display: none;
@@ -137,8 +143,15 @@
     justify-content: center;
     width: rem(40px);
 
+    @include transition(background-color 0.2s, color 0.2s);
+
     .btn__icon {
       font-size: rem(16px);
+    }
+
+    &.-open {
+      background-color: $color-error-bg;
+      color: $color-error-text;
     }
 
     &.-mobile {

@@ -25,20 +25,20 @@ class Review
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"Default"})
+     * @Groups({"frontPage"})
      */
     private $stars;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Reservation", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"Default"})
+     * @Groups({"frontPage"})
      */
     private $reservation;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"Default"})
+     * @Groups({"frontPage"})
      */
     private $description;
 

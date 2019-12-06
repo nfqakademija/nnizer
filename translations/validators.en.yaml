@@ -26,3 +26,14 @@ provider:
 settings:
   regex: "Your input must look like this: 09:00 - 17:00"
   empty: This value must not be empty
+
+detailsForm:
+  service:
+    empty: Your service must have a name!
+  description:
+    empty: You must describe your service!
+  address:
+    empty: You must have an address!
+  image:
+    invalid: Your image must be in JPG/PNG format
+    large: Your image must not exceed 2 Mb size limit

@@ -85,6 +85,25 @@ settings_form:
   visitDuration: Visit duration
   submit: Submit
 
+detailsForm:
+  title: Details
+  submit: Submit
+  service:
+    title: Service title
+    placeholder: Private teacher
+  description:
+    title: Service description
+    placeholder: Check out my awesome services!
+  address:
+    title: Address
+    placeholder: Service address
+  facebook:
+    title: Your facebook page
+    placeholder: '/mypage'
+  coverPhoto: Cover photo
+  profilePhoto: Profile photo
+
+
 locales:
   lt: Lithuanian
   en: English
