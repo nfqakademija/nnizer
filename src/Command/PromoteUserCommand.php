@@ -1,5 +1,6 @@
 <?php
 namespace App\Command;
+
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -8,15 +9,18 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 class PromoteUserCommand extends Command
 {
     protected static $defaultName = 'app:promote-user';
     /** @var EntityManagerInterface */
     private $entityManager;
     private $adminRole;
+
     /**
      * PromoteUserCommand constructor.
      * @param EntityManagerInterface $entityManager
+     * @param string $adminRole
      */
     public function __construct(EntityManagerInterface $entityManager, $adminRole = 'ROLE_ADMIN')
     {
