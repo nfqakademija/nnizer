@@ -61,9 +61,7 @@ class AdminController extends EasyAdminController
      */
     public function updateContractorEntity(Contractor $contractor)
     {
-        if (method_exists($contractor, 'setPassword')) {
-            $contractor->setPassword($this->encoder->encodePassword($contractor, $contractor->getPlainPassword()));
-        }
+        $contractor->setPassword($this->encoder->encodePassword($contractor, $contractor->getPlainPassword()));
         $contractor->eraseCredentials();
 
         parent::updateEntity($contractor);
@@ -74,9 +72,7 @@ class AdminController extends EasyAdminController
      */
     public function updateUserEntity(User $user)
     {
-        if (method_exists($user, 'setPassword')) {
-            $user->setPassword($this->encoder->encodePassword($user, $user->getPlainPassword()));
-        }
+        $user->setPassword($this->encoder->encodePassword($user, $user->getPlainPassword()));
         $user->eraseCredentials();
 
         parent::updateEntity($user);
