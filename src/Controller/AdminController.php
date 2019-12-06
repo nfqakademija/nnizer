@@ -37,8 +37,9 @@ class AdminController extends EasyAdminController
     public function persistUserEntity(User $user)
     {
         $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
-        $encodedPassword = $this->encoder->encodePassword($user, $user->getPassword());
+        $encodedPassword = $this->encoder->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($encodedPassword);
+        $user->eraseCredentials();
         $this->em->persist($user);
         $this->em->flush();
     }
@@ -48,8 +49,9 @@ class AdminController extends EasyAdminController
      */
     public function persistContractorEntity(Contractor $contractor)
     {
-        $encodedPassword = $this->encoder->encodePassword($contractor, $contractor->getPassword());
+        $encodedPassword = $this->encoder->encodePassword($contractor, $contractor->getPlainPassword());
         $contractor->setPassword($encodedPassword);
+        $contractor->eraseCredentials();
         $this->em->persist($contractor);
         $this->em->flush();
     }

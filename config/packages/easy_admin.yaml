@@ -24,7 +24,6 @@ easy_admin:
           - 'createdAt'
       form:
         fields:
-          - 'id'
           - 'email'
           - 'name'
           - { property: 'plainPassword', type: 'text', label: 'New password' }
@@ -44,7 +43,6 @@ easy_admin:
           - 'profilePhoto'
       form:
         fields:
-          - 'id'
           - 'firstname'
           - 'lastname'
           - 'username'
