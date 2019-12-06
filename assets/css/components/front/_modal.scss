@@ -9,6 +9,8 @@
     position: fixed;
     right: 0;
     top: 0;
+
+    @include z-index(overlay);
   }
 
   &__container {
@@ -52,7 +54,6 @@
   &__content {
     color: rgba(0, 0, 0, 0.8);
     line-height: 1.5;
-    margin-bottom: 2rem;
     margin-top: 2rem;
   }
 

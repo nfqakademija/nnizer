@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
-import { getDay, addDays, isSameDay, format } from 'date-fns';
+import {
+  getDay,
+  addDays,
+  isSameDay,
+} from 'date-fns';
 import { setHours, setMinutes } from 'date-fns/esm';
 import en from 'date-fns/locale/en-GB';
 
-import es from 'date-fns/locale/es';
-
 registerLocale('en', en);
 setDefaultLocale(en);
-
 
 import('../../node_modules/react-datepicker/dist/react-datepicker.min.css');
 
@@ -22,23 +23,31 @@ const Datepicker = () => {
 
   const getOffDays = (days) => {
     const DaysArr = Object.keys(days).filter((key) => days[key].isWorkday === false);
-    return DaysArr.map(day => {
-      let dayNumber;
-      day === '6' ? dayNumber = 0 : dayNumber = Number(day) + 1; // 6 equals to sunday at api, so this line changes to zero instead.
-      return dayNumber;
-    })
+    return DaysArr.map((day) => {
+      // 6 equals to sunday at api, so if it is 6 this changes to zero instead.
+      if (day === '6') {
+        return 0;
+      }
+      return Number(day) + 1;
+    });
   };
 
-  const isWorkDay = (date) => { 
-    return !offDays.includes(getDay(date));
-  }
+  const isWorkDay = (date) => !offDays.includes(getDay(date));
+
+  const getDayNumber = () => {
+    const currentDay = getDay(startDate);
+    if (currentDay === 0) {
+      return 0;
+    }
+    return currentDay - 1;
+  };
 
   const getTime = (timeType) => {
-    const selectedDay = getDay(startDate) - 1;
-    if (data.days[selectedDay][timeType] !== null ) {
+    const selectedDay = getDayNumber();
+    if (data.days[selectedDay][timeType] !== null) {
       const [hours, minutes] = data.days[selectedDay][timeType].split(':');
       return setHours(setMinutes(new Date(), minutes), hours);
-    } 
+    }
   };
 
   const getTakenDates = () => {
@@ -57,19 +66,18 @@ const Datepicker = () => {
 
   const fetchData = () => {
     const contractorName = window.location.href.split('/').pop();
-      axios({
-        method: 'get',
-        baseURL: window.location.protocol + "//" + window.location.host,
-        url: `/api/profile/${contractorName}/working-hours`,
-      }).then(response => {
-        setData(response.data);
-        console.log(response.data);
-        setOffDays(getOffDays(response.data.days));
-        setFetched(true);
-      })
-          .catch(error => {
-            console.log(error) //TOOD - error handling
-          });
+    axios({
+      method: 'get',
+      baseURL: `${window.location.protocol}//${window.location.host}`,
+      url: `/api/profile/${contractorName}/working-hours`,
+    }).then((response) => {
+      setData(response.data);
+      setOffDays(getOffDays(response.data.days));
+      setFetched(true);
+    })
+      .catch((error) => {
+        console.log(error); // TOOD - error handling
+      });
   };
 
   useEffect(() => {
@@ -79,7 +87,7 @@ const Datepicker = () => {
 
   return (
     <DatePicker
-      locale='en'
+      locale="en"
       selected={startDate}
       onChange={(date) => setStartDate(date)}
       excludeOutOfBoundsTimes
