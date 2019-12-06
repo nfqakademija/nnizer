@@ -26,7 +26,6 @@ class User implements UserInterface
      */
     private $email;
 
-
     /**
      * @ORM\Column(type="json")
      */
@@ -37,6 +36,11 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @var string
+     */
+    private $plainPassword = null;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -117,6 +121,24 @@ class User implements UserInterface
     }
 
     /**
+     * @param string $plainPassword
+     * @return $this
+     */
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+    /**
      * @see UserInterface
      */
     public function getSalt()
@@ -129,13 +151,11 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getUsername()
     {
-
     }
 
     public function setUsername(?string $username): self

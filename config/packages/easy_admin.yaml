@@ -22,15 +22,40 @@ easy_admin:
           - 'roles'
           - 'name'
           - 'createdAt'
-#          - { property: 'password', label: 'Password hash' }
+      form:
+        fields:
+          - 'id'
+          - 'email'
+          - 'name'
+          - { property: 'plainPassword', type: 'text', label: 'New password' }
     Contractor:
       class: App\Entity\Contractor
       list:
         fields:
           - 'id'
+          - 'firstname'
+          - 'lastname'
           - 'username'
-          - { property: 'roles' }
-          - { property: 'password', label: 'Password hash' }
+          - 'email'
+          - 'reservations'
+          - 'settings'
+          - 'reviews'
+          - 'coverPhoto'
+          - 'profilePhoto'
+      form:
+        fields:
+          - 'id'
+          - 'firstname'
+          - 'lastname'
+          - 'username'
+          - 'email'
+          - 'phoneNumber'
+          - 'isVerified'
+          - 'title'
+          - 'address'
+          - 'facebook'
+          - 'description'
+          - { property: 'plainPassword', type: 'text', label: 'New password' }
     ContractorSettings:
       class: App\Entity\ContractorSettings
     Reservation:
