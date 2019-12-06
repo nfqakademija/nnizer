@@ -48,7 +48,6 @@ class AdminController extends EasyAdminController
      */
     public function persistContractorEntity(Contractor $contractor)
     {
-        $contractor->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
         $encodedPassword = $this->encoder->encodePassword($contractor, $contractor->getPassword());
         $contractor->setPassword($encodedPassword);
         $this->em->persist($contractor);
