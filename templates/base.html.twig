@@ -17,7 +17,7 @@
                 </div>
                 <div class="header__right">
                     {% if is_granted('ROLE_CONTRACTOR') %}
-                        <a class="btn" href="{{ path('app_logout') }}">{{ "navigation.logout"|trans }}</a>
+                        <a class="btn btn--header" href="{{ path('app_logout') }}">{{ "navigation.logout"|trans }}</a>
                     {% else %}
                         {% if app.request.pathinfo != "/register" %}
                             <a href="{{ path('app_register') }}" class="btn btn--header">{{ "navigation.signup"|trans }}</a>
@@ -29,7 +29,8 @@
                 </div>
             </div>
         </header>
-        <footer style="position: fixed; bottom: 10%; left: 20px; width: 100%; font-size: 20px">
+        {% block body %}{% endblock %}
+         <footer style="position: fixed; bottom: 10%; left: 20px; width: 100%; font-size: 20px">
             <div class="container">
                 <a class="footer__lang-switcher" href="{{ path('language', {lang: 'lt'}) }}">
                     <img src="{{ asset('build/images/LT-flag.svg')}}" alt="Lithuanian flag">
@@ -39,7 +40,6 @@
                 </a>
             </div>
         </footer>
-        {% block body %}{% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

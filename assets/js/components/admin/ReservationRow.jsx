@@ -115,7 +115,7 @@ const ReservationRow = (props) => {
           { name }
         </div>
         <div className="reservations__item col-lg-3">
-          <i className="icon-email item__icon hide-lg" />
+          <i className="icon-envelope item__icon hide-lg" />
           {formatEmail()}
         </div>
         <div className="reservations__item col-lg-2">
