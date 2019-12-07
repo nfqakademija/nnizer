@@ -1,0 +1,25 @@
+.work-days {
+  &__list {
+    margin-top: rem(16px);
+  }
+
+  &__day {
+    display: flex;
+    width: 50%;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: rem(16px);
+
+    .status {
+      margin-right: rem(16px);
+    }
+  }
+
+  &__time {
+    font-weight: 600;
+    width: 50%;
+  }
+}

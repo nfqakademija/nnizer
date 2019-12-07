@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import MicroModal from 'micromodal';
 import axios from 'axios';
 
+import Loader from './Loader';
 import Hero from './Hero';
 import Content from './Content';
 
 const Template = () => {
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState();
+  const [isFetched, setFetched] = useState(false);
 
   const fetchData = () => {
     const contractorName = window.location.href.split('/').pop();
@@ -17,9 +19,10 @@ const Template = () => {
     }).then((response) => {
       console.log(response.data);
       setUserData(response.data);
+      setFetched(true);
     })
       .catch((error) => {
-        console.log(error) // TOOD - error handling
+        console.log(error); // TOOD - error handling
       });
   };
 
@@ -32,6 +35,25 @@ const Template = () => {
     });
   };
 
+  const loadContent = () => {
+    if (isFetched) {
+      return (
+        <>
+          <Hero
+            coverPath={userData.coverPhoto ? userData.coverPhoto.filename : null}
+            title={userData.title}
+            address={userData.address}
+            reviews={userData.reviews}
+          />
+          <Content
+            userData={userData}
+          />
+        </>
+      );
+    }
+    return <Loader />;
+  };
+
   useEffect(() => {
     fetchData();
     initModal();
@@ -40,8 +62,7 @@ const Template = () => {
 
   return (
     <section className="contractor">
-      <Hero />
-      <Content />
+      {loadContent()}
     </section>
   );
 };

@@ -1,8 +1,6 @@
 import React from 'react';
 import Rater from 'react-rater';
 
-
-
 const Reviews = () => {
   return (
     <div className="reviews__card">

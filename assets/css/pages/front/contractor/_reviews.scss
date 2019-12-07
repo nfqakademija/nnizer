@@ -1,0 +1,87 @@
+.reviews {
+  .rating {
+    margin-top: 16px;
+  }
+
+  &__text {
+    color: $color-grey-1;
+    font-size: rem(14px);
+  }
+
+  &__filters {
+    margin-top: rem(16px);
+
+    @include breakpoint(md) {
+      margin-top: 0;
+    }
+  }
+
+  &__filter {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: rem(24px);
+  }
+
+  .filter {
+    &__star {
+      color: $color-yellow;
+      margin-left: rem(6px);
+
+      @include transition(color 0.2s);
+    }
+
+    &__option {
+      border: 1px solid $color-grey-1;
+      border-radius: rem(2px);
+      cursor: pointer;
+      display: inline;
+      margin: rem(8px) rem(16px) 0 0;
+      padding: rem(8px) rem(16px);
+
+      @include transition(background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s);
+
+      &:hover,
+      &.-active {
+        background-color: $color-yellow;
+        border-color: $color-yellow;
+        box-shadow: 0 0 rem(5px) rgba(0, 0, 0, 0.25);
+        color: $color-white;
+
+        .filter__star {
+          color: $color-white;
+        }
+      }
+    }
+
+    &__count {
+      color: $color-grey-1;
+      font-size: rem(12px);
+      margin-left: rem(6px);
+    }
+  }
+
+  &__card {
+    border-radius: rem(2px);
+    box-shadow: 0 0 rem(5px) rgba(0, 0, 0, 0.25);
+    margin-bottom: rem(24px);
+    max-width: rem(400px);
+    padding: rem(16px) rem(16px);
+
+    .card {
+      &__info {
+        @include flex(space-between, center);
+
+        margin-bottom: rem(8px);
+      }
+
+      &__name {
+        color: lighten($color-black, 50%);
+        font-weight: 600;
+      }
+    }
+
+    .react-rater-star {
+      font-size: rem(14px);
+    }
+  }
+}
