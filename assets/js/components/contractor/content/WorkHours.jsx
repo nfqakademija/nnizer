@@ -1,51 +1,49 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const WorkHours = () => {
+const WorkHours = (props) => {
+  const { days } = props;
+
+  const weekDays = {
+    0: 'Monday',
+    1: 'Tuesday',
+    2: 'Wednesday',
+    3: 'Thursday',
+    4: 'Friday',
+    5: 'Saturday',
+    6: 'Sunday',
+  };
+
+  const getWorkHours = () => (
+    days.map((day, dayNum) => (
+      <li key={weekDays[dayNum]} className="work-days__row">
+        <div className="work-days__day">
+          <div className={`status -circle ${day.isWorkday ? '-open' : '-closed'}`} />
+          {weekDays[dayNum]}
+        </div>
+        <time className="work-days__time">
+          {day.isWorkday ? `${day.startTime} - ${day.endTime}` : 'CLOSED' }
+        </time>
+      </li>
+    ))
+  );
+  console.log(days);
+
   return (
     <div className="work-days">
       <h2 className="contractor__heading">
         Work hours
       </h2>
       <ul className="work-days__list">
-        <li className="work-days__row">
-          <div className="status -circle -open" />
-          Monday
-          <time>09:00 - 17:00</time>
-        </li>
-        <li className="work-days__row">
-          <div className="status -circle -open" />
-          Monday
-          <time>09:00 - 17:00</time>
-        </li>
-        <li className="work-days__row">
-          <div className="status -circle -open" />
-          Monday
-          <time>09:00 - 17:00</time>
-        </li>
-        <li className="work-days__row">
-          <div className="status -circle -open" />
-          Monday
-          <time>09:00 - 17:00</time>
-        </li>
-        <li className="work-days__row">
-          <div className="status -circle -open" />
-          Monday
-          <time>09:00 - 17:00</time>
-        </li>
-        <li className="work-days__row">
-          <div className="status -circle -open" />
-          Monday
-          <time>09:00 - 17:00</time>
-        </li>
-        <li className="work-days__row">
-          <div className="status -circle -open" />
-          Monday
-          <time>09:00 - 17:00</time>
-        </li>
+        {getWorkHours()}
       </ul>
     </div>
 
   );
+};
+
+WorkHours.propTypes = {
+  days: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 export default WorkHours;

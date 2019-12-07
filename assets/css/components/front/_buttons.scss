@@ -39,7 +39,7 @@
     }
   }
 
-  &--secondary {
+  &.-secondary {
     background: none;
 
     &:hover {
@@ -47,11 +47,11 @@
     }
   }
 
-  &--full {
+  &.-full {
     width: 100%;
   }
 
-  &--header {
+  &.-header {
     display: inline;
     margin: 0;
     padding: rem(8px) rem(12px);

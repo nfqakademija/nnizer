@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Rater from 'react-rater';
 
-// import('../../../../node_modules/react-rater/lib/react-rater.scss'); // <----- VEIKIA, bet nepraktiska
-
-const Stars = () => {
+const Stars = (props) => {
+  const { reviews } = props;
+  console.log(reviews);
 
   return (
     <div className="rating">
@@ -14,6 +15,14 @@ const Stars = () => {
       </div>
     </div>
   );
+};
+
+Stars.propTypes = {
+  reviews: PropTypes.arrayOf(PropTypes.shape({})),
+};
+
+Stars.defaultProps = {
+  reviews: [],
 };
 
 export default Stars;
