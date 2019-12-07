@@ -6,50 +6,29 @@ const Info = (props) => {
     address,
     facebook,
     email,
-    duration,
-    phoneNumber
+    phoneNumber,
   } = props;
+
+  const getRow = (icon, title, link, text) => (
+    <li className="info__row">
+      <i className={`info__icon icon-${icon}`} />
+      <div className="info__box">
+        <h3 className="info__title">{title}</h3>
+        <a href={link} className="link -hover-underline" target="_blank" rel="noopener noreferrer">
+          {text}
+        </a>
+      </div>
+    </li>
+  );
 
   return (
     <div className="info">
-      <h2 className="contractor__heading">Info</h2>
+      <h2 className="contractor__heading">Useful information</h2>
       <ul className="info__list">
-        <li className="info__row">
-          <i className="info__icon icon-location" />
-          <div className="info__box">
-            <h3 className="info__title">Location</h3>
-            <a href={`https://maps.google.com/?q=${address}`} className="link -hover-underline" target="_blank" rel="noopener noreferrer">
-              {address}
-            </a>
-          </div>
-        </li>
-        <li className="info__row">
-          <i className="info__icon icon-envelope" />
-          <div className="info__box">
-            <h3 className="info__title">Email Address</h3>
-            <a href={`mailto:${email}`} className="link -hover-underline" target="_blank" rel="noopener noreferrer">
-              {email}
-            </a>
-          </div>
-        </li>
-        <li className="info__row">
-          <i className="info__icon icon-facebook" />
-          <div className="info__box">
-            <h3 className="info__title">Facebook</h3>
-            <a href={`https://facebook.com/${facebook}`} className="link -hover-underline" target="_blank" rel="noopener noreferrer">
-              {facebook}
-            </a>
-          </div>
-        </li>
-        <li className="info__row">
-          <i className="info__icon icon-phone" />
-          <div className="info__box">
-            <h3 className="info__title">Phone Number</h3>
-            <a href={`telto:${phoneNumber}`} className="link -hover-underline" target="_blank" rel="noopener noreferrer">
-              {phoneNumber}
-            </a>
-          </div>
-        </li>
+        {address && getRow('location', 'location', `https://maps.google.com/?q=${address}`, address)}
+        {email && getRow('envelope', 'Email Address', `mailto:${email}`, email)}
+        {facebook && getRow('facebook', 'Facebook', `https://facebook.com/${facebook}`, facebook)}
+        {phoneNumber && getRow('phone', 'phoneNumber', `tel:${phoneNumber}`, phoneNumber)}
       </ul>
     </div>
   );
@@ -59,7 +38,6 @@ Info.propTypes = {
   address: PropTypes.string,
   facebook: PropTypes.string,
   email: PropTypes.string,
-  duration: PropTypes.number,
   phoneNumber: PropTypes.string,
 };
 
@@ -67,7 +45,6 @@ Info.defaultProps = {
   address: '',
   facebook: '',
   email: '',
-  duration: 0,
   phoneNumber: '',
 };
 

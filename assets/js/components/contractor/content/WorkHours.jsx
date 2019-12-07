@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import uuidv4 from 'uuid/v4';
+
 
 const WorkHours = (props) => {
   const { days } = props;
@@ -16,7 +18,7 @@ const WorkHours = (props) => {
 
   const getWorkHours = () => (
     days.map((day, dayNum) => (
-      <li key={weekDays[dayNum]} className="work-days__row">
+      <li key={uuidv4()} className="work-days__row">
         <div className="work-days__day">
           <div className={`status -circle ${day.isWorkday ? '-open' : '-closed'}`} />
           {weekDays[dayNum]}

@@ -3,6 +3,10 @@
     margin-top: 16px;
   }
 
+  &__message {
+    margin-top: rem(16px);
+  }
+
   &__text {
     color: $color-grey-1;
     font-size: rem(14px);

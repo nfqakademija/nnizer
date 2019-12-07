@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import MicroModal from 'micromodal';
 import axios from 'axios';
 
 import Loader from './Loader';
@@ -26,15 +25,6 @@ const Template = () => {
       });
   };
 
-  const initModal = () => {
-    MicroModal.init({
-      disableScroll: true,
-      disableFocus: false,
-      awaitOpenAnimation: true,
-      awaitCloseAnimation: true,
-    });
-  };
-
   const loadContent = () => {
     if (isFetched) {
       return (
@@ -56,7 +46,6 @@ const Template = () => {
 
   useEffect(() => {
     fetchData();
-    initModal();
   },
   []);
 
