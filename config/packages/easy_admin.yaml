@@ -69,6 +69,21 @@ easy_admin:
         fields:
           - { property: 'coverPhoto', type: 'vich_image' }
           - { property: 'contractor', type: 'entity', type_options: { class: App\Entity\Contractor } }
+    ProfilePhoto:
+      class: App\Entity\ProfilePhoto
+      list:
+        fields:
+          - 'id'
+          - { property: 'filename', type: 'image', base_path: '%profile_images%' }
+          - 'contractor'
+      show:
+        fields:
+          - { property: 'filename', type: 'image', base_path: '%profile_images%' }
+          - 'contractor'
+      form:
+        fields:
+          - { property: 'coverPhoto', type: 'vich_image' }
+          - { property: 'contractor', type: 'entity', type_options: { class: App\Entity\Contractor } }
     ContractorSettings:
       class: App\Entity\ContractorSettings
     Reservation:
