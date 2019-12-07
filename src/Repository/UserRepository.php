@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\ORMException;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -32,5 +33,17 @@ class UserRepository extends ServiceEntityRepository
             ->setParameter('email', $email)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    /**
+     * @param User $user
+     */
+    public function save(User $user): void
+    {
+        try {
+            $this->_em->persist($user);
+            $this->_em->flush();
+        } catch (ORMException $e) {
+        }
     }
 }
