@@ -10,8 +10,17 @@
   @include transition(color 0.2s);
   @include z-index(link);
 
-  &--underline {
-    &::before {
+  &:hover {
+    color: $color-grey-1;
+
+    &::after {
+      transform-origin: 0 0;
+      width: 0;
+    }
+  }
+
+  &.-underline {
+    &::after {
       background: $color-yellow;
       bottom: -2px;
       content: '';
@@ -25,12 +34,22 @@
     }
   }
 
-  &:hover {
-    color: $color-grey-1;
+  &.-hover-underline {
+    @extend .-underline;
 
-    &::before {
-      transform-origin: 0 0;
+    color: $color-grey-1;
+    margin: 0;
+
+    &::after {
       width: 0;
+    }
+
+    &:hover {
+      color: $color-black;
+
+      &::after {
+        width: calc(100% + 4px);
+      }
     }
   }
 }

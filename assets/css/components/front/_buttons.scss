@@ -107,3 +107,18 @@
     color: $color-warning-text;
   }
 }
+
+.contractor-btn {
+  @extend .btn;
+
+  background: $color-yellow;
+  border: none;
+  border-radius: rem(2px);
+  color: $color-black;
+  font-size: rem(14px);
+  font-weight: 600;
+  letter-spacing: rem(1px);
+  margin: 0;
+  padding: rem(8px) rem(24px);
+  text-transform: none;
+}

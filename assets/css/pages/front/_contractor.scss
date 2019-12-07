@@ -1,0 +1,129 @@
+.contractor {
+  &__heading {
+    display: inline;
+    font-size: rem(28px);
+    font-weight: 600;
+    line-height: rem(32px);
+    margin-bottom: rem(24px);
+    margin-bottom: rem(16px);
+    position: relative;
+
+    @include breakpoint(md) {
+      font-size: rem(32px);
+      line-height: rem(36px);
+      margin-bottom: rem(24px);
+    }
+
+    @include breakpoint(xl) {
+      font-size: rem(36px);
+      line-height: rem(42px);
+    }
+
+    &::after {
+      background: $color-yellow;
+      bottom: rem(8px);
+      content: '';
+      height: rem(8px);
+      left: rem(-2px);
+      position: absolute;
+      width: calc(100% + 4px);
+
+      @include z-index(below);
+    }
+  }
+
+  &__content {
+    margin-top: rem(48px);
+  }
+
+  .row {
+    &:last-child {
+      margin-top: rem(32px);
+
+      @include breakpoint(md) {
+        margin-top: rem(64px);
+      }
+    }
+
+    & > div:last-child {
+      margin-top: 32px;
+
+      @include breakpoint(md) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .about {
+    &__text {
+      margin-top: rem(16px);
+    }
+  }
+
+  .work-days {
+    &__list {
+      margin-top: rem(16px);
+    }
+
+    &__row {
+      display: flex;
+      margin-bottom: rem(16px);
+
+      .status {
+        margin-right: rem(16px);
+      }
+
+      time {
+        font-weight: 600;
+        margin-left: rem(32px);
+      }
+    }
+  }
+
+  .reviews {
+    .rating {
+      margin-top: 16px;
+    }
+
+    &__card {
+      padding: rem(16px) rem(16px);
+      border-radius: rem(2px);
+      box-shadow: 0 0 rem(5px) rgba(0, 0, 0, 0.25);
+
+      .card {
+        &__info {
+          @include flex(space-between, center);
+          margin-bottom: rem(8px);
+        }
+
+        &__name {
+          font-weight: 600;
+          color: lighten($color-black, 50%);
+        }
+      }
+    }
+  }
+
+  .info {
+    &__list {
+      margin-top: rem(16px);
+    }
+
+    &__row {
+      @include flex(flex-start, center);
+    }
+
+    &__title {
+      font-weight: 600;
+      font-size: rem(16px);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: rem(4px);
+    }
+
+    &__icon {
+      font-size: rem(24px);
+      margin-right: rem(16px);
+    }
+  }
+}

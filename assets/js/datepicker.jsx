@@ -13,8 +13,6 @@ import en from 'date-fns/locale/en-GB';
 registerLocale('en', en);
 setDefaultLocale(en);
 
-import('../../node_modules/react-datepicker/dist/react-datepicker.min.css');
-
 const Datepicker = () => {
   const [startDate, setStartDate] = useState(0);
   const [data, setData] = useState([]);

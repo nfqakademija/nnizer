@@ -98,11 +98,10 @@
   }
 
   &__edit {
-    align-items: center;
-    display: flex;
+    @extend .flex-xy-center;
+
     flex-direction: column;
     height: 0;
-    justify-content: center;
     opacity: 0;
     width: 100%;
 
