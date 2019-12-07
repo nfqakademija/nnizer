@@ -54,6 +54,21 @@ easy_admin:
           - 'facebook'
           - 'description'
           - { property: 'plainPassword', type: 'text', label: 'New password' }
+    CoverPhoto:
+      class: App\Entity\CoverPhoto
+      list:
+        fields:
+          - 'id'
+          - { property: 'filename', type: 'image', base_path: '%cover_images%' }
+          - 'contractor'
+      show:
+        fields:
+          - { property: 'filename', type: 'image', base_path: '%cover_images%' }
+          - 'contractor'
+      form:
+        fields:
+          - { property: 'coverPhoto', type: 'vich_image' }
+          - { property: 'contractor', type: 'entity', type_options: { class: App\Entity\Contractor } }
     ContractorSettings:
       class: App\Entity\ContractorSettings
     Reservation:

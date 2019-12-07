@@ -44,9 +44,9 @@ class CoverPhoto implements Serializable
     private $Contractor;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
