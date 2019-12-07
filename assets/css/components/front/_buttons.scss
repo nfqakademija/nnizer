@@ -121,4 +121,14 @@
   margin: 0;
   padding: rem(8px) rem(24px);
   text-transform: none;
+
+  &.-reset {
+    background: $color-error-bg;
+    color: $color-error-text;
+    margin-top: rem(8px);
+
+    &::after {
+      border: 2px solid $color-error-bg;
+    }
+  }
 }
