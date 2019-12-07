@@ -9,7 +9,7 @@ use App\Entity\Review;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use http\Exception;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
@@ -21,6 +21,7 @@ class AppFixtures extends Fixture
         '11:00 - 16:00',
         '09:00 - 21:00',
         '12:00 - 12:00',
+        '-1',
     ];
 
     /**
@@ -33,26 +34,42 @@ class AppFixtures extends Fixture
         '30'
     ];
 
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $encoder;
 
+    /**
+     * AppFixtures constructor.
+     * @param UserPasswordEncoderInterface $encoder
+     */
+    public function __construct(UserPasswordEncoderInterface $encoder) {
+        $this->encoder = $encoder;
+    }
+
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
-        $this->loadUsers($manager);
-        $this->loadContractors($manager);
+        $this->loadUsers($manager, $this->encoder);
+        $this->loadContractors($manager, $this->encoder);
 
         $manager->flush();
     }
 
     /**
      * @param ObjectManager $manager
+     * @param UserPasswordEncoderInterface $encoder
      */
-    private function loadUsers(ObjectManager $manager)
+    private function loadUsers(ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
         $names = ['nfq', 'dominykas', 'kornelijus', 'migle', 'tadas'];
         foreach ($names as $name) {
             $user = new User();
             $user->setEmail($name . '@' . $name . '.com');
             $user->setRoles(['ROLE_ADMIN']);
-            $user->setPassword($name);
+            $user->setPassword($encoder->encodePassword($user, $name));
             $user->setName($name);
             $manager->persist($user);
         }
@@ -60,21 +77,22 @@ class AppFixtures extends Fixture
 
     /**
      * @param ObjectManager $manager
+     * @param UserPasswordEncoderInterface $encoder
      */
-    private function loadContractors(ObjectManager $manager)
+    private function loadContractors(ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
         $services = ['Massages', 'Hairdressing', 'Driving', 'Teaching'];
         for ($i = 1; $i < 51; $i++) {
             try {
                 $contractor = new Contractor();
-                $contractor->setPassword("fixture");
+                $contractor->setPassword($encoder->encodePassword($contractor, 'fixture'));
                 $contractor->setFirstname('Contractor');
                 $contractor->setLastName('Fixture ' . $i);
                 $contractor->setUsername('fixture' . $i);
                 $contractor->setEmail('contractor' . $i . '@' . $i . '.com');
                 $contractor->setPhoneNumber(random_int(860000000, 869999999));
                 $contractor->setVerificationKey();
-                $contractor->setIsVerified(true);
+                $contractor->setIsVerified(random_int(0, 1));
                 $contractor->setTitle($services[random_int(0, 3)]);
                 $contractor->setDescription('There\'s not much to tell. Try it out and tell me what you think');
                 $this->loadSettings($contractor, $manager);
@@ -95,13 +113,13 @@ class AppFixtures extends Fixture
     {
         $settings = new ContractorSettings();
         try {
-            $settings->setMonday($this->workingHours[random_int(0, 3)]);
-            $settings->setTuesday($this->workingHours[random_int(0, 3)]);
-            $settings->setWednesday($this->workingHours[random_int(0, 3)]);
-            $settings->setThursday($this->workingHours[random_int(0, 3)]);
-            $settings->setFriday($this->workingHours[random_int(0, 3)]);
-            $settings->setSaturday('-1');
-            $settings->setSunday('-1');
+            $settings->setMonday($this->workingHours[random_int(0, 4)]);
+            $settings->setTuesday($this->workingHours[random_int(0, 4)]);
+            $settings->setWednesday($this->workingHours[random_int(0, 4)]);
+            $settings->setThursday($this->workingHours[random_int(0, 4)]);
+            $settings->setFriday($this->workingHours[random_int(0, 4)]);
+            $settings->setSaturday($this->workingHours[random_int(0, 4)]);
+            $settings->setSunday($this->workingHours[random_int(0, 4)]);
             $settings->setVisitDuration($this->visitDurations[random_int(0, 3)]);
             $settings->setContractor($contractor);
             $manager->persist($settings);
@@ -116,7 +134,7 @@ class AppFixtures extends Fixture
      */
     private function loadReservations(Contractor $contractor, ObjectManager $manager)
     {
-        for ($i = 1; $i < 10; $i++) {
+        for ($i = 1; $i < 20; $i++) {
             $reservation = new Reservation();
             try {
                 $reservation->setFirstname($contractor->getUsername() . 'client' . $i);
