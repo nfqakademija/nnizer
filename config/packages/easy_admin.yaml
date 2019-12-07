@@ -82,7 +82,7 @@ easy_admin:
           - 'contractor'
       form:
         fields:
-          - { property: 'coverPhoto', type: 'vich_image' }
+          - { property: 'profilePhoto', type: 'vich_image' }
           - { property: 'contractor', type: 'entity', type_options: { class: App\Entity\Contractor } }
     ContractorSettings:
       class: App\Entity\ContractorSettings
