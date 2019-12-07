@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import MicroModal from 'micromodal';
 import axios from 'axios';
+
 import Hero from './Hero';
+import Content from './Content';
 
 const Template = () => {
   const [userData, setUserData] = useState([]);
@@ -37,9 +39,10 @@ const Template = () => {
   []);
 
   return (
-    <div>
+    <section className="contractor">
       <Hero />
-    </div>
+      <Content />
+    </section>
   );
 };
 
