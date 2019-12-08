@@ -7,6 +7,8 @@ import {
   addDays,
   isSameDay,
   subMinutes,
+  isPast,
+  addMinutes,
 } from 'date-fns';
 import { setHours, setMinutes } from 'date-fns/esm';
 import en from 'date-fns/locale/en-GB';
@@ -51,30 +53,24 @@ const Datepicker = () => {
 
   const getTime = (timeType) => {
     const selectedDay = getDayNumber();
-    if (data.days[selectedDay][timeType] !== null) {
-      const [hours, minutes] = data.days[selectedDay][timeType].split(':');
-      return setHours(setMinutes(startDate, minutes), hours);
-    }
+    const time = data.days[selectedDay][timeType];
+    const [hours, minutes] = time.split(':');
+    return {
+      hours,
+      minutes,
+    };
   };
 
   const getStartTime = () => {
-    const selectedDay = getDayNumber();
-    const { startTime } = data.days[selectedDay];
-    if (startTime !== null) {
-      const [hours, minutes] = startTime.split(':');
-      return setHours(setMinutes(startDate, minutes), hours);
-    }
-    return null;
+    const { hours, minutes } = getTime('startTime');
+    const startTime = (setHours(setMinutes(startDate, minutes), hours));
+    return isPast(startTime) ? new Date() : startTime;
   };
 
   const getEndTime = () => {
-    const selectedDay = getDayNumber();
-    const { endTime } = data.days[selectedDay];
-    if (endTime !== null) {
-      const [hours, minutes] = endTime.split(':');
-      return setHours(setMinutes(new Date(), minutes), hours);
-    }
-    return null;
+    const { hours, minutes } = getTime('endTime');
+    const endTime = setHours(setMinutes(new Date(), minutes), hours);
+    return isPast(endTime) ? new Date() : subMinutes(endTime, data.visitDuration);
   };
 
   const getTakenDates = () => {
@@ -127,7 +123,7 @@ const Datepicker = () => {
       minDate={new Date()}
       maxDate={addDays(new Date(), 90)}
       minTime={isFetched && getStartTime()}
-      maxTime={isFetched && subMinutes(getEndTime(), data.visitDuration)}
+      maxTime={isFetched && getEndTime()}
       timeFormat="HH:mm"
       timeIntervals={data.visitDuration}
       timeCaption="time"

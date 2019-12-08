@@ -8,7 +8,7 @@ import ReviewCard from './ReviewCard';
 const Reviews = (props) => {
   const { reviews } = props;
   const [selectedStars, setStars] = useState([]);
-  const [reviewsNum, setReviewsNum] = useState(1);
+  const [reviewsNum, setReviewsNum] = useState(3);
   const stars = [5, 4, 3, 2, 1];
 
   const setFilter = (star) => {
@@ -89,7 +89,7 @@ const Reviews = (props) => {
             <button
               type="button"
               className="contractor-btn"
-              onClick={() => setReviewsNum(reviewsNum + 1)}
+              onClick={() => setReviewsNum(reviewsNum + 3)}
             >
               Load More
             </button>
