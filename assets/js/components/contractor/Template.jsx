@@ -16,12 +16,11 @@ const Template = () => {
       baseURL: `${window.location.protocol}//${window.location.host}`,
       url: `/api/profile/${contractorName}/working-hours`,
     }).then((response) => {
-      console.log(response.data);
       setUserData(response.data);
       setFetched(true);
     })
       .catch((error) => {
-        console.log(error); // TOOD - error handling
+        (error); // TOOD - error handling
       });
   };
 

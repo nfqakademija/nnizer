@@ -98,7 +98,6 @@ const Datepicker = () => {
       baseURL: `${window.location.protocol}//${window.location.host}`,
       url: `/api/profile/${contractorName}/working-hours`,
     }).then((response) => {
-      console.log(response.data);
       setData(response.data);
       setOffDays(getOffDays(response.data.days));
       setAvailableDay(response.data.workingDays);

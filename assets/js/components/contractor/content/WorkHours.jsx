@@ -29,7 +29,6 @@ const WorkHours = (props) => {
       </li>
     ))
   );
-  console.log(days);
 
   return (
     <div className="work-days">
