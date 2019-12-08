@@ -20,7 +20,7 @@ const Template = () => {
       setFetched(true);
     })
       .catch((error) => {
-        (error); // TOOD - error handling
+        console.log(error); // TOOD - error handling
       });
   };
 
