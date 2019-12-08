@@ -6,6 +6,7 @@ import {
   getDay,
   addDays,
   isSameDay,
+  subMinutes,
 } from 'date-fns';
 import { setHours, setMinutes } from 'date-fns/esm';
 import en from 'date-fns/locale/en-GB';
@@ -14,10 +15,18 @@ registerLocale('en', en);
 setDefaultLocale(en);
 
 const Datepicker = () => {
-  const [startDate, setStartDate] = useState(0);
+  const [startDate, setStartDate] = useState(new Date());
   const [data, setData] = useState([]);
   const [isFetched, setFetched] = useState(false);
   const [offDays, setOffDays] = useState([]);
+
+  const setAvailableDay = (workDays) => {
+    if (!workDays) return;
+    const currentDay = getDay(startDate) === 0 ? 6 : getDay(startDate) - 1;
+    if (!workDays.includes(currentDay)) {
+      setStartDate(addDays(startDate, 1));
+    }
+  };
 
   const getOffDays = (days) => {
     const DaysArr = Object.keys(days).filter((key) => days[key].isWorkday === false);
@@ -35,7 +44,7 @@ const Datepicker = () => {
   const getDayNumber = () => {
     const currentDay = getDay(startDate);
     if (currentDay === 0) {
-      return 0;
+      return 6;
     }
     return currentDay - 1;
   };
@@ -44,8 +53,28 @@ const Datepicker = () => {
     const selectedDay = getDayNumber();
     if (data.days[selectedDay][timeType] !== null) {
       const [hours, minutes] = data.days[selectedDay][timeType].split(':');
+      return setHours(setMinutes(startDate, minutes), hours);
+    }
+  };
+
+  const getStartTime = () => {
+    const selectedDay = getDayNumber();
+    const { startTime } = data.days[selectedDay];
+    if (startTime !== null) {
+      const [hours, minutes] = startTime.split(':');
+      return setHours(setMinutes(startDate, minutes), hours);
+    }
+    return null;
+  };
+
+  const getEndTime = () => {
+    const selectedDay = getDayNumber();
+    const { endTime } = data.days[selectedDay];
+    if (endTime !== null) {
+      const [hours, minutes] = endTime.split(':');
       return setHours(setMinutes(new Date(), minutes), hours);
     }
+    return null;
   };
 
   const getTakenDates = () => {
@@ -69,23 +98,27 @@ const Datepicker = () => {
       baseURL: `${window.location.protocol}//${window.location.host}`,
       url: `/api/profile/${contractorName}/working-hours`,
     }).then((response) => {
+      console.log(response.data);
       setData(response.data);
       setOffDays(getOffDays(response.data.days));
+      setAvailableDay(response.data.workingDays);
       setFetched(true);
     })
       .catch((error) => {
-        console.log(error); // TOOD - error handling
+        console.log(error); // TODO - error handling
       });
   };
 
   useEffect(() => {
     fetchData();
+    setAvailableDay(data.workingDays);
   },
   [startDate]);
 
   return (
     <DatePicker
       locale="en"
+      // selected={startDate}
       selected={startDate}
       onChange={(date) => setStartDate(date)}
       excludeOutOfBoundsTimes
@@ -94,8 +127,8 @@ const Datepicker = () => {
       filterDate={isWorkDay}
       minDate={new Date()}
       maxDate={addDays(new Date(), 90)}
-      minTime={isFetched && getTime('startTime')}
-      maxTime={isFetched && getTime('endTime')}
+      minTime={isFetched && getStartTime()}
+      maxTime={isFetched && subMinutes(getEndTime(), data.visitDuration)}
       timeFormat="HH:mm"
       timeIntervals={data.visitDuration}
       timeCaption="time"

@@ -1,7 +1,5 @@
-require('eslint-plugin-jsx-a11y').rules = 0; // Disable a11y because time is constrained in this project and accesibility is not required
-
 module.exports = {
-    extends: ['eslint:recommended', 'plugin:react/recommended', 'airbnb'],
+    extends: ['eslint:recommended', 'plugin:react/recommended',  'airbnb-base', 'airbnb/rules/react'],
     parser: 'babel-eslint',
     parserOptions: {
         ecmaVersion: 6,
