@@ -14,8 +14,8 @@
                     {% endif %}
                     {% if app.user %}
                         <div class="mb-3">
-                            {{ "login_page.logged_in_as"|trans({'%user%': app.user.username}, "messages") }}, <a
-                                    href="{{ path('app_logout') }}">{{ "login_page.logout"|trans }}</a>
+                            {{ "login_page.logged_in_as"|trans({'%user%': app.user.email}, "messages") }}, <a
+                                    href="{{ path('admin_logout') }}">{{ "login_page.logout"|trans }}</a>
                         </div>
                     {% endif %}
                     <h1>{{ "login_page.login_admin"|trans }}</h1>
