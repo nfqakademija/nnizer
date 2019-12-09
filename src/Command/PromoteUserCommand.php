@@ -2,6 +2,7 @@
 namespace App\Command;
 
 use App\Entity\User;
+use App\Enumerator\UserRoles;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -22,7 +23,7 @@ class PromoteUserCommand extends Command
      * @param EntityManagerInterface $entityManager
      * @param string $adminRole
      */
-    public function __construct(EntityManagerInterface $entityManager, $adminRole = 'ROLE_ADMIN')
+    public function __construct(EntityManagerInterface $entityManager, $adminRole = UserRoles::ADMIN)
     {
         $this->entityManager = $entityManager;
         $this->adminRole = $adminRole;
@@ -34,8 +35,10 @@ class PromoteUserCommand extends Command
             ->setDescription('Make user admin')
             ->addArgument('email', InputArgument::REQUIRED, 'E-mail address of existing user');
     }
+
     /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @param InputInterface $input
+     * @param OutputInterface $output
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

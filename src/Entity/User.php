@@ -58,9 +58,7 @@ class User implements UserInterface
     }
 
     /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
+     * @return string
      */
     public function getEmail(): string
     {
@@ -84,9 +82,6 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
     }
 
@@ -138,6 +133,7 @@ class User implements UserInterface
     {
         return $this->plainPassword;
     }
+
     /**
      * @see UserInterface
      */
@@ -154,8 +150,12 @@ class User implements UserInterface
         $this->plainPassword = null;
     }
 
+    /**
+     * @return mixed
+     */
     public function getUsername()
     {
+        return $this->username;
     }
 
     public function setUsername(?string $username): self

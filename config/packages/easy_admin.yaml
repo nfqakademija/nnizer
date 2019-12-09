@@ -1,5 +1,5 @@
 easy_admin:
-  site_name: 'NNIZER'
+  site_name: '%site_name%'
   user:
     name_property_path: 'name'
     display_avatar: true
@@ -26,6 +26,7 @@ easy_admin:
         fields:
           - 'email'
           - 'name'
+          - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN'} }}
           - { property: 'plainPassword', type: 'text', label: 'New password' }
     Contractor:
       class: App\Entity\Contractor
