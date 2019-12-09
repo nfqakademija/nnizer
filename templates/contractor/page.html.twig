@@ -1,68 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contractor page{% endblock %}
+{% block title %}Contractor page
+{% endblock %}
 
 {% block body %}
-    <div class="container container--top-spacing">
-        <h1 style="margin-top: 10%">Contractor's page</h1>
+	
+	<div class="modal micromodal-slide" id="register-modal" aria-hidden="true">
+		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+				<header class="modal__header">
+					<h2 class="modal__title" id="register-modal-title">
+						Select time and fill details! 📆
+					</h2>
+					<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+				</header>
+				<main class="modal__content" id="register-modal-content">
+					<form class="form" method="POST" action="{{ path('app_new-reservation') }}">
+						{% if errors is defined %}
+							{% for error in errors %}
+								<p>{{ error|trans }}</p>
+							{% endfor %}
+						{% endif %}
+						<div class="form__field">
+							<div id="datepicker"></div>
+						</div>
 
-        <p>Service provider: {{ contractor.firstname }} {{ contractor.lastname }}</p>
-        <p>Email: {{ contractor.email }}</p>
-        <p>Phone number: {{ contractor.phoneNumber }}</p>
-       
-    </div>
+						<div class="form__field">
+							<input type="text" name="firstname" required/>
+							<label for="firstname">{{ "registration_form.firstname"|trans }}</label>
+						</div>
 
-    <button data-micromodal-trigger="register-modal">Open</button>
+						<div class="form__field">
+							<input type="text" name="lastname" required/>
+							<label for="lastname">{{ "registration_form.lastname"|trans }}</label>
+						</div>
 
+						<div class="form__field">
+							<input type="email" name="email" required/>
+							<label for="email">{{ "registration_form.email"|trans }}</label>
+						</div>
 
+						<input type="hidden" name="contractor" value="{{ contractor.id }}">
+						<button class="btn -full">Submit</button>
+					</form>
+				</main>
+			</div>
+		</div>
+	</div>
 
-    <div class="modal micromodal-slide" id="register-modal" aria-hidden="true">
-    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-      <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-        <header class="modal__header">
-          <h2 class="modal__title" id="register-modal-title">
-            Select time and fill details! 📆 
-          </h2>
-          <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
-        </header>
-        <main class="modal__content" id="register-modal-content">
-          <form class="form" method="POST" action="{{ path('app_new-reservation') }}">
-            {% if errors is defined %}
-                {% for error in errors %}
-                    <p>{{ error|trans }}</p>
-                {% endfor %}
-            {% endif %}
-            <div class="form__field">
-                {# <label for="visitDate">{{ "registration_form.date"|trans }}</label> #}
-                <div id="datepicker"></div>
-            </div>
-
-            <div class="form__field">
-                <input type="text" name="firstname" required />
-                <label for="firstname">{{ "registration_form.firstname"|trans }}</label>
-            </div>  
-
-            <div class="form__field">
-                <input type="text" name="lastname" required />
-                <label for="lastname">{{ "registration_form.lastname"|trans }}</label>
-            </div>
-
-            <div class="form__field">
-                <input type="email" name="email" required />
-                <label for="email">{{ "registration_form.email"|trans }}</label>
-            </div>
-
-            <input type="hidden" name="contractor" value="{{ contractor.id }}">
-            <button class="btn btn--full">Submit</button>
-        </form>
-        </main>
-      </div>
-    </div>
-  </div>
-        
+	<div id="contractor"></div>
 
 {% endblock %}
 {% block javascripts %}
-    {{ encore_entry_script_tags('datepicker') }}
-    {{ encore_entry_script_tags('contractor') }}
+	{{ encore_entry_script_tags('datepicker') }}
+	{{ encore_entry_script_tags('contractor') }}
 {% endblock %}

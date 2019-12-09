@@ -1,0 +1,50 @@
+@import '~react-rater/lib/react-rater.scss';
+
+$react-rater-link: lighten($color-yellow, 30%) !default; // color of star not rated
+$react-rater-hover: #666 !default; // color of star on hover
+$react-rater-active: $color-yellow !default; // color of star rated
+
+.react-rater-star {
+  color: lighten($color-yellow, 40%);
+  font-size: rem(20px);
+
+  &.is-active-half {
+    &::before {
+      color: $color-yellow;
+      top: 3px;
+    }
+  }
+
+  &.is-active {
+    color: $color-yellow;
+  }
+}
+
+.rating {
+  align-items: stretch;
+  display: flex;
+
+  @include breakpoint(md) {
+    margin-bottom: rem(24px);
+  }
+
+  &__score {
+    @extend .hero__title;
+    @extend .flex-xy-center;
+
+    color: $color-yellow;
+    font-weight: 600;
+    margin: 0 rem(10px) 0 0;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__count {
+    color: $color-grey-1;
+    font-size: rem(14px);
+  }
+}

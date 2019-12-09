@@ -1,5 +1,5 @@
 module.exports = {
-    extends: ['eslint:recommended', 'plugin:react/recommended', 'airbnb'],
+    extends: ['eslint:recommended', 'plugin:react/recommended',  'airbnb-base', 'airbnb/rules/react'],
     parser: 'babel-eslint',
     parserOptions: {
         ecmaVersion: 6,
@@ -17,5 +17,6 @@ module.exports = {
     rules: {
         "no-console": 0,
         "no-unused-vars": 0,
+        "no-plusplus": [2, { allowForLoopAfterthoughts: true }]
     }
 };

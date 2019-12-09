@@ -1,0 +1,54 @@
+.hero {
+  align-items: flex-end;
+  display: flex;
+  height: 70vh;
+  justify-content: flex-end;
+  width: 100%;
+
+  .container {
+    height: auto;
+
+    @include breakpoint(md) {
+      display: flex;
+    }
+  }
+
+  &__title {
+    font-size: rem(32px);
+    line-height: rem(36px);
+    margin-bottom: rem(8px);
+
+    @include breakpoint(md) {
+      font-size: rem(36px);
+      line-height: rem(40px);
+      margin-bottom: rem(16px);
+    }
+
+    @include breakpoint(xl) {
+      font-size: rem(48px);
+      line-height: rem(52px);
+    }
+  }
+
+  &__address {
+    @include flex(flex-start, center);
+
+    i {
+      font-size: rem(24px);
+      margin-right: rem(8px);
+    }
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: rem(16px);
+
+    @include breakpoint(md) {
+      align-items: flex-end;
+      flex-direction: column;
+      margin: 0;
+    }
+  }
+}

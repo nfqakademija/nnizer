@@ -12,6 +12,10 @@
     margin-top: rem(112px);
   }
 
+  .row {
+    margin: 0;
+  }
+
   @include breakpoint(sm) {
     max-width: $container-sm;
     padding: 0;

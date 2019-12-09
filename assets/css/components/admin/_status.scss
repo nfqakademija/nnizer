@@ -5,6 +5,13 @@
   padding: rem(12px);
   text-transform: uppercase;
 
+  &.-circle {
+    border-radius: 50%;
+    height: rem(16px);
+    padding: 0;
+    width: rem(16px);
+  }
+
   &.-pending,
   &.-done {
     background-color: $color-success-bg;

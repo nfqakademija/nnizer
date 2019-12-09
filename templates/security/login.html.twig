@@ -19,7 +19,7 @@
                         </div>
                     {% endif %}
 
-                    <a href="{{ path('app_register') }}" class="login__register-link link link--underline">{{ "login_page.not_registered"|trans }}</a>
+                    <a href="{{ path('app_register') }}" class="login__register-link link -underline">{{ "login_page.not_registered"|trans }}</a>
                     <h1>{{ "login_page.login"|trans }}</h1>
 
                     <div class="form__field">
@@ -39,7 +39,7 @@
                         value="{{ csrf_token('authenticate') }}"
                     >
 
-                    <button class="btn btn--full" type="submit">
+                    <button class="btn -full" type="submit">
                         {{ "login_page.signin"|trans }}
                     </button>
                 </form>

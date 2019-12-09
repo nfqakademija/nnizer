@@ -1,0 +1,24 @@
+.info {
+  &__list {
+    margin-top: rem(16px);
+  }
+
+  &__row {
+    @include flex(flex-start, center);
+
+    margin-top: rem(36px);
+  }
+
+  &__title {
+    font-size: rem(16px);
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: rem(4px);
+    text-transform: uppercase;
+  }
+
+  &__icon {
+    font-size: rem(24px);
+    margin-right: rem(16px);
+  }
+}

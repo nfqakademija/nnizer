@@ -39,7 +39,7 @@
     }
   }
 
-  &--secondary {
+  &.-secondary {
     background: none;
 
     &:hover {
@@ -47,17 +47,18 @@
     }
   }
 
-  &--full {
+  &.-full {
     width: 100%;
   }
 
-  &--header {
-    margin: 0;
+  &.-header {
     display: inline;
+    margin: 0;
     padding: rem(8px) rem(12px);
 
     @include breakpoint(md) {
       display: inline-block;
+      margin-top: 0;
       padding: rem(16px) rem(24px);
     }
   }
@@ -88,7 +89,7 @@
     color: $color-success-text;
 
     &::before {
-      content: '\e912';
+      content: '\e909';
     }
   }
 
@@ -104,5 +105,30 @@
   &.-warning {
     border: 2px solid $color-warning-bg;
     color: $color-warning-text;
+  }
+}
+
+.contractor-btn {
+  @extend .btn;
+
+  background: $color-yellow;
+  border: none;
+  border-radius: rem(2px);
+  color: $color-black;
+  font-size: rem(14px);
+  font-weight: 600;
+  letter-spacing: rem(1px);
+  margin: 0;
+  padding: rem(8px) rem(24px);
+  text-transform: none;
+
+  &.-reset {
+    background: $color-error-bg;
+    color: $color-error-text;
+    margin-top: rem(8px);
+
+    &::after {
+      border: 2px solid $color-error-bg;
+    }
   }
 }
