@@ -12,11 +12,6 @@
 
   &:hover {
     color: $color-grey-1;
-
-    &::after {
-      transform-origin: 0 0;
-      width: 0;
-    }
   }
 
   &.-underline {
@@ -31,6 +26,13 @@
 
       @include z-index(below);
       @include transition(width 0.2s);
+    }
+
+    &:hover {
+      &::after {
+        transform-origin: 0 0;
+        width: 0;
+      }
     }
   }
 

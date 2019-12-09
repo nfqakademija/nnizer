@@ -26,9 +26,9 @@ const Info = (props) => {
       <h2 className="contractor__heading">Useful information</h2>
       <ul className="info__list">
         {address && getRow('location', 'location', `https://maps.google.com/?q=${address}`, address)}
-        {email && getRow('envelope', 'Email Address', `mailto:${email}`, email)}
-        {facebook && getRow('facebook', 'Facebook', `https://facebook.com/${facebook}`, facebook)}
-        {phoneNumber && getRow('phone', 'phoneNumber', `tel:${phoneNumber}`, phoneNumber)}
+        {email && getRow('envelope', 'email address', `mailto:${email}`, email)}
+        {facebook && getRow('facebook', 'facebook', `https://facebook.com/${facebook}`, facebook)}
+        {phoneNumber && getRow('phone', 'phone number', `tel:${phoneNumber}`, phoneNumber)}
       </ul>
     </div>
   );

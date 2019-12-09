@@ -22,6 +22,8 @@ const Hero = (props) => {
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    height: coverPath === null ? 'auto' : '70vh',
+    marginTop: coverPath === null ? '150px' : '0',
   };
 
   return (
@@ -32,10 +34,12 @@ const Hero = (props) => {
       <div className="container">
         <div className="hero__left col-12 col-md-8">
           <h1 className="hero__title">{title}</h1>
-          <address className="hero__address">
-            <i className="icon-location" />
-            {address}
-          </address>
+          {address !== null && (
+            <address className="hero__address">
+              <i className="icon-location" />
+              {address}
+            </address>
+          )}
         </div>
         <div className="hero__right col-12 col-md-4">
           <Stars reviews={reviews} />
