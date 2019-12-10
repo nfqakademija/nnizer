@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { format, differenceInHours, isSameDay } from 'date-fns';
+import { format, differenceInHours, isSameDay, isPast } from 'date-fns';
 import { parseISO, differenceInDays } from 'date-fns/esm';
 
 const ReservationRow = (props) => {
@@ -21,7 +21,7 @@ const ReservationRow = (props) => {
   let statusText = '';
 
   const setExpired = () => {
-    if (parseISO(date) <= new Date()) {
+    if (isPast(parseISO(date))) {
       setDone(true);
     }
   };
@@ -30,7 +30,7 @@ const ReservationRow = (props) => {
     if (isCancelled) {
       statusText = 'Cancelled';
       statusClass = 'cancelled';
-    } else if (isVerified) {
+    } else if (isVerified && !isDone) {
       statusText = 'Pending';
       statusClass = 'pending';
     } else if (isDone) {

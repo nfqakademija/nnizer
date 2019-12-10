@@ -1,15 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { parseISO } from 'date-fns/esm';
+import { parseISO, isPast } from 'date-fns/esm';
 import ReservationRow from './ReservationRow';
-
 
 const Reservations = (props) => {
   const { reservations, userKey, fetchData } = props;
 
   const sortReservationsASC = () => {
     reservations.sort((a, b) => {
-      return parseISO(a.visitDate) < parseISO(b.visitDate) ? 1 : -1;
+      const dateA = parseISO(a.visitDate);
+      const dateB = parseISO(b.visitDate);
+
+      if (a.isCancelled && !b.isCancelled) return 1;
+      if (!a.isCancelled && b.isCancelled) return -1;
+
+      if (isPast(dateA) && !isPast(dateB)) return 1;
+      if (!isPast(dateA) && isPast(dateB)) return -1;
+
+      if (a.isVerified && !b.isVerified) return 1;
+      if (!a.isVerified && b.isVerified) return -1;
+
+      return parseISO(a.visitDate) > parseISO(b.visitDate) ? 1 : -1;
+
+      // if (a.isCancelled && !b.isCancelled) {
+      //   return 1;
+      // } else if (!a.isCancelled && b.isCancelled) {
+      //   return -1;
+      // }
+      // // IF a is not verified, a is not cancelled, b is verified
+      // else if (!a.isVerified && !a.isCancelled && b.isVerified) {
+      //   return 1;
+      // }
+      // if (!a.isVerified && !a.isCancelled && b.isVerified) return 1;
+      // return parseISO(a.visitDate) > parseISO(b.visitDate) ? 1 : -1;
     });
   };
 
@@ -33,7 +56,6 @@ const Reservations = (props) => {
           <ReservationRow
             key={reservation.id}
             userKey={userKey}
-            
             id={reservation.id}
             date={reservation.visitDate}
             name={`${reservation.firstname} ${reservation.lastname}`}
