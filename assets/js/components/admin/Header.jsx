@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useLocation } from 'react';
 import PropTypes from 'prop-types';
 
 const PanelHeader = (props) => {
-  const { isOpen, toggleNav } = props;
+  const { isOpen, toggleNav, avatar, name } = props;
   const searchInput = React.createRef();
 
   const handleSearch = () => {
@@ -35,8 +35,12 @@ const PanelHeader = (props) => {
         />
       </div>
       <div className="header__person">
-        <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Blank&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light" className="person__avatar" alt="users profile avatar" />
-        <span className="person__name">Kornelijus Glinskas</span>
+        <img
+          src={avatar}
+          className="person__avatar"
+          alt="users profile avatar"
+        />
+        <span className="person__name">{name}</span>
       </div>
     </header>
   );
@@ -45,7 +49,8 @@ const PanelHeader = (props) => {
 PanelHeader.propTypes = {
   toggleNav: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
+  avatar: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
-
 
 export default PanelHeader;

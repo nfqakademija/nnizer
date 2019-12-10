@@ -1,9 +1,14 @@
 .admin {
   background-color: $color-admin;
+
+  svg,
+  rect {
+    min-height: 100vh;
+  }
 }
 
 .panel {
-  min-height: 250vh;
+  min-height: 100vh;
   position: relative;
 
   @include transition(transform 0.3s);
