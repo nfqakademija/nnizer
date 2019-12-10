@@ -12,6 +12,7 @@ yarn
 yarn run encore production
 
 # <-- This is a good place to add custom commands for your project
+php bin/console assets:install --env=prod
 
 # Generating deployment artifact (one file with everything you need to be deployed on the server)
 tar czf project.tar.gz --owner 0 --group 0 --anchored $( \
