@@ -4,6 +4,8 @@ namespace App\DataFixtures;
 
 use App\Entity\Contractor;
 use App\Entity\ContractorSettings;
+use App\Entity\CoverPhoto;
+use App\Entity\ProfilePhoto;
 use App\Entity\Reservation;
 use App\Entity\Review;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -32,6 +34,88 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         '20',
         '60',
         '30'
+    ];
+
+    /**
+     * @var array
+     */
+    private $profilePhotos = [
+        'twitter.jpg',
+        'dark.png',
+        'blue.jpg',
+        'pink.png',
+    ];
+
+    /**
+     * @var array
+     */
+    private $coverPhotos = [
+        'cover1.jpg',
+        'dark.jpg',
+        'circles.png',
+        'leafs.png',
+    ];
+
+    /**
+     * @var array
+     */
+    private $firstnames = [
+        'Jerry',
+        'Jesse',
+        'Daniel',
+        'Shirley',
+        'Helen',
+        'James',
+        'Ben',
+        'Stewart',
+        'Carol',
+        'Wayne',
+        'William',
+        'Gerald',
+        'Kai',
+        'Albert',
+        'Brian',
+        'Benjamin',
+        'Kevin'
+    ];
+
+    /**
+     * @var array
+     */
+    private $lastnames = [
+        'Evans',
+        'Holmes',
+        'Hopkins',
+        'Fowler',
+        'Murphy',
+        'Ray',
+        'Thompson',
+        'Garcia',
+        'Brooks',
+        'Phillips',
+        'Palmer',
+        'Hawkins',
+        'Wilson',
+        'Castro',
+        'Weber',
+        'Little'
+    ];
+
+    /**
+     * @var array
+     */
+    private $descriptions = [
+        'Hey there! I\'m a professional that you certainly need. With experience of over 10 years in the industry' .
+        ' I\'m proud to say that I am one of the best. Here\'s the best part - if you do not really like my ' . '
+            services, You don\'t have to pay. Sign up now and let me prove you how good I am!',
+        'I\'ve been working in the field since 2000 and since then I did not have a single disappointed customer.' .
+        'What is more, if you ever have difficulties coming to my place, I can show up at yours and provide as ' .
+        'good service as it can be. ',
+        'Since you are here, let me introduce myself. I\'m a 35 year old male currently living in USA and this ' .
+        'is what I am doing for living. With over 5000 customers satisfied, I\'m feeling confident in what I am' .
+        'doing. Sign up now and let me show you what kind of quality you deserve. ',
+        'I\'ve learned everything from my mentors in my young days and now I provide top quality services in this' .
+        'town. Feel free to check it out!',
     ];
 
     /**
@@ -65,16 +149,13 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     private function loadContractors(ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
         $services = ['Massages', 'Hairdressing', 'Driving services', 'Teaching'];
-        $firstnames = $this->getFirstnames();
-        $lastnames = $this->getLastnames();
-        $descriptions = $this->getDescriptions();
 
         for ($i = 1; $i < 51; $i++) {
             try {
-                $firstname = $firstnames[random_int(0, 9)];
-                $lastname = $lastnames[random_int(0, 9)];
+                $firstname = $this->firstnames[random_int(0, 9)];
+                $lastname = $this->lastnames[random_int(0, 9)];
                 $serviceTitle = $services[random_int(0, 3)];
-                $description = $descriptions[random_int(0, 3)];
+                $description = $this->descriptions[random_int(0, 3)];
 
                 $contractor = new Contractor();
                 $contractor->setPassword($encoder->encodePassword($contractor, 'fixture'));
@@ -87,6 +168,8 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
                 $contractor->setIsVerified(random_int(0, 1));
                 $contractor->setTitle($serviceTitle);
                 $contractor->setDescription($description);
+                $this->addCoverPhoto($contractor, $manager);
+                $this->addProfilePhoto($contractor, $manager);
                 $this->loadSettings($contractor, $manager);
                 $this->loadReservations($contractor, $manager);
                 $this->loadReviews($contractor, $manager);
@@ -96,6 +179,39 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             }
         }
     }
+
+    /**
+     * @param Contractor $contractor
+     * @param ObjectManager $manager
+     */
+    private function addCoverPhoto(Contractor $contractor, ObjectManager $manager)
+    {
+        $coverPhoto = new CoverPhoto();
+        try {
+            $coverPhoto->setContractor($contractor);
+            $coverPhoto->setFilename($this->coverPhotos[random_int(0, 3)]);
+            $manager->persist($coverPhoto);
+            $contractor->setCoverPhoto($coverPhoto);
+        } catch (\Exception $e) {
+        }
+    }
+
+    /**
+     * @param Contractor $contractor
+     * @param ObjectManager $manager
+     */
+    private function addProfilePhoto(Contractor $contractor, ObjectManager $manager)
+    {
+        $profilePhoto = new ProfilePhoto();
+        try {
+            $profilePhoto->setContractor($contractor);
+            $profilePhoto->setFilename($this->profilePhotos[random_int(0, 3)]);
+            $manager->persist($profilePhoto);
+            $contractor->setProfilePhoto($profilePhoto);
+        } catch (\Exception $e) {
+        }
+    }
+
 
     /**
      * @param Contractor $contractor
@@ -168,77 +284,6 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             } catch (\Exception $e) {
             }
         }
-    }
-
-    /**
-     * @return array
-     */
-    private function getFirstnames(): array
-    {
-        return [
-            'Jerry',
-            'Jesse',
-            'Daniel',
-            'Shirley',
-            'Helen',
-            'James',
-            'Ben',
-            'Stewart',
-            'Carol',
-            'Wayne',
-            'William',
-            'Gerald',
-            'Kai',
-            'Albert',
-            'Brian',
-            'Benjamin',
-            'Kevin'
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    private function getLastnames(): array
-    {
-        return [
-            'Evans',
-            'Holmes',
-            'Hopkins',
-            'Fowler',
-            'Murphy',
-            'Ray',
-            'Thompson',
-            'Garcia',
-            'Brooks',
-            'Phillips',
-            'Palmer',
-            'Hawkins',
-            'Wilson',
-            'Castro',
-            'Weber',
-            'Little'
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    private function getDescriptions(): array
-    {
-        return [
-            'Hey there! I\'m a professional that you certainly need. With experience of over 10 years in the industry' .
-            ' I\'m proud to say that I am one of the best. Here\'s the best part - if you do not really like my ' . '
-            services, You don\'t have to pay. Sign up now and let me prove you how good I am!',
-            'I\'ve been working in the field since 2000 and since then I did not have a single disappointed customer.' .
-            'What is more, if you ever have difficulties coming to my place, I can show up at yours and provide as ' .
-            'good service as it can be. ',
-            'Since you are here, let me introduce myself. I\'m a 35 year old male currently living in USA and this ' .
-            'is what I am doing for living. With over 5000 customers satisfied, I\'m feeling confident in what I am' .
-            'doing. Sign up now and let me show you what kind of quality you deserve. ',
-            'I\'ve learned everything from my mentors in my young days and now I provide top quality services in this' .
-            'town. Feel free to check it out!',
-        ];
     }
 
     /**
