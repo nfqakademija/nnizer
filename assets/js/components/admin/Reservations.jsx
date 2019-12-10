@@ -4,9 +4,6 @@ import { parseISO } from 'date-fns/esm';
 import ReservationRow from './ReservationRow';
 import { getTranslation } from '../../TranslationService';
 
-
-
-
 const Reservations = (props) => {
   const { reservations, userKey, fetchData } = props;
 

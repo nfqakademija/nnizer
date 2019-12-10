@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { getTranslation } from '../../TranslationService';
 
-
 const logoPath = require('../../../images/nnizer-logo.svg');
 
 const Sidenav = (props) => {

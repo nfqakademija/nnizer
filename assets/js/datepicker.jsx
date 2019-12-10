@@ -118,7 +118,6 @@ const Datepicker = () => {
   return (
     <DatePicker
       locale="en"
-      // selected={startDate}
       selected={startDate}
       onChange={(date) => setStartDate(date)}
       excludeOutOfBoundsTimes

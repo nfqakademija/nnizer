@@ -33,7 +33,7 @@ const WorkHours = (props) => {
   return (
     <div className="work-days">
       <h2 className="contractor__heading">
-        Work hours
+          {getTranslation('contractor.days.title')}
       </h2>
       <ul className="work-days__list">
         {getWorkHours()}

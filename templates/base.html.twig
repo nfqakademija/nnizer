@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale|split('_')[0] }}>
+<html lang="{{ app.request.locale|split('_')[0] }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -42,8 +42,6 @@
         </footer>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
-            <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
-            <script src="{{ url('bazinga_jstranslation_js') }}"></script>
         {% endblock %}
     </body>
 </html>

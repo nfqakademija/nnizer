@@ -5,6 +5,7 @@ import trans_lt from './../js/translations/lt.json';
 const getTranslation = (key, domain = "messages") => {
     const currentLocale = Translator.locale;
     const translations = getTranslationsByLocale(currentLocale);
+
     return translations.translations[currentLocale][domain][key];
 };
 

@@ -125,6 +125,10 @@ crm:
   done: Completed
 
 contractor:
+  title: services
+  form:
+    title: Select time and fill details!
+    submit: Submit
   about: About service
   useful-info: Useful information
   location: Location
@@ -133,6 +137,9 @@ contractor:
   phone: Phone number
   reviews:
     title: Reviews
+    singular: review
+    plural1: reviews
+    plural2: reviews
     filter:
       title: Filter reviews by rating
       none: No reviews at selected filter
@@ -140,6 +147,7 @@ contractor:
     none: No reviews
     load: Load more
   days:
+    title: Work hours
     closed: Closed
     Monday: Monday
     Tuesday: Tuesday
