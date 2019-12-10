@@ -106,3 +106,10 @@ detailsForm:
 locales:
   lt: Lietuvių k.
   en: Anglų k.
+
+crm:
+  date: Data
+  name: Vardas
+  email: El. paštas
+  phone: Tel. nr.
+  status: Būsena

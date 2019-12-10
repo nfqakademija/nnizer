@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { parseISO } from 'date-fns/esm';
 import ReservationRow from './ReservationRow';
+import Translator from 'bazinga-translator';
+
 
 
 const Reservations = (props) => {
@@ -21,12 +23,13 @@ const Reservations = (props) => {
       <ul className="reservations">
         <li className="reservations__labels">
           <div className="row">
-            <span className="reservations__label col-lg-1">date</span>
-            <span className="reservations__label col-lg-3">name</span>
-            <span className="reservations__label col-lg-3">email address</span>
-            <span className="reservations__label col-lg-2">phone number</span>
-            <span className="reservations__label col-lg-2">status</span>
-            <span className="reservations__label col-lg-1">edit</span>
+            {console.log(Translator)}
+            <span className="reservations__label col-lg-1">{Translator.trans('crm.date', {}, 'messages', 'lt')}</span>
+            <span className="reservations__label col-lg-3">{Translator.trans('crm.date')}</span>
+            <span className="reservations__label col-lg-3">{Translator.trans('crm.date')}</span>
+            <span className="reservations__label col-lg-2">{Translator.trans('crm.date')}</span>
+            <span className="reservations__label col-lg-2">{Translator.trans('crm.date')}</span>
+            <span className="reservations__label col-lg-1">{Translator.trans('crm.date')}</span>
           </div>
         </li>
         {reservations.map((reservation) => (

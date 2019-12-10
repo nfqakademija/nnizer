@@ -7,5 +7,7 @@
     </div> 
     {% block javascripts %}
         {{ encore_entry_script_tags('admin') }}
+        <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+        <script src="{{ url('bazinga_jstranslation_js') }}"></script>
     {% endblock %}
 {% endblock %}

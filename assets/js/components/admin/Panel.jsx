@@ -15,6 +15,8 @@ import Statistics from './Statistics';
 import Settings from './Settings';
 import Help from './Help';
 
+
+
 const Panel = () => {
   const [isNavOpen, toggleNav] = useState(false);
   const [reservations, setReservations] = useState([]);

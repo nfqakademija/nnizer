@@ -108,3 +108,10 @@ locales:
   lt: Lithuanian
   en: English
 
+crm:
+  date: Date
+  name: Name
+  email: Email address
+  phone: Phone number
+  status: Status
+
