@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "axios": "^0.19.0",
+        "bazinga-translator": "^2.6.6",
         "body-scroll-lock": "^2.6.4",
         "date-fns": "^2.8.1",
         "micromodal": "^0.4.2",

@@ -4,6 +4,7 @@ import uuidv4 from 'uuid/v4';
 
 import Stars from '../Stars';
 import ReviewCard from './ReviewCard';
+import { getTranslation } from '../../../TranslationService';
 
 const Reviews = (props) => {
   const { reviews } = props;
@@ -51,26 +52,26 @@ const Reviews = (props) => {
 
   return (
     <div className="reviews">
-      <h2 className="contractor__heading">Reviews</h2>
+      <h2 className="contractor__heading">{getTranslation('contractor.reviews.title')}</h2>
       {reviews.length === 0 ? (
-        <p className="reviews__message"> No reviews yet! 😕</p>
+        <p className="reviews__message"> {getTranslation('contractor.reviews.none')}😕</p>
       ) : (
         <>
           <Stars reviews={reviews} />
           <div className="reviews__filters">
-            <p className="reviews__text">Filter reviews by rating:</p>
+            <p className="reviews__text">{getTranslation('contractor.reviews.filter.title')}:</p>
             <ul className="reviews__filter">{getFilters()}</ul>
           </div>
           <ul className="reviews__list">
             {filteredReviews.length === 0 ? (
               <>
-                <p>No reviews at selected filters</p>
+                <p>{getTranslation('contractor.reviews.filter.none')}</p>
                 <button
                   type="button"
                   className="contractor-btn -reset"
                   onClick={() => setStars([])}
                 >
-                  Reset filters
+                  {getTranslation('contractor.reviews.filter.reset')}
                 </button>
               </>
             ) : (
@@ -91,7 +92,7 @@ const Reviews = (props) => {
               className="contractor-btn"
               onClick={() => setReviewsNum(reviewsNum + 3)}
             >
-              Load More
+              {getTranslation('contractor.reviews.load')}
             </button>
           )}
         </>

@@ -106,3 +106,53 @@ detailsForm:
 locales:
   lt: Lietuvių k.
   en: Anglų k.
+
+crm:
+  date: Data
+  name: Vardas
+  email: El. paštas
+  phone: Tel. nr.
+  status: Būsena
+  reservations: Rezervacijos
+  search: Paieška
+  reviews: Atsiliepimai
+  settings: Nustatymai
+  logout: Atsijungti
+  cancelled: Atšaukta
+  pending: Laukiama
+  unconfirmed: Nepatvirtinta
+  done: Įvykdyta
+
+contractor:
+  title: paslaugos
+  form:
+    title: Pasirinkite laiką ir įveskite savo duomenis
+    submit: Pateikti
+  about: Apie paslaugą
+  useful-info: Naudinga informacija
+  location: Vieta
+  email: El. pašto adresas
+  facebook: Facebook
+  phone: Telefono numeris
+  reviews:
+    singular: atsiliepimas
+    plural1: atsiliepimų
+    plural2: atsiliepimai
+    title: Atsiliepimai
+    filter:
+      title: Filtruoti atsiliepimus pagal įvertinimą
+      none: Pagal nurodytą filtrą atsiliepimų nerasta
+      reset: Atstatyti filtrą
+    none: Atsiliepimų nėra
+    load: Daugiau
+  days:
+    title: Darbo laikas
+    closed: Nedirbame
+    Monday: Pirmadienis
+    Tuesday: Antradienis
+    Wednesday: Trečiadienis
+    Thursday: Ketvirtadienis
+    Friday: Penktadienis
+    Saturday: Šeštadienis
+    Sunday: Sekmadienis
+  book: Užsirezervuoti

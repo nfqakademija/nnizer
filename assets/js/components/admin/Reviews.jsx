@@ -1,11 +1,12 @@
 import React from 'react';
+import {getTranslation} from "../../TranslationService";
 
 const Reviews = (props) => {
   const { key } = props;
   // TODO /api/contractor/{key}/get-reviews/
   return (
     <div className="panel__content admin-container">
-      <h2>Reviews</h2>
+      <h2>{getTranslation('crm.reviews')}</h2>
     </div>
   );
 };

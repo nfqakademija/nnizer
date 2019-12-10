@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contractor page
+{% block title %}{{ app.user.username }} {{ "contractor.title"|trans }}
 {% endblock %}
 
 {% block body %}
@@ -10,7 +10,7 @@
 			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
 				<header class="modal__header">
 					<h2 class="modal__title" id="register-modal-title">
-						Select time and fill details! 📆
+						{{"contractor.form.title"|trans}} 📆
 					</h2>
 					<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
 				</header>
@@ -41,7 +41,7 @@
 						</div>
 
 						<input type="hidden" name="contractor" value="{{ contractor.id }}">
-						<button class="btn -full">Submit</button>
+						<button class="btn -full">{{"contractor.form.submit"|trans}} </button>
 					</form>
 				</main>
 			</div>

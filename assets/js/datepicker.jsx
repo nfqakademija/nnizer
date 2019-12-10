@@ -97,7 +97,7 @@ const Datepicker = () => {
     axios({
       method: 'get',
       baseURL: `${window.location.protocol}//${window.location.host}`,
-      url: `/api/profile/${contractorName}/working-hours`,
+      url: `/api/profile/${contractorName}`,
     }).then((response) => {
       setData(response.data);
       setOffDays(getOffDays(response.data.days));
@@ -118,7 +118,6 @@ const Datepicker = () => {
   return (
     <DatePicker
       locale="en"
-      // selected={startDate}
       selected={startDate}
       onChange={(date) => setStartDate(date)}
       excludeOutOfBoundsTimes
