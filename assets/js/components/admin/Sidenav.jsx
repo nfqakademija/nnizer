@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { getTranslation } from '../../TranslationService';
+
 
 const logoPath = require('../../../images/nnizer-logo.svg');
 
@@ -38,43 +40,25 @@ const Sidenav = (props) => {
         <li className="sidenav__link -active">
           <NavLink to="/contractor/reservations" onClick={() => toggleNav(false)}>
             <i className="icon-people" />
-            Reservations
-          </NavLink>
-        </li>
-        <li className="sidenav__link">
-          <NavLink to="/contractor/manage" onClick={() => toggleNav(false)}>
-            <i className="icon-manage" />
-            Management
+            {getTranslation('crm.reservations')}
           </NavLink>
         </li>
         <li className="sidenav__link">
           <NavLink to="/contractor/reviews" onClick={() => toggleNav(false)}>
             <i className="icon-reviews" />
-            Reviews
-          </NavLink>
-        </li>
-        <li className="sidenav__link">
-          <NavLink to="/contractor/statistics" onClick={() => toggleNav(false)}>
-            <i className="icon-statistics" />
-            Statistics
+            {getTranslation('crm.reviews')}
           </NavLink>
         </li>
         <li className="sidenav__link">
           <NavLink to="/contractor/settings" onClick={() => toggleNav(false)}>
             <i className="icon-settings" />
-            Settings
-          </NavLink>
-        </li>
-        <li className="sidenav__link">
-          <NavLink to="/contractor/help" onClick={() => toggleNav(false)}>
-            <i className="icon-help" />
-            Help desk
+            {getTranslation('crm.settings')}
           </NavLink>
         </li>
         <li className="sidenav__link">
           <a href="/logout" onClick={() => toggleNav(false)}>
             <i className="icon-logout" />
-            Log out
+            {getTranslation('crm.logout')}
           </a>
         </li>
       </ul>

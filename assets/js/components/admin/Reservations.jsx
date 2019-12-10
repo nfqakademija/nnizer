@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { parseISO } from 'date-fns/esm';
 import ReservationRow from './ReservationRow';
-import Translator from 'bazinga-translator';
+import { getTranslation } from '../../TranslationService';
+
 
 
 
@@ -19,17 +20,16 @@ const Reservations = (props) => {
 
   return (
     <div className="panel__content admin-container">
-      <h2>Reservations</h2>
+      <h2>{getTranslation('crm.reservations')}</h2>
       <ul className="reservations">
         <li className="reservations__labels">
           <div className="row">
-            {console.log(Translator)}
-            <span className="reservations__label col-lg-1">{Translator.trans('crm.date', {}, 'messages', 'lt')}</span>
-            <span className="reservations__label col-lg-3">{Translator.trans('crm.date')}</span>
-            <span className="reservations__label col-lg-3">{Translator.trans('crm.date')}</span>
-            <span className="reservations__label col-lg-2">{Translator.trans('crm.date')}</span>
-            <span className="reservations__label col-lg-2">{Translator.trans('crm.date')}</span>
-            <span className="reservations__label col-lg-1">{Translator.trans('crm.date')}</span>
+            <span className="reservations__label col-lg-1">{getTranslation('crm.date')}</span>
+            <span className="reservations__label col-lg-3">{getTranslation('crm.name')}</span>
+            <span className="reservations__label col-lg-3">{getTranslation('crm.email')}</span>
+            <span className="reservations__label col-lg-2">{getTranslation('crm.phone')}</span>
+            <span className="reservations__label col-lg-2">{getTranslation('crm.status')}</span>
+            <span className="reservations__label col-lg-1">{getTranslation('crm.actions')}</span>
           </div>
         </li>
         {reservations.map((reservation) => (

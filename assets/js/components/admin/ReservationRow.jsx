@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { format, differenceInHours, isSameDay } from 'date-fns';
 import { parseISO, differenceInDays } from 'date-fns/esm';
+import {getTranslation} from "../../TranslationService";
 
 const ReservationRow = (props) => {
   const [editOpen, editToggle] = useState(false);
@@ -28,16 +29,16 @@ const ReservationRow = (props) => {
 
   const checkStatus = () => {
     if (isCancelled) {
-      statusText = 'Cancelled';
+      statusText = getTranslation('crm.cancelled');
       statusClass = 'cancelled';
     } else if (isVerified) {
-      statusText = 'Pending';
+      statusText =  getTranslation('crm.pending');
       statusClass = 'pending';
     } else if (isDone) {
-      statusText = 'Done';
+      statusText = getTranslation('crm.done');
       statusClass = 'done';
     } else {
-      statusText = 'Not confirmed';
+      statusText = getTranslation('crm.unconfirmed');
       statusClass = 'not-confirmed';
     }
   };

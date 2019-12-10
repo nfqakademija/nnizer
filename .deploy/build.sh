@@ -13,7 +13,7 @@ yarn run encore production
 
 # <-- This is a good place to add custom commands for your project
 php bin/console assets:install --env=prod
-
+php bin/console bazinga:js-translation:dump assets/js --format=json --merge-domains
 # Generating deployment artifact (one file with everything you need to be deployed on the server)
 tar czf project.tar.gz --owner 0 --group 0 --anchored $( \
     ls -a | tail -n +3 \

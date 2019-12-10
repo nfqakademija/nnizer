@@ -114,4 +114,13 @@ crm:
   email: Email address
   phone: Phone number
   status: Status
+  reservations: Reservations
+  search: Type in to search…
+  reviews: Reviews
+  settings: Settings
+  logout: Log out
+  cancelled: Cancelled
+  pending: Pending
+  unconfirmed: Unconfirmed
+  done: Completed
 

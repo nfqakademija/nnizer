@@ -113,3 +113,12 @@ crm:
   email: El. paštas
   phone: Tel. nr.
   status: Būsena
+  reservations: Rezervacijos
+  search: Paieška
+  reviews: Atsiliepimai
+  settings: Nustatymai
+  logout: Atsijungti
+  cancelled: Atšaukta
+  pending: Laukiama
+  unconfirmed: Nepatvirtinta
+  done: Įvykdyta
