@@ -1,0 +1,16 @@
+.status {
+  &.-circle {
+    border-radius: 50%;
+    height: rem(16px);
+    padding: 0;
+    width: rem(16px);
+  }
+
+  &.-open {
+    background-color: $color-green-2;
+  }
+
+  &.-closed {
+    background-color: $color-red-2;
+  }
+}

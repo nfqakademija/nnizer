@@ -32,3 +32,12 @@
   transition: $x;
   transition-timing-function: ease-in-out;
 }
+
+// Mixin for getting flex properties
+// Example usage @include flex(center, center, column) - return: display: flex; flex-direction: column; align-items: center; justify-content: center;
+@mixin flex($x, $y, $dir: row) {
+  align-items: $y;
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $x;
+}

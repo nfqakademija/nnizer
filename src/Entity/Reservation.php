@@ -286,4 +286,12 @@ class Reservation
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->visitDate->format('Y-m-d H:i:s');
+    }
 }

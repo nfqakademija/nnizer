@@ -8,6 +8,7 @@ parameters:
     default_locale: 'en'
     profile_images: /uploads/profile
     cover_images: /uploads/cover
+    site_name: 'NNIZER'
 
 services:
     # default configuration for services in *this* file

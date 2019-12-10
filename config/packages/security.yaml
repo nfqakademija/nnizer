@@ -15,7 +15,7 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
     admin:
-        pattern: ^/admin/
+        pattern: ^/admin
         anonymous: true
         provider: app_admin_provider
         guard:
@@ -23,8 +23,7 @@ security:
             - App\Security\UserAuthenticator
         logout:
           path: admin_logout
-          invalidate_session: false
-          success_handler: App\Security\LogoutHandler
+          target: admin_login
     main:
       anonymous: true
       provider: app_user_provider
@@ -37,7 +36,7 @@ security:
         success_handler: App\Security\LogoutHandler
 
   access_control:
-    - { path: /admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY}
+    - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY}
     - { path: ^/admin, role: ROLE_ADMIN }
     - { path: ^/contractor, roles: ROLE_CONTRACTOR }
     - { path: ^/api/contractor, roles: ROLE_CONTRACTOR }

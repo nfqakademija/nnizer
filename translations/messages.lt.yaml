@@ -74,6 +74,7 @@ email:
     home: NNIZER
 
 settings_form:
+  title: Jūsų darbo valandos
   Monday-workhours: Pirmadienio darbo valandos
   Tuesday-workhours: Antradienio darbo valandos
   Wednesday-workhours: Trečiadienio darbo valandos

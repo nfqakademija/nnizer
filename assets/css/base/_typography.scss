@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,600,700&display=swap');
 
 html,
 body,
 input {
+  color: $color-black;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -16,4 +17,12 @@ h1 {
 h2 {
   font-size: rem(36px);
   line-height: rem(36px * 1.4);
+}
+
+p {
+  font-size: rem(16px);
+  font-weight: 300;
+  letter-spacing: rem(0.5px);
+  line-height: calc(1rem * 1.5);
+  max-width: 50ch;
 }

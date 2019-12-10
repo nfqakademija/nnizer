@@ -47,20 +47,13 @@ class User implements UserInterface
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $username;
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
+     * @return string
      */
     public function getEmail(): string
     {
@@ -84,9 +77,6 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
     }
 
@@ -138,6 +128,7 @@ class User implements UserInterface
     {
         return $this->plainPassword;
     }
+
     /**
      * @see UserInterface
      */
@@ -154,17 +145,6 @@ class User implements UserInterface
         $this->plainPassword = null;
     }
 
-    public function getUsername()
-    {
-    }
-
-    public function setUsername(?string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
     /**
      * @return mixed
      */
@@ -179,5 +159,13 @@ class User implements UserInterface
     public function setName($name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUsername()
+    {
+        return $this->getEmail();
     }
 }
