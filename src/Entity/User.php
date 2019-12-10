@@ -47,11 +47,6 @@ class User implements UserInterface
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $username;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -153,21 +148,6 @@ class User implements UserInterface
     /**
      * @return mixed
      */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    public function setUsername(?string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getName()
     {
         return $this->name;
@@ -179,5 +159,13 @@ class User implements UserInterface
     public function setName($name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUsername()
+    {
+        return $this->getEmail();
     }
 }
