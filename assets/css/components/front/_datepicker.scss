@@ -23,3 +23,11 @@
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
   background-color: $color-yellow !important;
 }
+
+.react-datepicker__header {
+  background-color: #f2efea;
+}
+
+.react-datepicker {
+  box-shadow: 0 0 rem(5px) rgba(0, 0, 0, 0.3);
+}
