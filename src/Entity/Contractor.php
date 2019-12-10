@@ -149,6 +149,11 @@ class Contractor implements UserInterface
         $this->reservations = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
+
     /**
      * @return int|null
      */
