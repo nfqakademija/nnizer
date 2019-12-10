@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use App\Enumerator\UserRoles;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -51,7 +52,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         foreach ($names as $name) {
             $user = new User();
             $user->setEmail($name . '@' . $name . '.com');
-            $user->setRoles(['ROLE_ADMIN']);
+            $user->setRoles([UserRoles::ADMIN]);
             $user->setPassword($encoder->encodePassword($user, $name));
             $user->setName($name);
             $manager->persist($user);
