@@ -9,7 +9,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
-use Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\P1;
 
 /**
  * @method Reservation|null find($id, $lockMode = null, $lockVersion = null)
@@ -38,6 +37,30 @@ class ReservationRepository extends ServiceEntityRepository
             ->andWhere('c.visitDate < :to')
             ->setParameters(['contractor' => $contractor, 'from' => $from, 'to' => $to])
             ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @param Contractor $contractor
+     * @param DateTime $from
+     * @return array
+     */
+    public function findConflictingReservations(Contractor $contractor, DateTime $from): array
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.contractor = :contractor')
+            ->andWhere('c.visitDate >= :from')
+            ->andWhere('c.visitDate < :visitEnding')
+            ->setParameters(
+                [
+                    'contractor' => $contractor,
+                    'visitEnding' => (clone $from)
+                        ->modify('+' . $contractor->getSettings()->getVisitDuration() . ' minutes'),
+                    'from' => $from
+                ]
+            )
             ->getQuery()
             ->getResult()
             ;

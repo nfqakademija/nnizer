@@ -293,14 +293,20 @@ class ContractorController extends AbstractController
             return new JsonResponse(null, Response::HTTP_NO_CONTENT);
         }
 
+        $contractor = $this->getDoctrine()->getRepository(Contractor::class)
+            ->findOneByKey($contractorKey);
+        $reservations = $this->getDoctrine()->getRepository(Reservation::class)
+            ->findConflictingReservations($contractor, $visitDate);
+
+        if (count($reservations) > 0) {
+            return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
+        }
         $reservation = $reservationFactory->createReservation(
             $email,
             $firstname,
             $lastname,
             $visitDate
         );
-        $contractor = $this->getDoctrine()->getRepository(Contractor::class)
-            ->findOneByKey($contractorKey);
         $reservation->setContractor($contractor);
         $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
 
