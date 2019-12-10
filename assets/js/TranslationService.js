@@ -1,7 +1,6 @@
 import Translator from 'bazinga-translator';
-import trans_en from '../js/translations/en';
-import trans_lt from '../js/translations/lt';
-
+import trans_en from './../js/translations/en.json';
+import trans_lt from './../js/translations/lt.json';
 
 const getTranslation = (key, domain = "messages") => {
     const currentLocale = Translator.locale;

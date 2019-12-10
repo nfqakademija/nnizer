@@ -42,6 +42,8 @@
         </footer>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js') }}"></script>
         {% endblock %}
     </body>
 </html>

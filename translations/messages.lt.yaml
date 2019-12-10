@@ -122,3 +122,29 @@ crm:
   pending: Laukiama
   unconfirmed: Nepatvirtinta
   done: Įvykdyta
+
+contractor:
+  about: Apie paslaugą
+  useful-info: Naudinga informacija
+  location: Vieta
+  email: El. pašto adresas
+  facebook: Facebook
+  phone: Telefono numeris
+  reviews:
+    title: Atsiliepimai
+    filter:
+      title: Filtruoti atsiliepimus pagal įvertinimą
+      none: Pagal nurodytą filtrą atsiliepimų nerasta
+      reset: Atstatyti filtrą
+    none: Atsiliepimų nėra
+    load: Daugiau
+  days:
+    closed: Nedirbame
+    Monday: Pirmadienis
+    Tuesday: Antradienis
+    Wednesday: Trečiadienis
+    Thursday: Ketvirtadienis
+    Friday: Penktadienis
+    Saturday: Šeštadienis
+    Sunday: Sekmadienis
+  book: Užsirezervuoti

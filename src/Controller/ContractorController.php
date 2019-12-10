@@ -46,7 +46,7 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/c/{contractorUsername}", name="contractor-page")
+     * @Route("/service/{contractorUsername}", name="contractor-page")
      * @param string $contractorUsername
      * @param ContractorRepository $contractorRepository
      * @return Response
@@ -320,13 +320,13 @@ class ContractorController extends AbstractController
     }
 
     /**
-     * @Route("/api/profile/{contractorUsername}/working-hours", methods="GET")
+     * @Route("/api/profile/{contractorUsername}", methods="GET")
      * @param string $contractorUsername
      * @param ContractorRepository $contractorRepository
      * @param ContractorService $contractorService
      * @return JsonResponse
      */
-    public function getWorkingHoursAndTakenDates(
+    public function getContractorDetails(
         string $contractorUsername,
         ContractorRepository $contractorRepository,
         ContractorService $contractorService

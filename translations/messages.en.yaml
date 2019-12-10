@@ -41,7 +41,7 @@ flash:
     expired: Your activation key has already expired
   signup:
     verified: Your account has been verified
-  
+
 email:
   heading:
     signup: Congratulations! You're a one click away
@@ -115,7 +115,7 @@ crm:
   phone: Phone number
   status: Status
   reservations: Reservations
-  search: Type in to search…
+  search: Type in to search...
   reviews: Reviews
   settings: Settings
   logout: Log out
@@ -124,3 +124,28 @@ crm:
   unconfirmed: Unconfirmed
   done: Completed
 
+contractor:
+  about: About service
+  useful-info: Useful information
+  location: Location
+  email: Email address
+  facebook: Facebook
+  phone: Phone number
+  reviews:
+    title: Reviews
+    filter:
+      title: Filter reviews by rating
+      none: No reviews at selected filter
+      reset: Reset filter
+    none: No reviews
+    load: Load more
+  days:
+    closed: Closed
+    Monday: Monday
+    Tuesday: Tuesday
+    Wednesday: Wednesday
+    Thursday: Thursday
+    Friday: Friday
+    Saturday: Saturday
+    Sunday: Sunday
+  book: Book now
