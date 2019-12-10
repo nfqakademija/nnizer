@@ -38,15 +38,15 @@ class CoverPhoto implements Serializable
     private $coverPhoto;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Contractor", inversedBy="coverPhoto", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Contractor", inversedBy="coverPhoto", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $Contractor;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

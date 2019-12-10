@@ -45,6 +45,11 @@ class Contractor implements UserInterface
     private $roles = [];
 
     /**
+     * @var string
+     */
+    private $plainPassword = null;
+
+    /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
@@ -144,6 +149,11 @@ class Contractor implements UserInterface
         $this->reservations = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
+
     /**
      * @return int|null
      */
@@ -216,6 +226,25 @@ class Contractor implements UserInterface
     }
 
     /**
+     * @param string $plainPassword
+     * @return $this
+     */
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
      * @see UserInterface
      */
     public function getSalt()
@@ -228,7 +257,7 @@ class Contractor implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
+        $this->plainPassword = null;
     }
 
     /**

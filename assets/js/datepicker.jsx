@@ -8,7 +8,6 @@ import {
   isSameDay,
   subMinutes,
   isPast,
-  addMinutes,
 } from 'date-fns';
 import { setHours, setMinutes } from 'date-fns/esm';
 import en from 'date-fns/locale/en-GB';
@@ -21,6 +20,7 @@ const Datepicker = () => {
   const [data, setData] = useState([]);
   const [isFetched, setFetched] = useState(false);
   const [offDays, setOffDays] = useState([]);
+  const [excludedDates, setExcludedDates] = useState([]);
 
   const setAvailableDay = (workDays) => {
     if (!workDays) return;
@@ -54,6 +54,7 @@ const Datepicker = () => {
   const getTime = (timeType) => {
     const selectedDay = getDayNumber();
     const time = data.days[selectedDay][timeType];
+    if (time === null) return 0;
     const [hours, minutes] = time.split(':');
     return {
       hours,
@@ -69,7 +70,11 @@ const Datepicker = () => {
 
   const getEndTime = () => {
     const { hours, minutes } = getTime('endTime');
-    const endTime = setHours(setMinutes(new Date(), minutes), hours);
+    const endTime = setHours(setMinutes(startDate, minutes), hours);
+    if (isPast(endTime)) {
+      setExcludedDates([...excludedDates, startDate]);
+      setStartDate(addDays(startDate, 1));
+    }
     return isPast(endTime) ? new Date() : subMinutes(endTime, data.visitDuration);
   };
 
@@ -119,6 +124,7 @@ const Datepicker = () => {
       excludeOutOfBoundsTimes
       showTimeSelect
       excludeTimes={isFetched && getTakenDates()}
+      excludeDates={excludedDates}
       filterDate={isWorkDay}
       minDate={new Date()}
       maxDate={addDays(new Date(), 90)}
