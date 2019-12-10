@@ -165,6 +165,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
                 $contractor->setEmail($firstname . '@' . $lastname . '.com');
                 $contractor->setPhoneNumber(random_int(860000000, 869999999));
                 $contractor->setVerificationKey();
+                $contractor->setAddress('Brastos g. 15, Kaunas');
                 $contractor->setIsVerified(random_int(0, 1));
                 $contractor->setTitle($serviceTitle);
                 $contractor->setDescription($description);
