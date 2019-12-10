@@ -11,6 +11,8 @@ navigation:
 
 login_page:
   login: Login
+  login_admin: Admin login
+  email: Email
   logged_in_as: You are currently logged in as %user%
   logout: Log out
   username: Username

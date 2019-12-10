@@ -43,17 +43,17 @@ class Review
     private $description;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @return Contractor
+     * @return Contractor|null
      */
-    public function getContractor(): Contractor
+    public function getContractor(): ?Contractor
     {
         return $this->contractor;
     }
@@ -70,9 +70,9 @@ class Review
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getStars(): int
+    public function getStars(): ?int
     {
         return $this->stars;
     }
@@ -89,9 +89,9 @@ class Review
     }
 
     /**
-     * @return Reservation
+     * @return Reservation|null
      */
-    public function getReservation(): Reservation
+    public function getReservation(): ?Reservation
     {
         return $this->reservation;
     }

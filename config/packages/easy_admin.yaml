@@ -1,0 +1,93 @@
+easy_admin:
+  site_name: '%site_name%'
+  user:
+    name_property_path: 'name'
+    display_avatar: true
+
+  list:
+    title: 'List of %%entity_label%%'
+    actions:
+      - { name: edit, icon: pencil, label: Edit }
+      - { name: delete, icon: exclamation, label: Delete }
+      - { name: search, label: Search }
+      - { name: new, icon: plus, label: Add new  }
+
+  entities:
+    User:
+      class: App\Entity\User
+      list:
+        fields:
+          - 'id'
+          - 'email'
+          - 'roles'
+          - 'name'
+          - 'createdAt'
+      form:
+        fields:
+          - 'email'
+          - 'name'
+          - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN'} }}
+          - { property: 'plainPassword', type: 'text', label: 'New password' }
+    Contractor:
+      class: App\Entity\Contractor
+      list:
+        fields:
+          - 'id'
+          - 'firstname'
+          - 'lastname'
+          - 'username'
+          - 'email'
+          - 'reservations'
+          - 'settings'
+          - 'reviews'
+          - 'coverPhoto'
+          - 'profilePhoto'
+      form:
+        fields:
+          - 'firstname'
+          - 'lastname'
+          - 'username'
+          - 'email'
+          - 'phoneNumber'
+          - 'isVerified'
+          - 'title'
+          - 'address'
+          - 'facebook'
+          - 'description'
+          - { property: 'plainPassword', type: 'text', label: 'New password' }
+    CoverPhoto:
+      class: App\Entity\CoverPhoto
+      list:
+        fields:
+          - 'id'
+          - { property: 'filename', type: 'image', base_path: '%cover_images%' }
+          - 'contractor'
+      show:
+        fields:
+          - { property: 'filename', type: 'image', base_path: '%cover_images%' }
+          - 'contractor'
+      form:
+        fields:
+          - { property: 'coverPhoto', type: 'vich_image' }
+          - { property: 'contractor', type: 'entity', type_options: { class: App\Entity\Contractor } }
+    ProfilePhoto:
+      class: App\Entity\ProfilePhoto
+      list:
+        fields:
+          - 'id'
+          - { property: 'filename', type: 'image', base_path: '%profile_images%' }
+          - 'contractor'
+      show:
+        fields:
+          - { property: 'filename', type: 'image', base_path: '%profile_images%' }
+          - 'contractor'
+      form:
+        fields:
+          - { property: 'profilePhoto', type: 'vich_image' }
+          - { property: 'contractor', type: 'entity', type_options: { class: App\Entity\Contractor } }
+    ContractorSettings:
+      class: App\Entity\ContractorSettings
+    Reservation:
+      class: App\Entity\Reservation
+    Rewiev:
+      class: App\Entity\Review
