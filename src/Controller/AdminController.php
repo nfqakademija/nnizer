@@ -36,7 +36,6 @@ class AdminController extends EasyAdminController
      */
     public function persistUserEntity(User $user)
     {
-        $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
         $encodedPassword = $this->encoder->encodePassword($user, $user->getPlainPassword());
         $user->setPassword($encodedPassword);
         $user->eraseCredentials();
