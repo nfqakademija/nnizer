@@ -9,7 +9,7 @@ const Reservations = (props) => {
 
   const sortReservationsASC = () => {
     reservations.sort((a, b) => {
-      return parseISO(a.visitDate) > parseISO(b.visitDate) ? 1 : -1;
+      return parseISO(a.visitDate) < parseISO(b.visitDate) ? 1 : -1;
     });
   };
 
@@ -33,6 +33,7 @@ const Reservations = (props) => {
           <ReservationRow
             key={reservation.id}
             userKey={userKey}
+            
             id={reservation.id}
             date={reservation.visitDate}
             name={`${reservation.firstname} ${reservation.lastname}`}

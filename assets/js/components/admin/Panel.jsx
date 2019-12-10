@@ -33,7 +33,6 @@ const Panel = () => {
       url: `/api/profile/${username}/working-hours/`,
     })
       .then((response) => {
-        console.log(response.data);
         setData({
           users: response.data,
           isFetched: true,
@@ -49,6 +48,7 @@ const Panel = () => {
       url: `/api/contractor/${key}/get-clients/`,
     })
       .then((response) => {
+        console.log(response.data);
         setReservations(response.data);
       })
       .catch((error) => {
