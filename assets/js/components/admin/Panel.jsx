@@ -13,6 +13,8 @@ import Statistics from './Statistics';
 import Settings from './Settings';
 import Help from './Help';
 
+import { showAlert } from '../../Utils/NotificationUtils';
+
 const Panel = () => {
   const [isNavOpen, toggleNav] = useState(false);
   const [data, setData] = useState({
@@ -33,7 +35,7 @@ const Panel = () => {
     axios({
       method: 'get',
       baseURL,
-      url: `/api/profile/${username}/working-hours/`,
+      url: `/api/profile/${username}/working-hous/`,
     })
       .then((response) => {
         setData({
@@ -42,7 +44,7 @@ const Panel = () => {
         });
       })
       .catch((error) => {
-        console.log(error); // TODO handle error display in UI
+        showAlert('Can\'t load profile data. Try again or contact us!', 'error', 4000);
       });
 
     axios({
@@ -54,7 +56,7 @@ const Panel = () => {
         setReservations(response.data);
       })
       .catch((error) => {
-        console.log(error); // TODO handle error display in UI
+        showAlert('Can\'t load reservations. Try again or contact us!', 'error', 4000); // TODO translation
       });
   };
 
@@ -64,11 +66,11 @@ const Panel = () => {
 
   return (
     <Router>
+      <ToastContainer closeButton={<CloseButton />} />
       {!data.isFetched ? (
         <Loader />
       ) : (
         <div id="panel-view">
-          <ToastContainer closeButton={<CloseButton />} />
           <Sidenav isOpen={isNavOpen} toggleNav={toggleNav} />
           <div className={`panel ${isNavOpen ? '-nav-open' : ''}`}>
             <div

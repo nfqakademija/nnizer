@@ -60,10 +60,10 @@ const ReservationRow = (props) => {
       .patch(`/api/contractor/${userKey}/cancel/${id}`)
       .then((response) => {
         fetchData();
-        updateAlert('Cancellation was successful ✅', 'success', 4000);
+        updateAlert('Cancellation was successful ✅', 'success', 4000); // TODO translation
       })
       .catch((error) => {
-        updateAlert('Cancellation failed. Please try again.', 'error', 4000);
+        updateAlert('Cancellation failed. Please try again.', 'error', 4000); // TODO translation
       });
   };
 
@@ -73,10 +73,10 @@ const ReservationRow = (props) => {
       .patch(`/api/contractor/${userKey}/verify/${id}`)
       .then((response) => {
         fetchData();
-        updateAlert('Approval was successful ✅', 'success', 4000);
+        updateAlert('Approval was successful ✅', 'success', 4000); // TODO translation
       })
       .catch((error) => {
-        updateAlert('Approval failed. Please try again.', 'error', 4000);
+        updateAlert('Approval failed. Please try again.', 'error', 4000); // TODO translation
       });
   };
 

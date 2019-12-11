@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
 
 import Loader from './Loader';
 import Hero from './Hero';
 import Content from './Content';
+
+import { showAlert } from '../../Utils/NotificationUtils';
 
 const Template = () => {
   const [userData, setUserData] = useState();
@@ -14,13 +17,13 @@ const Template = () => {
     axios({
       method: 'get',
       baseURL: `${window.location.protocol}//${window.location.host}`,
-      url: `/api/profile/${contractorName}/working-hours`,
+      url: `/api/profile/${contractorName}/working-hous`,
     }).then((response) => {
       setUserData(response.data);
       setFetched(true);
     })
       .catch((error) => {
-        console.log(error); // TOOD - error handling
+        showAlert('Can\'t get provider information. Try again or contact us!', 'error', 4000); // TODO translation
       });
   };
 
@@ -50,6 +53,7 @@ const Template = () => {
 
   return (
     <section className="contractor">
+      <ToastContainer />
       {loadContent()}
     </section>
   );
