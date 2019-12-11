@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { parseISO, isPast } from 'date-fns/esm';
+
 import ReservationRow from './ReservationRow';
 
 const Reservations = (props) => {
   const { reservations, userKey, fetchData } = props;
 
-  const sortReservationsASC = () => {
+  const sortReservations = () => {
     reservations.sort((a, b) => {
       const dateA = parseISO(a.visitDate);
       const dateB = parseISO(b.visitDate);
@@ -21,26 +22,17 @@ const Reservations = (props) => {
       if (!a.isVerified && b.isVerified) return -1;
 
       return parseISO(a.visitDate) > parseISO(b.visitDate) ? 1 : -1;
-
-      // if (a.isCancelled && !b.isCancelled) {
-      //   return 1;
-      // } else if (!a.isCancelled && b.isCancelled) {
-      //   return -1;
-      // }
-      // // IF a is not verified, a is not cancelled, b is verified
-      // else if (!a.isVerified && !a.isCancelled && b.isVerified) {
-      //   return 1;
-      // }
-      // if (!a.isVerified && !a.isCancelled && b.isVerified) return 1;
-      // return parseISO(a.visitDate) > parseISO(b.visitDate) ? 1 : -1;
     });
   };
 
-  sortReservationsASC();
+  sortReservations();
 
   return (
     <div className="panel__content admin-container">
       <h2>Reservations</h2>
+      <ul className="reservations__filters">
+        <button type="button">Today</button>
+      </ul>
       <ul className="reservations">
         <li className="reservations__labels">
           <div className="row">

@@ -58,32 +58,37 @@
     letter-spacing: rem(2px);
     margin-bottom: rem(16px);
     padding: rem(16px);
+    position: relative;
     text-decoration: none;
     text-transform: uppercase;
     width: 100%;
+
+    @include transition(background 0.2s, color 0.2s);
 
     @include breakpoint(md) {
       flex-direction: column;
     }
 
-    &.active {
-      background: $color-admin;
-      color: $color-black;
-      position: relative;
+    &::before {
+      background-color: $color-yellow;
+      content: '';
+      height: 0%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: rem(4px);
 
-      &::before {
-        background-color: $color-yellow;
-        content: '';
-        height: 100%;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: rem(4px);
-      }
+      @include transition(height 0.2s);
     }
 
+    &.active,
     &:hover {
-      @extend .active;
+      background: $color-admin;
+      color: $color-black;
+
+      &::before {
+        height: 100%;
+      }
     }
 
     i {

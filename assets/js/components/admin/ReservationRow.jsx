@@ -4,9 +4,15 @@ import axios from 'axios';
 import { format, differenceInHours, isSameDay, isPast } from 'date-fns';
 import { parseISO, differenceInDays } from 'date-fns/esm';
 
+import { showAlert, updateAlert } from '../../Utils/NotificationUtils';
+
 const ReservationRow = (props) => {
   const [editOpen, editToggle] = useState(false);
   const [isDone, setDone] = useState(false);
+
+  const [isCancelDisabled, setCancel] = useState(false);
+  const [isApprovalDisabled, setApproval] = useState(false);
+
   const {
     id,
     userKey,
@@ -42,24 +48,35 @@ const ReservationRow = (props) => {
     }
   };
 
+  const buttonClicked = (msg, setBtn) => {
+    showAlert(msg, '', 20000);
+    editToggle(!editOpen);
+    setBtn(true);
+  };
+
   const cancelReservation = () => {
-    // TODO add some kind of loading animation while it fetching
-    axios.patch(`/api/contractor/${userKey}/cancel/${id}`)
+    buttonClicked('Cancellation in progress 👨🏼‍💻', setCancel);
+    axios
+      .patch(`/api/contractor/${userKey}/cancel/${id}`)
       .then((response) => {
         fetchData();
+        updateAlert('Cancellation was successful ✅', 'success', 4000);
       })
       .catch((error) => {
-        console.log(error); // To Do error handling
+        updateAlert('Cancellation failed. Please try again.', 'error', 4000);
       });
   };
 
   const approveReservation = () => {
-    axios.patch(`/api/contractor/${userKey}/verify/${id}`)
+    buttonClicked('Approval in progress 👨🏼‍💻', setApproval);
+    axios
+      .patch(`/api/contractor/${userKey}/verify/${id}`)
       .then((response) => {
         fetchData();
+        updateAlert('Approval was successful ✅', 'success', 4000);
       })
       .catch((error) => {
-        console.log(error);
+        updateAlert('Approval failed. Please try again.', 'error', 4000);
       });
   };
 
@@ -102,8 +119,7 @@ const ReservationRow = (props) => {
 
   useEffect(() => {
     setExpired();
-  },
-  [editOpen]);
+  }, [editOpen]);
 
   return (
     <li className={`reservations__row ${editOpen ? '-editing' : ''}`}>
@@ -115,12 +131,10 @@ const ReservationRow = (props) => {
         <i className="icon-edit btn__icon" />
       </button>
       <div className="row">
-        <div className="reservations__item col-lg-1">
-          {formatDate()}
-        </div>
+        <div className="reservations__item col-lg-1">{formatDate()}</div>
         <div className="reservations__item col-lg-3">
           <i className="icon-human item__icon hide-lg" />
-          { name }
+          {name}
         </div>
         <div className="reservations__item col-lg-3">
           <i className="icon-envelope item__icon hide-lg" />
@@ -131,9 +145,7 @@ const ReservationRow = (props) => {
           +370 627 93122
         </div>
         <div className="reservations__item col-lg-2">
-          <div className={`status -full + -${statusClass}`}>
-            { statusText }
-          </div>
+          <div className={`status -full + -${statusClass}`}>{statusText}</div>
         </div>
         <div className="reservations__item col-lg-1">
           <button
@@ -146,31 +158,35 @@ const ReservationRow = (props) => {
         </div>
       </div>
       <div className="row">
-        <div className={`reservations__edit js-edit-window ${editOpen ? '-open' : ''}`}>
+        <div
+          className={`reservations__edit js-edit-window ${
+            editOpen ? '-open' : ''
+          }`}
+        >
           <span className="edit__heading">Time left</span>
-          <span className="edit__time-left">
-            {getLeftTime(parseISO(date))}
-          </span>
+          <span className="edit__time-left">{getLeftTime(parseISO(date))}</span>
           <div className="edit__actions">
-            {(!isVerified && !isDone)
-            && (
-            <button
-              type="button"
-              className="panel-btn -success"
-              onClick={approveReservation}
-            >
-            Approve
-            </button>
+          {/* !isCancelled && !isDone */}
+            {true && (
+              <button
+                type="button"
+                className="panel-btn -cancel"
+                // eslint-disable-next-line no-alert
+                onClick={(e) => window.confirm('Are you sure to cancel this reservation?') && cancelReservation()}
+                disabled={isCancelDisabled}
+              >
+                Cancel
+              </button>
             )}
-            {(!isCancelled && !isDone)
-            && (
-            <button
-              type="button"
-              className="panel-btn -cancel"
-              onClick={cancelReservation}
-            >
-            Cancel
-            </button>
+            {!isVerified && !isDone && (
+              <button
+                type="button"
+                className="panel-btn -success"
+                onClick={approveReservation}
+                disabled={isApprovalDisabled}
+              >
+                Approve
+              </button>
             )}
           </div>
         </div>

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
-
 import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
 
 import Loader from '../contractor/Loader';
 import Sidenav from './Sidenav';
@@ -26,6 +25,10 @@ const Panel = () => {
   const baseURL = `${window.location.protocol}//${window.location.host}`;
   const { key, username } = panel.dataset;
 
+  const CloseButton = (closeToast) => (
+    <i className="icon-cross notification__close" onClick={() => closeToast} />
+  );
+
   const fetchData = () => {
     axios({
       method: 'get',
@@ -48,7 +51,6 @@ const Panel = () => {
       url: `/api/contractor/${key}/get-clients/`,
     })
       .then((response) => {
-        console.log(response.data);
         setReservations(response.data);
       })
       .catch((error) => {
@@ -66,6 +68,7 @@ const Panel = () => {
         <Loader />
       ) : (
         <div id="panel-view">
+          <ToastContainer closeButton={<CloseButton />} />
           <Sidenav isOpen={isNavOpen} toggleNav={toggleNav} />
           <div className={`panel ${isNavOpen ? '-nav-open' : ''}`}>
             <div
