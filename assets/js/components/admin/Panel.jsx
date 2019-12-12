@@ -35,7 +35,7 @@ const Panel = () => {
     axios({
       method: 'get',
       baseURL,
-      url: `/api/profile/${username}/working-hous/`,
+      url: `/api/profile/${username}/working-hours/`,
     })
       .then((response) => {
         setData({
@@ -53,6 +53,7 @@ const Panel = () => {
       url: `/api/contractor/${key}/get-clients/`,
     })
       .then((response) => {
+        console.log(response.data);
         setReservations(response.data);
       })
       .catch((error) => {
@@ -86,7 +87,7 @@ const Panel = () => {
               toggleNav={toggleNav}
               avatar={
                 data.isFetched
-                  ? `${baseURL}/uploads/profile/${data.users.profilePhoto.filename}`
+                  ? `${baseURL}/uploads/profile/${''}}`
                   : ''
               }
               name={

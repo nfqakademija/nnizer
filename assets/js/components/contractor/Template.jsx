@@ -12,12 +12,16 @@ const Template = () => {
   const [userData, setUserData] = useState();
   const [isFetched, setFetched] = useState(false);
 
+  const CloseButton = (closeToast) => (
+    <i className="icon-cross notification__close" onClick={() => closeToast} />
+  );
+
   const fetchData = () => {
     const contractorName = window.location.href.split('/').pop();
     axios({
       method: 'get',
       baseURL: `${window.location.protocol}//${window.location.host}`,
-      url: `/api/profile/${contractorName}/working-hous`,
+      url: `/api/profile/${contractorName}/working-hours`,
     }).then((response) => {
       setUserData(response.data);
       setFetched(true);
@@ -53,10 +57,11 @@ const Template = () => {
 
   return (
     <section className="contractor">
-      <ToastContainer />
+      <ToastContainer closeButton={<CloseButton />} />
       {loadContent()}
     </section>
   );
 };
 
 export default Template;
+

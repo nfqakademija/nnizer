@@ -85,7 +85,7 @@ const ReservationRow = (props) => {
     const currentDate = new Date();
 
     if (isDone || isCancelled) {
-      timeLeft = 'Expired';
+      timeLeft = 'Expired'; // TODO: translations
     } else if (isSameDay(reservationDate, currentDate)) {
       const diffInHours = differenceInHours(reservationDate, currentDate);
       timeLeft = diffInHours + (diffInHours === 1 ? ' hour' : ' hours');
@@ -166,8 +166,7 @@ const ReservationRow = (props) => {
           <span className="edit__heading">Time left</span>
           <span className="edit__time-left">{getLeftTime(parseISO(date))}</span>
           <div className="edit__actions">
-          {/* !isCancelled && !isDone */}
-            {true && (
+            {isCancelled && !isDone && (
               <button
                 type="button"
                 className="panel-btn -cancel"
