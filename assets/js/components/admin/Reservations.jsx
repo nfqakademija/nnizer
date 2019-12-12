@@ -7,7 +7,6 @@ import {
   isThisWeek,
 } from 'date-fns/esm';
 
-import BookBtn from '../contractor/BookBtn';
 import ReservationRow from './ReservationRow';
 import { getTranslation } from '../../TranslationService';
 
@@ -119,9 +118,10 @@ const Reservations = (props) => {
     <div className="panel__content admin-container">
       <h2>Reservations</h2>
       {reservations.length === 0 ? (
+        // TODO translation
         <>
-          <p className="reservations__message">
-            You dont have any reservations yet! Share this link and get your
+          <p className="reservations__message"> 
+            You dont have any reservations yet! Share this link and get your 
             first
           </p>
         </>

@@ -1,5 +1,6 @@
 import React from 'react';
-import {getTranslation} from "../../TranslationService";
+import PropTypes from 'prop-types';
+import { getTranslation } from '../../TranslationService';
 
 const Reviews = (props) => {
   const { key } = props;
