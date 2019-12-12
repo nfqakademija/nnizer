@@ -11,6 +11,7 @@ use App\Entity\Review;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture implements FixtureGroupInterface
@@ -124,12 +125,19 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     private $encoder;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * AppFixtures constructor.
      * @param UserPasswordEncoderInterface $encoder
+     * @param LoggerInterface $logger
      */
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(UserPasswordEncoderInterface $encoder, LoggerInterface $logger)
     {
         $this->encoder = $encoder;
+        $this->logger = $logger;
     }
 
     /**
@@ -177,6 +185,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
 
                 $manager->persist($contractor);
             } catch (\Exception $e) {
+                $this->logger->error($e->getMessage());
             }
         }
     }
@@ -194,6 +203,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $manager->persist($coverPhoto);
             $contractor->setCoverPhoto($coverPhoto);
         } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
         }
     }
 
@@ -210,6 +220,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $manager->persist($profilePhoto);
             $contractor->setProfilePhoto($profilePhoto);
         } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
         }
     }
 
@@ -234,6 +245,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $manager->persist($settings);
             $contractor->setSettings($settings);
         } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
         }
     }
 
@@ -262,6 +274,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
                 $manager->persist($reservation);
                 $contractor->addReservation($reservation);
             } catch (\Exception $e) {
+                $this->logger->error($e->getMessage());
             }
         }
     }
@@ -283,6 +296,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
                 $manager->persist($review);
                 $contractor->addReview($review);
             } catch (\Exception $e) {
+                $this->logger->error($e->getMessage());
             }
         }
     }

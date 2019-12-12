@@ -6,6 +6,7 @@ use App\Entity\ContractorSettings;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\ORMException;
+use Psr\Log\LoggerInterface;
 
 /**
  * @method ContractorSettings|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,8 +16,19 @@ use Doctrine\ORM\ORMException;
  */
 class ContractorSettingsRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var
+     */
+    private $logger;
+
+    /**
+     * ContractorSettingsRepository constructor.
+     * @param ManagerRegistry $registry
+     * @param LoggerInterface $logger
+     */
+    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
+        $this->logger = $logger;
         parent::__construct($registry, ContractorSettings::class);
     }
 
@@ -26,6 +38,7 @@ class ContractorSettingsRepository extends ServiceEntityRepository
             $this->_em->persist($contractorSettings);
             $this->_em->flush();
         } catch (ORMException $e) {
+            $this->logger->error($e->getMessage());
         }
     }
 

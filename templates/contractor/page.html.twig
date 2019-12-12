@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ app.user.username }} {{ "contractor.title"|trans }}
+{% block title %}{{ contractor.getUsername() }} {{ "contractor.title"|trans }}
 {% endblock %}
 
 {% block body %}

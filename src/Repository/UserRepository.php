@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
+use Psr\Log\LoggerInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,8 +17,19 @@ use Doctrine\ORM\ORMException;
  */
 class UserRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * UserRepository constructor.
+     * @param ManagerRegistry $registry
+     * @param LoggerInterface $logger
+     */
+    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
+        $this->logger = $logger;
         parent::__construct($registry, User::class);
     }
 
@@ -44,6 +56,7 @@ class UserRepository extends ServiceEntityRepository
             $this->_em->persist($user);
             $this->_em->flush();
         } catch (ORMException $e) {
+            $this->logger->error($e->getMessage());
         }
     }
 }
