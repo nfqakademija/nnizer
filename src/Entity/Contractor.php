@@ -140,6 +140,11 @@ class Contractor implements UserInterface
      * @Groups({"frontPage"})
      */
     private $coverPhoto;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\LostPassword", mappedBy="contractor", cascade={"persist", "remove"})
+     */
+    private $lostPassword;
     /**
      * Contractor constructor.
      */
@@ -588,6 +593,23 @@ class Contractor implements UserInterface
         // set the owning side of the relation if necessary
         if ($coverPhoto->getContractor() !== $this) {
             $coverPhoto->setContractor($this);
+        }
+
+        return $this;
+    }
+
+    public function getLostPassword(): ?LostPassword
+    {
+        return $this->lostPassword;
+    }
+
+    public function setLostPassword(LostPassword $lostPassword): self
+    {
+        $this->lostPassword = $lostPassword;
+
+        // set the owning side of the relation if necessary
+        if ($lostPassword->getContractor() !== $this) {
+            $lostPassword->setContractor($this);
         }
 
         return $this;
