@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import MicroModal from 'micromodal';
+import {getTranslation} from "../../TranslationService.js";
 
 const BookBtn = () => {
   const initModal = () => {
@@ -22,7 +23,7 @@ const BookBtn = () => {
       type="button"
       data-micromodal-trigger="register-modal"
     >
-      Book now
+      {getTranslation('contractor.book')}
     </button>
   );
 };

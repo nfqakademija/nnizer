@@ -21,7 +21,7 @@ const Template = () => {
     axios({
       method: 'get',
       baseURL: `${window.location.protocol}//${window.location.host}`,
-      url: `/api/profile/${contractorName}/working-hours`,
+      url: `/api/profile/${contractorName}`,
     }).then((response) => {
       setUserData(response.data);
       setFetched(true);

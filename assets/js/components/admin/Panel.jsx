@@ -8,10 +8,7 @@ import Sidenav from './Sidenav';
 import Header from './Header';
 import Reservations from './Reservations';
 import Reviews from './Reviews';
-import Management from './Management';
-import Statistics from './Statistics';
 import Settings from './Settings';
-import Help from './Help';
 
 import { showAlert } from '../../Utils/NotificationUtils';
 
@@ -35,7 +32,7 @@ const Panel = () => {
     axios({
       method: 'get',
       baseURL,
-      url: `/api/profile/${username}/working-hours/`,
+      url: `/api/profile/${username}/`,
     })
       .then((response) => {
         setData({
@@ -44,7 +41,7 @@ const Panel = () => {
         });
       })
       .catch((error) => {
-        showAlert('Can\'t load profile data. Try again or contact us!', 'error', 4000);
+        showAlert('Can\'t load profile data. Try again or contact us!', 'error', 4000); // TODO translation
       });
 
     axios({
@@ -106,12 +103,9 @@ const Panel = () => {
                   />
                 )}
               />
-              <Route path="/contractor/manage" component={Management} />
               <Route path="/contractor/settings" component={Settings} />
               <Route path="/contractor/reviews" component={Reviews} />
-              <Route path="/contractor/statistics" component={Statistics} />
               <Route path="/contractor/settings" component={Settings} />
-              <Route path="/contractor/help" component={Help} />
               <Route
                 path="*"
                 component={() => (

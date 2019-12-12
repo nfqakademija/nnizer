@@ -1,9 +1,10 @@
 import React from 'react';
+import {getTranslation} from "../../TranslationService";
 
 const Settings = (props) => {
   return (
     <div className="panel__content admin-container">
-      <h2>Settings</h2>
+      <h2>{getTranslation('crm.settings')}</h2>
     </div>
   );
 };

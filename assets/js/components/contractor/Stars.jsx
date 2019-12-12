@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Rater from 'react-rater';
+import {getTranslation} from "../../TranslationService";
 
 const Stars = (props) => {
   const { reviews } = props;
@@ -24,7 +25,11 @@ const Stars = (props) => {
       <div className="rating__box">
         <Rater total={5} rating={parseFloat(score, 0)} interactive={false} />
         <span className="rating__count">
-          { reviews.length === 1 ? '1 review' : `${reviews.length} reviews`}
+          { reviews.length === 1
+              ? '1 ' + getTranslation('contractor.reviews.singular')
+              : reviews.length >= 10 && reviews.length <= 19
+                ? `${reviews.length} ` + getTranslation('contractor.reviews.plural1')
+                : `${reviews.length} ` + getTranslation('contractor.reviews.plural2')}
         </span>
       </div>
     </div>

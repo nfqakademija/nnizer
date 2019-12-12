@@ -7,9 +7,9 @@ import {
   isThisWeek,
 } from 'date-fns/esm';
 
-
 import BookBtn from '../contractor/BookBtn';
 import ReservationRow from './ReservationRow';
+import { getTranslation } from '../../TranslationService';
 
 const Reservations = (props) => {
   const { reservations, userKey, fetchData } = props;
@@ -121,8 +121,8 @@ const Reservations = (props) => {
       {reservations.length === 0 ? (
         <>
           <p className="reservations__message">
-            You don't have any reservations yet! Share this link and get your
-            first{' '}
+            You dont have any reservations yet! Share this link and get your
+            first
           </p>
         </>
       ) : (
@@ -142,19 +142,12 @@ const Reservations = (props) => {
           <ul className="reservations">
             <li className="reservations__labels">
               <div className="row">
-                <span className="reservations__label col-lg-1">
-                  date
-                  <i className="icon-sort reservations__label-sort" />
-                </span>
-                <span className="reservations__label col-lg-3">name</span>
-                <span className="reservations__label col-lg-3">
-                  email address
-                </span>
-                <span className="reservations__label col-lg-2">
-                  phone number
-                </span>
-                <span className="reservations__label col-lg-2">status</span>
-                <span className="reservations__label col-lg-1">edit</span>
+                <span className="reservations__label col-lg-1">{getTranslation('crm.date')}</span>
+                <span className="reservations__label col-lg-3">{getTranslation('crm.name')}</span>
+                <span className="reservations__label col-lg-3">{getTranslation('crm.email')}</span>
+                <span className="reservations__label col-lg-2">{getTranslation('crm.phone')}</span>
+                <span className="reservations__label col-lg-2">{getTranslation('crm.status')}</span>
+                <span className="reservations__label col-lg-1">{getTranslation('crm.actions')}</span>
               </div>
             </li>
             {getFilteredReservations().map((reservation) => (

@@ -1,5 +1,6 @@
 import React, { useLocation } from 'react';
 import PropTypes from 'prop-types';
+import { getTranslation } from '../../TranslationService';
 
 const PanelHeader = (props) => {
   const { isOpen, toggleNav, avatar, name } = props;
@@ -30,7 +31,7 @@ const PanelHeader = (props) => {
         <input
           type="search"
           ref={searchInput}
-          placeholder="Type in to search…"
+          placeholder={getTranslation('crm.search')}
           className="js-search-input"
         />
       </div>

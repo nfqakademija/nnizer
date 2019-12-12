@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uuidv4 from 'uuid/v4';
+import {getTranslation} from "../../../TranslationService";
 
 const WorkHours = (props) => {
   const { days } = props;
@@ -20,10 +21,10 @@ const WorkHours = (props) => {
       <li key={uuidv4()} className="work-days__row">
         <div className="work-days__day">
           <div className={`status -circle ${day.isWorkday ? '-open' : '-closed'}`} />
-          {weekDays[dayNum]}
+          {getTranslation('contractor.days.' + weekDays[dayNum])}
         </div>
         <time className="work-days__time">
-          {day.isWorkday ? `${day.startTime} - ${day.endTime}` : 'CLOSED' }
+          {day.isWorkday ? `${day.startTime} - ${day.endTime}` : getTranslation('contractor.days.closed') }
         </time>
       </li>
     ))
@@ -32,7 +33,7 @@ const WorkHours = (props) => {
   return (
     <div className="work-days">
       <h2 className="contractor__heading">
-        Work hours
+          {getTranslation('contractor.days.title')}
       </h2>
       <ul className="work-days__list">
         {getWorkHours()}

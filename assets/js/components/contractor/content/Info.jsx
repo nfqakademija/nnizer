@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getTranslation } from '../../../TranslationService';
 
 const Info = (props) => {
   const {
@@ -28,12 +29,12 @@ const Info = (props) => {
 
   return (
     <div className="info">
-      <h2 className="contractor__heading">Useful information</h2>
+      <h2 className="contractor__heading">{getTranslation('contractor.useful-info')}</h2>
       <ul className="info__list">
-        {address && getRow('location', 'location', `https://maps.google.com/?q=${address}`, address)}
-        {phoneNumber && getRow('phone', 'phoneNumber', `tel:${phoneNumber}`, phoneNumber, false)}
-        {email && getRow('envelope', 'Email Address', `mailto:${email}`, email, false)}
-        {facebook && getRow('facebook', 'Facebook', `https://facebook.com/${facebook}`, facebook)}
+        {address && getRow('location', getTranslation('contractor.location'), `https://maps.google.com/?q=${address}`, address)}
+        {phoneNumber && getRow('phone', getTranslation('contractor.phone'), `tel:${phoneNumber}`, phoneNumber, false)}
+        {email && getRow('envelope', getTranslation('contractor.email'), `mailto:${email}`, email)}
+        {facebook && getRow('facebook', getTranslation('contractor.facebook'), `https://facebook.com/${facebook}`, facebook)}
       </ul>
     </div>
   );
