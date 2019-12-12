@@ -53,7 +53,6 @@ const Panel = () => {
       url: `/api/contractor/${key}/get-clients/`,
     })
       .then((response) => {
-        console.log(response.data);
         setReservations(response.data);
       })
       .catch((error) => {

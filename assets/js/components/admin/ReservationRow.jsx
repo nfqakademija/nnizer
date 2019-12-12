@@ -166,7 +166,7 @@ const ReservationRow = (props) => {
           <span className="edit__heading">Time left</span>
           <span className="edit__time-left">{getLeftTime(parseISO(date))}</span>
           <div className="edit__actions">
-            {isCancelled && !isDone && (
+            {!isCancelled && !isDone && (
               <button
                 type="button"
                 className="panel-btn -cancel"
@@ -177,7 +177,7 @@ const ReservationRow = (props) => {
                 Cancel
               </button>
             )}
-            {!isVerified && !isDone && (
+            {!isVerified && !isDone && !isCancelled && (
               <button
                 type="button"
                 className="panel-btn -success"

@@ -4,11 +4,11 @@
 
 {% block body %}
     
-    {% include('register-modal.html') with {'text': 'Add existing reservation'} %}
+    {# {% include('register-modal.html') with {'text': 'Add existing reservation'} %} #}
     <div id="admin" data-key="{{ app.user.verificationKey }}" data-username="{{ app.user.username }}">
     </div> 
     {% block javascripts %}
         {{ encore_entry_script_tags('admin') }}
-        {{ encore_entry_script_tags('datepicker') }}
+        {# {{ encore_entry_script_tags('datepicker') }} #}
     {% endblock %}
 {% endblock %}

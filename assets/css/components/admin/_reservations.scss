@@ -26,6 +26,10 @@
     padding: rem(8px) 0;
     text-transform: uppercase;
     white-space: nowrap;
+
+    &-sort {
+      font-size: rem(12px);
+    }
   }
 
   &__row {
@@ -76,6 +80,7 @@
 
     &:first-child {
       background-color: $color-yellow;
+      border-radius: rem(6px) rem(6px) 0 0;
       display: flex;
       font-weight: 600;
       justify-content: center;
@@ -83,6 +88,7 @@
       padding: rem(16px) rem(8px);
 
       @include breakpoint(lg) {
+        border-radius: rem(6px) 0 rem(6px);
         margin: 0;
         padding: 0;
       }
