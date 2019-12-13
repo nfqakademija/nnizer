@@ -57,6 +57,21 @@
     }
   }
 
+  &__text {
+    margin-top: rem(24px);
+
+    .link {
+      background: none;
+      border: none;
+      font-size: 16px;
+      margin-left: rem(12px);
+
+      &.-underline::after {
+        bottom: rem(1px);
+      }
+    }
+  }
+
   &__item {
     align-items: center;
     display: flex;
