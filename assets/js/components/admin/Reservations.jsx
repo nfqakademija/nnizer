@@ -154,6 +154,7 @@ const Reservations = (props) => {
                 date={reservation.visitDate}
                 name={`${reservation.firstname} ${reservation.lastname}`}
                 email={reservation.email}
+                phoneNumber={reservation.phoneNumber}
                 isVerified={reservation.isVerified}
                 isCancelled={reservation.isCancelled}
                 fetchData={fetchData}

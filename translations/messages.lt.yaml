@@ -25,11 +25,14 @@ registration_form:
   already-registered: Jau užsiregistravote? Prisijunkite!
   register: Registracija
   register.button: Registruotis
+  firstname: Jūsų vardas
+  lastname: Jūsų pavardė
   username: Vartotojo vardas *
   email: El. paštas *
   plainPassword: Slaptažodis *
   provider: Paslaugos teikėjas
   date: Vizito data
+  phone: Tel. nr.
 
 flash:
   reservation:
@@ -112,6 +115,8 @@ crm:
   name: Vardas
   email: El. paštas
   phone: Tel. nr.
+  missing:
+    phone: nenurodyta
   status: Būsena
   reservations: Rezervacijos
   search: Paieška

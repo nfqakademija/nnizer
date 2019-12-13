@@ -25,11 +25,14 @@ registration_form:
   already-registered: Already registered? Click to login!
   register: Register
   register.button: Register
+  firstname: Your firstname
+  lastname: Your lastname
   username: Username
   email: Email Address
   plainPassword: Password
   provider: Service provider
   date: Visit date
+  phone: Phone Number
 
 flash:
   reservation:
@@ -113,6 +116,8 @@ crm:
   name: Name
   email: Email address
   phone: Phone number
+  missing:
+    phone: not given
   status: Status
   reservations: Reservations
   search: Type in to search...
