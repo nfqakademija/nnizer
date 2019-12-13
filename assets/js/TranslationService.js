@@ -6,7 +6,11 @@ const getTranslation = (key, domain = "messages") => {
     const currentLocale = Translator.locale;
     const translations = getTranslationsByLocale(currentLocale);
 
-    return translations.translations[currentLocale][domain][key];
+    if (translations.translations[currentLocale][domain][key] != null) {
+        return translations.translations[currentLocale][domain][key];
+    } else {
+        return key;
+    }
 };
 
 const getTranslationsByLocale = (locale) => {
