@@ -24,7 +24,7 @@ class ReservationController extends AbstractController
      * @param ReservationFactory $reservationFactory
      * @param MailerService $mailer
      * @param ReservationValidation $reservationValidation
-     * @return Response
+     * @return JsonResponse
      * @throws Exception
      */
     public function register(
@@ -60,7 +60,7 @@ class ReservationController extends AbstractController
 
             return new JsonResponse();
         } else {
-            return new JsonResponse(null, Response::HTTP_PARTIAL_CONTENT);
+            return new JsonResponse($errors, Response::HTTP_PARTIAL_CONTENT);
         }
     }
 
