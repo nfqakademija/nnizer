@@ -26,10 +26,7 @@ registration_form:
   register: Registracija
   register.button: Registruotis
   username: Vartotojo vardas *
-  firstname: Jūsų vardas *
-  lastname: Jūsų pavardė *
   email: El. paštas *
-  phoneNumber: Telefono numeris
   plainPassword: Slaptažodis *
   provider: Paslaugos teikėjas
   date: Vizito data
@@ -102,6 +99,9 @@ detailsForm:
     placeholder: '/manopuslapis'
   coverPhoto: Viršelio nuotrauka
   profilePhoto: Paskyros nuotrauka
+  firstname: Jūsų vardas
+  lastname: Jūsų pavardė
+  phoneNumber: Telefono numeris
 
 locales:
   lt: Lietuvių k.

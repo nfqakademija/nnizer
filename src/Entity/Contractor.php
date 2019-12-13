@@ -56,13 +56,13 @@ class Contractor implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="string", length=32, nullable=true)
      * @Groups({"frontPage"})
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="string", length=32, nullable=true)
      * @Groups({"frontPage"})
      */
     private $lastname;
