@@ -41,17 +41,17 @@ const PanelHeader = (props) => {
           className="person__avatar"
           alt="users profile avatar"
         />
-        <span className="person__name">{name.length > 1 ? name : 'Anonymous'}</span>
+        <span className="person__name">{name}</span>
       </div>
     </header>
   );
 };
 
 PanelHeader.propTypes = {
-  toggleNav: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  avatar: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+    toggleNav: PropTypes.func.isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    avatar: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
 };
 
 export default PanelHeader;
