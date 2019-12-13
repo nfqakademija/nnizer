@@ -6,17 +6,95 @@
     <div class="container container--top-spacing">
         <h1>{{ "settings_form.title"|trans }}</h1>
 
-        {{ form_start(settingsForm, { attr: {novalidate: 'novalidate' }}) }}
-        {{ form_row(settingsForm.Monday) }}
-        {{ form_row(settingsForm.Tuesday) }}
-        {{ form_row(settingsForm.Wednesday) }}
-        {{ form_row(settingsForm.Thursday) }}
-        {{ form_row(settingsForm.Friday) }}
-        {{ form_row(settingsForm.Saturday) }}
-        {{ form_row(settingsForm.Sunday) }}
-        {{ form_row(settingsForm.visitDuration) }}
+        {{ form_start(settingsForm, { attr: {novalidate: 'novalidate', class: 'form' } }) }}
+            <p class="form__message">
+                Please select your work days!
+            </p>
+            <div class="form__checkboxes">
+                <div class="form__checkbox">
+                    <input type="checkbox" class="js-checkbox js-monday-checkbox" name="checkbox1" data-trigger="js-monday-field">
+                    Monday
+                </div>
+                <div class="form__checkbox">
+                    <input type="checkbox" class="form__checkbox-input js-checkbox js-tuesday-checkbox" name="checkbox2" data-trigger="js-tuesday-field">
+                    Tuesday
+                </div>
+                <div class="form__checkbox">
+                    <input type="checkbox" class="js-checkbox js-wednesday-checkbox" name="checkbox3" data-trigger="js-wednesday-field">
+                    Wednesday
+                </div>
+                <div class="form__checkbox">
+                    <input type="checkbox" class="js-checkbox js-thursday-checkbox" name="checkbox4" data-trigger="js-thursday-field">
+                    Thursday
+                </div>
+                <div class="form__checkbox">
+                    <input type="checkbox" class="js-checkbox js-friday-checkbox" name="checkbox5" data-trigger="js-friday-field">
+                    Friday
+                </div>
+                <div class="form__checkbox">
+                    <input type="checkbox" class="js-checkbox js-saturday-checkbox" name="checkbox6" data-trigger="js-saturday-field">
+                    Saturday
+                </div>
+                <div class="form__checkbox">
+                    <input type="checkbox" class="js-checkbox js-sunday-checkbox" name="checkbox7" data-trigger="js-sunday-field">
+                    Sunday
+                </div>
+            </div>
 
-        <button class="btn">{{ "settings_form.submit"|trans }}</button>
+            <div class="form__field js-monday-field hidden">
+                {{ form_widget(settingsForm.Monday) }}
+                {{ form_label(settingsForm.Monday) }}
+            </div> 
+
+             <div class="form__field js-tuesday-field hidden">
+                {{ form_widget(settingsForm.Tuesday) }}
+                {{ form_label(settingsForm.Tuesday) }}
+            </div> 
+
+             <div class="form__field js-wednesday-field hidden">
+                {{ form_widget(settingsForm.Wednesday) }}
+                {{ form_label(settingsForm.Wednesday) }}
+            </div> 
+
+             <div class="form__field js-thursday-field hidden">
+                {{ form_widget(settingsForm.Thursday) }}
+                {{ form_label(settingsForm.Thursday) }}
+            </div> 
+
+             <div class="form__field js-friday-field hidden">
+                {{ form_widget(settingsForm.Friday) }}
+                {{ form_label(settingsForm.Friday) }}
+            </div> 
+
+             <div class="form__field js-saturday-field hidden">
+                {{ form_widget(settingsForm.Saturday) }}
+                {{ form_label(settingsForm.Saturday) }}
+            </div> 
+
+             <div class="form__field js-sunday-field hidden">
+                {{ form_widget(settingsForm.Sunday) }}
+                {{ form_label(settingsForm.Sunday) }}
+            </div> 
+
+            <div class="form__field">
+                {{ form_widget(settingsForm.visitDuration) }}
+                {{ form_label(settingsForm.visitDuration) }}
+            </div> 
+
+            <button class="btn">{{ "settings_form.submit"|trans }}</button>
         {{ form_end(settingsForm) }}
     </div>
+
+    {% block javascripts %}
+        <script>
+            const checkboxes = document.querySelectorAll('.js-checkbox');
+            
+            checkboxes.forEach((cb) => {
+                cb.addEventListener('change', () => {
+                    const field = document.getElementsByClassName(cb.dataset.trigger)[0];
+                    field.classList.toggle('hidden');
+                });
+            });
+        </script>
+    {% endblock %}
 {% endblock %}

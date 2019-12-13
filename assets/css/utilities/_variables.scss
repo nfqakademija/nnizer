@@ -17,9 +17,9 @@ $container-xl: 1140px;
 $z-index: (
   above: 100,
   modal: 50,
-  sidenav: 20,
+  overlay: 20,
   dropdown: 10,
-  overlay: 5,
+  sidenav: 5,
   link: 1,
   below: -1
 );

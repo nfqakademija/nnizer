@@ -20,7 +20,7 @@ const SettingsBtn = () => {
     <button
       className="contractor-btn"
       type="button"
-      data-micromodal-trigger="register-modal"
+      data-micromodal-trigger="settings-modal"
     >
       Change settings
     </button>

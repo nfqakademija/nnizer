@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 .form {
   font-size: 0.875rem;
   margin: 0 rem(1px);
@@ -35,6 +39,10 @@
     top: rem(-12px);
   }
 
+  &__message {
+    margin-bottom: rem(16px);
+  }
+
   input {
     border: 1px solid $color-grey-2;
     border-radius: rem(2px);
@@ -64,6 +72,25 @@
       font-size: rem(12px);
       padding: 0 rem(2px);
       top: 0;
+    }
+  }
+
+  &__checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: rem(24px);
+  }
+
+  &__checkbox {
+    display: flex;
+    width: 30%;
+    margin-bottom: rem(16px);
+
+    input {
+      min-height: 0;
+      width: auto;
+      margin-right: rem(8px);
     }
   }
 }
