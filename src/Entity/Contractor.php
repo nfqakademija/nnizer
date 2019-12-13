@@ -140,6 +140,7 @@ class Contractor implements UserInterface
      * @Groups({"frontPage"})
      */
     private $coverPhoto;
+
     /**
      * Contractor constructor.
      */
@@ -149,6 +150,9 @@ class Contractor implements UserInterface
         $this->reservations = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getUsername();

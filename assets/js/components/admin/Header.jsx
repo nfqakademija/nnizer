@@ -41,7 +41,7 @@ const PanelHeader = (props) => {
           className="person__avatar"
           alt="users profile avatar"
         />
-        <span className="person__name">{name}</span>
+        <span className="person__name">{name == null ? name : 'Anonymous'}</span>
       </div>
     </header>
   );
