@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Contractor;
+use App\Entity\CoverPhoto;
+use App\Entity\ProfilePhoto;
 use App\Form\RegistrationFormType;
 use App\Security\ContractorAuthenticator;
 use App\Service\MailerService;
@@ -48,6 +50,8 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+
+            $user->setDefaultProfilePhoto();
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
