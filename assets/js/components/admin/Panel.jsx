@@ -8,7 +8,7 @@ import Sidenav from './Sidenav';
 import Header from './Header';
 import Reservations from './reservations/Reservations';
 import Reviews from './reviews/Reviews';
-import Settings from './Settings';
+import Settings from './settings/Settings';
 
 import { showAlert } from '../../Utils/NotificationUtils';
 import getTranslation from "../../TranslationService";
@@ -107,7 +107,7 @@ const Panel = () => {
                 )}
               />
               <Route path="/contractor/reviews" component={() => (<Reviews reviews={data.isFetched && data.users.reviews} />)} />
-              <Route path="/contractor/settings" component={Settings} />
+              <Route path="/contractor/settings" component={() => (<Settings userData={data.isFetched && data.users} />)} />
               <Route
                 path="*"
                 component={() => (

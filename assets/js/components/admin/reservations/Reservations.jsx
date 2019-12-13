@@ -164,7 +164,7 @@ const Reservations = (props) => {
                   {getTranslation('crm.no_reservations_matching')}
                   <button
                     type="button"
-                    className="link -underline"
+                    className="panel-btn -cancel"
                     onClick={resetFilters}
                   >
                     {getTranslation('crm.reset_filters')}
