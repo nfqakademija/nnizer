@@ -60,8 +60,6 @@ Encore
   .enableSassLoader()
   .enableReactPreset()
 
-  //.addEntry('admin', './assets/js/admin.js')
-
   .addPlugin(new CopyPlugin([{ from: './assets/images', to: 'images' }]));
 
 module.exports = Encore.getWebpackConfig();

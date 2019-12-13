@@ -51,12 +51,9 @@ const Reservations = (props) => {
     </button>
   );
 
-  const isAnyFilterSelected = () => {
-    if (isCancelledFilter || isPendingFilter || isConfirmedFilter || isExpiredFilter) {
-      return true;
-    }
-    return false;
-  };
+  const isAnyFilterSelected = () => (
+    isCancelledFilter || isPendingFilter || isConfirmedFilter || isExpiredFilter
+  );
 
   const removeDublicateReversations = (filteredReservations) => (
     filteredReservations.filter((item, pos) => filteredReservations.indexOf(item) === pos)
@@ -120,9 +117,8 @@ const Reservations = (props) => {
       {reservations.length === 0 ? (
         // TODO translation
         <>
-          <p className="reservations__message"> 
-            You dont have any reservations yet! Share this link and get your 
-            first
+          <p className="reservations__message">
+            You dont have any reservations yet!
           </p>
         </>
       ) : (

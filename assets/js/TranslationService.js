@@ -2,7 +2,7 @@ import Translator from 'bazinga-translator';
 import transEN from './translations/en.json';
 import transLT from './translations/lt.json';
 
-export const getTranslationsByLocale = (locale) => {
+const getTranslationsByLocale = (locale) => {
   switch (locale) {
     case 'en':
       return transEN;
@@ -16,5 +16,12 @@ export const getTranslationsByLocale = (locale) => {
 export const getTranslation = (key, domain = 'messages') => {
   const currentLocale = Translator.locale;
   const translations = getTranslationsByLocale(currentLocale);
-  return translations.translations[currentLocale][domain][key];
+
+  if (translations.translations[currentLocale][domain][key] != null) {
+    return translations.translations[currentLocale][domain][key];
+  }
+
+  return key;
 };
+
+export default getTranslation;
