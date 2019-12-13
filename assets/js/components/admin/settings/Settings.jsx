@@ -10,7 +10,6 @@ import Field from './Field';
 
 const Settings = (props) => {
   const { userData } = props;
-  console.log(userData);
   const baseURL = `${window.location.protocol}//${window.location.host}`;
 
   return (
