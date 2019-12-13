@@ -21,7 +21,7 @@ const Sidenav = (props) => {
   return (
     <nav className={`sidenav js-sidenav ${isOpen ? '-open' : ''}`}>
       <i
-        role="button" 
+        role="button"
         aria-label="close menu"
         tabIndex="0"
         className="icon-cross sidenav__close"

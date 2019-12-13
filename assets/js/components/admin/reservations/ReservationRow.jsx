@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { format, differenceInHours, isSameDay, isPast } from 'date-fns';
 import { parseISO, differenceInDays } from 'date-fns/esm';
-import { getTranslation } from '../../TranslationService';
+import { getTranslation } from '../../../TranslationService';
 
-import { showAlert, updateAlert } from '../../Utils/NotificationUtils';
+import { showAlert, updateAlert } from '../../../Utils/NotificationUtils';
 
 const ReservationRow = (props) => {
   const [editOpen, editToggle] = useState(false);
@@ -111,7 +111,7 @@ const ReservationRow = (props) => {
   const formatDate = () => {
     const day = parseISO(date);
     if (isSameDay(new Date(), day)) {
-      return `Today, ${format(day, 'HH:mm')}`;
+      return `Today, ${format(day, 'HH:mm')}`; // TODO translation
     }
     return format(day, 'yyyy-MM-dd, HH:mm');
   };

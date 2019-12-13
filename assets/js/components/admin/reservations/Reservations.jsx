@@ -5,10 +5,11 @@ import {
   isPast,
   isToday,
   isThisWeek,
+  format,
 } from 'date-fns/esm';
 
 import ReservationRow from './ReservationRow';
-import { getTranslation } from '../../TranslationService';
+import { getTranslation } from '../../../TranslationService';
 
 const Reservations = (props) => {
   const { reservations, userKey, fetchData } = props;
@@ -54,6 +55,15 @@ const Reservations = (props) => {
   const isAnyFilterSelected = () => (
     isCancelledFilter || isPendingFilter || isConfirmedFilter || isExpiredFilter
   );
+
+  const resetFilters = () => {
+    setTodayFilter(false);
+    setWeekFilter(false);
+    setCancelledFilter(false);
+    setPendingFilter(false);
+    setConfirmedFilter(false);
+    setExpiredFilter(false);
+  };
 
   const removeDublicateReversations = (filteredReservations) => (
     filteredReservations.filter((item, pos) => filteredReservations.indexOf(item) === pos)
@@ -113,12 +123,14 @@ const Reservations = (props) => {
 
   return (
     <div className="panel__content admin-container">
+      <p className="panel__time">
+        {`📆 Today is ${format(new Date(), 'd LLL, cccc!')} `}
+      </p>
       <h2>Reservations</h2>
       {reservations.length === 0 ? (
-        // TODO translation
         <>
           <p className="reservations__message">
-            You dont have any reservations yet!
+            You dont have any reservations yet! 
           </p>
         </>
       ) : (
@@ -146,19 +158,34 @@ const Reservations = (props) => {
                 <span className="reservations__label col-lg-1">{getTranslation('crm.actions')}</span>
               </div>
             </li>
-            {getFilteredReservations().map((reservation) => (
-              <ReservationRow
-                key={reservation.id}
-                userKey={userKey}
-                id={reservation.id}
-                date={reservation.visitDate}
-                name={`${reservation.firstname} ${reservation.lastname}`}
-                email={reservation.email}
-                isVerified={reservation.isVerified}
-                isCancelled={reservation.isCancelled}
-                fetchData={fetchData}
-              />
-            ))}
+            {getFilteredReservations().length === 0 ? (
+              <>
+                <p className="reservations__text">
+                  No reservations matching your criteria.
+                  <button
+                    type="button"
+                    className="link -underline"
+                    onClick={resetFilters}
+                  >
+                    reset filters
+                  </button>
+                </p>
+              </>
+            ) : (
+              getFilteredReservations().map((reservation) => (
+                <ReservationRow
+                  key={reservation.id}
+                  userKey={userKey}
+                  id={reservation.id}
+                  date={reservation.visitDate}
+                  name={`${reservation.firstname} ${reservation.lastname}`}
+                  email={reservation.email}
+                  isVerified={reservation.isVerified}
+                  isCancelled={reservation.isCancelled}
+                  fetchData={fetchData}
+                />
+              ))
+            )}
           </ul>
         </>
       )}

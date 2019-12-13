@@ -6,8 +6,8 @@ import { ToastContainer } from 'react-toastify';
 import Loader from '../contractor/Loader';
 import Sidenav from './Sidenav';
 import Header from './Header';
-import Reservations from './Reservations';
-import Reviews from './Reviews';
+import Reservations from './reservations/Reservations';
+import Reviews from './reviews/Reviews';
 import Settings from './Settings';
 
 import { showAlert } from '../../Utils/NotificationUtils';
@@ -35,6 +35,7 @@ const Panel = () => {
       url: `/api/profile/${username}/`,
     })
       .then((response) => {
+        console.log(response.data);
         setData({
           users: response.data,
           isFetched: true,
@@ -103,8 +104,7 @@ const Panel = () => {
                   />
                 )}
               />
-              <Route path="/contractor/settings" component={Settings} />
-              <Route path="/contractor/reviews" component={Reviews} />
+              <Route path="/contractor/reviews" component={() => (<Reviews reviews={data.isFetched && data.users.reviews} />)} />
               <Route path="/contractor/settings" component={Settings} />
               <Route
                 path="*"

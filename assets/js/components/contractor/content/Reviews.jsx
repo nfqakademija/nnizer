@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import uuidv4 from 'uuid/v4';
 
-import Stars from '../Stars';
+import Stars from '../../Stars';
 import ReviewCard from './ReviewCard';
 import { getTranslation } from '../../../TranslationService';
 
