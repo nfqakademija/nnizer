@@ -52,14 +52,22 @@ const Reviews = (props) => {
 
   return (
     <div className="reviews">
-      <h2 className="contractor__heading">{getTranslation('contractor.reviews.title')}</h2>
+      <h2 className="contractor__heading">
+        {getTranslation('contractor.reviews.title')}
+      </h2>
       {reviews.length === 0 ? (
-        <p className="reviews__message"> {getTranslation('contractor.reviews.none')}😕</p>
+        <p className="reviews__message">
+          {getTranslation('contractor.reviews.none')}
+          😕
+        </p>
       ) : (
         <>
           <Stars reviews={reviews} />
           <div className="reviews__filters">
-            <p className="reviews__text">{getTranslation('contractor.reviews.filter.title')}:</p>
+            <p className="reviews__text">
+              {getTranslation('contractor.reviews.filter.title')}
+              :
+            </p>
             <ul className="reviews__filter">{getFilters()}</ul>
           </div>
           <ul className="reviews__list">

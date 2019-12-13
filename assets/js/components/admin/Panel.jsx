@@ -8,7 +8,7 @@ import Sidenav from './Sidenav';
 import Header from './Header';
 import Reservations from './reservations/Reservations';
 import Reviews from './reviews/Reviews';
-import Settings from './Settings';
+import Settings from './settings/Settings';
 
 import { showAlert } from '../../Utils/NotificationUtils';
 
@@ -35,7 +35,6 @@ const Panel = () => {
       url: `/api/profile/${username}/`,
     })
       .then((response) => {
-        console.log(response.data);
         setData({
           users: response.data,
           isFetched: true,
@@ -84,7 +83,7 @@ const Panel = () => {
               toggleNav={toggleNav}
               avatar={
                 data.isFetched
-                  ? `${baseURL}/uploads/profile/${''}}`
+                  ? `${baseURL}/uploads/profile/${data.users.profilePhoto.filename}`
                   : ''
               }
               name={
@@ -105,7 +104,7 @@ const Panel = () => {
                 )}
               />
               <Route path="/contractor/reviews" component={() => (<Reviews reviews={data.isFetched && data.users.reviews} />)} />
-              <Route path="/contractor/settings" component={Settings} />
+              <Route path="/contractor/settings" component={() => (<Settings userData={data.isFetched && data.users} />)} />
               <Route
                 path="*"
                 component={() => (

@@ -54,4 +54,12 @@
       }
     }
   }
+
+  &.-dark {
+    color: $color-black;
+
+    &:hover {
+      color: $color-grey-1;
+    }
+  }
 }

@@ -37,7 +37,9 @@ const Hero = (props) => {
           {address !== null && (
             <address className="hero__address">
               <i className="icon-location" />
-              {address}
+              <a className="link -hover-underline -dark" href={`https://maps.google.com/?q=${address}`}>
+                {address}
+              </a>
             </address>
           )}
         </div>

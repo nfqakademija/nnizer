@@ -130,7 +130,7 @@ const Reservations = (props) => {
       {reservations.length === 0 ? (
         <>
           <p className="reservations__message">
-            You dont have any reservations yet! 
+            You dont have any reservations yet!
           </p>
         </>
       ) : (
@@ -164,7 +164,7 @@ const Reservations = (props) => {
                   No reservations matching your criteria.
                   <button
                     type="button"
-                    className="link -underline"
+                    className="panel-btn -cancel"
                     onClick={resetFilters}
                   >
                     reset filters

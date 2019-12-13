@@ -9,7 +9,7 @@ import { showAlert, updateAlert } from '../../../Utils/NotificationUtils';
 
 const ReservationRow = (props) => {
   const [editOpen, editToggle] = useState(false);
-  const [isDone, setDone] = useState(false);
+  const [isExpired, setExpired] = useState(false);
 
   const [isCancelDisabled, setCancel] = useState(false);
   const [isApprovalDisabled, setApproval] = useState(false);
@@ -27,9 +27,9 @@ const ReservationRow = (props) => {
   let statusClass = '';
   let statusText = '';
 
-  const setExpired = () => {
+  const setExpiredReservation = () => {
     if (isPast(parseISO(date))) {
-      setDone(true);
+      setExpired(true);
     }
   };
 
@@ -37,10 +37,10 @@ const ReservationRow = (props) => {
     if (isCancelled) {
       statusText = getTranslation('crm.cancelled');
       statusClass = 'cancelled';
-    } else if (isVerified) {
+    } else if (isVerified && !isExpired) {
       statusText = getTranslation('crm.pending');
       statusClass = 'pending';
-    } else if (isDone) {
+    } else if (isExpired) {
       statusText = getTranslation('crm.done');
       statusClass = 'done';
     } else {
@@ -85,14 +85,14 @@ const ReservationRow = (props) => {
     let timeLeft = '';
     const currentDate = new Date();
 
-    if (isDone || isCancelled) {
+    if (isExpired || isCancelled) {
       timeLeft = 'Expired'; // TODO: translations
     } else if (isSameDay(reservationDate, currentDate)) {
       const diffInHours = differenceInHours(reservationDate, currentDate);
-      timeLeft = diffInHours + (diffInHours === 1 ? ' hour' : ' hours');
+      timeLeft = diffInHours + (diffInHours === 1 ? ' hour' : ' hours'); // TODO: translations
     } else {
       const diffInDays = differenceInDays(reservationDate, currentDate);
-      timeLeft = diffInDays + (diffInDays === 1 ? ' day' : ' days');
+      timeLeft = diffInDays + (diffInDays === 1 ? ' day' : ' days'); // TODO: translations
     }
     return timeLeft;
   };
@@ -119,17 +119,17 @@ const ReservationRow = (props) => {
   checkStatus();
 
   useEffect(() => {
-    setExpired();
+    setExpiredReservation();
   }, [editOpen]);
 
   return (
     <li className={`reservations__row ${editOpen ? '-editing' : ''}`}>
       <button
         type="button"
-        className="reservations__btn -mobile js-edit"
+        className={`reservations__btn -mobile js-edit ${editOpen && '-open'}`}
         onClick={() => editToggle(!editOpen)}
       >
-        <i className="icon-edit btn__icon" />
+        <i className={`btn__icon icon-${editOpen ? 'cross' : 'edit'}`} />
       </button>
       <div className="row">
         <div className="reservations__item col-lg-1">{formatDate()}</div>
@@ -146,7 +146,7 @@ const ReservationRow = (props) => {
           +370 627 93122
         </div>
         <div className="reservations__item col-lg-2">
-          <div className={`status -full + -${statusClass}`}>{statusText}</div>
+          <div className={`status -full -${statusClass}`}>{statusText}</div>
         </div>
         <div className="reservations__item col-lg-1">
           <button
@@ -167,7 +167,7 @@ const ReservationRow = (props) => {
           <span className="edit__heading">Time left</span>
           <span className="edit__time-left">{getLeftTime(parseISO(date))}</span>
           <div className="edit__actions">
-            {!isCancelled && !isDone && (
+            {!isCancelled && !isExpired && (
               <button
                 type="button"
                 className="panel-btn -cancel"
@@ -178,7 +178,7 @@ const ReservationRow = (props) => {
                 Cancel
               </button>
             )}
-            {!isVerified && !isDone && !isCancelled && (
+            {!isVerified && !isExpired && !isCancelled && (
               <button
                 type="button"
                 className="panel-btn -success"

@@ -101,6 +101,7 @@ button[disabled] {
   &.-cancel {
     border: 2px solid $color-error-bg;
     color: $color-error-text;
+    margin-top: rem(16px);
 
     &::before {
       content: '\e909';
