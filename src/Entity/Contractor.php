@@ -145,6 +145,7 @@ class Contractor implements UserInterface
      * @ORM\OneToOne(targetEntity="App\Entity\LostPassword", mappedBy="contractor", cascade={"persist", "remove"})
      */
     private $lostPassword;
+
     /**
      * Contractor constructor.
      */
@@ -598,11 +599,18 @@ class Contractor implements UserInterface
         return $this;
     }
 
+    /**
+     * @return LostPassword|null
+     */
     public function getLostPassword(): ?LostPassword
     {
         return $this->lostPassword;
     }
 
+    /**
+     * @param LostPassword $lostPassword
+     * @return $this
+     */
     public function setLostPassword(LostPassword $lostPassword): self
     {
         $this->lostPassword = $lostPassword;

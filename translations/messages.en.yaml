@@ -4,6 +4,26 @@ contractor_page:
 home:
   header: NNIZER project
 
+lost_password:
+  title: Lost your password?
+  description: Enter your email that you have used to register on NNIZER. We will send you a mail with password reset details.
+  email: Email Address
+  submit: Submit
+  nonexisting: There is no associated contractor account
+  invalid:
+    email: Please make sure your email contains '@' and '.'
+  blank:
+    email: Please enter your email
+  sent: An email has been sent
+  existing: There is an active lost password attempt. If you did not receive the email, try again in 60 minutes.
+
+reset_password:
+  title: Reset your password
+  description: Enter your new password twice
+  password: Password
+  submit: Submit
+  mismatch: Passwords must match and they must not be empty!
+
 navigation:
   login: Login
   signup: Sign up
@@ -49,6 +69,7 @@ email:
     verified: Cool! Your reservation has been successfully verified
     cancelled: Oh no! Your reservation is no longed active!
     review: Let us know how it went!
+    lostpassword: Password reset
   signup:
     verify-email: Verify my email
     text: We're so glad that you joined NNIZER team! We hope that you'll enjoy the ride with us. Let's kick off your business with verifying your account email. Press the button below.
@@ -62,6 +83,8 @@ email:
   details:
     provider: Service provider - %provider%
     date: Visit date - %date%
+  lostpassword:
+    text: We have received your password reset request. If it was not you, simply ignore the email. If you actually want to reset your password, click the link below.
   privacy: Privacy
   unsubscribe: Unsubscribe
   copyright: NNIZER Inc., All Rights Reserved.
@@ -72,6 +95,7 @@ email:
     verify: Verify my reservation
     cancel: Cancel my reservation
     home: NNIZER
+    reset: RESET
 
 settings_form:
   title: Your working hours

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Contractor;
 use App\Entity\LostPassword;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -17,6 +18,54 @@ class LostPasswordRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, LostPassword::class);
+    }
+
+    /**
+     * @param Contractor $contractor
+     * @return LostPassword|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findActiveEntry(Contractor $contractor): ?LostPassword
+    {
+        $now = new \DateTime('now');
+        return $this->createQueryBuilder('lp')
+            ->andWhere('lp.contractor = :contractor')
+            ->setParameters(['contractor' => $contractor])
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    /**
+     * @param String $key
+     * @return LostPassword|null
+     * @throws \Exception
+     */
+    public function findActiveEntryByKey(String $key): ?LostPassword
+    {
+        $now = new \DateTime('now');
+        return $this->createQueryBuilder('lp')
+            ->andWhere('lp.resetKey = :key')
+            ->andWhere('lp.expiresAt > :now')
+            ->setParameters(['now' => $now->modify('-60 minutes'), 'key' => $key])
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    /**
+     * @return LostPassword[]
+     * @throws \Exception
+     */
+    public function findAllActiveEntries(): array
+    {
+        $now = new \DateTime('now');
+        return $this->createQueryBuilder('lp')
+            ->andWhere('lp.expiresAt > :now')
+            ->setParameter('now', $now->modify('-60 minutes'))
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
     // /**

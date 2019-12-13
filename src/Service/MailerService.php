@@ -3,6 +3,7 @@
 
 namespace App\Service;
 
+use App\Entity\Contractor;
 use App\Entity\Reservation;
 use Swift_Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -122,6 +123,21 @@ class MailerService extends AbstractController
             ),
             $this->translator->trans('email.heading.review'),
             $reservation->getEmail()
+        );
+    }
+
+    /**
+     * @param Contractor $contractor
+     */
+    public function sendLostPasswordEmail(Contractor $contractor)
+    {
+        $this->sendMail(
+            $this->renderView(
+                'emails/lost-password.html.twig',
+                ['hash' => $contractor->getLostPassword()->getResetKey(), 'user' => $contractor->getUsername()]
+            ),
+            $this->translator->trans('email.heading.lostpassword'),
+            $contractor->getEmail()
         );
     }
 }

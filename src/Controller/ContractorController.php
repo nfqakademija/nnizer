@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Contractor;
 use App\Entity\ContractorSettings;
-use App\Entity\CoverPhoto;
-use App\Entity\ProfilePhoto;
 use App\Entity\Reservation;
 use App\Form\ContractorDetailsFormType;
 use App\Form\ContractorSettingsType;

@@ -17,7 +17,7 @@ class LostPassword
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Contractor", inversedBy="lostPassword", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Contractor", inversedBy="lostPassword", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $contractor;
@@ -37,11 +37,18 @@ class LostPassword
         return $this->id;
     }
 
+    /**
+     * @return Contractor|null
+     */
     public function getContractor(): ?Contractor
     {
         return $this->contractor;
     }
 
+    /**
+     * @param Contractor $contractor
+     * @return $this
+     */
     public function setContractor(Contractor $contractor): self
     {
         $this->contractor = $contractor;
@@ -49,11 +56,18 @@ class LostPassword
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getResetKey(): ?string
     {
         return $this->resetKey;
     }
 
+    /**
+     * @param string $resetKey
+     * @return $this
+     */
     public function setResetKey(string $resetKey): self
     {
         $this->resetKey = $resetKey;
@@ -61,11 +75,18 @@ class LostPassword
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getExpiresAt(): ?\DateTimeInterface
     {
         return $this->expiresAt;
     }
 
+    /**
+     * @param \DateTimeInterface $expiresAt
+     * @return $this
+     */
     public function setExpiresAt(\DateTimeInterface $expiresAt): self
     {
         $this->expiresAt = $expiresAt;

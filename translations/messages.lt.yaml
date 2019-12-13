@@ -4,6 +4,26 @@ contractor_page:
 home:
   header: NNIZER projektas
 
+lost_password:
+  title: Pamiršote slaptažodį?
+  description: Įveskite el. paštą, kuriuo registravotes sistemoje. Mes jums išsiųsime slaptažodžio atstatymo nuorodą.
+  email: El. paštas
+  submit: Pateikti
+  nonexisting: Vartotojas, registruotas šiuo paštu, neegzistuoja.
+  invalid:
+    email: Įvestas neteisingas el. pašto adresas
+  blank:
+    email: Įveskite savo el. paštą
+  sent: Slaptažodžio atstatymo instrukcija buvo išsiųsta el. paštu.
+  existing: Slaptažodžio atstatymo funkcija šiai paskyrai jau iškviesta. Jeigu laiško negavote, pabandykite iš naujo po 60 min.
+
+reset_password:
+  title: Slaptažodžio atstatymas
+  description: Įveskite naują slaptažodį į abu laukelius
+  password: Slaptažodis
+  submit: Pateikti
+  mismatch: Slaptažodžiai privalo sutapti ir jie negali būti tušti!
+
 navigation:
   login: Prisijungti
   signup: Užsiregistruoti
@@ -49,6 +69,7 @@ email:
     verified: Sėkmingai patvirtinote savo rezervaciją!
     cancelled: Jūsų rezervacija buvo atšaukta
     review: Kaip praėjo jūsų vizitas?
+    lostpassword: Slaptažodžio atstatymas
   signup:
     verify-email: Patvirtinti e. paštą
     text: Džiaugemės, kad prisijungėte prie NNIZER komandos! Tikimės, kad mėgausitės naudodamiesi šia platforma. Norėdami pradėti savo veiklą, patvirtinkite paštą paspaudę mygtuką žemiau.
@@ -62,6 +83,8 @@ email:
   details:
     provider: Paslaugos teikėjas - %provider%
     date: Rezervacijos data - %date%
+  lostpassword:
+    text: Mes gavome jūsų paskyros slaptažodžio atstatymo užklausą. Jeigu tai buvote ne jūs, šį laišką galite ignoruoti. Jei iš tikrųjų norite atstatyti slaptažodį, spauskite nuorodą žemiau.
   privacy: Privatumo politika
   unsubscribe: Neprenumeruoti
   copyright: NNIZER Inc., visos teisės saugomos.
@@ -72,6 +95,7 @@ email:
     verify: Patvirtinti rezervaciją
     cancel: Atšaukti rezervaciją
     home: NNIZER
+    reset: ATSTATYTI
 
 settings_form:
   title: Jūsų darbo valandos
