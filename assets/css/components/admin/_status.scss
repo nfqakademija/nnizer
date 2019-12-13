@@ -12,13 +12,13 @@
     width: rem(16px);
   }
 
-  &.-pending,
-  &.-done {
+  &.-pending {
     background-color: $color-success-bg;
     color: $color-success-text;
   }
 
-  &.-cancelled {
+  &.-cancelled,
+  &.-done {
     background-color: $color-error-bg;
     color: $color-error-text;
   }
