@@ -592,4 +592,16 @@ class Contractor implements UserInterface
 
         return $this;
     }
+    
+    /**
+     * @return $this
+     */
+    public function setDefaultProfilePhoto(): self
+    {
+        $profilePhoto = new ProfilePhoto();
+        $profilePhoto->setFilename('default.png');
+        $this->setProfilePhoto($profilePhoto);
+
+        return $this;
+    }
 }

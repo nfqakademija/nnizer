@@ -51,12 +51,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $profilePhoto = new ProfilePhoto();
-            $profilePhoto->setFilename('default.png');
-            $coverPhoto = new CoverPhoto();
-            $coverPhoto->setFilename('default.jpg');
-            $user->setProfilePhoto($profilePhoto);
-            $user->setCoverPhoto($coverPhoto);
+            $user->setDefaultProfilePhoto();
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
