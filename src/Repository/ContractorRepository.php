@@ -7,7 +7,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
-use Psr\Log\LoggerInterface;
 
 /**
  * @method Contractor|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,19 +16,13 @@ use Psr\Log\LoggerInterface;
  */
 class ContractorRepository extends ServiceEntityRepository
 {
-    /**
-     * @var
-     */
-    private $logger;
 
     /**
      * ContractorRepository constructor.
      * @param ManagerRegistry $registry
-     * @param LoggerInterface $logger
      */
-    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
+    public function __construct(ManagerRegistry $registry)
     {
-        $this->logger = $logger;
         parent::__construct($registry, Contractor::class);
     }
 
@@ -49,15 +42,12 @@ class ContractorRepository extends ServiceEntityRepository
 
     /**
      * @param Contractor $contractor
+     * @throws ORMException
      */
     public function save(Contractor $contractor): void
     {
-        try {
-            $this->_em->persist($contractor);
-            $this->_em->flush();
-        } catch (ORMException $e) {
-            $this->logger->error($e->getMessage());
-        }
+        $this->_em->persist($contractor);
+        $this->_em->flush();
     }
 
     // /**

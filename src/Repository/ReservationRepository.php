@@ -9,7 +9,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\P1;
 
 /**
@@ -20,19 +19,13 @@ use Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\P1;
  */
 class ReservationRepository extends ServiceEntityRepository
 {
-    /**
-     * @var
-     */
-    private $logger;
 
     /**
      * ReservationRepository constructor.
      * @param ManagerRegistry $registry
-     * @param LoggerInterface $logger
      */
-    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
+    public function __construct(ManagerRegistry $registry)
     {
-        $this->logger = $logger;
         parent::__construct($registry, Reservation::class);
     }
 
@@ -73,15 +66,12 @@ class ReservationRepository extends ServiceEntityRepository
 
     /**
      * @param Reservation $reservation
+     * @throws ORMException
      */
     public function save(Reservation $reservation): void
     {
-        try {
-            $this->_em->persist($reservation);
-            $this->_em->flush();
-        } catch (ORMException $e) {
-            $this->logger->error($e->getMessage());
-        }
+        $this->_em->persist($reservation);
+        $this->_em->flush();
     }
 
     // /**

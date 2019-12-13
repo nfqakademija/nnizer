@@ -8,7 +8,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
-use Psr\Log\LoggerInterface;
 
 /**
  * @method Review|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,19 +17,13 @@ use Psr\Log\LoggerInterface;
  */
 class ReviewRepository extends ServiceEntityRepository
 {
-    /**
-     * @var
-     */
-    private $logger;
 
     /**
      * ReviewRepository constructor.
      * @param ManagerRegistry $registry
-     * @param LoggerInterface $logger
      */
-    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
+    public function __construct(ManagerRegistry $registry)
     {
-        $this->logger = $logger;
         parent::__construct($registry, Review::class);
     }
 
@@ -50,15 +43,12 @@ class ReviewRepository extends ServiceEntityRepository
 
     /**
      * @param Review $review
+     * @throws ORMException
      */
     public function save(Review $review): void
     {
-        try {
-            $this->_em->persist($review);
-            $this->_em->flush();
-        } catch (ORMException $e) {
-            $this->logger->error($e->getMessage());
-        }
+        $this->_em->persist($review);
+        $this->_em->flush();
     }
 
     // /**
