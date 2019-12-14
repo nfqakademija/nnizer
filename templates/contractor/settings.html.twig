@@ -83,6 +83,22 @@
 
             <button class="btn">{{ "settings_form.submit"|trans }}</button>
         {{ form_end(settingsForm) }}
+
+
+
+        <h1>{{ "detailsForm.title"|trans }}</h1>
+
+        {{ form_start(detailsForm, { attr: {novalidate: 'novalidate' }}) }}
+        {{ form_row(detailsForm.title) }}
+        {{ form_row(detailsForm.description) }}
+        {{ form_row(detailsForm.address) }}
+        {{ form_row(detailsForm.facebook) }}
+        {{ form_row(detailsForm.coverPhoto) }}
+        {{ form_row(detailsForm.profilePhoto) }}
+
+        <button class="btn">{{ "detailsForm.submit"|trans }}</button>
+        {{ form_end(detailsForm) }}
+
     </div>
 
     {% block javascripts %}
