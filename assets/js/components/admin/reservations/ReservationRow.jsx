@@ -20,6 +20,7 @@ const ReservationRow = (props) => {
     date,
     name,
     email,
+    phoneNumber,
     isVerified,
     isCancelled,
     fetchData,
@@ -143,7 +144,7 @@ const ReservationRow = (props) => {
         </div>
         <div className="reservations__item col-lg-2">
           <i className="icon-phone item__icon hide-lg" />
-          +370 627 93122
+          {phoneNumber ? phoneNumber : getTranslation('crm.missing.phone')}
         </div>
         <div className="reservations__item col-lg-2">
           <div className={`status -full -${statusClass}`}>{statusText}</div>
@@ -201,6 +202,7 @@ ReservationRow.propTypes = {
   date: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  phoneNumber: PropTypes.string.isRequired,
   isVerified: PropTypes.bool.isRequired,
   isCancelled: PropTypes.bool.isRequired,
   fetchData: PropTypes.func.isRequired,

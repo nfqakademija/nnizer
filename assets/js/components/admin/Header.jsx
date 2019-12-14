@@ -48,10 +48,10 @@ const PanelHeader = (props) => {
 };
 
 PanelHeader.propTypes = {
-  toggleNav: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  avatar: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+    toggleNav: PropTypes.func.isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    avatar: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
 };
 
 export default PanelHeader;

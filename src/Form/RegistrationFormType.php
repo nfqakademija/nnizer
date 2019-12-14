@@ -6,7 +6,6 @@ use App\Entity\Contractor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -52,34 +51,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('firstname', TextType::class, [
-                'label' => 'registration_form.firstname',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'firstname.empty',
-                    ]),
-                    new Length([
-                        'min' => 2,
-                        'minMessage' => 'firstname.short',
-                        'max' => 32,
-                        'maxMessage' => 'firstname.long',
-                    ])
-                ]
-            ])
-            ->add('lastname', TextType::class, [
-                'label' => 'registration_form.lastname',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'lastname.empty',
-                    ]),
-                    new Length([
-                        'min' => 2,
-                        'minMessage' => 'lastname.short',
-                        'max' => 32,
-                        'maxMessage' => 'lastname.long',
-                    ])
-                ]
-            ])
             ->add('email', EmailType::class, [
                 'label' => 'registration_form.email',
                 'constraints' => [
@@ -90,9 +61,6 @@ class RegistrationFormType extends AbstractType
                         'message' => 'email.invalid',
                     ])
                 ]
-            ])
-            ->add('phoneNumber', TelType::class, [
-                'label' => 'registration_form.phoneNumber',
             ]);
     }
 
