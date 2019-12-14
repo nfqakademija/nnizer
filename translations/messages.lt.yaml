@@ -133,18 +133,20 @@ email:
     reset: ATSTATYTI
 
 settings_form:
+  choosedays: Pasirinkite dienas, kuriomis dirbate
   title: Jūsų darbo valandos
-  Monday-workhours: Pirmadienio darbo valandos
-  Tuesday-workhours: Antradienio darbo valandos
-  Wednesday-workhours: Trečiadienio darbo valandos
-  Thursday-workhours: Ketvirtadienio darbo valandos
-  Friday-workhours: Penktadienio darbo valandos
-  Saturday-workhours: Šeštadienio darbo valandos
-  Sunday-workhours: Sekmadienio darbo valandos
+  Monday: Pirmadienis
+  Tuesday: Antradienis
+  Wednesday: Trečiadienis
+  Thursday: Ketvirtadienis
+  Friday: Penktadienis
+  Saturday: Šeštadienis
+  Sunday: Sekmadienis
   visitDuration: Vizito trukmė
-  Submit: Pateikti
+  submit: Pateikti
 
 detailsForm:
+  edit: Redaguoti paskyrą
   title: Detalės
   submit: Pateikti
   service:

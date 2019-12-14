@@ -133,18 +133,20 @@ email:
     reset: RESET
 
 settings_form:
+  choosedays: Please select your work days!
   title: Your working hours
-  Monday-workhours: Working hours on Monday
-  Tuesday-workhours: Working hours on Tuesday
-  Wednesday-workhours: Working hours on Wednesday
-  Thursday-workhours: Working hours on Thursday
-  Friday-workhours: Working hours on Friday
-  Saturday-workhours: Working hours on Saturday
-  Sunday-workhours: Working hours on Sunday
+  Monday: Monday
+  Tuesday: Tuesday
+  Wednesday: Wednesday
+  Thursday: Thursday
+  Friday: Friday
+  Saturday: Saturday
+  Sunday: Sunday
   visitDuration: Visit duration
   submit: Submit
 
 detailsForm:
+  edit: Edit account
   title: Details
   submit: Submit
   service:
