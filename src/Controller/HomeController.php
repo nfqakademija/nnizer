@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Repository\ContractorRepository;
+use App\Repository\ServiceTypeRepository;
+use App\Service\SerializerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,5 +37,39 @@ class HomeController extends AbstractController
         } else {
             return $this->redirectToRoute('home');
         }
+    }
+
+    /**
+     * @Route("/public-api/services")
+     * @param ServiceTypeRepository $serviceTypeRepository
+     * @param SerializerService $serializer
+     * @return JsonResponse
+     */
+    public function getServiceTypes(
+        ServiceTypeRepository $serviceTypeRepository,
+        SerializerService $serializer
+    ): JsonResponse {
+        $services = $serviceTypeRepository->findAll();
+        $json = $serializer->getResponse($services, ['nameOnly']);
+
+        return new JsonResponse($json);
+    }
+
+    /**
+     * @Route("/public-api/services/{service}")
+     * @param string $service
+     * @param ServiceTypeRepository $serviceTypeRepository
+     * @param SerializerService $serializer
+     * @return JsonResponse
+     */
+    public function getContractorsByServiceType(
+        string $service,
+        ServiceTypeRepository $serviceTypeRepository,
+        SerializerService $serializer
+    ): JsonResponse {
+        $contractors = $serviceTypeRepository->findOneBy(['name' => $service])->getContractors();
+        $json = $serializer->getResponse($contractors, ['filtered']);
+
+        return new JsonResponse($json);
     }
 }

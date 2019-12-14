@@ -35,7 +35,7 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $username;
     
@@ -57,13 +57,13 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=32)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=32)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $lastname;
 
@@ -96,7 +96,7 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="contractor", orphanRemoval=true)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $reviews;
 
@@ -107,13 +107,13 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=32, nullable=true)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $address;
 
@@ -140,6 +140,13 @@ class Contractor implements UserInterface
      * @Groups({"frontPage"})
      */
     private $coverPhoto;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\ServiceType", mappedBy="contractors")
+     * @Groups({"frontPage"})
+     */
+    private $services;
+
     /**
      * Contractor constructor.
      */
@@ -147,8 +154,12 @@ class Contractor implements UserInterface
     {
         $this->reviews = new ArrayCollection();
         $this->reservations = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getUsername();
@@ -588,6 +599,42 @@ class Contractor implements UserInterface
         // set the owning side of the relation if necessary
         if ($coverPhoto->getContractor() !== $this) {
             $coverPhoto->setContractor($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ServiceType[]
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    /**
+     * @param ServiceType $service
+     * @return $this
+     */
+    public function addService(ServiceType $service): self
+    {
+        if (!$this->services->contains($service)) {
+            $this->services[] = $service;
+            $service->addContractor($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ServiceType $service
+     * @return $this
+     */
+    public function removeService(ServiceType $service): self
+    {
+        if ($this->services->contains($service)) {
+            $this->services->removeElement($service);
+            $service->removeContractor($this);
         }
 
         return $this;
