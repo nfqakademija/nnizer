@@ -35,4 +35,20 @@
   &__content {
     padding-top: rem(32px);
   }
+
+  &__time {
+    color: $color-grey-3;
+    font-size: rem(14px);
+    font-weight: 600;
+  }
+
+  &__review-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .rating {
+      margin: 0;
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Rater from 'react-rater';
-import { getTranslation } from '../../TranslationService';
+import { getTranslation } from '../TranslationService';
 
 const Stars = (props) => {
   const { reviews } = props;
