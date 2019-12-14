@@ -25,12 +25,14 @@ class ContractorService
     /**
      * @param Contractor $contractor
      * @return array|null
+     * @throws \Exception
      */
     public function generateContractorCalenderResponse(Contractor $contractor): ?array
     {
         if ($contractor && $settings = $contractor->getSettings()) {
             $reservations = $contractor->getReservations();
             $contractorDetails = $this->json->getResponse($contractor, ['frontPage']);
+            $contractorDetails['reviews'] = $this->hideReviewerPersonalDetails($contractorDetails['reviews']);
             $settings = $this->json->getResponse($settings);
             $days = ['days' => $this->restructuredDaysInfo(array_splice($settings, 0, 7))];
             $workingDays = ['workingDays' => $this->getWorkingDaysArray($days['days'])];
@@ -40,6 +42,22 @@ class ContractorService
         } else {
             return null;
         }
+    }
+
+    /**
+     * @param array $reviews
+     * @return array
+     * @throws \Exception
+     */
+    private function hideReviewerPersonalDetails(array $reviews)
+    {
+        $hiddenDetails = [];
+        foreach ($reviews as $review) {
+            $lastname = $review['reservation']['lastname'];
+            $review['reservation']['lastname'] = strtoupper($lastname[0]) . '.';
+            $hiddenDetails[] = $review;
+        }
+        return $hiddenDetails;
     }
     /**
      * @param array $days
