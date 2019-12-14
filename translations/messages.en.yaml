@@ -91,6 +91,7 @@ detailsForm:
   service:
     title: Service title
     placeholder: Private teacher
+    type: Services type
   description:
     title: Service description
     placeholder: Check out my awesome services!
@@ -158,3 +159,9 @@ contractor:
     Saturday: Saturday
     Sunday: Sunday
   book: Book now
+
+Massages: Massages
+Teaching: Teaching
+Fitness: Fitness
+Driver: Driver
+Hairdressing: Hairdressing

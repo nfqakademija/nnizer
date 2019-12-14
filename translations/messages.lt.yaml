@@ -91,6 +91,7 @@ detailsForm:
   service:
     title: Paslaugos pavadinimas
     placeholder: Asmeninis vairuotojas
+    type: Paslaugų sritis
   description:
     title: Paslaugos aprašymas
     placeholder: Išbandyk mano paslaugas ir nepasigailėk!
@@ -157,3 +158,9 @@ contractor:
     Saturday: Šeštadienis
     Sunday: Sekmadienis
   book: Užsirezervuoti
+
+Massages: Masažai
+Teaching: Privatus mokymas
+Fitness: Fitnesas
+Driver: Asmeninio vairuotojo paslaugos
+Hairdressing: Kirpimo paslaugos

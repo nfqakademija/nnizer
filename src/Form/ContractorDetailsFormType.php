@@ -1,11 +1,12 @@
 <?php
 
-
 namespace App\Form;
 
 use App\Entity\Contractor;
+use App\Entity\ServiceType;
+use App\Repository\ServiceTypeRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,9 +18,12 @@ class ContractorDetailsFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tags', CollectionType::class, [
-                'entry_type' => ServicesType::class,
-                'entry_options' => ['label' => false],
+            ->add('services', EntityType::class, [
+                'label' => 'detailsForm.service.type',
+                'class' => ServiceType::class,
+                'choice_label' => 'name',
+                'choice_translation_domain' => true,
+
             ])
             ->add('title', TextType::class, [
                 'label' => 'detailsForm.service.title',
@@ -77,5 +81,14 @@ class ContractorDetailsFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Contractor::class,
         ]);
+    }
+
+    /**
+     * @param ServiceTypeRepository $services
+     * @return ServiceType[]
+     */
+    private function getServiceTypes(ServiceTypeRepository $services): array
+    {
+        return $services->findAll();
     }
 }
