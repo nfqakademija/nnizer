@@ -13,6 +13,7 @@ const ReservationRow = (props) => {
 
   const [isCancelDisabled, setCancel] = useState(false);
   const [isApprovalDisabled, setApproval] = useState(false);
+  const [isDeletionDisabled, setDeletion] = useState(false);
 
   const {
     id,
@@ -26,6 +27,8 @@ const ReservationRow = (props) => {
   } = props;
   let statusClass = '';
   let statusText = '';
+
+  console.log(id);
 
   const setExpired = () => {
     if (isPast(parseISO(date))) {
@@ -50,9 +53,23 @@ const ReservationRow = (props) => {
   };
 
   const buttonClicked = (msg, setBtn) => {
-    showAlert(msg, '', 20000);
+    showAlert(msg, '', 10000);
     editToggle(!editOpen);
     setBtn(true);
+  };
+
+  const deleteReservation = () => {
+    // @Route("/api/contractor/{contractorKey}/delete/{reservationId}", methods="DELETE")
+    buttonClicked('Removal in progress 🗑', setDeletion);
+    axios
+      .delete(`/api/contractor/${userKey}/delete/${id}`)
+      .then((response) => {
+        fetchData();
+        updateAlert('Removal was successful ✅', 'success', 4000); // TODO translation
+      })
+      .catch((error) => {
+        updateAlert('Removal failed. Please try again.', 'error', 4000); // TODO translation
+      });
   };
 
   const cancelReservation = () => {
@@ -167,12 +184,22 @@ const ReservationRow = (props) => {
           <span className="edit__heading">Time left</span>
           <span className="edit__time-left">{getLeftTime(parseISO(date))}</span>
           <div className="edit__actions">
+            <button
+              type="button"
+              className="panel-btn -delete"
+              // eslint-disable-next-line no-alert
+              onClick={(e) => window.confirm('Are you sure to PERMANENTLY remove this reservation?') && deleteReservation()}
+              disabled={isDeletionDisabled}
+            >
+            Delete
+            </button>
+            
             {!isCancelled && !isDone && (
               <button
                 type="button"
                 className="panel-btn -cancel"
                 // eslint-disable-next-line no-alert
-                onClick={(e) => window.confirm('Are you sure to cancel this reservation?') && cancelReservation()}
+                onClick={(e) => window.confirm('Are you sure to CANCEL this reservation?') && cancelReservation()}
                 disabled={isCancelDisabled}
               >
                 Cancel

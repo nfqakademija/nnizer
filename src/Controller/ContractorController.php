@@ -262,7 +262,7 @@ class ContractorController extends AbstractController
         if ($reservation !== null) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($reservation);
-            $em->persist($reservation);
+            $em->flush();
 
             return new JsonResponse();
         } else {
