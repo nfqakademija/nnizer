@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { format, differenceInHours, isSameDay } from 'date-fns';
+import { format, differenceInHours, isSameDay, isPast } from 'date-fns';
 import { parseISO, differenceInDays } from 'date-fns/esm';
-import {getTranslation} from "../../TranslationService";
+import { getTranslation } from '../../../TranslationService';
+
+import { showAlert, updateAlert } from '../../../Utils/NotificationUtils';
 
 const ReservationRow = (props) => {
   const [editOpen, editToggle] = useState(false);
   const [isDone, setDone] = useState(false);
+
+  const [isCancelDisabled, setCancel] = useState(false);
+  const [isApprovalDisabled, setApproval] = useState(false);
+
   const {
     id,
     userKey,
@@ -22,7 +28,7 @@ const ReservationRow = (props) => {
   let statusText = '';
 
   const setExpired = () => {
-    if (parseISO(date) <= new Date()) {
+    if (isPast(parseISO(date))) {
       setDone(true);
     }
   };
@@ -32,7 +38,7 @@ const ReservationRow = (props) => {
       statusText = getTranslation('crm.cancelled');
       statusClass = 'cancelled';
     } else if (isVerified) {
-      statusText =  getTranslation('crm.pending');
+      statusText = getTranslation('crm.pending');
       statusClass = 'pending';
     } else if (isDone) {
       statusText = getTranslation('crm.done');
@@ -43,24 +49,35 @@ const ReservationRow = (props) => {
     }
   };
 
+  const buttonClicked = (msg, setBtn) => {
+    showAlert(msg, '', 20000);
+    editToggle(!editOpen);
+    setBtn(true);
+  };
+
   const cancelReservation = () => {
-    // TODO add some kind of loading animation while it fetching
-    axios.patch(`/api/contractor/${userKey}/cancel/${id}`)
+    buttonClicked('Cancellation in progress 👨🏼‍💻', setCancel);
+    axios
+      .patch(`/api/contractor/${userKey}/cancel/${id}`)
       .then((response) => {
         fetchData();
+        updateAlert('Cancellation was successful ✅', 'success', 4000); // TODO translation
       })
       .catch((error) => {
-        console.log(error); // To Do error handling
+        updateAlert('Cancellation failed. Please try again.', 'error', 4000); // TODO translation
       });
   };
 
   const approveReservation = () => {
-    axios.patch(`/api/contractor/${userKey}/verify/${id}`)
+    buttonClicked('Approval in progress 👨🏼‍💻', setApproval);
+    axios
+      .patch(`/api/contractor/${userKey}/verify/${id}`)
       .then((response) => {
         fetchData();
+        updateAlert('Approval was successful ✅', 'success', 4000); // TODO translation
       })
       .catch((error) => {
-        console.log(error);
+        updateAlert('Approval failed. Please try again.', 'error', 4000); // TODO translation
       });
   };
 
@@ -69,7 +86,7 @@ const ReservationRow = (props) => {
     const currentDate = new Date();
 
     if (isDone || isCancelled) {
-      timeLeft = 'Expired';
+      timeLeft = 'Expired'; // TODO: translations
     } else if (isSameDay(reservationDate, currentDate)) {
       const diffInHours = differenceInHours(reservationDate, currentDate);
       timeLeft = diffInHours + (diffInHours === 1 ? ' hour' : ' hours');
@@ -91,12 +108,19 @@ const ReservationRow = (props) => {
     );
   };
 
+  const formatDate = () => {
+    const day = parseISO(date);
+    if (isSameDay(new Date(), day)) {
+      return `Today, ${format(day, 'HH:mm')}`; // TODO translation
+    }
+    return format(day, 'yyyy-MM-dd, HH:mm');
+  };
+
   checkStatus();
 
   useEffect(() => {
     setExpired();
-  },
-  [editOpen]);
+  }, [editOpen]);
 
   return (
     <li className={`reservations__row ${editOpen ? '-editing' : ''}`}>
@@ -108,12 +132,10 @@ const ReservationRow = (props) => {
         <i className="icon-edit btn__icon" />
       </button>
       <div className="row">
-        <div className="reservations__item col-lg-1">
-          {format(parseISO(date), 'd MMM, Y EEEE')}
-        </div>
+        <div className="reservations__item col-lg-1">{formatDate()}</div>
         <div className="reservations__item col-lg-3">
           <i className="icon-human item__icon hide-lg" />
-          { name }
+          {name}
         </div>
         <div className="reservations__item col-lg-3">
           <i className="icon-envelope item__icon hide-lg" />
@@ -124,9 +146,7 @@ const ReservationRow = (props) => {
           +370 627 93122
         </div>
         <div className="reservations__item col-lg-2">
-          <div className={`status -full + -${statusClass}`}>
-            { statusText }
-          </div>
+          <div className={`status -full + -${statusClass}`}>{statusText}</div>
         </div>
         <div className="reservations__item col-lg-1">
           <button
@@ -139,31 +159,34 @@ const ReservationRow = (props) => {
         </div>
       </div>
       <div className="row">
-        <div className={`reservations__edit js-edit-window ${editOpen ? '-open' : ''}`}>
+        <div
+          className={`reservations__edit js-edit-window ${
+            editOpen ? '-open' : ''
+          }`}
+        >
           <span className="edit__heading">Time left</span>
-          <span className="edit__time-left">
-            {getLeftTime(parseISO(date))}
-          </span>
+          <span className="edit__time-left">{getLeftTime(parseISO(date))}</span>
           <div className="edit__actions">
-            {(!isVerified && !isDone)
-            && (
-            <button
-              type="button"
-              className="panel-btn -success"
-              onClick={approveReservation}
-            >
-            Approve
-            </button>
+            {!isCancelled && !isDone && (
+              <button
+                type="button"
+                className="panel-btn -cancel"
+                // eslint-disable-next-line no-alert
+                onClick={(e) => window.confirm('Are you sure to cancel this reservation?') && cancelReservation()}
+                disabled={isCancelDisabled}
+              >
+                Cancel
+              </button>
             )}
-            {(!isCancelled && !isDone)
-            && (
-            <button
-              type="button"
-              className="panel-btn -cancel"
-              onClick={cancelReservation}
-            >
-            Cancel
-            </button>
+            {!isVerified && !isDone && !isCancelled && (
+              <button
+                type="button"
+                className="panel-btn -success"
+                onClick={approveReservation}
+                disabled={isApprovalDisabled}
+              >
+                Approve
+              </button>
             )}
           </div>
         </div>

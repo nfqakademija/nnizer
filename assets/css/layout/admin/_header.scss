@@ -29,7 +29,9 @@
       display: flex;
 
       img {
+        border-radius: rem(8px);
         height: rem(40px);
+        object-fit: cover;
         width: rem(40px);
       }
 

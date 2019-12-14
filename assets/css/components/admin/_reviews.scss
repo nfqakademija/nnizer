@@ -1,0 +1,43 @@
+.admin-reviews {
+  display: grid;
+  grid-column-gap: rem(16px);
+  grid-row-gap: rem(24px);
+  grid-template-columns: repeat(auto-fill, minmax(rem(300px), 1fr));
+  margin: rem(32px) 0;
+
+  &__card {
+    background: white;
+    border-radius: rem(2px);
+    box-shadow: 0 0 rem(5px) rgba(0, 0, 0, 0.25);
+    padding: rem(16px) rem(24px);
+
+    @include transition(box-shadow 0.2s, transform 0.2s);
+
+    &:hover {
+      box-shadow: 0 0 rem(10px) rgba(0, 0, 0, 0.5);
+      transform: scale(1.05);
+    }
+
+    .card {
+      &__name {
+        color: $color-grey-3;
+        font-weight: 600;
+        margin-top: rem(4px);
+      }
+
+      &__text {
+        margin: rem(8px) 0;
+      }
+
+      &__date {
+        color: $color-grey-3;
+        font-size: rem(12px);
+        font-weight: 600;
+      }
+    }
+
+    .react-rater-star {
+      font-size: rem(16px);
+    }
+  }
+}
