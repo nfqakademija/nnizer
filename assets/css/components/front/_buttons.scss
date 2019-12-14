@@ -107,6 +107,15 @@ button[disabled] {
     }
   }
 
+  &.-delete {
+    background-color: $color-error-bg;
+    color: $color-error-text;
+
+    &::before {
+      content: '\e91a';
+    }
+  }
+
   &.-warning {
     border: 2px solid $color-warning-bg;
     color: $color-warning-text;

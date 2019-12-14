@@ -35,7 +35,6 @@ const Panel = () => {
       url: `/api/profile/${username}/`,
     })
       .then((response) => {
-        console.log(response.data);
         setData({
           users: response.data,
           isFetched: true,
