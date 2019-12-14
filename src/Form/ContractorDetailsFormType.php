@@ -5,6 +5,7 @@ namespace App\Form;
 
 use App\Entity\Contractor;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,6 +17,10 @@ class ContractorDetailsFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('tags', CollectionType::class, [
+                'entry_type' => ServicesType::class,
+                'entry_options' => ['label' => false],
+            ])
             ->add('title', TextType::class, [
                 'label' => 'detailsForm.service.title',
                 'empty_data' => '',
