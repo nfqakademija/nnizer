@@ -87,10 +87,10 @@ class ContractorController extends AbstractController
             'id' => $this->getUser()->getId()
         ]);
         $settings = $contractor->getSettings() ?? new ContractorSettings();
-        $form = $this->createForm(ContractorSettingsType::class, $settings);
-        $form->handleRequest($request);
+        $settingsForm = $this->createForm(ContractorSettingsType::class, $settings);
+        $settingsForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
             $settings->setContractor($contractor);
             $contractorSettingsRepository->save($settings);
 
@@ -120,12 +120,11 @@ class ContractorController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $contractorRepository->save($contractor);
-
-            return $this->redirectToRoute('contractor');
         }
 
-        return $this->render('contractor/details.html.twig', [
-            'detailsForm' => $form->createView(),
+        return $this->render('contractor/settings.html.twig', [
+            'settingsForm' => $settingsForm->createView(),
+            'detailsForm' => $detailsForm->createView()
         ]);
     }
 
