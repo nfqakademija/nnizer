@@ -72,7 +72,7 @@ class ReservationValidation
     {
         $errors = array();
         foreach ($this->constraints as $constraint) {
-            array_push($errors, $constraint->getMessage());
+            $errors[] = $constraint->getMessage();
         }
         return $errors;
     }

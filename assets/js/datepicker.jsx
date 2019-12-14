@@ -24,6 +24,8 @@ const Datepicker = () => {
   const [offDays, setOffDays] = useState([]);
   const [excludedDates, setExcludedDates] = useState([]);
 
+  const handleDateChangeRaw = (e) => e.preventDefault();
+
   const setAvailableDay = (workDays) => {
     if (!workDays) return;
     const currentDay = getDay(startDate) === 0 ? 6 : getDay(startDate) - 1;
@@ -122,6 +124,7 @@ const Datepicker = () => {
       locale="en"
       selected={startDate}
       onChange={(date) => setStartDate(date)}
+      onChangeRaw={handleDateChangeRaw}
       excludeOutOfBoundsTimes
       showTimeSelect
       excludeTimes={isFetched && getTakenDates()}

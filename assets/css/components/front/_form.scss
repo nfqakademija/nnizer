@@ -1,6 +1,17 @@
 .form {
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin: 0 rem(1px);
+
+  @include transition(opacity 0.2s);
+  
+  @include breakpoint(md) {
+    font-size: 0.875rem;
+  }
+
+  &.-disable {
+    opacity: 0.2;
+    pointer-events: none;
+  }
 
   &__fields {
     display: block;
