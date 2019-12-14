@@ -3,7 +3,6 @@
 {% block title %} {{ "contractor_page.welcome"|trans({'%name%': app.user.firstname}, "messages") }}{% endblock %}
 
 {% block body %}
-    {% include('contractor/settings-modal.html.twig') %}
 
     <div id="admin" data-key="{{ app.user.verificationKey }}" data-username="{{ app.user.username }}">
     </div> 

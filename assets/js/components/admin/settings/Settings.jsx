@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { getTranslation } from '../../../TranslationService';
+import { getTranslation } from '../../../Utils/TranslationService';
 
 import SettingsBtn from './SettingsBtn';
 import Field from './Field';

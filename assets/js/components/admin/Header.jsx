@@ -1,6 +1,6 @@
 import React, { useLocation } from 'react';
 import PropTypes from 'prop-types';
-import { getTranslation } from '../../TranslationService';
+import { getTranslation } from '../../Utils/TranslationService';
 
 const PanelHeader = (props) => {
   const { isOpen, toggleNav, avatar, name } = props;

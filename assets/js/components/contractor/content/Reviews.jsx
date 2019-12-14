@@ -4,7 +4,7 @@ import uuidv4 from 'uuid/v4';
 
 import Stars from '../../Stars';
 import ReviewCard from './ReviewCard';
-import { getTranslation } from '../../../TranslationService';
+import { getTranslation } from '../../../Utils/TranslationService';
 
 const Reviews = (props) => {
   const { reviews } = props;

@@ -1,30 +1,14 @@
-import React, { useEffect } from 'react';
-import MicroModal from 'micromodal';
+import React from 'react';
 
-const SettingsBtn = () => {
-  const initModal = () => {
-    MicroModal.init({
-      disableScroll: true,
-      disableFocus: false,
-      awaitOpenAnimation: true,
-      awaitCloseAnimation: true,
-    });
-  };
+const SettingsBtn = () => (
+  <a
+    className="btn -no-margin"
+    type="button"
+    href="/contractor/settings"
+  >
+    Change settings
+  </a>
+);
 
-  useEffect(() => {
-    initModal();
-  },
-  []);
-
-  return (
-    <button
-      className="contractor-btn"
-      type="button"
-      data-micromodal-trigger="settings-modal"
-    >
-      Change settings
-    </button>
-  );
-};
 
 export default SettingsBtn;
