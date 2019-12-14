@@ -25,7 +25,6 @@ class ContractorService
     /**
      * @param Contractor $contractor
      * @return array|null
-     * @throws \Exception
      */
     public function generateContractorCalenderResponse(Contractor $contractor): ?array
     {
@@ -47,7 +46,6 @@ class ContractorService
     /**
      * @param array $reviews
      * @return array
-     * @throws \Exception
      */
     private function hideReviewerPersonalDetails(array $reviews)
     {
