@@ -12,7 +12,6 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Exception;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture implements FixtureGroupInterface
@@ -126,23 +125,17 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     private $encoder;
 
     /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * AppFixtures constructor.
      * @param UserPasswordEncoderInterface $encoder
-     * @param LoggerInterface $logger
      */
-    public function __construct(UserPasswordEncoderInterface $encoder, LoggerInterface $logger)
+    public function __construct(UserPasswordEncoderInterface $encoder)
     {
         $this->encoder = $encoder;
-        $this->logger = $logger;
     }
 
     /**
      * @param ObjectManager $manager
+     * @throws Exception
      */
     public function load(ObjectManager $manager)
     {
