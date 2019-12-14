@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import { getTranslation } from '../../TranslationService';
+import { getTranslation } from '../../Utils/TranslationService';
 
 const logoPath = require('../../../images/nnizer-logo.svg');
 

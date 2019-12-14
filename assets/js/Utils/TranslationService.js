@@ -1,6 +1,6 @@
 import Translator from 'bazinga-translator';
-import transEN from './translations/en.json';
-import transLT from './translations/lt.json';
+import transEN from '../translations/en.json';
+import transLT from '../translations/lt.json';
 
 const getTranslationsByLocale = (locale) => {
   switch (locale) {

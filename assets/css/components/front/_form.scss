@@ -4,7 +4,7 @@
 
 .form {
   font-size: 1rem;
-  margin: 0 rem(1px);
+  margin: rem(16px) 0;
 
   @include transition(opacity 0.2s);
 
@@ -55,16 +55,40 @@
   }
 
   input {
-    border: 1px solid $color-grey-2;
-    border-radius: rem(2px);
-    box-shadow: 0 0 rem(2px) rgba(0, 0, 0, 0.5);
-    min-height: rem(40px);
-    padding-left: rem(12px);
-    width: 100%;
+    &[type='text'],
+    &[type='tel'],
+    &[type='email'],
+    &[type='password'] {
+      border: 1px solid $color-grey-2;
+      border-radius: rem(2px);
+      box-shadow: 0 0 rem(2px) rgba(0, 0, 0, 0.5);
+      min-height: rem(40px);
+      padding-left: rem(12px);
+      width: 100%;
+
+      &:focus,
+      &:valid {
+        border: 1px solid $color-yellow;
+        box-shadow: none;
+
+        ~ label {
+          font-size: rem(12px);
+          padding: 0 rem(2px);
+          top: 0;
+        }
+      }
+    }
+
+    &[type='file'] {
+      padding: rem(16px) 0;
+      display: flex;
+      border: none;
+    }
   }
 
   label {
     background: white;
+    padding: 0 rem(2px);
     color: $color-grey-1;
     left: rem(14px);
     position: absolute;
@@ -74,16 +98,21 @@
     @include transition(font-size 0.2s, padding 0.2s, top 0.2s);
   }
 
-  input:focus,
-  input:valid {
-    border: 1px solid $color-yellow;
-    box-shadow: none;
-
-    ~ label {
-      font-size: rem(12px);
-      padding: 0 rem(2px);
-      top: 0;
+  &__other-fields {
+    label {
+      position: static;
     }
+  }
+
+  textarea { 
+    background: white;
+    margin: rem(16px) 0;
+    width: 100%;
+    border-radius: rem(2px);
+    box-shadow: 0 0 rem(2px) rgba(0, 0, 0, 0.5);
+    border: 1px solid $color-grey-2;
+
+    padding: rem(12px);
   }
 
   &__checkboxes {

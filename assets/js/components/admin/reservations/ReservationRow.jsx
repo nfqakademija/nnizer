@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { format, differenceInHours, isSameDay, isPast } from 'date-fns';
 import { parseISO, differenceInDays } from 'date-fns/esm';
-import { getTranslation } from '../../../TranslationService';
+import { getTranslation } from '../../../Utils/TranslationService';
 
 import { showAlert, updateAlert } from '../../../Utils/NotificationUtils';
 
@@ -160,7 +160,7 @@ const ReservationRow = (props) => {
         </div>
         <div className="reservations__item col-lg-2">
           <i className="icon-phone item__icon hide-lg" />
-          {phoneNumber ? phoneNumber : getTranslation('crm.missing.phone')}
+          {phoneNumber === '' ? phoneNumber : getTranslation('crm.missing.phone')}
         </div>
         <div className="reservations__item col-lg-2">
           <div className={`status -full -${statusClass}`}>{statusText}</div>

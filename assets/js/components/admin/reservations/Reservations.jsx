@@ -9,7 +9,7 @@ import {
 } from 'date-fns/esm';
 
 import ReservationRow from './ReservationRow';
-import { getTranslation } from '../../../TranslationService';
+import { getTranslation } from '../../../Utils/TranslationService';
 
 const Reservations = (props) => {
   const { reservations, userKey, fetchData } = props;

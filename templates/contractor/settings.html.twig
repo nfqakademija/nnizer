@@ -6,7 +6,7 @@
     <div class="container -top-spacing">
         <h1>{{ "settings_form.title"|trans }}</h1>
 
-        {{ form_start(settingsForm, { attr: {novalidate: 'novalidate', class: 'form' } }) }}
+        {{ form_start(settingsForm, { attr: {novalidate: 'novalidate', class: 'form js-days-form' } }) }}
             <p class="form__message">
                 {{"settings_form.choosedays"|trans}}
             </p>
@@ -41,37 +41,37 @@
                 </div>
             </div>
 
-            <div class="form__field js-monday-field hidden">
+            <div class="form__field js-day-field js-monday-field hidden">
                 {{ form_widget(settingsForm.Monday) }}
                 {{ form_label(settingsForm.Monday) }}
             </div> 
 
-             <div class="form__field js-tuesday-field hidden">
+             <div class="form__field js-day-field js-tuesday-field hidden">
                 {{ form_widget(settingsForm.Tuesday) }}
                 {{ form_label(settingsForm.Tuesday) }}
             </div> 
 
-             <div class="form__field js-wednesday-field hidden">
+             <div class="form__field js-day-field js-wednesday-field hidden">
                 {{ form_widget(settingsForm.Wednesday) }}
                 {{ form_label(settingsForm.Wednesday) }}
             </div> 
 
-             <div class="form__field js-thursday-field hidden">
+             <div class="form__field js-day-field js-thursday-field hidden">
                 {{ form_widget(settingsForm.Thursday) }}
                 {{ form_label(settingsForm.Thursday) }}
             </div> 
 
-             <div class="form__field js-friday-field hidden">
+             <div class="form__field js-day-field js-friday-field hidden">
                 {{ form_widget(settingsForm.Friday) }}
                 {{ form_label(settingsForm.Friday) }}
             </div> 
 
-             <div class="form__field js-saturday-field hidden">
+             <div class="form__field js-day-field js-saturday-field hidden">
                 {{ form_widget(settingsForm.Saturday) }}
                 {{ form_label(settingsForm.Saturday) }}
             </div> 
 
-             <div class="form__field js-sunday-field hidden">
+             <div class="form__field js-day-field js-sunday-field hidden">
                 {{ form_widget(settingsForm.Sunday) }}
                 {{ form_label(settingsForm.Sunday) }}
             </div> 
@@ -84,33 +84,44 @@
             <button class="btn">{{ "settings_form.submit"|trans }}</button>
         {{ form_end(settingsForm) }}
 
+        {{ form_start(detailsForm, { attr: {class: 'form', novalidate: 'novalidate' }}) }}
+            <div class="form__field">
+                {{ form_widget(detailsForm.firstname) }}
+                {{ form_label(detailsForm.firstname) }}
+            </div> 
+            <div class="form__field">
+                {{ form_widget(detailsForm.lastname) }}
+                {{ form_label(detailsForm.lastname) }}
+            </div> 
+            <div class="form__field">
+                {{ form_widget(detailsForm.phoneNumber) }}
+                {{ form_label(detailsForm.phoneNumber) }}
+            </div> 
+            <div class="form__field">
+                {{ form_widget(detailsForm.title) }}
+                {{ form_label(detailsForm.title) }}
+            </div> 
+            <div class="form__field">
+                {{ form_widget(detailsForm.address) }}
+                {{ form_label(detailsForm.address) }}
+            </div>
+            <div class="form__field">
+                {{ form_widget(detailsForm.facebook) }}
+                {{ form_label(detailsForm.facebook) }}
+            </div>
 
+            <div class="form__other-fields">
+                {{ form_row(detailsForm.description) }}
+                {{ form_row(detailsForm.coverPhoto) }}
+                {{ form_row(detailsForm.profilePhoto) }}
+            </div>
 
-        <h1>{{ "detailsForm.title"|trans }}</h1>
-
-        {{ form_start(detailsForm, { attr: {novalidate: 'novalidate' }}) }}
-        {{ form_row(detailsForm.title) }}
-        {{ form_row(detailsForm.description) }}
-        {{ form_row(detailsForm.address) }}
-        {{ form_row(detailsForm.facebook) }}
-        {{ form_row(detailsForm.coverPhoto) }}
-        {{ form_row(detailsForm.profilePhoto) }}
-
-        <button class="btn">{{ "detailsForm.submit"|trans }}</button>
+            <button class="btn">{{ "detailsForm.submit"|trans }}</button>
         {{ form_end(detailsForm) }}
 
     </div>
 
     {% block javascripts %}
-        <script>
-            const checkboxes = document.querySelectorAll('.js-checkbox');
-            
-            checkboxes.forEach((cb) => {
-                cb.addEventListener('change', () => {
-                    const field = document.getElementsByClassName(cb.dataset.trigger)[0];
-                    field.classList.toggle('hidden');
-                });
-            });
-        </script>
+        {{ encore_entry_script_tags('settings') }} 
     {% endblock %}
 {% endblock %}
