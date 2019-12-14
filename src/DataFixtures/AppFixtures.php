@@ -166,7 +166,6 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             try {
                 $firstname = $this->firstnames[random_int(0, 9)];
                 $lastname = $this->lastnames[random_int(0, 9)];
-                $serviceTitle = $services[random_int(0, 3)];
                 $description = $this->descriptions[random_int(0, 3)];
 
                 $contractor = new Contractor();
@@ -179,9 +178,9 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
                 $contractor->setVerificationKey();
                 $contractor->setAddress('Brastos g. 15, Kaunas');
                 $contractor->setIsVerified(random_int(0, 1));
-                $contractor->setTitle($serviceTitle);
                 $contractor->setDescription($description);
                 $this->loadService($contractor, $manager);
+                $contractor->setTitle($contractor->getServices()->getName() . $i . ' services');
                 $this->addCoverPhoto($contractor, $manager);
                 $this->addProfilePhoto($contractor, $manager);
                 $this->loadSettings($contractor, $manager);

@@ -69,6 +69,7 @@ class HomeController extends AbstractController
     ): JsonResponse {
         $contractors = $serviceTypeRepository->findOneBy(['name' => $service])->getContractors();
         $json = $serializer->getResponse($contractors, ['filtered']);
+        $json = $serializer->reformatReviews($json);
 
         return new JsonResponse($json);
     }
