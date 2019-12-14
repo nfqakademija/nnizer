@@ -370,7 +370,7 @@ class ContractorController extends AbstractController
         ContractorService $contractorService
     ): JsonResponse {
         $contractor = $contractorRepository->findOneBy(['username' => $contractorUsername]);
-        $response = $contractorService->generateContractorCalenderResponse($contractor);
+        $response = $contractorService->generateContractorCalendarResponse($contractor);
         if ($response) {
             return new JsonResponse($response);
         } else {

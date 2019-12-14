@@ -39,6 +39,11 @@
 							<label for="email">{{ "registration_form.email"|trans }}</label>
 						</div>
 
+						<div class="form__field">
+							<input type="text" name="phoneNumber" required/>
+							<label for="phoneNumber">{{ "registration_form.phone"|trans }}</label>
+						</div>
+
 						<input type="hidden" name="contractor" value="{{ contractor.id }}">
 						<button 
 							class="btn -full js-book-btn"

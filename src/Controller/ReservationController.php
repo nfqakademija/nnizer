@@ -41,7 +41,7 @@ class ReservationController extends AbstractController
             $lastname = $request->get('lastname');
             $contractor= $request->get('contractor');
             $visitDate = new \DateTime($request->get('visitDate'));
-
+            $phoneNumber = $request->get('phoneNumber');
 
             $contractor = $this->getDoctrine()->getRepository(Contractor::class)->find($contractor);
             $reservations = $this->getDoctrine()->getRepository(Reservation::class)
@@ -52,7 +52,7 @@ class ReservationController extends AbstractController
             }
 
             $reservation = $reservationFactory
-                ->createReservation($email, $firstname, $lastname, $visitDate);
+                ->createReservation($email, $firstname, $lastname, $visitDate, $phoneNumber);
 
             $reservation->setContractor($contractor);
             $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
