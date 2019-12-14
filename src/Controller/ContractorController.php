@@ -71,7 +71,7 @@ class ContractorController extends AbstractController
 
 
     /**
-     * @Route("/contractor/settings", name="contractor_settings")
+     * @Route("/contractor/edit", name="contractor_settings")
      * @param Request $request
      * @param ContractorRepository $contractorRepository
      * @param ContractorSettingsRepository $contractorSettingsRepository
