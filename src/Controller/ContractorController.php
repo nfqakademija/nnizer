@@ -160,10 +160,14 @@ class ContractorController extends AbstractController
     public function getReservations(
         string $contractorKey,
         SerializerService $json,
-        ContractorRepository $contractorRepository
+        ContractorRepository $contractorRepository,
+        ReservationRepository $reservationRepository
     ): Response {
         $contractor = $contractorRepository->findOneByKey($contractorKey);
-        $reservations = $contractor->getReservations();
+        $reservations = $reservationRepository->findBy([
+            'contractor' => $contractor,
+            'isDeleted' => null
+        ]);
 
         return new Jsonresponse($json->getResponse($reservations));
     }
@@ -261,7 +265,8 @@ class ContractorController extends AbstractController
 
         if ($reservation !== null) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($reservation);
+            $reservation->setIsDeleted(true);
+            $em->persist($reservation);
             $em->flush();
 
             return new JsonResponse();
