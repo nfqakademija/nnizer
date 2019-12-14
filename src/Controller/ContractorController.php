@@ -239,6 +239,38 @@ class ContractorController extends AbstractController
     }
 
     /**
+     * @Route("/api/contractor/{contractorKey}/delete/{reservationId}", methods="DELETE")
+     * @param string $contractorKey
+     * @param int $reservationId
+     * @param ContractorRepository $contractorRepository
+     * @param ReservationRepository $reservationRepository
+     * @return JsonResponse
+     * @throws NonUniqueResultException
+     */
+    public function deleteReservation(
+        string $contractorKey,
+        int $reservationId,
+        ContractorRepository $contractorRepository,
+        ReservationRepository $reservationRepository
+    ): JsonResponse {
+        $contractor = $contractorRepository->findOneByKey($contractorKey);
+        $reservation = $reservationRepository->findOneBy([
+            'contractor' => $contractor,
+            'id' => $reservationId
+        ]);
+
+        if ($reservation !== null) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($reservation);
+            $em->persist($reservation);
+
+            return new JsonResponse();
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    /**
      * @Route("/api/contractor/{contractorKey}/get-clients/{date}", methods="GET")
      * @param string $contractorKey
      * @param string $date
