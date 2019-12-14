@@ -28,8 +28,6 @@ const ReservationRow = (props) => {
   let statusClass = '';
   let statusText = '';
 
-  console.log(id);
-
   const setExpired = () => {
     if (isPast(parseISO(date))) {
       setDone(true);
@@ -147,6 +145,7 @@ const ReservationRow = (props) => {
         onClick={() => editToggle(!editOpen)}
       >
         <i className="icon-edit btn__icon" />
+        { !isVerified && !isDone && !isCancelled && <div className="circle -pending">1</div> }
       </button>
       <div className="row">
         <div className="reservations__item col-lg-1">{formatDate()}</div>
@@ -172,6 +171,7 @@ const ReservationRow = (props) => {
             onClick={() => editToggle(!editOpen)}
           >
             <i className={`btn__icon icon-${editOpen ? 'cross' : 'edit'}`} />
+            { !isVerified && !isDone && !isCancelled && <div className="circle -pending">1</div> }
           </button>
         </div>
       </div>
@@ -186,7 +186,7 @@ const ReservationRow = (props) => {
           <div className="edit__actions">
             <button
               type="button"
-              className="panel-btn -delete"
+              className="edit__action panel-btn -delete"
               // eslint-disable-next-line no-alert
               onClick={(e) => window.confirm('Are you sure to PERMANENTLY remove this reservation?') && deleteReservation()}
               disabled={isDeletionDisabled}
@@ -197,7 +197,7 @@ const ReservationRow = (props) => {
             {!isCancelled && !isDone && (
               <button
                 type="button"
-                className="panel-btn -cancel"
+                className="edit__action panel-btn -cancel"
                 // eslint-disable-next-line no-alert
                 onClick={(e) => window.confirm('Are you sure to CANCEL this reservation?') && cancelReservation()}
                 disabled={isCancelDisabled}
@@ -208,7 +208,7 @@ const ReservationRow = (props) => {
             {!isVerified && !isDone && !isCancelled && (
               <button
                 type="button"
-                className="panel-btn -success"
+                className="edit__action panel-btn -success"
                 onClick={approveReservation}
                 disabled={isApprovalDisabled}
               >

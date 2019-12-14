@@ -136,18 +136,23 @@
 
       &__time-left {
         font-size: rem(14px);
-        margin: rem(8px) 0 rem(16px) 0;
+        margin-top: rem(8px);
       }
 
       &__actions {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-around;
         width: 100%;
+      }
+
+      &__action {
+        margin-top: rem(16px);
       }
     }
 
     &.-open {
-      height: rem(140px);
+      height: rem(160px);
       opacity: 1;
       padding: rem(16px) 0;
     }
@@ -161,6 +166,7 @@
     display: none;
     height: rem(40px);
     justify-content: center;
+    position: relative;
     width: rem(40px);
 
     @include transition(background-color 0.2s, color 0.2s);
