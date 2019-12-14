@@ -84,7 +84,8 @@ class Reservation
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isDeleted;
-  
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"Default"})
      */
