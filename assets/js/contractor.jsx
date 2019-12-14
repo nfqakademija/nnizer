@@ -10,21 +10,24 @@ const baseURL = `${window.location.protocol}//${window.location.host}`;
 const bookForm = document.querySelector('.js-book-form');
 const bookLoader = document.querySelector('.js-book-loader');
 
+// TODO: translations
+
 const handleFormResponse = (response) => {
   // 200 - form success
-  if (response === 200) {
+  if (response.status === 200) {
     updateAlert('Successfully booked!', 'success', 4000);
     bookForm.reset();
     MicroModal.close('register-modal');
     return;
   }
   // 206 - form validation failed
-  if (response === 206) {
-    updateAlert('Booking failed! Please check your details', 'error', 4000);
+  if (response.status === 206) {
+    const missingField = response.data[0].replace('.', ' ');
+    updateAlert(`Booking failed! ${missingField}`, 'error', 4000);
     return;
   }
   // 406 - reservation time is already booked
-  if (response === 406) {
+  if (response.status === 406) {
     updateAlert('Chosen time is not available! Please select other date', 'error', 4000);
     return;
   }
@@ -51,10 +54,10 @@ const validateBookForm = () => {
       data: formData,
     })
       .then((response) => {
-        handleFormResponse(response.status);
+        handleFormResponse(response);
       })
       .catch((error) => {
-        handleFormResponse(error.response.status);
+        handleFormResponse(error.response);
       })
       .finally(() => toggleFormClasses());
   });
