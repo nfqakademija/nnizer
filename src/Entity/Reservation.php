@@ -84,6 +84,11 @@ class Reservation
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isDeleted;
+  
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"Default"})
+     */
+    private $phoneNumber;
 
     /**
      * @return int|null
@@ -297,7 +302,26 @@ class Reservation
      */
     public function __toString(): string
     {
-        return $this->visitDate->format('Y-m-d H:i:s');
+        return $this->getVisitDate()->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param string|null $phoneNumber
+     * @return $this
+     */
+    public function setPhoneNumber(?string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
     }
 
     /**

@@ -56,13 +56,13 @@ class Contractor implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="string", length=32, nullable=true)
      * @Groups({"frontPage"})
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="string", length=32, nullable=true)
      * @Groups({"frontPage"})
      */
     private $lastname;
@@ -140,6 +140,7 @@ class Contractor implements UserInterface
      * @Groups({"frontPage"})
      */
     private $coverPhoto;
+
     /**
      * Contractor constructor.
      */
@@ -149,6 +150,9 @@ class Contractor implements UserInterface
         $this->reservations = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getUsername();

@@ -250,6 +250,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
                 $reservation->setLastname('fixture');
                 $reservation->setEmail($reservation->getFirstname() . '@' . $i . '.com');
                 $reservation->setIsVerified(random_int(0, 1));
+                $reservation->setPhoneNumber(random_int(860000000, 869999999));
                 $reservation->setVerificationKey($reservation->generateActivationKey());
                 $reservation->setContractor($contractor);
                 $reservation->setVisitDate(
