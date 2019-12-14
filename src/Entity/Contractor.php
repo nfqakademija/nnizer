@@ -142,7 +142,7 @@ class Contractor implements UserInterface
     private $coverPhoto;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ServiceType", mappedBy="contractors")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ServiceType", inversedBy="contractors", cascade={"persist"})
      * @Groups({"frontPage"})
      */
     private $services;
@@ -154,7 +154,6 @@ class Contractor implements UserInterface
     {
         $this->reviews = new ArrayCollection();
         $this->reservations = new ArrayCollection();
-        $this->services = new ArrayCollection();
     }
 
     /**
@@ -605,9 +604,9 @@ class Contractor implements UserInterface
     }
 
     /**
-     * @return Collection|ServiceType[]
+     * @return ServiceType|null
      */
-    public function getServices(): Collection
+    public function getServices(): ?ServiceType
     {
         return $this->services;
     }
@@ -616,26 +615,11 @@ class Contractor implements UserInterface
      * @param ServiceType $service
      * @return $this
      */
-    public function addService(ServiceType $service): self
+    public function setServices(ServiceType $service): self
     {
-        if (!$this->services->contains($service)) {
-            $this->services[] = $service;
-            $service->addContractor($this);
-        }
+        $this->services = $service;
 
-        return $this;
-    }
-
-    /**
-     * @param ServiceType $service
-     * @return $this
-     */
-    public function removeService(ServiceType $service): self
-    {
-        if ($this->services->contains($service)) {
-            $this->services->removeElement($service);
-            $service->removeContractor($this);
-        }
+        $service->addContractor($this);
 
         return $this;
     }

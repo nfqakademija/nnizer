@@ -26,7 +26,7 @@ class ServiceType
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Contractor", inversedBy="services", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Contractor", mappedBy="services", cascade={"persist"})
      */
     private $contractors;
 
