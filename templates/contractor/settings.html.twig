@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ "settings_form.title"|trans }}{% endblock %}
+{% block title %}{{ "detailsForm.edit"|trans }}{% endblock %}
 
 {% block body %}
     <div class="container container--top-spacing">
@@ -8,36 +8,36 @@
 
         {{ form_start(settingsForm, { attr: {novalidate: 'novalidate', class: 'form' } }) }}
             <p class="form__message">
-                Please select your work days!
+                {{"settings_form.choosedays"|trans}}
             </p>
             <div class="form__checkboxes">
                 <div class="form__checkbox">
                     <input type="checkbox" class="js-checkbox js-monday-checkbox" name="checkbox1" data-trigger="js-monday-field">
-                    Monday
+                    {{ "settings_form.Monday"|trans }}
                 </div>
                 <div class="form__checkbox">
                     <input type="checkbox" class="form__checkbox-input js-checkbox js-tuesday-checkbox" name="checkbox2" data-trigger="js-tuesday-field">
-                    Tuesday
+                    {{ "settings_form.Tuesday"|trans }}
                 </div>
                 <div class="form__checkbox">
                     <input type="checkbox" class="js-checkbox js-wednesday-checkbox" name="checkbox3" data-trigger="js-wednesday-field">
-                    Wednesday
+                    {{ "settings_form.Wednesday"|trans }}
                 </div>
                 <div class="form__checkbox">
                     <input type="checkbox" class="js-checkbox js-thursday-checkbox" name="checkbox4" data-trigger="js-thursday-field">
-                    Thursday
+                    {{ "settings_form.Thursday"|trans }}
                 </div>
                 <div class="form__checkbox">
                     <input type="checkbox" class="js-checkbox js-friday-checkbox" name="checkbox5" data-trigger="js-friday-field">
-                    Friday
+                    {{ "settings_form.Friday"|trans }}
                 </div>
                 <div class="form__checkbox">
                     <input type="checkbox" class="js-checkbox js-saturday-checkbox" name="checkbox6" data-trigger="js-saturday-field">
-                    Saturday
+                    {{ "settings_form.Saturday"|trans }}
                 </div>
                 <div class="form__checkbox">
                     <input type="checkbox" class="js-checkbox js-sunday-checkbox" name="checkbox7" data-trigger="js-sunday-field">
-                    Sunday
+                    {{ "settings_form.Sunday"|trans }}
                 </div>
             </div>
 
