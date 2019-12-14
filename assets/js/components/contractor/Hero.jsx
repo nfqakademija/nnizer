@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import BookBtn from './BookBtn';
-import Stars from './Stars';
+import Stars from '../Stars';
 
 const Hero = (props) => {
   const {

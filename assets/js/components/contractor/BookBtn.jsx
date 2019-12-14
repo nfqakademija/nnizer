@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import MicroModal from 'micromodal';
-import {getTranslation} from "../../TranslationService.js";
+import { getTranslation } from '../../TranslationService';
 
 const BookBtn = () => {
   const initModal = () => {

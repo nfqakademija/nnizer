@@ -1,20 +1,14 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}{{ contractor.username }} {{ "contractor.title"|trans }}
-{% endblock %}
-
-{% block body %}
-	<div class="modal micromodal-slide" id="register-modal" aria-hidden="true">
+<div class="modal micromodal-slide" id="register-modal" aria-hidden="true">
 		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
 			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
 				<header class="modal__header">
 					<h2 class="modal__title" id="register-modal-title">
-						{{"contractor.form.title"|trans}} 📆
+						{{ text }}
 					</h2>
 					<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
 				</header>
 				<main class="modal__content" id="register-modal-content">
-					<form class="form js-book-form" method="POST" action="{{ path('app_new-reservation') }}">
+					<form class="form" method="POST" action="{{ path('app_new-reservation') }}">
 						{% if errors is defined %}
 							{% for error in errors %}
 								<p>{{ error|trans }}</p>
@@ -25,37 +19,24 @@
 						</div>
 
 						<div class="form__field">
-							<input type="text" name="firstname" class="js-book-firstname" required/>
+							<input type="text" name="firstname" required/>
 							<label for="firstname">{{ "registration_form.firstname"|trans }}</label>
 						</div>
 
 						<div class="form__field">
-							<input type="text" name="lastname" class="js-book-lastname"  required/>
+							<input type="text" name="lastname" required/>
 							<label for="lastname">{{ "registration_form.lastname"|trans }}</label>
 						</div>
 
 						<div class="form__field">
-							<input type="email" name="email" class="js-book-email"  required/>
+							<input type="email" name="email" required/>
 							<label for="email">{{ "registration_form.email"|trans }}</label>
 						</div>
 
-						<input type="hidden" name="contractor" value="{{ contractor.id }}">
-						<button 
-							class="btn -full js-book-btn"
-						>
-							{{"contractor.form.submit"|trans}}
-						</button>
+						<input type="hidden" name="contractor" value="{{ app.user.id }}">
+						<button class="btn -full">Submit</button>
 					</form>
-						<div class="loader js-book-loader -hide"><div></div><div></div><div></div><div></div></div>
 				</main>
 			</div>
 		</div>
 	</div>
-
-	<div id="contractor"></div>
-
-{% endblock %}
-{% block javascripts %}
-	{{ encore_entry_script_tags('datepicker') }}
-	{{ encore_entry_script_tags('contractor') }}
-{% endblock %}

@@ -1,5 +1,10 @@
 module.exports = {
-    extends: ['eslint:recommended', 'plugin:react/recommended',  'airbnb-base', 'airbnb/rules/react'],
+    extends: [
+        'eslint:recommended',
+        'plugin:react/recommended',
+        'airbnb-base',
+        'airbnb/rules/react',
+    ],
     parser: 'babel-eslint',
     parserOptions: {
         ecmaVersion: 6,
@@ -17,6 +22,12 @@ module.exports = {
     rules: {
         "no-console": 0,
         "no-unused-vars": 0,
-        "no-plusplus": [2, { allowForLoopAfterthoughts: true }]
+        "no-plusplus": [2, { allowForLoopAfterthoughts: true }],
+        "object-curly-newline": ["error", {
+            "ObjectExpression": { "multiline": true, "minProperties": 5, "consistent": true},
+            "ObjectPattern": { "multiline": true, "minProperties": 5, "consistent": true},
+            "ImportDeclaration": { "multiline": true, "minProperties": 5, "consistent": true},
+            "ExportDeclaration": { "multiline": true, "minProperties": 5, "consistent": true}
+        }]
     }
 };

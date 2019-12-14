@@ -12,6 +12,8 @@ import {
 import { setHours, setMinutes } from 'date-fns/esm';
 import en from 'date-fns/locale/en-GB';
 
+import { showAlert } from './Utils/NotificationUtils';
+
 registerLocale('en', en);
 setDefaultLocale(en);
 
@@ -21,6 +23,8 @@ const Datepicker = () => {
   const [isFetched, setFetched] = useState(false);
   const [offDays, setOffDays] = useState([]);
   const [excludedDates, setExcludedDates] = useState([]);
+
+  const handleDateChangeRaw = (e) => e.preventDefault();
 
   const setAvailableDay = (workDays) => {
     if (!workDays) return;
@@ -105,7 +109,7 @@ const Datepicker = () => {
       setFetched(true);
     })
       .catch((error) => {
-        console.log(error); // TODO - error handling
+        showAlert('Can\'t get available dates. Try again or contact us!', 'error', 4000); // TODO translation
       });
   };
 
@@ -120,6 +124,7 @@ const Datepicker = () => {
       locale="en"
       selected={startDate}
       onChange={(date) => setStartDate(date)}
+      onChangeRaw={handleDateChangeRaw}
       excludeOutOfBoundsTimes
       showTimeSelect
       excludeTimes={isFetched && getTakenDates()}

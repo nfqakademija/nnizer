@@ -1,0 +1,59 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: rem(24px);
+
+  @include breakpoint(md) {
+    justify-content: flex-start;
+  }
+
+  &__btn {
+    align-items: center;
+    border: rem(1px) solid $color-grey-3;
+    border-radius: rem(2px);
+    color: $color-grey-3;
+    display: flex;
+    font-size: rem(14px);
+    justify-content: center;
+    margin: rem(12px) 0 0 0;
+    min-width: rem(96px);
+    padding: rem(8px) rem(16px);
+    position: relative;
+    width: 40%;
+
+    @include breakpoint(md) {
+      margin-right: rem(16px);
+      padding: rem(4px) rem(16px);
+      width: auto;
+    }
+
+    @include transition(background-color 0.2s, box-shadow 0.2s, color 0.2s, border-color 0.2s);
+
+    i {
+      color: $color-error-text;
+      display: none;
+      font-size: rem(8px);
+      margin-right: rem(8px);
+      opacity: 0;
+
+      @include transition(opacity 0.2s);
+    }
+
+    &:hover {
+      border-color: $color-yellow;
+    }
+
+    &.-active {
+      background-color: $color-yellow;
+      border-color: $color-yellow;
+      box-shadow: 0 0 rem(5px) rgba(0, 0, 0, 0.25);
+      color: $color-black;
+
+      i {
+        display: block;
+        opacity: 1;
+      }
+    }
+  }
+}

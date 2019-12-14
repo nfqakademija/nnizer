@@ -123,6 +123,7 @@ crm:
   pending: Pending
   unconfirmed: Unconfirmed
   done: Completed
+  actions: Actions
 
 contractor:
   title: services

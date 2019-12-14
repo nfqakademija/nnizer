@@ -122,6 +122,7 @@ crm:
   pending: Laukiama
   unconfirmed: Nepatvirtinta
   done: Įvykdyta
+  actions: Veiksmai
 
 contractor:
   title: paslaugos
