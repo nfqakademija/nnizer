@@ -124,8 +124,7 @@ const Reservations = (props) => {
   return (
     <div className="panel__content admin-container">
       <p className="panel__time">
-        {getTranslation('crm.time.today_is')}{`📆${format(new Date(), 'd LLL, cccc!')} `}
-        {/*TODO translate the date*/}
+        {getTranslation('crm.time.today_is')}{`📆${format(new Date(), 'yyyy-MM-dd!')} `}
       </p>
       <h2>Reservations</h2>
       {reservations.length === 0 ? (

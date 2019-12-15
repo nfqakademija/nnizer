@@ -16,9 +16,9 @@ const Reviews = (props) => {
         <Stars reviews={reviews} />
       </div>
       <ul className="admin-reviews">
-        { // TODO translation
+        {
         reviews.length === 0
-          ? 'You don\'t have reviews yet. 😤'
+          ? `${getTranslation('contractor.reviews.no_reviews')}`
           : reviews.map((review) => (
             <li key={uuidv4()} className="admin-reviews__item">
               <ReviewCard

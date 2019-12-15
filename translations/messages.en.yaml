@@ -173,6 +173,7 @@ contractor:
   facebook: Facebook
   phone: Phone number
   reviews:
+    no_reviews: You don't have reviews yet.
     title: Reviews
     singular: review
     plural1: reviews

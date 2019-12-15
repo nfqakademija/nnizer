@@ -59,12 +59,12 @@ const ReservationRow = (props) => {
 
   const deleteReservation = () => {
     // @Route("/api/contractor/{contractorKey}/delete/{reservationId}", methods="DELETE")
-    buttonClicked(getTranslation('crm.removal.progress'), setDeletion);
+    buttonClicked(`${getTranslation('crm.removal.progress')} 🗑`, setDeletion);
     axios
       .delete(`/api/contractor/${userKey}/delete/${id}`)
       .then((response) => {
         fetchData();
-        updateAlert(getTranslation('crm.removal.success'), 'success', 4000);
+        updateAlert(`${getTranslation('crm.removal.success')} ✅`, 'success', 4000);
       })
       .catch((error) => {
         updateAlert(getTranslation('crm.removal.error'), 'error', 4000);
@@ -72,12 +72,12 @@ const ReservationRow = (props) => {
   };
 
   const cancelReservation = () => {
-    buttonClicked(getTranslation('crm.cancellation.progress'), setCancel);
+    buttonClicked(`${getTranslation('crm.cancellation.progress')} 👨🏼‍💻`, setCancel);
     axios
       .patch(`/api/contractor/${userKey}/cancel/${id}`)
       .then((response) => {
         fetchData();
-        updateAlert(getTranslation('crm.cancellation.success'), 'success', 4000);
+        updateAlert(`${getTranslation('crm.cancellation.success')} ✅`, 'success', 4000);
       })
       .catch((error) => {
         updateAlert(getTranslation('crm.cancellation.error'), 'error', 4000);
@@ -85,12 +85,12 @@ const ReservationRow = (props) => {
   };
 
   const approveReservation = () => {
-    buttonClicked(getTranslation('crm.approval.progress'), setApproval);
+    buttonClicked(`${getTranslation('crm.approval.progress')} 👨🏼‍💻`, setApproval);
     axios
       .patch(`/api/contractor/${userKey}/verify/${id}`)
       .then((response) => {
         fetchData();
-        updateAlert(getTranslation('crm.approval.success'), 'success', 4000);
+        updateAlert(`${getTranslation('crm.approval.success')} ✅`, 'success', 4000);
       })
       .catch((error) => {
         updateAlert(getTranslation('crm.approval.error'), 'error', 4000);
@@ -127,7 +127,7 @@ const ReservationRow = (props) => {
   const formatDate = () => {
     const day = parseISO(date);
     if (isSameDay(new Date(), day)) {
-      return `Today, ${format(day, 'HH:mm')}`; // TODO translation  getTranslation('crm.time.today')
+      return `${getTranslation('crm.time.today')}, ${format(day, 'HH:mm')}`;
     }
     return format(day, 'yyyy-MM-dd, HH:mm');
   };
