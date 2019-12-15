@@ -6,8 +6,10 @@ use App\Entity\Contractor;
 use App\Entity\LostPassword;
 use App\Repository\ContractorRepository;
 use App\Repository\LostPasswordRepository;
+use App\Service\LostPasswordFactory;
 use App\Service\MailerService;
-use App\Validator\LostPasswordValidation;
+use App\Validator\LostPasswordValidator;
+use Doctrine\ORM\NonUniqueResultException;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -26,23 +28,31 @@ class LostPasswordController extends AbstractController
     public function lostPasswordPage(Request $request): Response
     {
         $errors = $request->getSession()->get('errors');
+        $success = $request->getSession()->get('success');
         $request->getSession()->remove('errors');
-        return $this->render('contractor/lostpassword.html.twig', ['errors' => $errors]);
+        $request->getSession()->remove('success');
+
+        return $this->render('contractor/lostpassword.html.twig', ['errors' => $errors, 'success' => $success]);
     }
 
     /**
      * @Route("/lost-password/submit", name="app_lost-password-submit", methods="POST")
      * @param Request $request
      * @param ContractorRepository $contractorRepository
-     * @param LostPasswordValidation $validator
+     * @param LostPasswordRepository $lostPasswordRepository
+     * @param LostPasswordValidator $validator
+     * @param LostPasswordFactory $lostPasswordFactory
      * @param MailerService $mailer
      * @return Response
+     * @throws NonUniqueResultException
      * @throws Exception
      */
     public function lostPasswordSubmit(
         Request $request,
         ContractorRepository $contractorRepository,
-        LostPasswordValidation $validator,
+        LostPasswordRepository $lostPasswordRepository,
+        LostPasswordValidator $validator,
+        LostPasswordFactory $lostPasswordFactory,
         MailerService $mailer
     ): Response {
         $email = $request->get('email');
@@ -57,9 +67,7 @@ class LostPasswordController extends AbstractController
         $contractor = $contractorRepository->findOneBy(['email' => $email]);
 
         if ($contractor) {
-            $em = $this->getDoctrine()->getManager();
-            $lostPassword = $em->getRepository(LostPassword::class)
-                ->findActiveEntry($contractor);
+            $lostPassword = $lostPasswordRepository->findActiveEntry($contractor);
 
             $now = new \DateTime('now');
             if ($lostPassword && $lostPassword->getExpiresAt() > $now) {
@@ -68,17 +76,16 @@ class LostPasswordController extends AbstractController
                 ];
                 $request->getSession()->set('errors', $errors);
             } else {
-                $this->deleteIfExpired($lostPassword);
-                $lostPassword = $this->createLostPassword($contractor);
+                $this->deleteIfExpired($lostPassword, $lostPasswordRepository);
+                $lostPassword = $lostPasswordFactory->createLostPassword($contractor);
                 $contractor->setLostPassword($lostPassword);
-                $em->persist($contractor);
-                $em->flush();
+                $contractorRepository->save($contractor);
 
                 $mailer->sendLostPasswordEmail($contractor);
-                $errors = [
+                $success = [
                     'lost_password.sent'
                 ];
-                $request->getSession()->set('errors', $errors);
+                $request->getSession()->set('success', $success);
             }
         } else {
             $errors = [
@@ -88,20 +95,6 @@ class LostPasswordController extends AbstractController
         }
 
         return $this->redirectToRoute('app_lost-password-page');
-    }
-    /**
-     * @param Contractor $contractor
-     * @return LostPassword
-     * @throws Exception
-     */
-    private function createLostPassword(Contractor $contractor): LostPassword
-    {
-        $lostPassword = new LostPassword();
-        $lostPassword->setContractor($contractor);
-        $lostPassword->setExpiresAt((new \DateTime('now'))->modify('+60 minutes'));
-        $lostPassword->setResetKey(sha1(random_bytes(6)));
-
-        return $lostPassword;
     }
 
     /**
@@ -122,7 +115,7 @@ class LostPasswordController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        $this->deleteIfExpired($lostPassword);
+        $this->deleteIfExpired($lostPassword, $lostPasswordRepository);
 
         $errors = $request->getSession()->get('errors');
         $request->getSession()->remove('errors');
@@ -159,12 +152,9 @@ class LostPasswordController extends AbstractController
             return $this->redirectToRoute('app_password-reset', ['key' => $key]);
         } else {
             $contractor = $lostPassword->getContractor();
-            $pass1 = $encoder->encodePassword($contractor, $pass1);
-            $contractor->setPassword($pass1);
+            $contractor->setPassword($encoder->encodePassword($contractor, $pass1));
             $contractorRepository->save($contractor);
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($lostPassword);
-            $em->flush();
+            $lostPasswordRepository->remove($lostPassword);
 
             return $this->redirectToRoute('home');
         }
@@ -172,16 +162,17 @@ class LostPasswordController extends AbstractController
 
     /**
      * @param LostPassword|null $lostPassword
+     * @param LostPasswordRepository $lostPasswordRepository
      * @return RedirectResponse|null
      * @throws Exception
      */
-    private function deleteIfExpired(?LostPassword $lostPassword): ?RedirectResponse
-    {
+    private function deleteIfExpired(
+        ?LostPassword $lostPassword,
+        LostPasswordRepository $lostPasswordRepository
+    ): ?RedirectResponse {
         $now = new \DateTime('now');
         if ($lostPassword != null && $lostPassword->getExpiresAt() < $now) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($lostPassword);
-            $em->flush();
+            $lostPasswordRepository->remove($lostPassword);
 
             return $this->redirectToRoute('home');
         }

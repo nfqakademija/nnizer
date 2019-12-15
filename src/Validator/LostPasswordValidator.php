@@ -5,7 +5,7 @@ namespace App\Validator;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validation;
 
-class LostPasswordValidation
+class LostPasswordValidator
 {
 
     /**
@@ -44,6 +44,7 @@ class LostPasswordValidation
         foreach ($this->constraints as $constraint) {
             array_push($errors, $constraint->getMessage());
         }
+
         return $errors;
     }
 }

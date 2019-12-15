@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validation;
 
-class ReservationValidation
+class ReservationValidator
 {
 
     /**

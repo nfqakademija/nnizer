@@ -6,6 +6,8 @@ use App\Entity\Contractor;
 use App\Entity\LostPassword;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 
 /**
  * @method LostPassword|null find($id, $lockMode = null, $lockVersion = null)
@@ -54,46 +56,23 @@ class LostPasswordRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return LostPassword[]
-     * @throws \Exception
+     * @param LostPassword $lostPassword
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
-    public function findAllActiveEntries(): array
+    public function remove(LostPassword $lostPassword)
     {
-        $now = new \DateTime('now');
-        return $this->createQueryBuilder('lp')
-            ->andWhere('lp.expiresAt > :now')
-            ->setParameter('now', $now->modify('-60 minutes'))
-            ->getQuery()
-            ->getResult()
-            ;
+        $this->_em->remove($lostPassword);
+        $this->_em->flush();
     }
 
-    // /**
-    //  * @return LostPassword[] Returns an array of LostPassword objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param LostPassword $lostPassword
+     * @throws ORMException
+     */
+    public function save(LostPassword $lostPassword)
     {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $this->_em->persist($lostPassword);
+        $this->_em->flush();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?LostPassword
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

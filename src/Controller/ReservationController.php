@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contractor;
 use App\Entity\Reservation;
-use App\Validator\ReservationValidation;
+use App\Validator\ReservationValidator;
 use App\Repository\ReservationRepository;
 use App\Service\MailerService;
 use App\Service\ReservationFactory;
@@ -22,7 +22,7 @@ class ReservationController extends AbstractController
      * @param Request $request
      * @param ReservationFactory $reservationFactory
      * @param MailerService $mailer
-     * @param ReservationValidation $reservationValidation
+     * @param ReservationValidator $reservationValidator
      * @return Response
      * @throws Exception
      */
@@ -30,9 +30,9 @@ class ReservationController extends AbstractController
         Request $request,
         ReservationFactory $reservationFactory,
         MailerService $mailer,
-        ReservationValidation $reservationValidation
+        ReservationValidator $reservationValidator
     ): Response {
-        $errors = $reservationValidation->validateInput($request);
+        $errors = $reservationValidator->validateInput($request);
 
         if (count($errors) === 0) {
             $email = $request->get('email');
