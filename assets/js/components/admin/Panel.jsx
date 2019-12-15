@@ -32,7 +32,7 @@ const Panel = () => {
     axios({
       method: 'get',
       baseURL,
-      url: `/api/profile/${username}/`,
+      url: `/api/profile/${username}`,
     })
       .then((response) => {
         setData({
