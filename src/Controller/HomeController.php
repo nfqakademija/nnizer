@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Repository\ContractorRepository;
 use App\Repository\ServiceTypeRepository;
-use App\Service\ReviewsService;
+use App\Service\ReviewService;
 use App\Service\SerializerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -61,14 +61,14 @@ class HomeController extends AbstractController
      * @param string $service
      * @param ServiceTypeRepository $serviceTypeRepository
      * @param SerializerService $serializer
-     * @param ReviewsService $reviewsService
+     * @param ReviewService $reviewsService
      * @return JsonResponse
      */
     public function getContractorsByServiceType(
         string $service,
         ServiceTypeRepository $serviceTypeRepository,
         SerializerService $serializer,
-        ReviewsService $reviewsService
+        ReviewService $reviewsService
     ): JsonResponse {
         $contractors = $serviceTypeRepository->findOneBy(['name' => $service])->getContractors();
         $json = $serializer->getResponse($contractors, ['filtered']);
