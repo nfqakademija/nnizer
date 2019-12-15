@@ -156,6 +156,7 @@ class ContractorController extends AbstractController
      * @param string $contractorKey
      * @param SerializerService $json
      * @param ContractorRepository $contractorRepository
+     * @param ReservationRepository $reservationRepository
      * @return Response
      * @throws NonUniqueResultException
      */
@@ -166,12 +167,16 @@ class ContractorController extends AbstractController
         ReservationRepository $reservationRepository
     ): Response {
         $contractor = $contractorRepository->findOneByKey($contractorKey);
-        $reservations = $reservationRepository->findBy([
-            'contractor' => $contractor,
-            'isDeleted' => null
-        ]);
+        if ($contractor) {
+            $reservations = $reservationRepository->findBy([
+                'contractor' => $contractor,
+                'isDeleted' => null
+            ]);
 
-        return new Jsonresponse($json->getResponse($reservations));
+            return new Jsonresponse($json->getResponse($reservations));
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
     }
 
     /**
@@ -193,18 +198,21 @@ class ContractorController extends AbstractController
         ReservationRepository $reservationRepository
     ): JsonResponse {
         $contractor = $contractorRepository->findOneByKey($contractorKey);
-        $reservation = $reservationRepository->findOneBy([
-            'contractor' => $contractor,
-            'id' => $reservationId,
-            'isCancelled' => false,
-        ]);
 
-        if ($reservation !== null) {
-            $reservation->setIsCancelled(true);
-            $reservationRepository->save($reservation);
-            $mailer->sendSuccessfulCancellationEmail($reservation);
+        if ($contractor) {
+            $reservation = $reservationRepository->findOneBy([
+                'contractor' => $contractor,
+                'id' => $reservationId,
+                'isCancelled' => false,
+            ]);
 
-            return new JsonResponse();
+            if ($reservation) {
+                $reservation->setIsCancelled(true);
+                $reservationRepository->save($reservation);
+                $mailer->sendSuccessfulCancellationEmail($reservation);
+
+                return new JsonResponse();
+            }
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
@@ -229,18 +237,21 @@ class ContractorController extends AbstractController
         ReservationRepository $reservationRepository
     ): JsonResponse {
         $contractor = $contractorRepository->findOneByKey($contractorKey);
-        $reservation = $reservationRepository->findOneBy([
-            'contractor' => $contractor,
-            'id' => $reservationId,
-            'isVerified' => false,
-        ]);
 
-        if ($reservation !== null) {
-            $reservation->setIsVerified(true);
-            $reservationRepository->save($reservation);
-            $mailer->sendSuccessfulVerificationEmail($reservation);
+        if ($contractor) {
+            $reservation = $reservationRepository->findOneBy([
+                'contractor' => $contractor,
+                'id' => $reservationId,
+                'isVerified' => false,
+            ]);
 
-            return new JsonResponse();
+            if ($reservation) {
+                $reservation->setIsVerified(true);
+                $reservationRepository->save($reservation);
+                $mailer->sendSuccessfulVerificationEmail($reservation);
+
+                return new JsonResponse();
+            }
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
@@ -262,18 +273,21 @@ class ContractorController extends AbstractController
         ReservationRepository $reservationRepository
     ): JsonResponse {
         $contractor = $contractorRepository->findOneByKey($contractorKey);
-        $reservation = $reservationRepository->findOneBy([
-            'contractor' => $contractor,
-            'id' => $reservationId
-        ]);
 
-        if ($reservation !== null) {
-            $em = $this->getDoctrine()->getManager();
-            $reservation->setIsDeleted(true);
-            $em->persist($reservation);
-            $em->flush();
+        if ($contractor) {
+            $reservation = $reservationRepository->findOneBy([
+                'contractor' => $contractor,
+                'id' => $reservationId
+            ]);
 
-            return new JsonResponse();
+            if ($reservation) {
+                $em = $this->getDoctrine()->getManager();
+                $reservation->setIsDeleted(true);
+                $em->persist($reservation);
+                $em->flush();
+
+                return new JsonResponse();
+            }
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
@@ -302,11 +316,14 @@ class ContractorController extends AbstractController
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
         }
-        $contractor = $contractorRepository->findOneByKey($contractorKey);
-        $reservations = $reservationsRepository->findByDateInterval($contractor, $dateFrom, $dateTo);
 
-        if ($reservations !== null) {
-            return new Jsonresponse($json->getResponse($reservations));
+        $contractor = $contractorRepository->findOneByKey($contractorKey);
+
+        if ($contractor) {
+            $reservations = $reservationsRepository->findByDateInterval($contractor, $dateFrom, $dateTo);
+            if ($reservations) {
+                return new Jsonresponse($json->getResponse($reservations));
+            }
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
@@ -329,13 +346,13 @@ class ContractorController extends AbstractController
         $lastname = $request->get('lastname');
         $email = $request->get('email');
         $visitDate = new \DateTime($request->get('visitDate'));
-
-        if (!$firstname || !$lastname || !$email || !$visitDate) {
-            return new JsonResponse(null, Response::HTTP_NO_CONTENT);
-        }
-
         $contractor = $this->getDoctrine()->getRepository(Contractor::class)
             ->findOneByKey($contractorKey);
+
+        if (!$firstname || !$lastname || !$email || !$visitDate || !$contractor) {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
+
         $reservations = $this->getDoctrine()->getRepository(Reservation::class)
             ->findConflictingReservations($contractor, $visitDate);
 
@@ -379,9 +396,12 @@ class ContractorController extends AbstractController
         ContractorService $contractorService
     ): JsonResponse {
         $contractor = $contractorRepository->findOneBy(['username' => $contractorUsername]);
-        $response = $contractorService->generateContractorCalendarResponse($contractor);
-        if ($response) {
-            return new JsonResponse($response);
+
+        if ($contractor) {
+            $response = $contractorService->generateContractorCalendarResponse($contractor);
+            if ($response) {
+                return new JsonResponse($response);
+            }
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
