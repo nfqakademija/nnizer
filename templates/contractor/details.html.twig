@@ -6,6 +6,7 @@
     <h1>{{ "detailsForm.title"|trans }}</h1>
 
     {{ form_start(detailsForm, { attr: {novalidate: 'novalidate' }}) }}
+    {{ form_row(detailsForm.services) }}
     {{ form_row(detailsForm.firstname) }}
     {{ form_row(detailsForm.lastname) }}
     {{ form_row(detailsForm.phoneNumber) }}

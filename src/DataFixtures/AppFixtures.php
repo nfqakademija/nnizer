@@ -8,6 +8,7 @@ use App\Entity\CoverPhoto;
 use App\Entity\ProfilePhoto;
 use App\Entity\Reservation;
 use App\Entity\Review;
+use App\Entity\ServiceType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -105,6 +106,17 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     /**
      * @var array
      */
+    private $services = [
+        'Massages',
+        'Hairdressing',
+        'Driver',
+        'Fitness',
+        'Teaching'
+    ];
+
+    /**
+     * @var array
+     */
     private $descriptions = [
         'Hey there! I\'m a professional that you certainly need. With experience of over 10 years in the industry' .
         ' I\'m proud to say that I am one of the best. Here\'s the best part - if you do not really like my ' . '
@@ -156,7 +168,6 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         for ($i = 1; $i < 51; $i++) {
             $firstname = $this->firstnames[random_int(0, 9)];
             $lastname = $this->lastnames[random_int(0, 9)];
-            $serviceTitle = $services[random_int(0, 3)];
             $description = $this->descriptions[random_int(0, 3)];
 
             $contractor = new Contractor();
@@ -169,8 +180,9 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $contractor->setVerificationKey();
             $contractor->setAddress('Brastos g. 15, Kaunas');
             $contractor->setIsVerified(random_int(0, 1));
-            $contractor->setTitle($serviceTitle);
             $contractor->setDescription($description);
+            $this->loadService($contractor, $manager);
+            $contractor->setTitle($contractor->getServices()->getName() . $i . ' services');
             $this->addCoverPhoto($contractor, $manager);
             $this->addProfilePhoto($contractor, $manager);
             $this->loadSettings($contractor, $manager);
@@ -276,6 +288,29 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $manager->persist($review);
             $contractor->addReview($review);
         }
+    }
+
+    /**
+     * @param Contractor $contractor
+     * @param ObjectManager $manager
+     * @throws \Exception
+     */
+    private function loadService(Contractor $contractor, ObjectManager $manager)
+    {
+        $serviceName = $this->services[random_int(0, 4)];
+        $service = $manager->getRepository(ServiceType::class)->findOneBy(['name' => $serviceName]);
+        if ($service) {
+            $service->addContractor($contractor);
+            $manager->persist($service);
+            $contractor->setServices($service);
+        } else {
+            $service = new ServiceType();
+            $service->setName($serviceName);
+            $service->addContractor($contractor);
+            $manager->persist($service);
+            $contractor->setServices($service);
+        }
+        $manager->flush();
     }
 
     /**

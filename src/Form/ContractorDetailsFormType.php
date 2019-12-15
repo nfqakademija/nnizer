@@ -1,9 +1,10 @@
 <?php
 
-
 namespace App\Form;
 
 use App\Entity\Contractor;
+use App\Entity\ServiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -18,6 +19,12 @@ class ContractorDetailsFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('services', EntityType::class, [
+                'label' => 'detailsForm.service.type',
+                'class' => ServiceType::class,
+                'choice_label' => 'name',
+                'choice_translation_domain' => true,
+            ])
             ->add('firstname', TextType::class, [
                 'label' => 'detailsForm.firstname',
                 'constraints' => [

@@ -25,7 +25,7 @@ class Review
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $stars;
 
