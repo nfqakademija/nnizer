@@ -92,12 +92,8 @@ class ContractorDetailsFormType extends AbstractType
                     'placeholder' => 'detailsForm.facebook.placeholder',
                 ],
             ])
-            ->add('coverPhoto', CoverPhotoType::class, [
-                'label' => 'detailsForm.profilePhoto',
-            ])
-            ->add('profilePhoto', ProfilePhotoType::class, [
-                'label' => 'detailsForm.profilePhoto',
-            ]);
+            ->add('coverPhoto', CoverPhotoType::class, ['label' => ' '])
+            ->add('profilePhoto', ProfilePhotoType::class, ['label' => ' ']);
     }
 
     public function configureOptions(OptionsResolver $resolver)

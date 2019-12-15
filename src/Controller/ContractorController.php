@@ -84,12 +84,16 @@ class ContractorController extends AbstractController
         if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
             $settings->setContractor($contractor);
             $this->getDoctrine()->getRepository(ContractorSettings::class)->save($settings);
+
+            return $this->redirectToRoute('contractor');
         }
 
         $detailsForm = $this->createForm(ContractorDetailsFormType::class, $contractor);
         $detailsForm->handleRequest($request);
         if ($detailsForm->isSubmitted() && $detailsForm->isValid()) {
             $contractorRepository->save($contractor);
+
+            return $this->redirectToRoute('contractor');
         }
 
         return $this->render('contractor/settings.html.twig', [

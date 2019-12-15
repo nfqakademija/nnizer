@@ -4,7 +4,7 @@ const SettingsBtn = () => (
   <a
     className="btn -no-margin"
     type="button"
-    href="/contractor/settings"
+    href="/contractor/edit"
   >
     Change settings
   </a>
