@@ -61,13 +61,13 @@ class ExceptionListener
 
         if ($exception instanceof NotFoundHttpException) {
             $response->setStatusCode($exception->getStatusCode());
-            $twig = $this->twig->render('bundles/TwigBundle/Exception/error404.html.twig');
-            $response->setContent($twig);
+//            $twig = $this->twig->render('bundles/TwigBundle/Exception/error404.html.twig');
+//            $response->setContent($twig);
         } else {
             $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
             $this->mailer->sendExceptionEmail($exception);
-            $twig = $this->twig->render('bundles/TwigBundle/Exception/error.html.twig');
-            $response->setContent($twig);
+//            $twig = $this->twig->render('bundles/TwigBundle/Exception/error.html.twig');
+//            $response->setContent($twig);
         }
 
         $event->setResponse($response);
