@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Contractor;
 use App\Entity\ContractorSettings;
-use App\Entity\CoverPhoto;
-use App\Entity\ProfilePhoto;
 use App\Entity\Reservation;
 use App\Form\ContractorDetailsFormType;
 use App\Form\ContractorSettingsType;
@@ -16,6 +14,7 @@ use App\Service\ContractorService;
 use App\Service\ReservationFactory;
 use App\Service\SerializerService;
 use App\Service\MailerService;
+use Doctrine\ORM\ORMException;
 use Exception;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -73,6 +72,7 @@ class ContractorController extends AbstractController
      * @param Request $request
      * @param ContractorRepository $contractorRepository
      * @return Response
+     * @throws ORMException
      */
     public function settings(Request $request, ContractorRepository $contractorRepository): Response
     {
@@ -100,6 +100,7 @@ class ContractorController extends AbstractController
      * @param Request $request
      * @param ContractorRepository $contractorRepository
      * @return Response
+     * @throws ORMException
      */
     public function details(Request $request, ContractorRepository $contractorRepository): Response
     {
@@ -127,6 +128,7 @@ class ContractorController extends AbstractController
      * @param TranslatorInterface $translator
      * @param ContractorRepository $contractorRepository
      * @return Response
+     * @throws ORMException
      */
     public function activate(
         string $verificationKey,
@@ -181,6 +183,7 @@ class ContractorController extends AbstractController
      * @param ReservationRepository $reservationRepository
      * @return JsonResponse
      * @throws NonUniqueResultException
+     * @throws ORMException
      */
     public function cancelReservation(
         string $contractorKey,
@@ -216,6 +219,7 @@ class ContractorController extends AbstractController
      * @param ReservationRepository $reservationRepository
      * @return JsonResponse
      * @throws NonUniqueResultException
+     * @throws ORMException
      */
     public function verifyReservation(
         string $contractorKey,

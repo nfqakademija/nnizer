@@ -16,6 +16,11 @@ use Doctrine\ORM\ORMException;
  */
 class UserRepository extends ServiceEntityRepository
 {
+
+    /**
+     * UserRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
@@ -37,13 +42,11 @@ class UserRepository extends ServiceEntityRepository
 
     /**
      * @param User $user
+     * @throws ORMException
      */
     public function save(User $user): void
     {
-        try {
-            $this->_em->persist($user);
-            $this->_em->flush();
-        } catch (ORMException $e) {
-        }
+        $this->_em->persist($user);
+        $this->_em->flush();
     }
 }
