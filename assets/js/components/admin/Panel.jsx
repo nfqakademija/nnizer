@@ -83,7 +83,7 @@ const Panel = () => {
               toggleNav={toggleNav}
               avatar={
                 data.isFetched
-                  ? `${baseURL}/uploads/profile/${data.users.profilePhoto.filename}}`
+                  ? `${baseURL}/uploads/profile/${data.users.profilePhoto.filename}`
                   : ''
               }
               name={
