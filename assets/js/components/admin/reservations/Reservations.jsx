@@ -124,28 +124,29 @@ const Reservations = (props) => {
   return (
     <div className="panel__content admin-container">
       <p className="panel__time">
-        {`📆 Today is ${format(new Date(), 'd LLL, cccc!')} `}
+        {getTranslation('crm.time.today_is')}{`📆${format(new Date(), 'd LLL, cccc!')} `}
+        {/*TODO translate the date*/}
       </p>
       <h2>Reservations</h2>
       {reservations.length === 0 ? (
         <>
           <p className="reservations__message">
-            You dont have any reservations yet!
+            {getTranslation('crm.no_reservations')}
           </p>
         </>
       ) : (
         <>
           <div className="filters">
-            {getFilterBtn('Today', isTodayFilter, setTodayFilter)}
-            {getFilterBtn('This week', isWeekFilter, setWeekFilter)}
-            {getFilterBtn('Pending', isPendingFilter, setPendingFilter)}
+            {getFilterBtn(getTranslation('crm.time.today'), isTodayFilter, setTodayFilter)}
+            {getFilterBtn(getTranslation('crm.time.this_week'), isWeekFilter, setWeekFilter)}
+            {getFilterBtn(getTranslation('crm.pending'), isPendingFilter, setPendingFilter)}
             {getFilterBtn(
-              'Not confirmed',
+                getTranslation('crm.unconfirmed'),
               isConfirmedFilter,
               setConfirmedFilter,
             )}
-            {getFilterBtn('Cancelled', isCancelledFilter, setCancelledFilter)}
-            {getFilterBtn('Expired', isExpiredFilter, setExpiredFilter)}
+            {getFilterBtn(getTranslation('crm.cancelled'), isCancelledFilter, setCancelledFilter)}
+            {getFilterBtn(getTranslation('crm.time.expired'), isExpiredFilter, setExpiredFilter)}
           </div>
           <ul className="reservations">
             <li className="reservations__labels">
@@ -161,13 +162,13 @@ const Reservations = (props) => {
             {getFilteredReservations().length === 0 ? (
               <>
                 <p className="reservations__text">
-                  No reservations matching your criteria.
+                  {getTranslation('crm.no_reservations_matching')}
                   <button
                     type="button"
                     className="link -underline"
                     onClick={resetFilters}
                   >
-                    reset filters
+                    {getTranslation('crm.reset_filters')}
                   </button>
                 </p>
               </>

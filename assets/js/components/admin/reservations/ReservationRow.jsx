@@ -59,41 +59,41 @@ const ReservationRow = (props) => {
 
   const deleteReservation = () => {
     // @Route("/api/contractor/{contractorKey}/delete/{reservationId}", methods="DELETE")
-    buttonClicked('Removal in progress 🗑', setDeletion);
+    buttonClicked(getTranslation('crm.removal.progress'), setDeletion);
     axios
       .delete(`/api/contractor/${userKey}/delete/${id}`)
       .then((response) => {
         fetchData();
-        updateAlert('Removal was successful ✅', 'success', 4000); // TODO translation
+        updateAlert(getTranslation('crm.removal.success'), 'success', 4000);
       })
       .catch((error) => {
-        updateAlert('Removal failed. Please try again.', 'error', 4000); // TODO translation
+        updateAlert(getTranslation('crm.removal.error'), 'error', 4000);
       });
   };
 
   const cancelReservation = () => {
-    buttonClicked('Cancellation in progress 👨🏼‍💻', setCancel);
+    buttonClicked(getTranslation('crm.cancellation.progress'), setCancel);
     axios
       .patch(`/api/contractor/${userKey}/cancel/${id}`)
       .then((response) => {
         fetchData();
-        updateAlert('Cancellation was successful ✅', 'success', 4000); // TODO translation
+        updateAlert(getTranslation('crm.cancellation.success'), 'success', 4000);
       })
       .catch((error) => {
-        updateAlert('Cancellation failed. Please try again.', 'error', 4000); // TODO translation
+        updateAlert(getTranslation('crm.cancellation.error'), 'error', 4000);
       });
   };
 
   const approveReservation = () => {
-    buttonClicked('Approval in progress 👨🏼‍💻', setApproval);
+    buttonClicked(getTranslation('crm.approval.progress'), setApproval);
     axios
       .patch(`/api/contractor/${userKey}/verify/${id}`)
       .then((response) => {
         fetchData();
-        updateAlert('Approval was successful ✅', 'success', 4000); // TODO translation
+        updateAlert(getTranslation('crm.approval.success'), 'success', 4000);
       })
       .catch((error) => {
-        updateAlert('Approval failed. Please try again.', 'error', 4000); // TODO translation
+        updateAlert(getTranslation('crm.approval.error'), 'error', 4000);
       });
   };
 
@@ -102,13 +102,13 @@ const ReservationRow = (props) => {
     const currentDate = new Date();
 
     if (isDone || isCancelled) {
-      timeLeft = 'Expired'; // TODO: translations
+      timeLeft = getTranslation('crm.time.expired');
     } else if (isSameDay(reservationDate, currentDate)) {
       const diffInHours = differenceInHours(reservationDate, currentDate);
-      timeLeft = diffInHours + (diffInHours === 1 ? ' hour' : ' hours');
+      timeLeft = diffInHours + ' ' +(diffInHours === 1 ? getTranslation('crm.time.hour') : getTranslation('crm.time.hours'));
     } else {
       const diffInDays = differenceInDays(reservationDate, currentDate);
-      timeLeft = diffInDays + (diffInDays === 1 ? ' day' : ' days');
+      timeLeft = diffInDays + ' '+(diffInDays === 1 ? getTranslation('crm.time.day') : getTranslation('crm.time.days'));
     }
     return timeLeft;
   };
@@ -127,7 +127,7 @@ const ReservationRow = (props) => {
   const formatDate = () => {
     const day = parseISO(date);
     if (isSameDay(new Date(), day)) {
-      return `Today, ${format(day, 'HH:mm')}`; // TODO translation
+      return `Today, ${format(day, 'HH:mm')}`; // TODO translation  getTranslation('crm.time.today')
     }
     return format(day, 'yyyy-MM-dd, HH:mm');
   };
@@ -182,17 +182,17 @@ const ReservationRow = (props) => {
             editOpen ? '-open' : ''
           }`}
         >
-          <span className="edit__heading">Time left</span>
+          <span className="edit__heading">{getTranslation('crm.time_left')}</span>
           <span className="edit__time-left">{getLeftTime(parseISO(date))}</span>
           <div className="edit__actions">
             <button
               type="button"
               className="edit__action panel-btn -delete"
               // eslint-disable-next-line no-alert
-              onClick={(e) => window.confirm('Are you sure to PERMANENTLY remove this reservation?') && deleteReservation()}
+              onClick={(e) => window.confirm(getTranslation('crm.removal.approval')) && deleteReservation()}
               disabled={isDeletionDisabled}
             >
-            Delete
+              {getTranslation('crm.delete')}
             </button>
             
             {!isCancelled && !isDone && (
@@ -200,10 +200,10 @@ const ReservationRow = (props) => {
                 type="button"
                 className="edit__action panel-btn -cancel"
                 // eslint-disable-next-line no-alert
-                onClick={(e) => window.confirm('Are you sure to CANCEL this reservation?') && cancelReservation()}
+                onClick={(e) => window.confirm(getTranslation('crm.cancellation.approval')) && cancelReservation()}
                 disabled={isCancelDisabled}
               >
-                Cancel
+                {getTranslation('crm.cancel')}
               </button>
             )}
             {!isVerified && !isDone && !isCancelled && (
@@ -213,7 +213,7 @@ const ReservationRow = (props) => {
                 onClick={approveReservation}
                 disabled={isApprovalDisabled}
               >
-                Approve
+                {getTranslation('crm.approve')}
               </button>
             )}
           </div>

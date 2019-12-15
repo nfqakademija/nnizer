@@ -116,8 +116,6 @@ crm:
   name: Name
   email: Email address
   phone: Phone number
-  missing:
-    phone: not given
   status: Status
   reservations: Reservations
   search: Type in to search...
@@ -129,6 +127,39 @@ crm:
   unconfirmed: Unconfirmed
   done: Completed
   actions: Actions
+  removal:
+    progress: Removal in progress
+    success: Removal was successful
+    error: Removal failed. Please try again.
+    approval: Are you sure to PERMANENTLY remove this reservation?
+  delete: Delete
+  cancellation:
+    progress: Cancellation in progress
+    success: Cancellation was successful
+    error: Cancellation failed. Please try again.
+    approval: Are you sure to CANCEL this reservation?
+  cancel: Cancel
+  approval:
+    progress: Approval in progress
+    success: Approval was successful
+    error: Approval failed. Please try again.
+  approve: Approve
+  no_reservations: You don't have any reservations yet!
+  no_reservations_matching: No reservations matching your criteria.
+  reset_filters: Reset filters
+  error:
+    profile: Can't load profile data. Try again or contact us!
+    reservations: Can't load reservations. Try again or contact us!
+  time_left: Time left
+  time:
+    expired: Expired
+    hour: hour
+    hours: hours
+    day: day
+    days: days
+    today: Today
+    today_is: Today is
+    this_week: This week
 
 contractor:
   title: services
@@ -163,3 +194,14 @@ contractor:
     Saturday: Saturday
     Sunday: Sunday
   book: Book now
+  booking:
+    success: Successfully booked!
+    send: Sending booking details
+  error:
+    provider: Can't get provider information. Try again or contact us!
+    failed: Booking failed
+    chosen: Chosen time is not available! Please select other date
+    error: Something went wrong. Please try again
+datepicker:
+  error:
+    dates: Can't get available dates. Try again or contact us!

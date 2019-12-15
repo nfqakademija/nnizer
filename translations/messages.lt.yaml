@@ -109,14 +109,11 @@ detailsForm:
 locales:
   lt: Lietuvių k.
   en: Anglų k.
-
 crm:
   date: Data
   name: Vardas
   email: El. paštas
   phone: Tel. nr.
-  missing:
-    phone: nenurodyta
   status: Būsena
   reservations: Rezervacijos
   search: Paieška
@@ -128,6 +125,40 @@ crm:
   unconfirmed: Nepatvirtinta
   done: Įvykdyta
   actions: Veiksmai
+  removal:
+    progress: Pašalinimas vykdomas
+    success: Pašalinimas sėkmingas
+    error: Pašalinti nepavyko. Bandykite dar kartą.
+    approval: Ar tikrai norite VISAM LAIKUI pašalinti rezervaciją?
+  delete: Pašalinti
+  cancellation:
+    progress: Atšaukimas vykdoma
+    success: Atšaukimas sėkmingas
+    error: Atšaukti nepavyko. Bandykite dar kartą.
+    approval: Ar tikrai norite ATŠAUKTI rezervaciją?
+  cancel: Atšaukti
+  approval:
+    progress: Patvirtinimas vykdomas
+    success: Patvirtinimas sėkmingas
+    error: Patvirtinti nepavyko. Bandykite dar kartą.
+  approve: Patvirtinti
+  no_reservations: Kol kas neturite jokių!
+  no_reservations_matching: Nėra rezervacijų tenkinančių jūsų pasirinktus kriterijus.
+  reset_filters: Nuimti filtrus
+  error:
+    profile: Nepasiekiami profilio duomenys. Bandykite dar kartą arba susisiekite su mumis!
+    reservations: Nepasiekiamos rezervacijos. Bandykite dar kartą arba susisiekite su mumis!
+  time_left: Likęs laikas
+  time:
+    expired: Pasibaigė
+    hour: valanda
+    hours: valandos
+    day: diena
+    days: dienos
+    today: Šiandien
+    today_is: Šiandien yra
+    this_week: Ši savaitė
+
 
 contractor:
   title: paslaugos
@@ -162,3 +193,14 @@ contractor:
     Saturday: Šeštadienis
     Sunday: Sekmadienis
   book: Užsirezervuoti
+  booking:
+    success: Rezervacija sėkmiga!
+    send: Siunčiamos rezervacijos detalės
+  error:
+    provider: Nepasiekiama tiekėjo informacija. Bandykite dar kartą arba susisiekite su mumis!
+    failed: Rezervacija nepavyko
+    chosen: Pasirinktas laikas negalimas! Pasirinkite kitą datą
+    error: Kažkas įvyko negerai. Bandykite dar kartą
+datepicker:
+  error:
+    dates: Nėra prieinamų datų. Bandykite dar kartą arba susisiekite su mumis!
