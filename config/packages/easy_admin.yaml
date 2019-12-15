@@ -89,5 +89,5 @@ easy_admin:
       class: App\Entity\ContractorSettings
     Reservation:
       class: App\Entity\Reservation
-    Rewiev:
+    Review:
       class: App\Entity\Review
