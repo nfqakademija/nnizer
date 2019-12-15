@@ -28,6 +28,7 @@ navigation:
   login: Login
   signup: Sign up
   logout: Log out
+  reservations: My reservations
 
 login_page:
   login: Login

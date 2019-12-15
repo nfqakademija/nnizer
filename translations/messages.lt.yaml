@@ -28,6 +28,7 @@ navigation:
   login: Prisijungti
   signup: Užsiregistruoti
   logout: Atsijungti
+  reservations: Mano rezervacijos
 
 login_page:
   login: Prisijungimas
