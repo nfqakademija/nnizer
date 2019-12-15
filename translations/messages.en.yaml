@@ -25,14 +25,14 @@ registration_form:
   already-registered: Already registered? Click to login!
   register: Register
   register.button: Register
+  firstname: Your firstname
+  lastname: Your lastname
   username: Username
-  firstname: First Name
-  lastname: Last Name
   email: Email Address
-  phoneNumber: Phone number
   plainPassword: Password
   provider: Service provider
   date: Visit date
+  phone: Phone Number
 
 flash:
   reservation:
@@ -102,6 +102,9 @@ detailsForm:
     placeholder: '/mypage'
   coverPhoto: Cover photo
   profilePhoto: Profile photo
+  firstname: First Name
+  lastname: Last Name
+  phoneNumber: Phone Number
 
 
 locales:
@@ -113,6 +116,8 @@ crm:
   name: Name
   email: Email address
   phone: Phone number
+  missing:
+    phone: not given
   status: Status
   reservations: Reservations
   search: Type in to search...
@@ -123,6 +128,7 @@ crm:
   pending: Pending
   unconfirmed: Unconfirmed
   done: Completed
+  actions: Actions
 
 contractor:
   title: services

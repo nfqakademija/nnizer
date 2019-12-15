@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
 
 import Loader from './Loader';
 import Hero from './Hero';
 import Content from './Content';
 
+import { showAlert } from '../../Utils/NotificationUtils';
+
 const Template = () => {
   const [userData, setUserData] = useState();
   const [isFetched, setFetched] = useState(false);
+
+  const CloseButton = (closeToast) => (
+    <i className="icon-cross notification__close" onClick={() => closeToast} />
+  );
 
   const fetchData = () => {
     const contractorName = window.location.href.split('/').pop();
@@ -20,7 +27,7 @@ const Template = () => {
       setFetched(true);
     })
       .catch((error) => {
-        console.log(error); // TOOD - error handling
+        showAlert('Can\'t get provider information. Try again or contact us!', 'error', 4000); // TODO translation
       });
   };
 
@@ -50,9 +57,11 @@ const Template = () => {
 
   return (
     <section className="contractor">
+      <ToastContainer closeButton={<CloseButton />} />
       {loadContent()}
     </section>
   );
 };
 
 export default Template;
+

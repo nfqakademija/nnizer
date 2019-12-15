@@ -1,5 +1,5 @@
 import React from 'react';
-import {getTranslation} from "../../TranslationService";
+import { getTranslation } from '../../TranslationService';
 
 const Settings = (props) => {
   return (
