@@ -88,7 +88,7 @@ const Panel = () => {
               }
               name={
                 data.isFetched
-                  ? data.users.firstname.length > 0
+                  ? data.users.firstname
                     ? `${data.users.firstname} ${data.users.lastname}`
                     : data.users.username
                   : ''
