@@ -4,10 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Contractor;
 use App\Entity\Reservation;
-use App\Validator\ReservationValidation;
+use App\Validator\ReservationValidator;
 use App\Repository\ReservationRepository;
 use App\Service\MailerService;
 use App\Service\ReservationFactory;
+use Doctrine\ORM\ORMException;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,17 +24,17 @@ class ReservationController extends AbstractController
      * @param Request $request
      * @param ReservationFactory $reservationFactory
      * @param MailerService $mailer
-     * @param ReservationValidation $reservationValidation
-     * @return JsonResponse
+     * @param ReservationValidator $reservationValidator
+     * @return Response
      * @throws Exception
      */
     public function register(
         Request $request,
         ReservationFactory $reservationFactory,
         MailerService $mailer,
-        ReservationValidation $reservationValidation
-    ): JsonResponse {
-        $errors = $reservationValidation->validateInput($request);
+        ReservationValidator $reservationValidator
+    ): Response {
+        $errors = $reservationValidator->validateInput($request);
 
         if (count($errors) === 0) {
             $email = $request->get('email');
@@ -111,6 +112,7 @@ class ReservationController extends AbstractController
      * @param MailerService $mailer
      * @param ReservationRepository $reservationRepository
      * @return Response
+     * @throws ORMException
      */
     public function cancel(
         string $verificationKey,

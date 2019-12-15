@@ -32,7 +32,7 @@
                         <label for="inputPassword" class="sr-only">{{ "login_page.password"|trans }}</label>
                     </div>
 
-                    <a href="#" class="login__forgot-link link">{{ "login_page.forgot_pass"|trans }}</a>
+                    <a href="{{ path('app_lost-password-page') }}" class="login__forgot-link link">{{ "login_page.forgot_pass"|trans }}</a>
 
 
                     <input type="hidden" name="_csrf_token"
