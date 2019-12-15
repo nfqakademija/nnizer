@@ -9,7 +9,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
-use Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\P1;
 
 /**
  * @method Reservation|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +18,11 @@ use Symfony\Component\DependencyInjection\Tests\Fixtures\includes\HotPath\P1;
  */
 class ReservationRepository extends ServiceEntityRepository
 {
+
+    /**
+     * ReservationRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Reservation::class);
@@ -44,6 +48,30 @@ class ReservationRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param Contractor $contractor
+     * @param DateTime $from
+     * @return array
+     */
+    public function findConflictingReservations(Contractor $contractor, DateTime $from): array
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.contractor = :contractor')
+            ->andWhere('c.visitDate >= :from')
+            ->andWhere('c.visitDate < :visitEnding')
+            ->setParameters(
+                [
+                    'contractor' => $contractor,
+                    'visitEnding' => (clone $from)
+                        ->modify('+' . $contractor->getSettings()->getVisitDuration() . ' minutes'),
+                    'from' => $from
+                ]
+            )
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
      * @param DateTime $now
      * @return Reservation[] Returns an array of Reservation objects
      */
@@ -61,14 +89,12 @@ class ReservationRepository extends ServiceEntityRepository
 
     /**
      * @param Reservation $reservation
+     * @throws ORMException
      */
     public function save(Reservation $reservation): void
     {
-        try {
-            $this->_em->persist($reservation);
-            $this->_em->flush();
-        } catch (ORMException $e) {
-        }
+        $this->_em->persist($reservation);
+        $this->_em->flush();
     }
 
     // /**

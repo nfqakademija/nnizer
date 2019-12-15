@@ -26,7 +26,7 @@ class ContractorService
      * @param Contractor $contractor
      * @return array|null
      */
-    public function generateContractorCalenderResponse(Contractor $contractor): ?array
+    public function generateContractorCalendarResponse(Contractor $contractor): ?array
     {
         if ($contractor && $settings = $contractor->getSettings()) {
             $reservations = $contractor->getReservations();

@@ -4,13 +4,14 @@ namespace App\Form;
 
 use App\Entity\Contractor;
 use App\Entity\ServiceType;
-use App\Repository\ServiceTypeRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ContractorDetailsFormType extends AbstractType
@@ -23,6 +24,37 @@ class ContractorDetailsFormType extends AbstractType
                 'class' => ServiceType::class,
                 'choice_label' => 'name',
                 'choice_translation_domain' => true,
+            ])
+            ->add('firstname', TextType::class, [
+                'label' => 'detailsForm.firstname',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'firstname.empty',
+                    ]),
+                    new Length([
+                        'min' => 2,
+                        'minMessage' => 'firstname.short',
+                        'max' => 32,
+                        'maxMessage' => 'firstname.long',
+                    ])
+                ]
+            ])
+            ->add('lastname', TextType::class, [
+                'label' => 'detailsForm.lastname',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'lastname.empty',
+                    ]),
+                    new Length([
+                        'min' => 2,
+                        'minMessage' => 'lastname.short',
+                        'max' => 32,
+                        'maxMessage' => 'lastname.long',
+                    ])
+                ]
+            ])
+            ->add('phoneNumber', TelType::class, [
+                'label' => 'detailsForm.phoneNumber',
             ])
             ->add('title', TextType::class, [
                 'label' => 'detailsForm.service.title',
@@ -80,14 +112,5 @@ class ContractorDetailsFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Contractor::class,
         ]);
-    }
-
-    /**
-     * @param ServiceTypeRepository $services
-     * @return ServiceType[]
-     */
-    private function getServiceTypes(ServiceTypeRepository $services): array
-    {
-        return $services->findAll();
     }
 }

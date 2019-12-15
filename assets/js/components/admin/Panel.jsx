@@ -35,7 +35,6 @@ const Panel = () => {
       url: `/api/profile/${username}/`,
     })
       .then((response) => {
-        console.log(response.data);
         setData({
           users: response.data,
           isFetched: true,
@@ -89,7 +88,9 @@ const Panel = () => {
               }
               name={
                 data.isFetched
-                  ? `${data.users.firstname} ${data.users.lastname}`
+                  ? data.users.firstname.length > 0
+                    ? `${data.users.firstname} ${data.users.lastname}`
+                    : data.users.username
                   : ''
               }
             />
