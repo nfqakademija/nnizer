@@ -36,7 +36,8 @@ security:
         success_handler: App\Security\LogoutHandler
 
   access_control:
-    - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY}
+    - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin, role: ROLE_ADMIN }
     - { path: ^/contractor, roles: ROLE_CONTRACTOR }
     - { path: ^/api/contractor, roles: ROLE_CONTRACTOR }
+    - { path: ^/api/profile, role: IS_AUTHENTICATED_ANONYMOUSLY }
