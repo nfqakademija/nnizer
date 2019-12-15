@@ -23,7 +23,6 @@ class ContractorDetailsFormType extends AbstractType
                 'class' => ServiceType::class,
                 'choice_label' => 'name',
                 'choice_translation_domain' => true,
-
             ])
             ->add('title', TextType::class, [
                 'label' => 'detailsForm.service.title',
