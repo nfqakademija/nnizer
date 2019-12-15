@@ -26,19 +26,12 @@ class ExceptionListener
     private $environment;
 
     /**
-     * @var Environment
-     */
-    private $twig;
-
-    /**
      * ExceptionListener constructor.
-     * @param ContainerInterface $container
      * @param MailerService $mailer
      * @param String $environment
      */
-    public function __construct(String $environment, ContainerInterface $container, MailerService $mailer)
+    public function __construct(String $environment, MailerService $mailer)
     {
-        $this->twig = $container->get('twig');
         $this->mailer = $mailer;
         $this->environment = $environment;
     }
@@ -46,9 +39,6 @@ class ExceptionListener
     /**
      * @param ExceptionEvent $event
      * @return string|Response
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
      */
     public function onKernelException(ExceptionEvent $event)
     {
@@ -57,19 +47,11 @@ class ExceptionListener
         }
 
         $exception = $event->getException();
-        $response = new Response();
-
         if ($exception instanceof NotFoundHttpException) {
-            $response->setStatusCode($exception->getStatusCode());
-            $twig = $this->twig->render('bundles/TwigBundle/Exception/error404.html.twig');
-            $response->setContent($twig);
+            $event->setException(new NotFoundHttpException('Page not found'));
         } else {
-            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
             $this->mailer->sendExceptionEmail($exception);
-            $twig = $this->twig->render('bundles/TwigBundle/Exception/error.html.twig');
-            $response->setContent($twig);
+            $event->setException(new \Exception('Unexpected error', Response::HTTP_INTERNAL_SERVER_ERROR));
         }
-
-        $event->setResponse($response);
     }
 }
