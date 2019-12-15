@@ -10,21 +10,6 @@
                 <h1>{{ "registration_form.register"|trans }}</h1>
 
                 {{ form_start(registrationForm, { attr: {novalidate: 'novalidate', class: 'form'}}) }}
-                <div class="form__fields">
-                    <div class="form__field form__field--half">
-                        {{ form_widget(registrationForm.firstname) }}
-                        {{ form_label(registrationForm.firstname) }}
-                    </div>
-
-                    <div class="form__field form__field--half">
-                        {{ form_widget(registrationForm.lastname) }}
-                        {{ form_label(registrationForm.lastname) }}
-                    </div>
-                </div>
-                <div class="form__fields form__error">
-                        {{ form_errors(registrationForm.firstname) }}
-                        {{ form_errors(registrationForm.lastname) }}
-                    </div>
 
                 <div class="form__field">
                     {{ form_widget(registrationForm.username) }}
@@ -41,14 +26,6 @@
                 <div class="form__error">
                     {{ form_errors(registrationForm.email) }}
                 </div>
-
-                <div class="form__field">
-                    {{ form_widget(registrationForm.phoneNumber) }}
-                    {{ form_label(registrationForm.phoneNumber) }}
-                </div>
-                <div class="form__error">
-                    {{ form_errors(registrationForm.phoneNumber) }}
-                </div> 
 
                 <div class="form__field">
                     {{ form_widget(registrationForm.plainPassword) }}

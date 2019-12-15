@@ -8,8 +8,10 @@ use App\Validator\ReservationValidator;
 use App\Repository\ReservationRepository;
 use App\Service\MailerService;
 use App\Service\ReservationFactory;
+use Doctrine\ORM\ORMException;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,20 +41,27 @@ class ReservationController extends AbstractController
             $firstname = $request->get('firstname');
             $lastname = $request->get('lastname');
             $contractor= $request->get('contractor');
-            $visitDate = $request->get('visitDate');
-
-            $reservation = $reservationFactory
-                ->createReservation($email, $firstname, $lastname, new \DateTime($visitDate));
+            $visitDate = new \DateTime($request->get('visitDate'));
+            $phoneNumber = $request->get('phoneNumber');
 
             $contractor = $this->getDoctrine()->getRepository(Contractor::class)->find($contractor);
+            $reservations = $this->getDoctrine()->getRepository(Reservation::class)
+                ->findConflictingReservations($contractor, $visitDate);
+
+            if (count($reservations) > 0) {
+                return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
+            }
+
+            $reservation = $reservationFactory
+                ->createReservation($email, $firstname, $lastname, $visitDate, $phoneNumber);
 
             $reservation->setContractor($contractor);
             $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
             $mailer->sendSuccessfulRegistrationEmail($reservation);
 
-            return $this->redirectToRoute('home');
+            return new JsonResponse();
         } else {
-            return $this->redirect($request->headers->get('referer'));
+            return new JsonResponse($errors, Response::HTTP_PARTIAL_CONTENT);
         }
     }
 
@@ -103,6 +112,7 @@ class ReservationController extends AbstractController
      * @param MailerService $mailer
      * @param ReservationRepository $reservationRepository
      * @return Response
+     * @throws ORMException
      */
     public function cancel(
         string $verificationKey,

@@ -81,6 +81,17 @@ class Reservation
     private $contractor;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isDeleted;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"Default"})
+     */
+    private $phoneNumber;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -292,6 +303,44 @@ class Reservation
      */
     public function __toString(): string
     {
-        return $this->visitDate->format('Y-m-d H:i:s');
+        return $this->getVisitDate()->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param string|null $phoneNumber
+     * @return $this
+     */
+    public function setPhoneNumber(?string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
+    }
+
+    /**
+     * @param bool|null $isDeleted
+     * @return $this
+     */
+    public function setIsDeleted(?bool $isDeleted): self
+    {
+        $this->isDeleted = $isDeleted;
+
+        return $this;
     }
 }

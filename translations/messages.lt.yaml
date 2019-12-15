@@ -45,14 +45,14 @@ registration_form:
   already-registered: Jau užsiregistravote? Prisijunkite!
   register: Registracija
   register.button: Registruotis
+  firstname: Jūsų vardas
+  lastname: Jūsų pavardė
   username: Vartotojo vardas *
-  firstname: Jūsų vardas *
-  lastname: Jūsų pavardė *
   email: El. paštas *
-  phoneNumber: Telefono numeris
   plainPassword: Slaptažodis *
   provider: Paslaugos teikėjas
   date: Vizito data
+  phone: Tel. nr.
 
 flash:
   reservation:
@@ -126,6 +126,9 @@ detailsForm:
     placeholder: '/manopuslapis'
   coverPhoto: Viršelio nuotrauka
   profilePhoto: Paskyros nuotrauka
+  firstname: Jūsų vardas
+  lastname: Jūsų pavardė
+  phoneNumber: Telefono numeris
 
 locales:
   lt: Lietuvių k.
@@ -136,6 +139,8 @@ crm:
   name: Vardas
   email: El. paštas
   phone: Tel. nr.
+  missing:
+    phone: nenurodyta
   status: Būsena
   reservations: Rezervacijos
   search: Paieška
@@ -146,6 +151,7 @@ crm:
   pending: Laukiama
   unconfirmed: Nepatvirtinta
   done: Įvykdyta
+  actions: Veiksmai
 
 contractor:
   title: paslaugos

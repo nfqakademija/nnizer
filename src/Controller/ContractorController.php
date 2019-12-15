@@ -14,6 +14,7 @@ use App\Service\ContractorService;
 use App\Service\ReservationFactory;
 use App\Service\SerializerService;
 use App\Service\MailerService;
+use Doctrine\ORM\ORMException;
 use Exception;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -71,6 +72,7 @@ class ContractorController extends AbstractController
      * @param Request $request
      * @param ContractorRepository $contractorRepository
      * @return Response
+     * @throws ORMException
      */
     public function settings(Request $request, ContractorRepository $contractorRepository): Response
     {
@@ -98,6 +100,7 @@ class ContractorController extends AbstractController
      * @param Request $request
      * @param ContractorRepository $contractorRepository
      * @return Response
+     * @throws ORMException
      */
     public function details(Request $request, ContractorRepository $contractorRepository): Response
     {
@@ -125,6 +128,7 @@ class ContractorController extends AbstractController
      * @param TranslatorInterface $translator
      * @param ContractorRepository $contractorRepository
      * @return Response
+     * @throws ORMException
      */
     public function activate(
         string $verificationKey,
@@ -158,10 +162,14 @@ class ContractorController extends AbstractController
     public function getReservations(
         string $contractorKey,
         SerializerService $json,
-        ContractorRepository $contractorRepository
+        ContractorRepository $contractorRepository,
+        ReservationRepository $reservationRepository
     ): Response {
         $contractor = $contractorRepository->findOneByKey($contractorKey);
-        $reservations = $contractor->getReservations();
+        $reservations = $reservationRepository->findBy([
+            'contractor' => $contractor,
+            'isDeleted' => null
+        ]);
 
         return new Jsonresponse($json->getResponse($reservations));
     }
@@ -175,6 +183,7 @@ class ContractorController extends AbstractController
      * @param ReservationRepository $reservationRepository
      * @return JsonResponse
      * @throws NonUniqueResultException
+     * @throws ORMException
      */
     public function cancelReservation(
         string $contractorKey,
@@ -210,6 +219,7 @@ class ContractorController extends AbstractController
      * @param ReservationRepository $reservationRepository
      * @return JsonResponse
      * @throws NonUniqueResultException
+     * @throws ORMException
      */
     public function verifyReservation(
         string $contractorKey,
@@ -229,6 +239,39 @@ class ContractorController extends AbstractController
             $reservation->setIsVerified(true);
             $reservationRepository->save($reservation);
             $mailer->sendSuccessfulVerificationEmail($reservation);
+
+            return new JsonResponse();
+        } else {
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    /**
+     * @Route("/api/contractor/{contractorKey}/delete/{reservationId}", methods="DELETE")
+     * @param string $contractorKey
+     * @param int $reservationId
+     * @param ContractorRepository $contractorRepository
+     * @param ReservationRepository $reservationRepository
+     * @return JsonResponse
+     * @throws NonUniqueResultException
+     */
+    public function deleteReservation(
+        string $contractorKey,
+        int $reservationId,
+        ContractorRepository $contractorRepository,
+        ReservationRepository $reservationRepository
+    ): JsonResponse {
+        $contractor = $contractorRepository->findOneByKey($contractorKey);
+        $reservation = $reservationRepository->findOneBy([
+            'contractor' => $contractor,
+            'id' => $reservationId
+        ]);
+
+        if ($reservation !== null) {
+            $em = $this->getDoctrine()->getManager();
+            $reservation->setIsDeleted(true);
+            $em->persist($reservation);
+            $em->flush();
 
             return new JsonResponse();
         } else {
@@ -291,14 +334,20 @@ class ContractorController extends AbstractController
             return new JsonResponse(null, Response::HTTP_NO_CONTENT);
         }
 
+        $contractor = $this->getDoctrine()->getRepository(Contractor::class)
+            ->findOneByKey($contractorKey);
+        $reservations = $this->getDoctrine()->getRepository(Reservation::class)
+            ->findConflictingReservations($contractor, $visitDate);
+
+        if (count($reservations) > 0) {
+            return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
+        }
         $reservation = $reservationFactory->createReservation(
             $email,
             $firstname,
             $lastname,
             $visitDate
         );
-        $contractor = $this->getDoctrine()->getRepository(Contractor::class)
-            ->findOneByKey($contractorKey);
         $reservation->setContractor($contractor);
         $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
 
@@ -330,7 +379,7 @@ class ContractorController extends AbstractController
         ContractorService $contractorService
     ): JsonResponse {
         $contractor = $contractorRepository->findOneBy(['username' => $contractorUsername]);
-        $response = $contractorService->generateContractorCalenderResponse($contractor);
+        $response = $contractorService->generateContractorCalendarResponse($contractor);
         if ($response) {
             return new JsonResponse($response);
         } else {

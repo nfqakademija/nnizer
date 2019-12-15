@@ -140,4 +140,20 @@ class MailerService extends AbstractController
             $contractor->getEmail()
         );
     }
+
+    /**
+     * @param \Exception $exception
+     */
+    public function sendExceptionEmail(
+        \Exception $exception
+    ): void {
+        $exception->getTraceAsString();
+        $details = 'Exception has been thrown in ' . $exception->getFile() .
+            ' on line ' . $exception->getLine() . '<br>Exception message: ' . $exception->getMessage();
+        $this->sendMail(
+            $details,
+            'Exception!',
+            $this->getParameter('admin_email')
+        );
+    }
 }
