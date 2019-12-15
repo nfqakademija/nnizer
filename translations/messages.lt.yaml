@@ -193,3 +193,13 @@ Teaching: Privatus mokymas
 Fitness: Fitnesas
 Driver: Asmeninio vairuotojo paslaugos
 Hairdressing: Kirpimo paslaugos
+
+errors:
+  notfound:
+    title: Puslapis nerastas
+    description: Puslapis, kurį bandėte atidaryti, nerastas. Patikrinkite, ar teisinga nuoroda, arba
+    link: grįžkite į pagrindinį
+  internal:
+    title: Vidinė klaida
+    description: Atsiprašome, kažkas nutiko ne taip. Mes apie tai jau informuoti ir klaidą sutvarkysime kaip galėdami greičiau.
+    link: Grįžti į pagrindinį
