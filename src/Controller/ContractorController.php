@@ -92,7 +92,7 @@ class ContractorController extends AbstractController
 
         if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
             $settings->setContractor($contractor);
-            $contractorSettingsRepository->save($settings);
+            $this->getDoctrine()->getRepository(ContractorSettings::class)->save($settings);
 
             return $this->redirectToRoute('contractor');
         }
@@ -120,6 +120,8 @@ class ContractorController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $contractorRepository->save($contractor);
+
+            return $this->redirectToRoute('contractor');
         }
 
         return $this->render('contractor/settings.html.twig', [

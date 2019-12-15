@@ -29,7 +29,7 @@ Encore
   .addEntry('admin', './assets/js/admin.jsx')
   .addEntry('contractor', './assets/js/contractor.jsx')
   .addEntry('datepicker', './assets/js/datepicker.jsx')
-  .addEntry('settings', './assets/js/utils/ContractorSettings.js')
+  .addEntry('settings', './assets/js/Utils/ContractorSettings.js')
 
   // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
   .splitEntryChunks()
