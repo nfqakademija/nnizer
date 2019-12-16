@@ -17,6 +17,10 @@
     @media only screen and (min-width: $breakpoint-sm) {
       @content;
     }
+  } @else {
+    @media only screen and (min-width: $bp) {
+      @content;
+    }
   }
 }
 
