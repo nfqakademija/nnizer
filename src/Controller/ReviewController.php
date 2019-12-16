@@ -9,11 +9,13 @@ use App\Repository\ContractorRepository;
 use App\Repository\ReviewRepository;
 use App\Service\SerializerService;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 class ReviewController extends AbstractController
 {
@@ -24,6 +26,7 @@ class ReviewController extends AbstractController
      * @param ContractorRepository $contractorRepository
      * @return JsonResponse
      * @throws NonUniqueResultException
+     * @throws ExceptionInterface
      */
     public function getReviews(
         string $contractorKey,
@@ -45,6 +48,7 @@ class ReviewController extends AbstractController
      * @param int $starCount
      * @param ReviewRepository $reviewRepository
      * @return Response
+     * @throws ORMException
      */
     public function setStars(string $key, int $starCount, ReviewRepository $reviewRepository): Response
     {
@@ -74,6 +78,7 @@ class ReviewController extends AbstractController
      * @param ReviewRepository $reviewRepository
      * @return Response
      * @throws NonUniqueResultException
+     * @throws ORMException
      */
     public function addDescription(Request $request, string $key, ReviewRepository $reviewRepository): Response
     {

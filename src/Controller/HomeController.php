@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 class HomeController extends AbstractController
 {
@@ -45,6 +46,7 @@ class HomeController extends AbstractController
      * @param ServiceTypeRepository $serviceTypeRepository
      * @param SerializerService $serializer
      * @return JsonResponse
+     * @throws ExceptionInterface
      */
     public function getServiceTypes(
         ServiceTypeRepository $serviceTypeRepository,
@@ -63,6 +65,7 @@ class HomeController extends AbstractController
      * @param SerializerService $serializer
      * @param ReviewService $reviewsService
      * @return JsonResponse
+     * @throws ExceptionInterface
      */
     public function getContractorsByServiceType(
         string $service,

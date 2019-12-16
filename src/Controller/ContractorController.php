@@ -26,7 +26,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContractorController extends AbstractController
 {
@@ -318,6 +317,7 @@ class ContractorController extends AbstractController
      * @param ContractorRepository $contractorRepository
      * @return JsonResponse
      * @throws NonUniqueResultException
+     * @throws ExceptionInterface
      */
     public function getReservationsByDay(
         string $contractorKey,
@@ -412,6 +412,7 @@ class ContractorController extends AbstractController
      * @param ContractorRepository $contractorRepository
      * @param ContractorService $contractorService
      * @return JsonResponse
+     * @throws ExceptionInterface
      */
     public function getContractorDetails(
         string $contractorUsername,
