@@ -32,7 +32,7 @@ navigation:
 
 login_page:
   login: Prisijungimas
-  login_admin: Administratoriaus prisijungimas
+  login_admin: Admin skydelis
   email: El. paštas
   logged_in_as: Jūs šiuo metu esate prisijungęs kaip %user%
   logout: Atsijungti
