@@ -200,6 +200,6 @@ errors:
     description: Puslapis, kurį bandėte atidaryti, nerastas. Patikrinkite, ar teisinga nuoroda, arba
     link: grįžkite į pagrindinį
   internal:
-    title: Vidinė klaida
+    title: Nenumatyta klaida
     description: Atsiprašome, kažkas nutiko ne taip. Mes apie tai jau informuoti ir klaidą sutvarkysime kaip galėdami greičiau.
     link: Grįžti į pagrindinį

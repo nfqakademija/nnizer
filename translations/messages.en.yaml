@@ -201,6 +201,6 @@ errors:
     description: The requested page couldn't be located. Checkout for any URL misspelling or
     link: return to the homepage
   internal:
-    title: Internal Server Error
+    title: Unexpected Error
     description: Sorry, something went wrong. No worries though, we are already informed about this and we will fix it as soon as possible.
     link: Visit homepage
