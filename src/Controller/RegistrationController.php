@@ -3,10 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contractor;
-use App\Entity\CoverPhoto;
-use App\Entity\ProfilePhoto;
 use App\Form\RegistrationFormType;
-use App\Security\ContractorAuthenticator;
 use App\Service\MailerService;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
@@ -23,8 +19,6 @@ class RegistrationController extends AbstractController
      * @Route("/register", name="app_register")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param GuardAuthenticatorHandler $guardHandler
-     * @param ContractorAuthenticator $authenticator
      * @param MailerService $mailer
      * @param TranslatorInterface $translator
      * @return Response
@@ -33,8 +27,6 @@ class RegistrationController extends AbstractController
     public function register(
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
-        GuardAuthenticatorHandler $guardHandler,
-        ContractorAuthenticator $authenticator,
         MailerService $mailer,
         TranslatorInterface $translator
     ): Response {

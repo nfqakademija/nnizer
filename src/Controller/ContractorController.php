@@ -10,6 +10,7 @@ use App\Form\ContractorSettingsType;
 use App\Repository\ContractorRepository;
 use App\Repository\ContractorSettingsRepository;
 use App\Repository\ReservationRepository;
+use App\Security\ContractorAuthenticator;
 use App\Service\ContractorService;
 use App\Service\ReservationFactory;
 use App\Service\SerializerService;
@@ -22,6 +23,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContractorController extends AbstractController
@@ -125,14 +127,18 @@ class ContractorController extends AbstractController
     /**
      * @Route("/contractor/activate/{verificationKey}", name="contractor_activate", methods="GET")
      * @param string $verificationKey
-     * @param TranslatorInterface $translator
+     * @param Request $request
+     * @param GuardAuthenticatorHandler $guardHandler
+     * @param ContractorAuthenticator $authenticator
      * @param ContractorRepository $contractorRepository
      * @return Response
      * @throws ORMException
      */
     public function activate(
         string $verificationKey,
-        TranslatorInterface $translator,
+        Request $request,
+        GuardAuthenticatorHandler $guardHandler,
+        ContractorAuthenticator $authenticator,
         ContractorRepository $contractorRepository
     ): Response {
         $user = $contractorRepository->findOneBy([
@@ -142,9 +148,12 @@ class ContractorController extends AbstractController
         if ($user != null && !$user->getIsVerified()) {
             $user->setIsVerified(true);
             $contractorRepository->save($user);
-            $this->addFlash(
-                'notice',
-                $translator->trans('flash.signup.verified')
+
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
             );
         }
 
