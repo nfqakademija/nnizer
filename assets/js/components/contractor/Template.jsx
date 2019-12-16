@@ -7,6 +7,7 @@ import Hero from './Hero';
 import Content from './Content';
 
 import { showAlert } from '../../Utils/NotificationUtils';
+import getTranslation from "../../TranslationService";
 
 const Template = () => {
   const [userData, setUserData] = useState();
@@ -27,7 +28,7 @@ const Template = () => {
       setFetched(true);
     })
       .catch((error) => {
-        showAlert('Can\'t get provider information. Try again or contact us!', 'error', 4000); // TODO translation
+        showAlert(getTranslation('contractor.error.provider'), 'error', 4000);
       });
   };
 
