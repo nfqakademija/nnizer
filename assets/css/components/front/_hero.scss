@@ -1,3 +1,80 @@
 .hero {
-  color: red;
+  background-color: $color-yellow;
+  min-height: rem(640px);
+  position: relative;
+  text-align: center;
+  font-size: rem(36px);
+
+  @include breakpoint(md) {
+    font-size: rem(60px);
+  }
+
+  @include breakpoint(xl) {
+    min-height: 60vh;
+  }
+
+  .container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    margin-bottom: rem(25px);
+  }
+
+  &__text {
+    font-size: rem(16px);
+    line-height: calc(#{rem(16px)} * 1.45);
+    max-width: 70ch;
+
+    @include breakpoint(md) {
+      font-size: rem(20px);
+      line-height: calc(#{rem(20px)} * 1.45);
+    }
+  }
+
+  &__wave {
+    display: block;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+  }
+}
+
+.demo {
+  margin-top: -40%;
+
+  @include breakpoint(sm) {
+    margin-top: -30%;
+  }
+
+  @include breakpoint(md) {
+    margin-top: -35%;
+  }
+
+  @include breakpoint(xl) {
+    margin-top: -30%;
+  }
+
+  @include breakpoint(1700px) {
+    margin-top: -20%;
+  }
+
+
+  &__img {
+    &.-desktop {
+      display: none;
+
+      @include breakpoint(md) {
+        display: block;
+      }
+    }
+
+    &.-mobile {
+      @include breakpoint(md) {
+        display: none;
+      }
+    }
+  }
 }

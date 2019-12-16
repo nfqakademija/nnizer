@@ -3,6 +3,9 @@ contractor_page:
 
 home:
   header: NNIZER project
+  cta: Get started
+  hero_title: Reservations made easy.
+  hero_text: The tool which will help you automate client’s management effortless way and most importantly - absolutely FREE! 
 
 lost_password:
   title: Lost your password?

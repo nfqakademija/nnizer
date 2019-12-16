@@ -3,12 +3,8 @@
 {% block title %} {{ "home.header"|trans }} {% endblock %}
 
 {% block body %}
-    {% if is_granted('ROLE_CONTRACTOR') == false %}
-        <h2>You're just one form away. Sign in and let us handle your reservations immediately! 👋🏻</h2>
-    {% endif %}
-    
     <main class="home">
+        {% include 'home/partials/hero.html.twig' %}
         
     </main>
-    {% include 'home/partials/hero.html.twig' %}
 {% endblock %}

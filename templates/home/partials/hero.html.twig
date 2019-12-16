@@ -1,1 +1,31 @@
-<h2>Wassup man</h2>
+<section class="hero">
+  <div class="container -top-spacing">
+      <h1 class="hero__title">
+          {{ "home.hero_title"|trans }} 
+      </h1>
+      <p class="hero__text">
+          {{ "home.hero_text"|trans }}
+      </p>
+      
+      <button class="hero__cta btn -black">
+          {{ "home.cta"|trans }}
+      </button>  
+
+      <svg class="hero__wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#F9F9FB" fill-opacity="1" d="M0,160L48,138.7C96,117,192,75,288,80C384,85,480,139,576,154.7C672,171,768,149,864,165.3C960,181,1056,235,1152,229.3C1248,224,1344,160,1392,128L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+  </div>
+</section>
+
+<section class="demo">
+  <div class="container row justify-content-center">
+    <img 
+      src="{{ asset('build/images/home/crm-demo.svg' )}}"
+      alt="customer relationship management system demonstration"
+      class="demo__img -desktop col-12 col-xl-10">
+
+      <img 
+      src="{{ asset('build/images/home/crm-demo-mobile.svg' )}}"
+      alt="customer relationship management system demonstration"
+      class="demo__img -mobile col-10 col-sm-8 col-xl-10">
+  </div>
+</section>
+

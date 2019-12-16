@@ -3,7 +3,9 @@ contractor_page:
 
 home:
   header: NNIZER projektas
-
+  cta: Get started
+  hero_title: Rezervacijų valdymas lengviau
+  hero_text: The tool which will help you automate client’s management effortless way and most importantly - absolutely FREE! 
 lost_password:
   title: Pamiršote slaptažodį?
   description: Įveskite el. paštą, kuriuo registravotes sistemoje. Mes jums išsiųsime slaptažodžio atstatymo nuorodą.
