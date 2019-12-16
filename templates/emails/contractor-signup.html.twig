@@ -15,7 +15,7 @@
 {% block button %}
     <td align="center" bgcolor="#FFC600" role="presentation"
         style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#FFC600;" valign="middle">
-        <a href="{{ absolute_url(path('contractor_activate', {verificationKey: key})) }}"
+        <a href="{{ url('contractor_activate', {verificationKey: key}) }}"
            style="display:inline-block;background:#FFC600;color:#1A1A1A;font-family:Poppins, Helvetica;font-size:16px;font-weight:600;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
            target="_blank">
             {{ "email.signup.verify-email"|trans }}
@@ -25,9 +25,9 @@
 
 {% block alternatelink %}
     <div style="font-family:Poppins, Helvetica;font-size:16px;line-height:1;text-align:center;text-decoration:underline;color:#1A1A1A;">
-        <a href="{{ absolute_url(path('contractor_activate', {verificationKey: key})) }}"
+        <a href="{{ url('contractor_activate', {verificationKey: key}) }}"
             target="_blank">
-            {{ absolute_url(path('contractor_activate', {verificationKey: key})) }}
+            {{ url('contractor_activate', {verificationKey: key}) }}
         </a>
     </div>
 {% endblock %}
