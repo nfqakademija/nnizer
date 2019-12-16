@@ -27,7 +27,6 @@ class ContractorAuthenticator extends AbstractFormLoginAuthenticator
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
-    private $translator;
 
     /**
      * ContractorAuthenticator constructor.
