@@ -3,15 +3,16 @@
 namespace App\Validator;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validation;
 
 class LostPasswordValidator
 {
 
     /**
-     * @var array
+     * @var ConstraintViolationListInterface
      */
-    protected $constraints = [];
+    protected $constraints;
 
     /**
      * @param String $email

@@ -3,6 +3,7 @@
 
 namespace App\Service;
 
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class SerializerService

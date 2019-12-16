@@ -25,14 +25,17 @@ class ReservationController extends AbstractController
      * @param ReservationFactory $reservationFactory
      * @param MailerService $mailer
      * @param ReservationValidator $reservationValidator
+     * @param ReservationRepository $reservationRepository
      * @return Response
+     * @throws ORMException
      * @throws Exception
      */
     public function register(
         Request $request,
         ReservationFactory $reservationFactory,
         MailerService $mailer,
-        ReservationValidator $reservationValidator
+        ReservationValidator $reservationValidator,
+        ReservationRepository $reservationRepository
     ): Response {
         $errors = $reservationValidator->validateInput($request);
 
@@ -45,8 +48,7 @@ class ReservationController extends AbstractController
             $phoneNumber = $request->get('phoneNumber');
 
             $contractor = $this->getDoctrine()->getRepository(Contractor::class)->find($contractor);
-            $reservations = $this->getDoctrine()->getRepository(Reservation::class)
-                ->findConflictingReservations($contractor, $visitDate);
+            $reservations = $reservationRepository->findConflictingReservations($contractor, $visitDate);
 
             if (count($reservations) > 0) {
                 return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
@@ -56,7 +58,7 @@ class ReservationController extends AbstractController
                 ->createReservation($email, $firstname, $lastname, $visitDate, $phoneNumber);
 
             $reservation->setContractor($contractor);
-            $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
+            $reservationRepository->save($reservation);
             $mailer->sendSuccessfulRegistrationEmail($reservation);
 
             return new JsonResponse();

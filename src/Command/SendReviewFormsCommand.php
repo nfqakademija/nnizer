@@ -4,6 +4,8 @@
 namespace App\Command;
 
 use App\Entity\Reservation;
+use App\Repository\ReservationRepository;
+use App\Repository\UserRepository;
 use App\Service\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -23,16 +25,27 @@ class SendReviewFormsCommand extends Command
      * @var MailerService
      */
     private $mailer;
+
+    /**
+     * @var ReservationRepository
+     */
+    private $reservationRepository;
+
     /**
      * SendReviewFormsCommand constructor.
      * @param EntityManagerInterface $em
      * @param MailerService $mailer
+     * @param ReservationRepository $reservationRepository
      */
-    public function __construct(EntityManagerInterface $em, MailerService $mailer)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        MailerService $mailer,
+        ReservationRepository $reservationRepository
+    ) {
         parent::__construct();
         $this->em = $em;
         $this->mailer = $mailer;
+        $this->reservationRepository = $reservationRepository;
     }
 
     protected function configure()
@@ -44,13 +57,11 @@ class SendReviewFormsCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return int|void|null
      * @throws Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $reservations = $this->em->getRepository(Reservation::class)
-            ->findByInComplete(new \DateTime('now'));
+        $reservations = $this->reservationRepository->findByInComplete(new \DateTime('now'));
 
         foreach ($reservations as $reservation) {
             $this->mailer->sendReviewEmail($reservation);

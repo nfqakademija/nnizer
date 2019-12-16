@@ -38,7 +38,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $plainPassword = null;
 

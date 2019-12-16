@@ -15,6 +15,7 @@ use App\Service\ContractorService;
 use App\Service\ReservationFactory;
 use App\Service\SerializerService;
 use App\Service\MailerService;
+use App\Validator\ReservationValidator;
 use Doctrine\ORM\ORMException;
 use Exception;
 use Doctrine\ORM\NonUniqueResultException;
@@ -73,11 +74,15 @@ class ContractorController extends AbstractController
      * @Route("/contractor/settings", name="contractor_settings")
      * @param Request $request
      * @param ContractorRepository $contractorRepository
+     * @param ContractorSettingsRepository $contractorSettingsRepository
      * @return Response
      * @throws ORMException
      */
-    public function settings(Request $request, ContractorRepository $contractorRepository): Response
-    {
+    public function settings(
+        Request $request,
+        ContractorRepository $contractorRepository,
+        ContractorSettingsRepository $contractorSettingsRepository
+    ): Response {
         $contractor = $contractorRepository->findOneBy([
             'id' => $this->getUser()->getId()
         ]);
@@ -87,7 +92,7 @@ class ContractorController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $settings->setContractor($contractor);
-            $this->getDoctrine()->getRepository(ContractorSettings::class)->save($settings);
+            $contractorSettingsRepository->save($settings);
 
             return $this->redirectToRoute('contractor');
         }
@@ -222,9 +227,9 @@ class ContractorController extends AbstractController
 
                 return new JsonResponse();
             }
-        } else {
-            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
+
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -261,9 +266,9 @@ class ContractorController extends AbstractController
 
                 return new JsonResponse();
             }
-        } else {
-            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
+
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -297,9 +302,9 @@ class ContractorController extends AbstractController
 
                 return new JsonResponse();
             }
-        } else {
-            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
+
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -333,9 +338,9 @@ class ContractorController extends AbstractController
             if ($reservations) {
                 return new Jsonresponse($json->getResponse($reservations));
             }
-        } else {
-            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
+
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
     /**
@@ -343,27 +348,34 @@ class ContractorController extends AbstractController
      * @param Request $request
      * @param string $contractorKey
      * @param ReservationFactory $reservationFactory
+     * @param ContractorRepository $contractorRepository
+     * @param ReservationRepository $reservationRepository
+     * @param ReservationValidator $reservationValidator
      * @return JsonResponse
+     * @throws NonUniqueResultException
+     * @throws ORMException
      * @throws Exception
      */
     public function addReservation(
         Request $request,
         string $contractorKey,
-        ReservationFactory $reservationFactory
+        ReservationFactory $reservationFactory,
+        ContractorRepository $contractorRepository,
+        ReservationRepository $reservationRepository,
+        ReservationValidator $reservationValidator
     ): JsonResponse {
         $firstname = $request->get('firstname');
         $lastname = $request->get('lastname');
         $email = $request->get('email');
         $visitDate = new \DateTime($request->get('visitDate'));
-        $contractor = $this->getDoctrine()->getRepository(Contractor::class)
-            ->findOneByKey($contractorKey);
+        $contractor = $contractorRepository->findOneByKey($contractorKey);
 
-        if (!$firstname || !$lastname || !$email || !$visitDate || !$contractor) {
+        $errors = $reservationValidator->validateInput($request);
+        if (count($errors) > 0 && $contractor === null) {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
 
-        $reservations = $this->getDoctrine()->getRepository(Reservation::class)
-            ->findConflictingReservations($contractor, $visitDate);
+        $reservations = $reservationRepository->findConflictingReservations($contractor, $visitDate);
 
         if (count($reservations) > 0) {
             return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
@@ -375,7 +387,7 @@ class ContractorController extends AbstractController
             $visitDate
         );
         $reservation->setContractor($contractor);
-        $this->getDoctrine()->getRepository(Reservation::class)->save($reservation);
+        $reservationRepository->save($reservation);
 
         return new JsonResponse();
     }
@@ -411,8 +423,8 @@ class ContractorController extends AbstractController
             if ($response) {
                 return new JsonResponse($response);
             }
-        } else {
-            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
+
+        return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 }

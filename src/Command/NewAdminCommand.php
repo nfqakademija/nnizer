@@ -21,8 +21,9 @@ class NewAdminCommand extends Command
      * @var AdminFactory
      */
     private $adminFactory;
+
     /**
-     * @var EntityManagerInterface
+     * @var UserRepository
      */
     private $userRepository;
 
@@ -54,8 +55,8 @@ class NewAdminCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return int|void|null
      * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\ORMException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

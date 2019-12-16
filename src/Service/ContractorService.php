@@ -25,10 +25,11 @@ class ContractorService
     /**
      * @param Contractor $contractor
      * @return array|null
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
     public function generateContractorCalendarResponse(Contractor $contractor): ?array
     {
-        if ($contractor && $settings = $contractor->getSettings()) {
+        if ($contractor != null && $settings = $contractor->getSettings()) {
             $reservations = $contractor->getReservations();
             $contractorDetails = $this->json->getResponse($contractor, ['frontPage']);
             $contractorDetails['reviews'] = $this->hideReviewerPersonalDetails($contractorDetails['reviews']);
