@@ -1,3 +1,18 @@
-<html lang="{{ app.request.locale|split('_')[0] }}">
-<h2>Unexpected error</h2>
-</html>
+{% extends('base.html.twig') %}
+
+{% block title %}{{ "errors.internal.title"|trans }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-md-6" style="margin: 0 auto; margin-top: 10%">
+            <img src="{{ asset('build/images/500.png') }}" alt="Unexpected error"/>
+            <div class="details" style="text-align: center; margin-top: 5%">
+                <h2 style="text-align: center; margin-bottom: 3%">{{ "errors.internal.title"|trans }}</h2>
+                <p style="margin: 0 auto">
+                    {{ "errors.internal.description"|trans }}
+                    <br><a style="margin-top: 2%" class="link -underline" href="{{ path('home') }}">{{ "errors.internal.link"|trans }}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
