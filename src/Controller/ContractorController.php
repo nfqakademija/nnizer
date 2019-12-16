@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContractorController extends AbstractController
@@ -173,6 +174,7 @@ class ContractorController extends AbstractController
      * @param ReservationRepository $reservationRepository
      * @return Response
      * @throws NonUniqueResultException
+     * @throws ExceptionInterface
      */
     public function getReservations(
         string $contractorKey,
@@ -187,7 +189,7 @@ class ContractorController extends AbstractController
                 'isDeleted' => null
             ]);
 
-            return new Jsonresponse($json->getResponse($reservations));
+            return new JsonResponse($json->getResponse($reservations));
         } else {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }

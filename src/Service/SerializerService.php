@@ -3,29 +3,36 @@
 
 namespace App\Service;
 
+use App\Entity\Contractor;
+use App\Entity\ContractorSettings;
+use App\Entity\Reservation;
+use App\Entity\Review;
+use App\Entity\ServiceType;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Serializer;
 
 class SerializerService
 {
     /**
-     * @var SerializerInterface
+     * @var Serializer
      */
     private $serializer;
 
     /**
      * JsonService constructor.
-     * @param SerializerInterface $serializer
+     * @param Serializer $serializer
      */
-    public function __construct(SerializerInterface $serializer)
+    public function __construct(Serializer $serializer)
     {
         $this->serializer = $serializer;
     }
 
     /**
-     * @param object $object
+     * @param Contractor|Collection<Review|Contractor>|ContractorSettings|Review[]|ServiceType[]|Reservation[] $object
      * @param array $groups
      * @return array
+     * @throws ExceptionInterface
      */
     public function getResponse($object, array $groups = ['Default']): array
     {
