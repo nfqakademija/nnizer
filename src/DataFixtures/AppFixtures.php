@@ -51,16 +51,6 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     /**
      * @var array
      */
-    private $coverPhotos = [
-        'cover1.jpg',
-        'dark.jpg',
-        'circles.png',
-        'leafs.png',
-    ];
-
-    /**
-     * @var array
-     */
     private $firstnames = [
         'Jerry',
         'Jesse',
@@ -163,13 +153,10 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
      */
     private function loadContractors(ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
-        $services = ['Massages', 'Hairdressing', 'Driving services', 'Teaching'];
-
         for ($i = 1; $i < 51; $i++) {
             $firstname = $this->firstnames[random_int(0, 9)];
             $lastname = $this->lastnames[random_int(0, 9)];
             $description = $this->descriptions[random_int(0, 3)];
-
             $contractor = new Contractor();
             $contractor->setPassword($encoder->encodePassword($contractor, 'fixture'));
             $contractor->setFirstname($firstname);
@@ -182,8 +169,9 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $contractor->setIsVerified(random_int(0, 1));
             $contractor->setDescription($description);
             $this->loadService($contractor, $manager);
-            $contractor->setTitle($contractor->getServices()->getName() . $i . ' services');
-            $this->addCoverPhoto($contractor, $manager);
+            $service = $contractor->getServices()->getName();
+            $contractor->setTitle($service . $i . ' services');
+            $this->addCoverPhoto($contractor, $manager, strtolower($service) . '.jpg');
             $this->addProfilePhoto($contractor, $manager);
             $this->loadSettings($contractor, $manager);
             $this->loadReservations($contractor, $manager);
@@ -196,13 +184,13 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     /**
      * @param Contractor $contractor
      * @param ObjectManager $manager
-     * @throws Exception
+     * @param string $filename
      */
-    private function addCoverPhoto(Contractor $contractor, ObjectManager $manager)
+    private function addCoverPhoto(Contractor $contractor, ObjectManager $manager, string $filename)
     {
         $coverPhoto = new CoverPhoto();
         $coverPhoto->setContractor($contractor);
-        $coverPhoto->setFilename($this->coverPhotos[random_int(0, 3)]);
+        $coverPhoto->setFilename($filename);
         $manager->persist($coverPhoto);
         $contractor->setCoverPhoto($coverPhoto);
     }
