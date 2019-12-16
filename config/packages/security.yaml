@@ -36,10 +36,10 @@ security:
         success_handler: App\Security\LogoutHandler
 
   access_control:
-    - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
-    - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
-    - { path: ^/admin, role: ROLE_ADMIN, requires_channel: '%env(SECURE_SCHEME)%' }
-    - { path: ^/contractor/activate/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
-    - { path: ^/contractor, roles: ROLE_CONTRACTOR, requires_channel: '%env(SECURE_SCHEME)%' }
-    - { path: ^/api/contractor, roles: ROLE_CONTRACTOR, requires_channel: '%env(SECURE_SCHEME)%' }
-    - { path: ^/api/profile, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
+    - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/admin, role: ROLE_ADMIN }
+    - { path: ^/contractor/activate/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/contractor, roles: ROLE_CONTRACTOR }
+    - { path: ^/api/contractor, roles: ROLE_CONTRACTOR }
+    - { path: ^/api/profile, role: IS_AUTHENTICATED_ANONYMOUSLY }
