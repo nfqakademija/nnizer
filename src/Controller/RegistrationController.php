@@ -43,7 +43,6 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -57,41 +56,14 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->sendSignupEmail($user, $translator, $mailer);
+            $mailer->sendSignUpEmail($user, $translator);
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+            $this->addFlash('notice', 'login_page.register-success');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @param Contractor $user
-     * @param TranslatorInterface $translatorInterface
-     * @param MailerService $mailerService
-     */
-    public function sendSignUpEmail(
-        Contractor $user,
-        TranslatorInterface $translatorInterface,
-        MailerService $mailerService
-    ): void {
-        $mailerService->sendMail(
-            $this->renderView(
-                'emails/contractor-signup.html.twig',
-                [
-                    'user' => $user->getFirstname(),
-                    'key' => $user->getVerificationKey()
-                ]
-            ),
-            $translatorInterface->trans('email.heading.signup'),
-            $user->getEmail()
-        );
     }
 }
