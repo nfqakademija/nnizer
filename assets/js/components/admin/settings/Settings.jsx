@@ -22,7 +22,7 @@ const Settings = (props) => {
           className="profile-settings__avatar"
         />
         <h3 className="profile-settings__name">
-          { userData.firstname.length !== 0
+          { userData.firstname != null
             ? `${userData.firstname} ${userData.lastname}`
             : `${userData.username}` }
         </h3>
