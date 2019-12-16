@@ -10,6 +10,7 @@ use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class SendReviewFormsCommand extends Command
 {
@@ -24,15 +25,22 @@ class SendReviewFormsCommand extends Command
      */
     private $mailer;
     /**
+     * @var RouterInterface
+     */
+    private $router;
+
+    /**
      * SendReviewFormsCommand constructor.
      * @param EntityManagerInterface $em
      * @param MailerService $mailer
+     * @param RouterInterface $router
      */
-    public function __construct(EntityManagerInterface $em, MailerService $mailer)
+    public function __construct(EntityManagerInterface $em, MailerService $mailer, RouterInterface $router)
     {
         parent::__construct();
         $this->em = $em;
         $this->mailer = $mailer;
+        $this->router = $router;
     }
 
     protected function configure()
@@ -49,6 +57,9 @@ class SendReviewFormsCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $context = $this->router->getContext();
+        $context->setHost('nnizer.projektai.nfqakademija.lt');
+
         $reservations = $this->em->getRepository(Reservation::class)
             ->findByInComplete(new \DateTime('now'));
 

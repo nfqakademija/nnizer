@@ -22,11 +22,6 @@
     <div class="container">
         <div class="login__window col-lg-5">
             <form method="post" class="form">
-                {% if error %}
-                    <div class="form__error">
-                        {{ error.messageKey|trans(error.messageData, 'security') }}
-                    </div>
-                {% endif %}
                 {% if app.user %}
                     <div class="mb-3">
                         {{ "login_page.logged_in_as"|trans({'%user%': app.user.email}, "messages") }}, <a
@@ -34,6 +29,12 @@
                     </div>
                 {% endif %}
                 <h1>{{ "login_page.login_admin"|trans }}</h1>
+
+                {% if error %}
+                    <div class="form__error" style="margin-bottom: 5%">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
 
                 <div class="form__field">
                     <input type="text" name="email" id="inputEmail" class="form-control" required autofocus>
