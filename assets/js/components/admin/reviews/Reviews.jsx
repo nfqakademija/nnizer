@@ -18,7 +18,7 @@ const Reviews = (props) => {
       <ul className="admin-reviews">
         {
         reviews.length === 0
-          ? `${getTranslation('contractor.reviews.no_reviews')}`
+          ? `${getTranslation('contractor.reviews.no_reviews')} 😤`
           : reviews.map((review) => (
             <li key={uuidv4()} className="admin-reviews__item">
               <ReviewCard
