@@ -41,6 +41,9 @@ login_page:
   signin: Prisijungti
   forgot_pass: Pamiršote slaptažodį?
   not_registered: Dar neturite paskyros? Užsiregistruokite!
+  notfound: Vartotojo vardas nerastas.
+  unverified: Jūsų paskyra dar nepatvirtinta. Norėdami patvirtinti, patikrinkite savo el. paštą ir paspauskite patvirtinimo nuorodą.
+  register-success: Jūsų registracija sėkminga. Prieš prisijungdami, patikrinkite savo el. paštą ir aktyvuokite savo paskyrą.
 
 registration_form:
   already-registered: Jau užsiregistravote? Prisijunkite!

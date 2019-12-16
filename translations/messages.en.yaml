@@ -41,6 +41,9 @@ login_page:
   signin: Login
   forgot_pass: Forgot password?
   not_registered: Don't have account? Click to register!
+  notfound: Username could not be found.
+  unverified: Your account has not yet been verified, please check your email inbox.
+  register-success: Your registration has been successful. Before logging in, please check your inbox and verify your account.
 
 registration_form:
   already-registered: Already registered? Click to login!

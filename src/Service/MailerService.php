@@ -156,4 +156,25 @@ class MailerService extends AbstractController
             $this->getParameter('admin_email')
         );
     }
+
+    /**
+     * @param Contractor $user
+     * @param TranslatorInterface $translatorInterface
+     */
+    public function sendSignUpEmail(
+        Contractor $user,
+        TranslatorInterface $translatorInterface
+    ): void {
+        $this->sendMail(
+            $this->renderView(
+                'emails/contractor-signup.html.twig',
+                [
+                    'user' => $user->getUsername(),
+                    'key' => $user->getVerificationKey()
+                ]
+            ),
+            $translatorInterface->trans('email.heading.signup'),
+            $user->getEmail()
+        );
+    }
 }
