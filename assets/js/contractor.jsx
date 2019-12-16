@@ -24,7 +24,7 @@ const handleFormResponse = (response) => {
     // 206 - form validation failed
     if (response.status === 206) {
         const missingField = response.data[0].replace('.', ' ');
-        updateAlert(`Booking failed! ${missingField}`, 'error', 4000); // TODO getTranslation('contractor.error.failed')
+        updateAlert(`${getTranslation('contractor.error.failed')} ${missingField}`, 'error', 4000);
         return;
     }
     // 406 - reservation time is already booked
