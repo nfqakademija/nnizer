@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1440px" height="96px" viewBox="0 0 1440 96" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+    <title>Mask Copy</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="desktop-landing" transform="translate(0.000000, -1579.000000)" fill="#FFC600" fill-rule="nonzero">
+            <g id="hero" transform="translate(-1.000000, 0.000000)">
+                <path d="M49,1600.3 C97,1622 193,1664 289,1669.7 C385,1675 481,1643 577,1643 C673,1643 769,1675 865,1659 C961,1643 1056.17178,1586.15022 1152.17178,1580.85022 C1227.78771,1576.36053 1303.91747,1604.47364 1356.29489,1629.46713 C1370.41447,1636.20472 1382.80796,1642.71561 1393,1648.3 L1441,1675 L1441,1451 C1441,1892.76021 1441,1935.42688 1441,1579 L1,1579 L49,1600.3 Z" id="Mask-Copy"></path>
+            </g>
+        </g>
+    </g>
+</svg>
