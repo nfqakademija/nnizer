@@ -4,14 +4,35 @@ contractor_page:
 home:
   header: NNIZER projektas
 
+lost_password:
+  title: Pamiršote slaptažodį?
+  description: Įveskite el. paštą, kuriuo registravotes sistemoje. Mes jums išsiųsime slaptažodžio atstatymo nuorodą.
+  email: El. paštas
+  submit: Pateikti
+  nonexisting: Vartotojas, registruotas šiuo paštu, neegzistuoja.
+  invalid:
+    email: Įvestas neteisingas el. pašto adresas
+  blank:
+    email: Įveskite savo el. paštą
+  sent: Slaptažodžio atstatymo instrukcija buvo išsiųsta el. paštu.
+  existing: Slaptažodžio atstatymo funkcija šiai paskyrai jau iškviesta. Jeigu laiško negavote, pabandykite iš naujo po 60 min.
+
+reset_password:
+  title: Slaptažodžio atstatymas
+  description: Įveskite naują slaptažodį į abu laukelius
+  password: Slaptažodis
+  submit: Pateikti
+  mismatch: Slaptažodžiai privalo sutapti ir jie negali būti tušti!
+
 navigation:
   login: Prisijungti
   signup: Užsiregistruoti
   logout: Atsijungti
+  reservations: Mano rezervacijos
 
 login_page:
   login: Prisijungimas
-  login_admin: Administratoriaus prisijungimas
+  login_admin: Admin skydelis
   email: El. paštas
   logged_in_as: Jūs šiuo metu esate prisijungęs kaip %user%
   logout: Atsijungti
@@ -20,6 +41,9 @@ login_page:
   signin: Prisijungti
   forgot_pass: Pamiršote slaptažodį?
   not_registered: Dar neturite paskyros? Užsiregistruokite!
+  notfound: Vartotojo vardas nerastas.
+  unverified: Jūsų paskyra dar nepatvirtinta. Norėdami patvirtinti, patikrinkite savo el. paštą ir paspauskite patvirtinimo nuorodą.
+  register-success: Jūsų registracija sėkminga. Prieš prisijungdami, patikrinkite savo el. paštą ir aktyvuokite savo paskyrą.
 
 registration_form:
   already-registered: Jau užsiregistravote? Prisijunkite!
@@ -49,6 +73,7 @@ email:
     verified: Sėkmingai patvirtinote savo rezervaciją!
     cancelled: Jūsų rezervacija buvo atšaukta
     review: Kaip praėjo jūsų vizitas?
+    lostpassword: Slaptažodžio atstatymas
   signup:
     verify-email: Patvirtinti e. paštą
     text: Džiaugemės, kad prisijungėte prie NNIZER komandos! Tikimės, kad mėgausitės naudodamiesi šia platforma. Norėdami pradėti savo veiklą, patvirtinkite paštą paspaudę mygtuką žemiau.
@@ -62,6 +87,8 @@ email:
   details:
     provider: Paslaugos teikėjas - %provider%
     date: Rezervacijos data - %date%
+  lostpassword:
+    text: Mes gavome jūsų paskyros slaptažodžio atstatymo užklausą. Jeigu tai buvote ne jūs, šį laišką galite ignoruoti. Jei iš tikrųjų norite atstatyti slaptažodį, spauskite nuorodą žemiau.
   privacy: Privatumo politika
   unsubscribe: Neprenumeruoti
   copyright: NNIZER Inc., visos teisės saugomos.
@@ -72,6 +99,7 @@ email:
     verify: Patvirtinti rezervaciją
     cancel: Atšaukti rezervaciją
     home: NNIZER
+    reset: ATSTATYTI
 
 settings_form:
   title: Jūsų darbo valandos
@@ -91,6 +119,7 @@ detailsForm:
   service:
     title: Paslaugos pavadinimas
     placeholder: Asmeninis vairuotojas
+    type: Paslaugų sritis
   description:
     title: Paslaugos aprašymas
     placeholder: Išbandyk mano paslaugas ir nepasigailėk!
@@ -205,3 +234,19 @@ contractor:
 datepicker:
   error:
     dates: Nėra prieinamų datų. Bandykite dar kartą arba susisiekite su mumis!
+
+Massages: Masažai
+Teaching: Privatus mokymas
+Fitness: Fitnesas
+Driver: Asmeninio vairuotojo paslaugos
+Hairdressing: Kirpimo paslaugos
+
+errors:
+  notfound:
+    title: Puslapis nerastas
+    description: Puslapis, kurį bandėte atidaryti, nerastas. Patikrinkite, ar teisinga nuoroda, arba
+    link: grįžkite į pagrindinį
+  internal:
+    title: Nenumatyta klaida
+    description: Atsiprašome, kažkas nutiko ne taip. Mes apie tai jau informuoti ir klaidą sutvarkysime kaip galėdami greičiau.
+    link: Grįžti į pagrindinį

@@ -17,6 +17,7 @@
                 </div>
                 <div class="header__right">
                     {% if is_granted('ROLE_CONTRACTOR') %}
+                        <a class="btn -header" href="{{ path('contractor') }}">{{ "navigation.reservations"|trans }}</a>
                         <a class="btn -header" href="{{ path('app_logout') }}">{{ "navigation.logout"|trans }}</a>
                     {% else %}
                         {% if app.request.pathinfo != "/register" %}

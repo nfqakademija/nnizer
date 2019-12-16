@@ -35,7 +35,7 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $username;
     
@@ -57,13 +57,13 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=32, nullable=true)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=32, nullable=true)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $lastname;
 
@@ -96,7 +96,7 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="contractor", orphanRemoval=true)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $reviews;
 
@@ -107,13 +107,13 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=32, nullable=true)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $address;
 
@@ -140,6 +140,17 @@ class Contractor implements UserInterface
      * @Groups({"frontPage"})
      */
     private $coverPhoto;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ServiceType", inversedBy="contractors", cascade={"persist"})
+     * @Groups({"frontPage"})
+     */
+    private $services;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\LostPassword", mappedBy="contractor", cascade={"persist", "remove"})
+     */
+    private $lostPassword;
 
     /**
      * Contractor constructor.
@@ -596,7 +607,31 @@ class Contractor implements UserInterface
 
         return $this;
     }
-    
+
+    /**
+     * @return LostPassword|null
+     */
+    public function getLostPassword(): ?LostPassword
+    {
+        return $this->lostPassword;
+    }
+
+    /**
+     * @param LostPassword $lostPassword
+     * @return $this
+     */
+    public function setLostPassword(LostPassword $lostPassword): self
+    {
+        $this->lostPassword = $lostPassword;
+
+        // set the owning side of the relation if necessary
+        if ($lostPassword->getContractor() !== $this) {
+            $lostPassword->setContractor($this);
+        }
+
+        return $this;
+    }
+
     /**
      * @return $this
      */
@@ -605,6 +640,27 @@ class Contractor implements UserInterface
         $profilePhoto = new ProfilePhoto();
         $profilePhoto->setFilename('default.png');
         $this->setProfilePhoto($profilePhoto);
+
+        return $this;
+    }
+
+    /**
+     * @return ServiceType|null
+     */
+    public function getServices(): ?ServiceType
+    {
+        return $this->services;
+    }
+
+    /**
+     * @param ServiceType $service
+     * @return $this
+     */
+    public function setServices(ServiceType $service): self
+    {
+        $this->services = $service;
+
+        $service->addContractor($this);
 
         return $this;
     }

@@ -33,7 +33,7 @@ const Panel = () => {
     axios({
       method: 'get',
       baseURL,
-      url: `/api/profile/${username}/`,
+      url: `/api/profile/${username}`,
     })
       .then((response) => {
         setData({
@@ -84,12 +84,12 @@ const Panel = () => {
               toggleNav={toggleNav}
               avatar={
                 data.isFetched
-                  ? `${baseURL}/uploads/profile/${''}}`
+                  ? `${baseURL}/uploads/profile/${data.users.profilePhoto.filename}`
                   : ''
               }
               name={
                 data.isFetched
-                  ? data.users.firstname.length > 0
+                  ? data.users.firstname
                     ? `${data.users.firstname} ${data.users.lastname}`
                     : data.users.username
                   : ''

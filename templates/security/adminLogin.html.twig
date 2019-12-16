@@ -1,44 +1,73 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}{{ "login_page.login"|trans }}{% endblock %}
-
-{% block body %}
-    <div class="login">
-        <div class="container">
-            <div class="login__window col-lg-5">
-                <form method="post" class="form">
-                    {% if error %}
-                        <div class="form__error">
-                            {{ error.messageKey|trans(error.messageData, 'security') }}
-                        </div>
-                    {% endif %}
-                    {% if app.user %}
-                        <div class="mb-3">
-                            {{ "login_page.logged_in_as"|trans({'%user%': app.user.email}, "messages") }}, <a
-                                    href="{{ path('admin_logout') }}">{{ "login_page.logout"|trans }}</a>
-                        </div>
-                    {% endif %}
-                    <h1>{{ "login_page.login_admin"|trans }}</h1>
-
-                    <div class="form__field">
-                        <input type="text" name="email" id="inputEmail" class="form-control" required autofocus>
-                        <label for="inputEmail" class="sr-only">{{ "login_page.email"|trans }}</label>
-                    </div>
-
-                    <div class="form__field">
-                        <input type="password" name="password" id="inputPassword" class="form-control" required>
-                        <label for="inputPassword" class="sr-only">{{ "login_page.password"|trans }}</label>
-                    </div>
-
-                    <input type="hidden" name="_csrf_token"
-                           value="{{ csrf_token('authenticate') }}"
-                    >
-
-                    <button class="btn btn--full" type="submit">
-                        {{ "login_page.signin"|trans }}
-                    </button>
-                </form>
-            </div>
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|split('_')[0] }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <title>{{ "login_page.login"|trans }}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="header__left">
+            <a href="{{ path('home') }}"><img src="{{ asset('build/images/nnizer-logo.svg') }}"
+                                              alt="nnizer type logotype" class="header__logo"></a>
         </div>
     </div>
+</header>
+<div class="login">
+    <div class="container">
+        <div class="login__window col-lg-5">
+            <form method="post" class="form">
+                {% if error %}
+                    <div class="form__error">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+                {% if app.user %}
+                    <div class="mb-3">
+                        {{ "login_page.logged_in_as"|trans({'%user%': app.user.email}, "messages") }}, <a
+                                href="{{ path('admin_logout') }}">{{ "login_page.logout"|trans }}</a>
+                    </div>
+                {% endif %}
+                <h1>{{ "login_page.login_admin"|trans }}</h1>
+
+                <div class="form__field">
+                    <input type="text" name="email" id="inputEmail" class="form-control" required autofocus>
+                    <label for="inputEmail" class="sr-only">{{ "login_page.email"|trans }}</label>
+                </div>
+
+                <div class="form__field">
+                    <input type="password" name="password" id="inputPassword" class="form-control" required>
+                    <label for="inputPassword" class="sr-only">{{ "login_page.password"|trans }}</label>
+                </div>
+
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+
+                <button class="btn btn--full" type="submit">
+                    {{ "login_page.signin"|trans }}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<footer style="position: fixed; bottom: 10%; left: 20px; width: 100%; font-size: 20px">
+    <div class="container">
+        <a class="footer__lang-switcher" href="{{ path('language', {lang: 'lt'}) }}">
+            <img src="{{ asset('build/images/LT-flag.svg') }}" alt="Lithuanian flag">
+        </a>
+        <a class="footer__lang-switcher" href="{{ path('language', {lang: 'en'}) }}">
+            <img src="{{ asset('build/images/EN-flag.svg') }}" alt="Great Britain flag">
+        </a>
+    </div>
+</footer>
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
 {% endblock %}
+</body>
+</html>

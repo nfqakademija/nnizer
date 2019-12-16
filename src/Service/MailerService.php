@@ -3,6 +3,7 @@
 
 namespace App\Service;
 
+use App\Entity\Contractor;
 use App\Entity\Reservation;
 use Swift_Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -122,6 +123,58 @@ class MailerService extends AbstractController
             ),
             $this->translator->trans('email.heading.review'),
             $reservation->getEmail()
+        );
+    }
+
+    /**
+     * @param Contractor $contractor
+     */
+    public function sendLostPasswordEmail(Contractor $contractor)
+    {
+        $this->sendMail(
+            $this->renderView(
+                'emails/lost-password.html.twig',
+                ['hash' => $contractor->getLostPassword()->getResetKey(), 'user' => $contractor->getUsername()]
+            ),
+            $this->translator->trans('email.heading.lostpassword'),
+            $contractor->getEmail()
+        );
+    }
+
+    /**
+     * @param \Exception $exception
+     */
+    public function sendExceptionEmail(
+        \Exception $exception
+    ): void {
+        $exception->getTraceAsString();
+        $details = 'Exception has been thrown in ' . $exception->getFile() .
+            ' on line ' . $exception->getLine() . '<br>Exception message: ' . $exception->getMessage();
+        $this->sendMail(
+            $details,
+            'Exception!',
+            $this->getParameter('admin_email')
+        );
+    }
+
+    /**
+     * @param Contractor $user
+     * @param TranslatorInterface $translatorInterface
+     */
+    public function sendSignUpEmail(
+        Contractor $user,
+        TranslatorInterface $translatorInterface
+    ): void {
+        $this->sendMail(
+            $this->renderView(
+                'emails/contractor-signup.html.twig',
+                [
+                    'user' => $user->getUsername(),
+                    'key' => $user->getVerificationKey()
+                ]
+            ),
+            $translatorInterface->trans('email.heading.signup'),
+            $user->getEmail()
         );
     }
 }

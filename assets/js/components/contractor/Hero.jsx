@@ -15,10 +15,16 @@ const Hero = (props) => {
   const url = `${window.location.protocol}//${window.location.host}`;
 
   const heroImage = {
-    background: `
-      linear-gradient(180deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%),
-      url('${url}/uploads/cover/${coverPath}')
-    `,
+    background:
+      coverPath !== null
+        ?
+          `
+        linear-gradient(180deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%),
+        url('${url}/uploads/cover/${coverPath}')
+          `
+        :
+        'none'
+    ,
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',

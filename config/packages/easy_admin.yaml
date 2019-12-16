@@ -37,6 +37,7 @@ easy_admin:
           - 'lastname'
           - 'username'
           - 'email'
+          - 'services'
           - 'reservations'
           - 'settings'
           - 'reviews'
@@ -48,6 +49,7 @@ easy_admin:
           - 'lastname'
           - 'username'
           - 'email'
+          - 'services'
           - 'phoneNumber'
           - 'isVerified'
           - 'title'
@@ -85,9 +87,20 @@ easy_admin:
         fields:
           - { property: 'profilePhoto', type: 'vich_image' }
           - { property: 'contractor', type: 'entity', type_options: { class: App\Entity\Contractor } }
+    ServiceType:
+      class: App\Entity\ServiceType
+      list:
+        fields:
+          - 'id'
+          - 'name'
+          - 'contractors'
+      form:
+        fields:
+          - 'name'
+          - 'contractors'
     ContractorSettings:
       class: App\Entity\ContractorSettings
     Reservation:
       class: App\Entity\Reservation
-    Rewiev:
+    Review:
       class: App\Entity\Review
