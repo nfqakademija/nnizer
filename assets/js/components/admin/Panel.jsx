@@ -8,10 +8,10 @@ import Sidenav from './Sidenav';
 import Header from './Header';
 import Reservations from './reservations/Reservations';
 import Reviews from './reviews/Reviews';
-import Settings from './Settings';
+import Settings from './settings/Settings';
 
 import { showAlert } from '../../Utils/NotificationUtils';
-import getTranslation from "../../TranslationService";
+import getTranslation from "../../Utils/TranslationService";
 
 const Panel = () => {
   const [isNavOpen, toggleNav] = useState(false);
@@ -20,6 +20,7 @@ const Panel = () => {
     isFetched: false,
   });
   const [reservations, setReservations] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const panel = document.querySelector('#admin');
   const baseURL = `${window.location.protocol}//${window.location.host}`;
@@ -82,6 +83,7 @@ const Panel = () => {
             <Header
               isOpen={isNavOpen}
               toggleNav={toggleNav}
+              setSearchTerm={setSearchTerm}
               avatar={
                 data.isFetched
                   ? `${baseURL}/uploads/profile/${data.users.profilePhoto.filename}`
@@ -101,19 +103,23 @@ const Panel = () => {
                 component={() => (
                   <Reservations
                     userKey={key}
+                    userName={data.users.username}
                     reservations={reservations}
+                    searchTerm={searchTerm}
                     fetchData={fetchData}
                   />
                 )}
               />
               <Route path="/contractor/reviews" component={() => (<Reviews reviews={data.isFetched && data.users.reviews} />)} />
-              <Route path="/contractor/settings" component={Settings} />
+              <Route path="/contractor/settings" component={() => (<Settings userData={data.isFetched && data.users} />)} />
               <Route
                 path="*"
                 component={() => (
                   <Reservations
                     userKey={key}
+                    userName={data.users.username}
                     reservations={reservations}
+                    searchTerm={searchTerm}
                     fetchData={fetchData}
                   />
                 )}

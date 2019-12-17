@@ -1,9 +1,15 @@
 import React, { useLocation } from 'react';
 import PropTypes from 'prop-types';
-import { getTranslation } from '../../TranslationService';
+import { getTranslation } from '../../Utils/TranslationService';
 
 const PanelHeader = (props) => {
-  const { isOpen, toggleNav, avatar, name } = props;
+  const {
+    isOpen,
+    toggleNav,
+    avatar,
+    name,
+    setSearchTerm,
+  } = props;
   const searchInput = React.createRef();
 
   const handleSearch = () => {
@@ -32,6 +38,7 @@ const PanelHeader = (props) => {
           type="search"
           ref={searchInput}
           placeholder={getTranslation('crm.search')}
+          onChange={(e) => setSearchTerm(e.target.value)}
           className="js-search-input"
         />
       </div>
@@ -48,10 +55,11 @@ const PanelHeader = (props) => {
 };
 
 PanelHeader.propTypes = {
-    toggleNav: PropTypes.func.isRequired,
-    isOpen: PropTypes.bool.isRequired,
-    avatar: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+  toggleNav: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  setSearchTerm: PropTypes.func.isRequired,
+  avatar: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default PanelHeader;

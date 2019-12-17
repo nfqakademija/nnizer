@@ -71,9 +71,6 @@ class ContractorDetailsFormType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'detailsForm.description.title',
                 'empty_data' => '',
-                'attr' => [
-                    'placeholder' => 'detailsForm.description.placeholder',
-                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'detailsForm.description.empty',
@@ -83,9 +80,6 @@ class ContractorDetailsFormType extends AbstractType
             ->add('address', TextType::class, [
                 'label' => 'detailsForm.address.title',
                 'empty_data' => '',
-                'attr' => [
-                    'placeholder' => 'detailsForm.address.placeholder',
-                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'detailsForm.address.empty',
@@ -99,12 +93,8 @@ class ContractorDetailsFormType extends AbstractType
                     'placeholder' => 'detailsForm.facebook.placeholder',
                 ],
             ])
-            ->add('coverPhoto', CoverPhotoType::class, [
-                'label' => 'detailsForm.profilePhoto',
-            ])
-            ->add('profilePhoto', ProfilePhotoType::class, [
-                'label' => 'detailsForm.profilePhoto',
-            ]);
+            ->add('coverPhoto', CoverPhotoType::class, ['label' => ' '])
+            ->add('profilePhoto', ProfilePhotoType::class, ['label' => ' ']);
     }
 
     public function configureOptions(OptionsResolver $resolver)

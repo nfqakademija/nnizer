@@ -13,7 +13,7 @@ import { setHours, setMinutes } from 'date-fns/esm';
 import en from 'date-fns/locale/en-GB';
 
 import { showAlert } from './Utils/NotificationUtils';
-import getTranslation from "./TranslationService";
+import getTranslation from "./Utils/TranslationService";
 
 registerLocale('en', en);
 setDefaultLocale(en);

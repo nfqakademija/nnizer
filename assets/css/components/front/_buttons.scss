@@ -79,6 +79,10 @@ button[disabled] {
       padding: rem(16px) rem(24px);
     }
   }
+
+  &.-no-margin {
+    margin: 0;
+  }
 }
 
 .panel-btn {
@@ -113,6 +117,7 @@ button[disabled] {
   &.-cancel {
     border: 2px solid $color-error-bg;
     color: $color-error-text;
+    margin-top: rem(16px);
 
     &::before {
       content: '\e909';

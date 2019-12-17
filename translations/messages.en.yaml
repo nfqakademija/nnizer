@@ -133,18 +133,21 @@ email:
     reset: RESET
 
 settings_form:
-  title: Your working hours
-  Monday-workhours: Working hours on Monday
-  Tuesday-workhours: Working hours on Tuesday
-  Wednesday-workhours: Working hours on Wednesday
-  Thursday-workhours: Working hours on Thursday
-  Friday-workhours: Working hours on Friday
-  Saturday-workhours: Working hours on Saturday
-  Sunday-workhours: Working hours on Sunday
+  choosedays: Please select your work days!
+  days_title: Your working hours
+  info_title: Other information
+  Monday: Monday
+  Tuesday: Tuesday
+  Wednesday: Wednesday
+  Thursday: Thursday
+  Friday: Friday
+  Saturday: Saturday
+  Sunday: Sunday
   visitDuration: Visit duration
   submit: Submit
 
 detailsForm:
+  edit: Edit account
   title: Details
   submit: Submit
   service:
@@ -187,6 +190,7 @@ crm:
   unconfirmed: Unconfirmed
   done: Completed
   actions: Actions
+  missing.phone: Missing phone
   removal:
     progress: Removal in progress
     success: Removal was successful
@@ -204,7 +208,9 @@ crm:
     success: Approval was successful
     error: Approval failed. Please try again.
   approve: Approve
-  no_reservations: You don't have any reservations yet!
+  no_reservations_text1: You don't have any reservations yet! Share this
+  no_reservations_link: link
+  no_reservations_text2: to get your first reservation in nnizer platform!
   no_reservations_matching: No reservations matching your criteria.
   reset_filters: Reset filters
   error:

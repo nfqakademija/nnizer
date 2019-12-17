@@ -7,7 +7,7 @@ import Hero from './Hero';
 import Content from './Content';
 
 import { showAlert } from '../../Utils/NotificationUtils';
-import getTranslation from "../../TranslationService";
+import getTranslation from "../../Utils/TranslationService";
 
 const Template = () => {
   const [userData, setUserData] = useState();

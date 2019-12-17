@@ -71,7 +71,7 @@ class ContractorController extends AbstractController
 
 
     /**
-     * @Route("/contractor/settings", name="contractor_settings")
+     * @Route("/contractor/edit", name="contractor_settings")
      * @param Request $request
      * @param ContractorRepository $contractorRepository
      * @param ContractorSettingsRepository $contractorSettingsRepository
@@ -87,45 +87,27 @@ class ContractorController extends AbstractController
             'id' => $this->getUser()->getId()
         ]);
         $settings = $contractor->getSettings() ?? new ContractorSettings();
-        $form = $this->createForm(ContractorSettingsType::class, $settings);
-        $form->handleRequest($request);
+        $settingsForm = $this->createForm(ContractorSettingsType::class, $settings);
+        $settingsForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
             $settings->setContractor($contractor);
-            $contractorSettingsRepository->save($settings);
+            $this->getDoctrine()->getRepository(ContractorSettings::class)->save($settings);
 
             return $this->redirectToRoute('contractor');
         }
 
-        return $this->render('contractor/settings.html.twig', [
-            'settingsForm' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/contractor/details", name="contractor_details")
-     * @param Request $request
-     * @param ContractorRepository $contractorRepository
-     * @return Response
-     * @throws ORMException
-     */
-    public function details(Request $request, ContractorRepository $contractorRepository): Response
-    {
-        $contractor = $contractorRepository->findOneBy([
-            'id' => $this->getUser()->getId()
-        ]);
-
-        $form = $this->createForm(ContractorDetailsFormType::class, $contractor);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        $detailsForm = $this->createForm(ContractorDetailsFormType::class, $contractor);
+        $detailsForm->handleRequest($request);
+        if ($detailsForm->isSubmitted() && $detailsForm->isValid()) {
             $contractorRepository->save($contractor);
 
             return $this->redirectToRoute('contractor');
         }
 
-        return $this->render('contractor/details.html.twig', [
-            'detailsForm' => $form->createView(),
+        return $this->render('contractor/settings.html.twig', [
+            'settingsForm' => $settingsForm->createView(),
+            'detailsForm' => $detailsForm->createView()
         ]);
     }
 

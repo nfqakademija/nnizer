@@ -18,7 +18,7 @@ class ContractorSettingsType extends AbstractType
         $pattern = '/(([0-1][0-9]|2[0-4]):[0-5][0-9] \- ([0-1][0-9]|2[0-4]):[0-5][0-9])|(\-1)/';
         $builder
             ->add('Monday', TextType::class, [
-                'label' => 'settings_form.Monday-workhours',
+                'label' => 'settings_form.Monday',
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
@@ -31,7 +31,7 @@ class ContractorSettingsType extends AbstractType
                 ]
             ])
             ->add('Tuesday', TextType::class, [
-                'label' => 'settings_form.Tuesday-workhours',
+                'label' => 'settings_form.Tuesday',
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
@@ -44,7 +44,7 @@ class ContractorSettingsType extends AbstractType
                 ]
             ])
             ->add('Wednesday', TextType::class, [
-                'label' => 'settings_form.Wednesday-workhours',
+                'label' => 'settings_form.Wednesday',
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
@@ -57,7 +57,7 @@ class ContractorSettingsType extends AbstractType
                 ]
             ])
             ->add('Thursday', TextType::class, [
-                'label' => 'settings_form.Thursday-workhours',
+                'label' => 'settings_form.Thursday',
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
@@ -70,7 +70,7 @@ class ContractorSettingsType extends AbstractType
                 ]
             ])
             ->add('Friday', TextType::class, [
-                'label' => 'settings_form.Friday-workhours',
+                'label' => 'settings_form.Friday',
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
@@ -83,7 +83,7 @@ class ContractorSettingsType extends AbstractType
                 ]
             ])
             ->add('Saturday', TextType::class, [
-                'label' => 'settings_form.Saturday-workhours',
+                'label' => 'settings_form.Saturday',
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],
@@ -96,7 +96,7 @@ class ContractorSettingsType extends AbstractType
                 ]
             ])
             ->add('Sunday', TextType::class, [
-                'label' => 'settings_form.Sunday-workhours',
+                'label' => 'settings_form.Sunday',
                 'attr' => [
                     'placeholder' => '07:00 - 17:00',
                 ],

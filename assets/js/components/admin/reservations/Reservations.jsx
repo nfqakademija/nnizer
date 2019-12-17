@@ -9,10 +9,12 @@ import {
 } from 'date-fns/esm';
 
 import ReservationRow from './ReservationRow';
-import { getTranslation } from '../../../TranslationService';
+import { getTranslation } from '../../../Utils/TranslationService';
+import axios from 'axios';
 
 const Reservations = (props) => {
-  const { reservations, userKey, fetchData } = props;
+  const { reservations, userName, userKey, fetchData, searchTerm } = props;
+  const baseURL = `${window.location.protocol}//${window.location.host}`;
 
   const [isTodayFilter, setTodayFilter] = useState(false);
   const [isWeekFilter, setWeekFilter] = useState(false);
@@ -69,9 +71,40 @@ const Reservations = (props) => {
     filteredReservations.filter((item, pos) => filteredReservations.indexOf(item) === pos)
   );
 
+  const isIncluded = (text) => (
+    text.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const addNewReservation = () => {
+    // TODO: finish add new post
+    axios({
+      method: 'POST',
+      url: `${baseURL}/api/contractor/${userKey}/new-client`,
+      data: [
+        'labas',
+        'labas',
+        'labas@gmail.com',
+        '2019-12-24T17:12:05+00:00',
+      ],
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+      });
+};
+
   const getFilteredReservations = () => {
     let sortedReservations = getSortedReservations(reservations);
     let filteredReservations = [];
+
+    if (searchTerm !== '') {
+      sortedReservations = sortedReservations.filter((res) => (
+        isIncluded(`${res.firstname} ${res.lastname}`)
+        || isIncluded(res.email)
+        || isIncluded(res.visitDate)
+      ));
+    }
 
     if (isTodayFilter && !isWeekFilter) {
       sortedReservations = sortedReservations.filter((res) => isToday(parseISO(res.visitDate)));
@@ -124,13 +157,31 @@ const Reservations = (props) => {
   return (
     <div className="panel__content admin-container">
       <p className="panel__time">
-        {getTranslation('crm.time.today_is')}{`📆${format(new Date(), 'yyyy-MM-dd!')} `}
+        📆
+        { `${getTranslation('crm.time.today_is')} ${format(new Date(), 'EEEE, LLLL Lo')} `}
       </p>
       <h2>{getTranslation('crm.reservations')}</h2>
+      {/* TODO: do add new btn */}
+      {/* <button
+        type="button"
+        className="btn"
+        onClick={addNewReservation}
+      >
+        add new
+      </button> */}
       {reservations.length === 0 ? (
         <>
           <p className="reservations__message">
-            {getTranslation('crm.no_reservations')}
+            { getTranslation('crm.no_reservations_text1') }
+            <a
+              href={`${baseURL}/service/${userName}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link -underline -contractor"
+            >
+              { getTranslation('crm.no_reservations_link') }
+            </a>
+            { getTranslation('crm.no_reservations_text2') }
           </p>
         </>
       ) : (
@@ -140,7 +191,7 @@ const Reservations = (props) => {
             {getFilterBtn(getTranslation('crm.time.this_week'), isWeekFilter, setWeekFilter)}
             {getFilterBtn(getTranslation('crm.pending'), isPendingFilter, setPendingFilter)}
             {getFilterBtn(
-                getTranslation('crm.unconfirmed'),
+              getTranslation('crm.unconfirmed'),
               isConfirmedFilter,
               setConfirmedFilter,
             )}
@@ -164,7 +215,7 @@ const Reservations = (props) => {
                   {getTranslation('crm.no_reservations_matching')}
                   <button
                     type="button"
-                    className="link -underline"
+                    className="panel-btn -cancel"
                     onClick={resetFilters}
                   >
                     {getTranslation('crm.reset_filters')}
@@ -196,8 +247,10 @@ const Reservations = (props) => {
 
 Reservations.propTypes = {
   reservations: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  userName: PropTypes.string.isRequired,
   userKey: PropTypes.string.isRequired,
   fetchData: PropTypes.func.isRequired,
+  searchTerm: PropTypes.string.isRequired,
 };
 
 export default Reservations;
