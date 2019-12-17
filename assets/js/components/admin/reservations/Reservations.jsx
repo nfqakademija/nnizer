@@ -158,7 +158,7 @@ const Reservations = (props) => {
     <div className="panel__content admin-container">
       <p className="panel__time">
         📆
-        { `${getTranslation('crm.time.today_is')} ${format(new Date(), 'EEEE, LLLL Lo')} `}
+        { `${getTranslation('crm.time.today_is')} ${format(new Date(), 'yyyy-MM-dd!')} `}
       </p>
       <h2>{getTranslation('crm.reservations')}</h2>
       {/* TODO: do add new btn */}
