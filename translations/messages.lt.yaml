@@ -31,7 +31,7 @@ home:
   migle_position: Back-end programuotoja
   kornelijus_position: Front-end / Dizainas
   banner_title: Nieko nelaukite! <br> Taupykime laiką!
-  banner_text: Įrankis, kuris padės automatizuoti klientų rezervacijas patogiausiu ir svarbiausia VISIŠKAI NEMOKAMU būdu!
+  banner_text: Paprastas ir patogus registracijų valdymas visiškai nemokamai
   footer_text1: Sukurta su
   footer_text2:  <span class="orange">NFQ</span> akademijoje
 
@@ -177,7 +177,13 @@ crm:
   date: Data
   name: Vardas
   email: El. paštas
+  address: Adresas
   phone: Tel. nr.
+  facebook: Facebook'as
+  service_title: Paslaugos pavadinimas
+  service_description: Paslaugos aprašymas
+  change_settings: Keisti nustatymus
+  no_facebook: Nėra pridėto facebook'o
   status: Būsena
   reservations: Rezervacijos
   search: Paieška

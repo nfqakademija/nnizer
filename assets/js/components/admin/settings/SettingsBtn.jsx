@@ -1,4 +1,5 @@
 import React from 'react';
+import getTranslation from "../../../Utils/TranslationService";
 
 const SettingsBtn = () => (
   <a
@@ -6,7 +7,7 @@ const SettingsBtn = () => (
     type="button"
     href="/contractor/edit"
   >
-    Change settings
+    {getTranslation('crm.change_settings')}
   </a>
 );
 

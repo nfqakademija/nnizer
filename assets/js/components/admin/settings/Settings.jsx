@@ -6,7 +6,6 @@ import { getTranslation } from '../../../Utils/TranslationService';
 import SettingsBtn from './SettingsBtn';
 import Field from './Field';
 
-// TODO: TRANSLATIONS
 
 const Settings = (props) => {
   const { userData } = props;
@@ -37,12 +36,12 @@ const Settings = (props) => {
         </a>
         <SettingsBtn />
         <div className="profile-settings__fields row">
-          <Field label="Phone number" output={userData.phoneNumber} icon="phone" />
-          <Field label="Email address" output={userData.email} icon="envelope" />
-          <Field label="Address" output={userData.address} icon="location" />
-          <Field label="Facebook" output={userData.facebook} icon="facebook" />
-          <Field label="Service name" output={userData.title} columns="12" />
-          <Field label="Service description" output={userData.description} columns="12" />
+          <Field label={getTranslation('crm.phone')} output={userData.phoneNumber} icon="phone" />
+          <Field label={getTranslation('crm.email')} output={userData.email} icon="envelope" />
+          <Field label={getTranslation('crm.address')} output={userData.address} icon="location" />
+          <Field label={getTranslation('crm.facebook')} output={userData.facebook} icon="facebook" />
+          <Field label={getTranslation('crm.service_title')} output={userData.title} columns="12" />
+          <Field label={getTranslation('crm.service_description')} output={userData.description} columns="12" />
         </div>
       </div>
     </div>
