@@ -45,8 +45,8 @@ button[disabled] {
   }
 
   &.-black {
-    border-radius: rem(2px);
     background-color: $color-black;
+    border-radius: rem(2px);
     color: white;
 
     @include z-index(link);
