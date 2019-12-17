@@ -17,6 +17,40 @@ h1 {
 h2 {
   font-size: rem(36px);
   line-height: rem(36px * 1.4);
+
+  &.-home {
+    font-size: rem(36px);
+    font-weight: 600;
+    line-height: calc(2.25rem * 1.25);
+
+    @include breakpoint(md) {
+      font-size: rem(48px);
+      line-height: calc(3rem * 1.25);
+    }
+  }
+
+  &.-underline {
+    display: inline-block;
+    position: relative;
+
+    @include z-index(header);
+
+    &::after {
+      background: $color-yellow;
+      bottom: rem(6px);
+      content: '';
+      height: rem(12px);
+      left: rem(-6px);
+      position: absolute;
+      width: calc(100% + #{rem(6px)});
+
+      @include z-index(below);
+    }
+  }
+}
+
+h3 {
+  font-weight: 600;
 }
 
 p {
@@ -25,4 +59,14 @@ p {
   letter-spacing: rem(0.5px);
   line-height: calc(1rem * 1.5);
   max-width: 50ch;
+}
+
+span {
+  &.-subtitle {
+    color: $color-grey-1;
+    font-size: rem(14px);
+    font-weight: 600;
+    letter-spacing: rem(2px);
+    text-transform: uppercase;
+  }
 }

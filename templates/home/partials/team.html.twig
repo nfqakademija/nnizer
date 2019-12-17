@@ -1,0 +1,49 @@
+<section class="team section-mt">
+  <div class="container">
+    <div class="team__title">
+      <h2 class=" -home -underline">
+        {{ "home.team_title"|trans }}
+      </h2>
+      <img
+        src="{{ asset('build/images/home/abstract/confetti.svg') }}" 
+        alt=""
+        class="team__confetti"
+      />
+    </div>
+    <div class="team__members">
+      <div class="row">
+        {{ include( 'home/partials/member.html.twig', {
+          avatar: asset('build/images/home/team/dominykas.png'),
+          alt: 'team member dominykas avatar',
+          name: 'Dominykas Murauskas',
+          position: "home.dominykas_position"|trans,
+          }) 
+        }}
+
+        {{ include( 'home/partials/member.html.twig', {
+          avatar: asset('build/images/home/team/migle.png'),
+          alt: 'team member migle avatar',
+          name: 'Migle Kraskauskaitė',
+          position: "home.migle_position"|trans,
+          }) 
+        }}
+
+        {{ include( 'home/partials/member.html.twig', {
+          avatar: asset('build/images/home/team/kornelijus.png'),
+          alt: 'team member kornelijus avatar',
+          name: 'Kornelijus Glinskas',
+          position: "home.kornelijus_position"|trans,
+          }) 
+        }}
+
+        {{ include( 'home/partials/member.html.twig', {
+          avatar: asset('build/images/home/team/tadas.png'),
+          alt: 'team member tadas avatar',
+          name: 'Tadas Žemuskevičius',
+          position: "home.tadas_position"|trans,
+          }) 
+        }}
+      </div>
+    </div>
+  </div>
+</section>

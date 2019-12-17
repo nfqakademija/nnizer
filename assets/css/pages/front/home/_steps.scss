@@ -1,0 +1,38 @@
+.steps {
+  text-align: center;
+
+  &__subtitle {
+    display: block;
+  }
+
+  &__wrapper {
+    margin-top: rem(32px);
+  }
+
+  .step {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: rem(32px);
+
+    @include breakpoint(md) {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    &__icon {
+      align-self: center;
+      margin-bottom: rem(32px);
+    }
+
+    &__title {
+      font-size: rem(24px);
+      margin-bottom: rem(12px);
+    }
+
+    &__text {
+      color: $color-grey-1;
+      letter-spacing: rem(0.25px);
+    }
+  }
+}

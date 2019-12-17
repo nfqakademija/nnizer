@@ -3,6 +3,35 @@ contractor_page:
 
 home:
   header: NNIZER projektas
+  cta: Get started
+  hero_title: Rezervacijų valdymas lengviau
+  hero_text: The tool which will help you automate client’s management effortless way and most importantly - absolutely FREE! 
+  steps_title: How nnizer works?
+  steps_subtitle: Easy as 1-2-3
+  step1_title: 1. Sign up in 20 seconds
+  step1_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  step2_title: 2. Setup and verify profile
+  step2_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  step3_title: 3. Go get your moooney!
+  step3_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  benefits_title: Meet nnizer, tool that <br> you’ll fall in 💛 with.
+  benefit1_title: All your client’s reservation and data in <span class="yellow-text">one place</span>.
+  benefit1_text:  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  benefit2_title: CRM built to be as <span class="yellow-text">simple</span> and <span class="yellow-text">straightforward</span> as possible.  
+  benefit2_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  benefit3_title: Don’t spend any <span class"yellow-text">money</span> on website, we got <span class"yellow-text">you.</span>
+  benefit3_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  benefit4_title: Never miss a chance because of <span class"yellow-text">language</span> barrier.
+  benefit4_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  team_title: Team behind nnizer
+  dominykas_position: 
+  tadas_position:
+  migle_position:
+  kornelijus_position:
+  banner_title: 
+  banner_text:
+  footer_text1: Made with 
+  footer_text2: at <span class="orange">NFQ</span> academy
 
 lost_password:
   title: Pamiršote slaptažodį?

@@ -1,0 +1,78 @@
+.hero {
+  background-color: $color-yellow;
+  font-size: rem(36px);
+  position: relative;
+  text-align: center;
+
+  @include breakpoint(md) {
+    font-size: rem(60px);
+  }
+
+  @include breakpoint(xl) {
+  }
+
+  .container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    margin-bottom: rem(25px);
+  }
+
+  &__text {
+    font-size: rem(16px);
+    line-height: calc(#{rem(16px)} * 1.45);
+    max-width: 70ch;
+
+    @include breakpoint(md) {
+      font-size: rem(20px);
+      line-height: calc(#{rem(20px)} * 1.45);
+    }
+  }
+
+  &__cta {
+    margin-top: rem(36px);
+  
+    @extend .header__link;
+    @extend .header__link.-primary;
+  }
+}
+
+.demo {
+  position: relative;
+
+  &__wave {
+    display: block;
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+
+  &__img {
+    margin-top: rem(-80px);
+
+    @include breakpoint(md) {
+      margin-top: rem(-160px);
+    }
+
+    @include breakpoint(lg) {
+      margin-top: rem(-200px);
+    }
+
+    &.-desktop {
+      display: none;
+
+      @include breakpoint(md) {
+        display: block;
+      }
+    }
+
+    &.-mobile {
+      @include breakpoint(md) {
+        display: none;
+      }
+    }
+  }
+}
