@@ -1,4 +1,4 @@
-FROM php:7.2.4-fpm
+FROM php:7.3.3-fpm
 
 LABEL maintainer "Aurelijus Banelis <aurelijus@banelis.lt>"
 
@@ -16,7 +16,6 @@ RUN apt-get update \
  && apt-get install -y git zip unzip \
  && rm -rf /var/lib/apt/lists/*
 
-
 # Get sources and put them in proper place
 RUN mkdir -p /usr/src/php/ext && \
     mkdir /tmp/mysql_xdevapi && \
@@ -31,15 +30,6 @@ RUN apt-get update \
  && apt-get install -y libzip-dev bash-completion procps nano libicu-dev libprotobuf-dev libboost-dev openssl protobuf-compiler g++ \
  && docker-php-ext-install -j$(nproc) zip mysqli pdo_mysql intl mysql_xdevapi \
  && rm -rf /var/lib/apt/lists/*
-
-# xDebug helpers (do not use this in real production)
-ADD enable_xdebug.sh /enable_xdebug.sh
-ADD disable_xdebug.sh /disable_xdebug.sh
-RUN pecl install xdebug-2.6.0 && \
-    chmod +x /enable_xdebug.sh && \
-    chmod +x /disable_xdebug.sh && \
-    touch /usr/local/etc/php/conf.d/custom-xdebug.ini && \
-    chmod 777 /usr/local/etc/php/conf.d/custom-xdebug.ini
 
 # Not root user
 RUN useradd -c 'PHP user' -m -d /home/php -s /bin/bash php
