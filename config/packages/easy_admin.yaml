@@ -27,7 +27,7 @@ easy_admin:
         fields:
           - 'email'
           - 'name'
-          - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN'} }}
+          - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN': 'ROLE_SUPER_ADMIN'} }}
           - { property: 'plainPassword', type: 'text', label: 'New password' }
 
     Contractor:
