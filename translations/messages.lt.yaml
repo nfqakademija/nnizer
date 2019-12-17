@@ -288,3 +288,11 @@ errors:
     title: Nenumatyta klaida
     description: Atsiprašome, kažkas nutiko ne taip. Mes apie tai jau informuoti ir klaidą sutvarkysime kaip galėdami greičiau.
     link: Grįžti į pagrindinį
+
+reviews_page:
+  title: Ačiū!
+  text: Ačiū už paliktą įvertinimą. Dabar, jeigu norite, galite palikti papildomą komentarą apie jums suteiktą paslaugą arba
+  homepage: grįžti į pagrindinį.
+  submit: Pateikti
+  description: Jūsų komentaras
+  done: Ačiū Jums už paliktą įvertinimą!

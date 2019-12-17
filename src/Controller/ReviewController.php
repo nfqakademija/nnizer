@@ -68,11 +68,12 @@ class ReviewController extends AbstractController
         $review->setStars($starCount);
         $reviewRepository->save($review);
 
-        return $this->redirectToRoute('home');
+
+        return $this->render('reviews/thankyou.html.twig', ['key' => $key]);
     }
 
     /**
-     * @Route("/api/reservation/{key}/review", name="review_description", methods="GET")
+     * @Route("/api/reservation/{key}/review", name="review_description", methods="POST")
      * @param Request $request
      * @param string $key
      * @param ReviewRepository $reviewRepository
@@ -92,7 +93,7 @@ class ReviewController extends AbstractController
         if ($review !== null) {
             $review->setDescription($description);
             $reviewRepository->save($review);
-            return new JsonResponse();
+            $this->addFlash('notice', 'reviews_page.done');
         }
 
         return $this->redirectToRoute('home');
