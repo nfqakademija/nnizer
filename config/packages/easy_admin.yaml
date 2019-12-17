@@ -16,6 +16,7 @@ easy_admin:
     User:
       class: App\Entity\User
       list:
+        item_permission: 'ROLE_SUPER_ADMIN'
         fields:
           - 'id'
           - 'email'
@@ -28,6 +29,7 @@ easy_admin:
           - 'name'
           - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN'} }}
           - { property: 'plainPassword', type: 'text', label: 'New password' }
+
     Contractor:
       class: App\Entity\Contractor
       list:
