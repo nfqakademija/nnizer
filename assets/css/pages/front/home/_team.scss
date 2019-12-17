@@ -53,5 +53,9 @@
       font-size: rem(14px);
       letter-spacing: rem(2px);
     }
+
+    &__avatar {
+      min-height: rem(205px);
+    }
   }
 }
