@@ -8,21 +8,23 @@ home:
   hero_text: The tool which will help you automate client’s management effortless way and most importantly - absolutely FREE! 
   steps_title: How nnizer works?
   steps_subtitle: Easy as 1-2-3
-  step1_title: 1. Sign up in 20 seconds
-  step1_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
-  step2_title: 2. Setup and verify profile
-  step2_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
-  step3_title: 3. Go get your moooney!
-  step3_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  steps:
+    step1_title: 1. Sign up in 30 seconds
+    step1_text: Simply fill in registration form and verify your email.
+    step2_title: 2. Set up profile
+    step2_text: After verification, set up your working hours and you are ready to use your reservation management system.
+    step3_title: 3. Go get your moooney!
+    step3_text: Brag about it in social media or wherever you want and wait for your customers reservations.
   benefits_title: Meet nnizer, tool that <br> you’ll fall in 💛 with.
-  benefit1_title: All your client’s reservation and data in <span class="yellow-text">one place</span>.
-  benefit1_text:  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
-  benefit2_title: CRM built to be as <span class="yellow-text">simple</span> and <span class="yellow-text">straightforward</span> as possible.  
-  benefit2_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
-  benefit3_title: Don’t spend any <span class="yellow-text">money</span> on website, we got <span class="yellow-text">you.</span>
-  benefit3_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
-  benefit4_title: Never miss a chance because of <span class="yellow-text">language</span> barrier.
-  benefit4_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  benefits:
+    benefit1_title: All your client’s reservation and data in <span class="yellow-text">one place</span>.
+    benefit1_text:  Customers' bookings, their data, time and other customer details are displayed in simple and understandable way.
+    benefit2_title: CRM built to be as <span class="yellow-text">simple</span> and <span class="yellow-text">straightforward</span> as possible.
+    benefit2_text: Confirmation or cancellation of the reservation doesn't require notifying customers about it, everything is taken care of in advance.
+    benefit3_title: Don’t spend any <span class="yellow-text">money</span> on website, we got <span class="yellow-text">you.</span>
+    benefit3_text: Everything is free, no premium versions, no deceptions. Just sign up and use.
+    benefit4_title: Never miss a chance because of <span class="yellow-text">language</span> barrier.
+    benefit4_text: Reservation management is available in both Lithuanian and English.
   team_title: Team behind nnizer
   dominykas_position: Back-end developer
   tadas_position: Team Lead / Mentor
