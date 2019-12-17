@@ -88,6 +88,15 @@ class ReservationRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param String $key
+     * @return Reservation|null
+     */
+    public function findOneByKey(String $key): ?Reservation
+    {
+        return $this->findOneBy(['verificationKey' => $key]);
+    }
+
+    /**
      * @param Reservation $reservation
      * @throws ORMException
      */

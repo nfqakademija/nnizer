@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Contractor;
 use App\Entity\Reservation;
 use App\Entity\Review;
 use App\Repository\ContractorRepository;
@@ -48,12 +47,17 @@ class ReviewController extends AbstractController
      * @param string $key
      * @param int $starCount
      * @param ReviewRepository $reviewRepository
+     * @param ReservationRepository $reservationRepository
      * @return Response
      * @throws ORMException
      */
-    public function setStars(string $key, int $starCount, ReviewRepository $reviewRepository): Response
-    {
-        $reservation = $this->getReservationByKey($key);
+    public function setStars(
+        string $key,
+        int $starCount,
+        ReviewRepository $reviewRepository,
+        ReservationRepository $reservationRepository
+    ): Response {
+        $reservation = $reservationRepository->findOneByKey($key);
         if ($reservation === null) {
             return $this->redirectToRoute('home');
         }
@@ -83,13 +87,14 @@ class ReviewController extends AbstractController
      * @throws NonUniqueResultException
      * @throws ORMException
      */
-    public function addDescription(Request $request,
+    public function addDescription(
+        Request $request,
         string $key,
         ReviewRepository $reviewRepository,
         ReservationRepository $reservationRepository
     ): Response {
         $description = $request->get('description');
-        $reservation = $reservationRepository->findOneBy(['verificationKey' => $key, 'isVerified' => 1]);
+        $reservation = $reservationRepository->findOneByKey($key);
         if ($description === null || $reservation === null) {
             return $this->redirectToRoute('home');
         }
