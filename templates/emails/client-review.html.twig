@@ -7,11 +7,11 @@
 {% endblock %}
 {% block text %}
     <div style="font-family:Poppins, Helvetica;font-size:16px;line-height:24px;text-align:left;color:#637381;">
-        <a href="{{ url('review_star', {key: hash, starCount: 1}) }}">1 star</a>
-        <a href="{{ url('review_star', {key: hash, starCount: 2}) }}">2 star</a>
-        <a href="{{ url('review_star', {key: hash, starCount: 3}) }}">3 star</a>
-        <a href="{{ url('review_star', {key: hash, starCount: 4}) }}">4 star</a>
-        <a href="{{ url('review_star', {key: hash, starCount: 5}) }}">5 star</a>
+        <a href="{{ path('review_star', {key: hash, starCount: 1}) }}">1 star</a>
+        <a href="{{ path('review_star', {key: hash, starCount: 2}) }}">2 star</a>
+        <a href="{{ path('review_star', {key: hash, starCount: 3}) }}">3 star</a>
+        <a href="{{ path('review_star', {key: hash, starCount: 4}) }}">4 star</a>
+        <a href="{{ path('review_star', {key: hash, starCount: 5}) }}">5 star</a>
     </div>
 {% endblock %}
 
