@@ -3,16 +3,16 @@
 {% block title %}{{ "errors.notfound.title"|trans }}{% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="col-md-6" style="margin: 0 auto; margin-top: 10%">
-        <img src="{{ asset('build/images/404.png') }}" alt="Page not found"/>
-        <div class="details" style="text-align: center; margin-top: 5%">
-            <h2 style="text-align: center; margin-bottom: 5%">{{ "errors.notfound.title"|trans }}</h2>
-            <p style="margin: 0 auto; font-size: .875rem">
-                {{ "errors.notfound.description"|trans }}
-                <a class="link -underline" href="{{ path('home') }}">{{ "errors.notfound.link"|trans }}</a>.
-            </p>
+    <div class="container">
+        <div class="col-md-6" style="margin: 0 auto; margin-top: 10%">
+            <img src="{{ asset('build/images/nnizer-404.svg') }}" alt="Page not found"/>
+            <div class="details" style="text-align: center; margin-top: 5%">
+                <h2 style="text-align: center; margin-bottom: 8px; font-weight: 600">{{ "errors.notfound.title"|trans }}</h2>
+                <p style="margin: 0 auto; font-size: .875rem">
+                    {{ "errors.notfound.description"|trans }}
+                    <a class="link -underline" href="{{ path('home') }}">{{ "errors.notfound.link"|trans }}</a>.
+                </p>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
