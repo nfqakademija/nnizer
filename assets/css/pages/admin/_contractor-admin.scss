@@ -10,6 +10,7 @@
 .panel {
   min-height: 100vh;
   position: relative;
+  padding-bottom: rem(48px);
 
   @include transition(transform 0.3s);
 

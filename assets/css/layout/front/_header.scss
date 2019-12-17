@@ -33,7 +33,7 @@
 
     @include transition(transform 0.2s);
 
-    &.-primary {
+    &.-cta {
       background-color: $color-black;
       color: $color-white;
       box-shadow: 0 rem(8px) rem(24px) rgba(0, 0, 0, 0.25);
@@ -61,6 +61,14 @@
           opacity: 1;
           transform: translate(rem(8px), rem(-8px));
         }
+      }
+    }
+
+    &.-secondary {
+      display: inline-block;
+
+      &:hover {
+        transform: translateY(rem(-4px));
       }
     }
   }

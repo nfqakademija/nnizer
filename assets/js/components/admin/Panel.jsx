@@ -20,6 +20,7 @@ const Panel = () => {
     isFetched: false,
   });
   const [reservations, setReservations] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const panel = document.querySelector('#admin');
   const baseURL = `${window.location.protocol}//${window.location.host}`;
@@ -82,6 +83,7 @@ const Panel = () => {
             <Header
               isOpen={isNavOpen}
               toggleNav={toggleNav}
+              setSearchTerm={setSearchTerm}
               avatar={
                 data.isFetched
                   ? `${baseURL}/uploads/profile/${data.users.profilePhoto.filename}`
@@ -101,7 +103,9 @@ const Panel = () => {
                 component={() => (
                   <Reservations
                     userKey={key}
+                    userName={data.users.username}
                     reservations={reservations}
+                    searchTerm={searchTerm}
                     fetchData={fetchData}
                   />
                 )}
@@ -113,7 +117,9 @@ const Panel = () => {
                 component={() => (
                   <Reservations
                     userKey={key}
+                    userName={data.users.username}
                     reservations={reservations}
+                    searchTerm={searchTerm}
                     fetchData={fetchData}
                   />
                 )}

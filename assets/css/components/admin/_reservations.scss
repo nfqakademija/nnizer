@@ -104,7 +104,7 @@
       padding: rem(16px) rem(8px);
 
       @include breakpoint(lg) {
-        border-radius: rem(6px) 0 rem(6px);
+        border-radius: rem(6px) 0 rem(6px) rem(6px);
         margin: 0;
         padding: 0;
       }

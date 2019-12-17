@@ -16,7 +16,33 @@
 
   &__name {
     font-size: rem(24px);
-    margin: rem(24px) 0;
+    margin: rem(24px) 0 rem(12px) 0;
+  }
+
+  &__website {
+    @extend .flex-xy-center;
+
+    margin-bottom: rem(24px);
+    text-decoration: none;
+    color: $color-black;
+
+    @include transition(color 0.2s);
+
+    i {
+      color: $color-grey-1;
+      margin-right: rem(16px);
+      margin-bottom: rem(4px);
+
+      @include transition(color 0.2s);
+    }
+
+    &:hover {
+      color: $color-yellow;
+
+      i {
+        color: $color-yellow;
+      }
+    }
   }
 
   &__fields {

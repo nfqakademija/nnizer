@@ -34,9 +34,9 @@
 
   &__cta {
     margin-top: rem(36px);
-  
+
     @extend .header__link;
-    @extend .header__link.-primary;
+    @extend .header__link.-cta;
   }
 }
 
