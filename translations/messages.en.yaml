@@ -145,6 +145,7 @@ settings_form:
   Sunday: Sunday
   visitDuration: Visit duration
   submit: Submit
+  submitted: Your working hours are now submitted. Don't forget to update your details as well!
 
 detailsForm:
   edit: Edit account

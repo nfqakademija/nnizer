@@ -145,6 +145,7 @@ settings_form:
   Sunday: Sekmadienis
   visitDuration: Vizito trukmė
   submit: Pateikti
+  submitted: Jūsų darbo valandos atnaujintos. Nepamirškite atnaujinti ir savo paskyros detalių.
 
 detailsForm:
   edit: Redaguoti paskyrą
