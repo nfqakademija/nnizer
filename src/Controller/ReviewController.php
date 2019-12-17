@@ -116,11 +116,12 @@ class ReviewController extends AbstractController
     /**
      * @param string $key
      * @return Reservation|null
+     * @throws \Exception
      */
     private function getReservationByKey(string $key): ?Reservation
     {
         return $this->getDoctrine()
             ->getRepository(Reservation::class)
-            ->findOneBy(['verificationKey' => $key, 'isVerified' => true]);
+            ->findOneBy(['verificationKey' => $key, 'visitDate' < new \DateTime('now')]);
     }
 }
