@@ -8,9 +8,6 @@
     font-size: rem(60px);
   }
 
-  @include breakpoint(xl) {
-  }
-
   .container {
     align-items: center;
     display: flex;
@@ -34,7 +31,7 @@
 
   &__cta {
     margin-top: rem(36px);
-  
+
     @extend .header__link;
     @extend .header__link.-primary;
   }
