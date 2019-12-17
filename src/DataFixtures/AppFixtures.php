@@ -269,13 +269,15 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     {
         $reservations = $contractor->getReservations();
         foreach ($reservations as $reservation) {
-            $review = new Review();
-            $review->setContractor($contractor);
-            $review->setDescription('The rating tells it all!');
-            $review->setReservation($reservation);
-            $review->setStars(random_int(1, 5));
-            $manager->persist($review);
-            $contractor->addReview($review);
+            if ($reservation->getVisitDate() < new \DateTime('format')) {
+                $review = new Review();
+                $review->setContractor($contractor);
+                $review->setDescription('The rating tells it all!');
+                $review->setReservation($reservation);
+                $review->setStars(random_int(1, 5));
+                $manager->persist($review);
+                $contractor->addReview($review);
+            }
         }
     }
 

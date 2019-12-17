@@ -80,6 +80,7 @@ class ReviewController extends AbstractController
      * @return Response
      * @throws NonUniqueResultException
      * @throws ORMException
+     * @throws \Exception
      */
     public function addDescription(Request $request, string $key, ReviewRepository $reviewRepository): Response
     {
@@ -122,6 +123,6 @@ class ReviewController extends AbstractController
     {
         return $this->getDoctrine()
             ->getRepository(Reservation::class)
-            ->findOneBy(['verificationKey' => $key, 'visitDate' < new \DateTime('now')]);
+            ->findOneBy(['verificationKey' => $key]);
     }
 }
