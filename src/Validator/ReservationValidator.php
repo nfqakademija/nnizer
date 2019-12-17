@@ -33,18 +33,24 @@ class ReservationValidator
         ];
 
         $constraint = new Assert\Collection([
-            'firstname' => new Assert\Length([
+            'firstname' => [
+                new Assert\NotBlank(['message' => 'firstname.empty']),
+                new Assert\Length([
                 'min' => 2,
                 'minMessage' => 'firstname.short',
                 'max' => 32,
                 'maxMessage' => 'firstname.long',
-            ]),
-            'lastname' => new Assert\Length([
-                'min' => 2,
-                'minMessage' => 'lastname.short',
-                'max' => 32,
-                'maxMessage' => 'lastname.long',
-            ]),
+                ]),
+            ],
+            'lastname' => [
+                new Assert\NotBlank(['message' => 'lastname.empty']),
+                new Assert\Length([
+                    'min' => 2,
+                    'minMessage' => 'lastname.short',
+                    'max' => 32,
+                    'maxMessage' => 'lastname.long',
+                ]),
+            ],
             'email' => [
                 new Assert\Email(['message' => 'email.invalid']),
                 new Assert\NotBlank(['message' => 'email.blank']),

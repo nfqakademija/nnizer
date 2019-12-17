@@ -107,7 +107,7 @@ email:
     lostpassword: Slaptažodžio atstatymas
   signup:
     verify-email: Patvirtinti e. paštą
-    text: Džiaugemės, kad prisijungėte prie NNIZER komandos! Tikimės, kad mėgausitės naudodamiesi šia platforma. Norėdami pradėti savo veiklą, patvirtinkite paštą paspaudę mygtuką žemiau.
+    text: Džiaugiamės, kad prisijungėte prie NNIZER komandos! Tikimės, kad mėgausitės naudodamiesi šia platforma. Norėdami pradėti savo veiklą, patvirtinkite paštą paspaudę mygtuką žemiau.
   verification:
     text: Viskas! Daugiau niekuo jums nereikia rūpintis - viskuo pasirūpinsime mes. Vis dėlto, jeigu nuspręsite, kad pasirinktu laiku atvykti negalėsite, prašome pranešti savo paslaugos teikėjui ir atšaukti savo rezervaciją.
   registration:
