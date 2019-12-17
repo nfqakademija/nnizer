@@ -24,7 +24,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         '08:00 - 17:00',
         '11:00 - 16:00',
         '09:00 - 21:00',
-        '12:00 - 12:00',
+        '10:00 - 12:00',
         '-1',
     ];
 
@@ -249,8 +249,9 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $reservation->setContractor($contractor);
             $reservation->setVisitDate(
                 (new \DateTime('now'))
+                    ->setTime(11, 00)
                     ->modify(
-                        '+'. $contractor->getSettings()->getVisitDuration() * $i . ' minutes'
+                        '+'. $i . ' days'
                     )
             );
             $reservation->setIsCompleted(true);
