@@ -11,7 +11,7 @@
 
   &__cta {
     @extend .hero__cta;
-    
+
     @include z-index(above);
   }
 
