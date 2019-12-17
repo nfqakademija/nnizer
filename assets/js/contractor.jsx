@@ -6,7 +6,7 @@ import MicroModal from 'micromodal';
 import { showAlert, updateAlert } from './Utils/NotificationUtils';
 import Template from './components/contractor/Template';
 
-import { getTranslation } from './TranslationService';
+import { getTranslation } from './Utils/TranslationService';
 
 const baseURL = `${window.location.protocol}//${window.location.host}`;
 const bookForm = document.querySelector('.js-book-form');

@@ -11,7 +11,7 @@ import Reviews from './reviews/Reviews';
 import Settings from './settings/Settings';
 
 import { showAlert } from '../../Utils/NotificationUtils';
-import getTranslation from "../../TranslationService";
+import getTranslation from "../../Utils/TranslationService";
 
 const Panel = () => {
   const [isNavOpen, toggleNav] = useState(false);
