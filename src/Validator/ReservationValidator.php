@@ -57,6 +57,9 @@ class ReservationValidator
                     'message' => 'date.invalid',
                 ]),
             ],
+            'contractor' => [
+                new Assert\NotBlank(['message' => 'provider.empty']),
+            ]
         ]);
 
         $this->constraints = $validator->validate($input, $constraint);
