@@ -47,9 +47,9 @@ class NewAdminCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Create a new admin account')
-            ->addArgument('email', InputArgument::REQUIRED, 'New admin account email')
-            ->addArgument('password', InputArgument::REQUIRED, 'New admin account password');
+            ->setDescription('Create a new super admin account')
+            ->addArgument('email', InputArgument::REQUIRED, 'New super admin account email')
+            ->addArgument('password', InputArgument::REQUIRED, 'New super admin account password');
     }
 
     /**

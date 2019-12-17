@@ -36,7 +36,7 @@ class AdminFactory
         $user->setEmail($email);
         $user->setPassword($this->encoder->encodePassword($user, $password));
         $user->setName($name);
-        $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+        $user->setRoles(['ROLE_USER', 'ROLE_SUPER_ADMIN']);
         return $user;
     }
 }
