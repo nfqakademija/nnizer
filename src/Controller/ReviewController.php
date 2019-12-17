@@ -121,6 +121,6 @@ class ReviewController extends AbstractController
     {
         return $this->getDoctrine()
             ->getRepository(Reservation::class)
-            ->findOneBy(['verificationKey' => $key]);
+            ->findOneBy(['verificationKey' => $key, 'isVerified' => true]);
     }
 }
