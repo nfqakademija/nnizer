@@ -71,9 +71,6 @@ class ContractorDetailsFormType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'detailsForm.description.title',
                 'empty_data' => '',
-                'attr' => [
-                    'placeholder' => 'detailsForm.description.placeholder',
-                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'detailsForm.description.empty',
@@ -83,9 +80,6 @@ class ContractorDetailsFormType extends AbstractType
             ->add('address', TextType::class, [
                 'label' => 'detailsForm.address.title',
                 'empty_data' => '',
-                'attr' => [
-                    'placeholder' => 'detailsForm.address.placeholder',
-                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'detailsForm.address.empty',

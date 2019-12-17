@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { getTranslation } from '../../Utils/TranslationService';
 
-const logoPath = require('../../../images/nnizer-logo.svg');
+const logoPath = require('../../../images/nnizer-logo-dark-vertical.svg');
 
 const Sidenav = (props) => {
   const { isOpen, toggleNav } = props;

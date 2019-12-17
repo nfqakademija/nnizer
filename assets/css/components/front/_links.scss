@@ -36,6 +36,11 @@
     }
   }
 
+  &.-contractor {
+    font-size: rem(16px);
+    margin: 0 rem(4px);
+  }
+
   &.-hover-underline {
     @extend .-underline;
 

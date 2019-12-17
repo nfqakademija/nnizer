@@ -134,7 +134,8 @@ email:
 
 settings_form:
   choosedays: Pasirinkite dienas, kuriomis dirbate
-  title: Jūsų darbo valandos
+  days_title: Jūsų darbo valandos
+  info_title: Kita informacija
   Monday: Pirmadienis
   Tuesday: Antradienis
   Wednesday: Trečiadienis
@@ -151,14 +152,14 @@ detailsForm:
   submit: Pateikti
   service:
     title: Paslaugos pavadinimas
-    placeholder: Asmeninis vairuotojas
+    placeholder: Vairuotojas (-a)
     type: Paslaugų sritis
   description:
     title: Paslaugos aprašymas
-    placeholder: Išbandyk mano paslaugas ir nepasigailėk!
+    placeholder: Išbandyk mano paslaugas, nes...
   address:
     title: Adresas
-    placeholder: Jūsų adresas
+    placeholder: adresas
   facebook:
     title: Jūsų facebook puslapis
     placeholder: '/manopuslapis'
@@ -187,6 +188,7 @@ crm:
   unconfirmed: Nepatvirtinta
   done: Įvykdyta
   actions: Veiksmai
+  missing.phone: Nenurodyta
   removal:
     progress: Pašalinimas vykdomas
     success: Pašalinimas sėkmingas
@@ -204,7 +206,9 @@ crm:
     success: Patvirtinimas sėkmingas
     error: Patvirtinti nepavyko. Bandykite dar kartą.
   approve: Patvirtinti
-  no_reservations: Kol kas neturite jokių!
+  no_reservations_text1: Kol kas neturite jokių rezervacijų! Pasidalinkit šia
+  no_reservations_link: nuoroda
+  no_reservations_text2: ir gaukite pirmąją rezervaciją nnizer platformoje!
   no_reservations_matching: Nėra rezervacijų tenkinančių jūsų pasirinktus kriterijus.
   reset_filters: Nuimti filtrus
   error:

@@ -134,7 +134,8 @@ email:
 
 settings_form:
   choosedays: Please select your work days!
-  title: Your working hours
+  days_title: Your working hours
+  info_title: Other information
   Monday: Monday
   Tuesday: Tuesday
   Wednesday: Wednesday
@@ -189,6 +190,7 @@ crm:
   unconfirmed: Unconfirmed
   done: Completed
   actions: Actions
+  missing.phone: Missing phone
   removal:
     progress: Removal in progress
     success: Removal was successful
@@ -206,7 +208,9 @@ crm:
     success: Approval was successful
     error: Approval failed. Please try again.
   approve: Approve
-  no_reservations: You don't have any reservations yet!
+  no_reservations_text1: You don't have any reservations yet! Share this
+  no_reservations_link: link
+  no_reservations_text2: to get your first reservation in nnizer platform!
   no_reservations_matching: No reservations matching your criteria.
   reset_filters: Reset filters
   error:

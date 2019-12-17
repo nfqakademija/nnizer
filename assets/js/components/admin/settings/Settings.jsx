@@ -26,6 +26,15 @@ const Settings = (props) => {
             ? `${userData.firstname} ${userData.lastname}`
             : `${userData.username}` }
         </h3>
+        <a
+          href={`${baseURL}/service/${userData.username}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="profile-settings__website"
+        >
+          <i className="icon-website" />
+          { `${window.location.host}/service/${userData.username}` }
+        </a>
         <SettingsBtn />
         <div className="profile-settings__fields row">
           <Field label="Phone number" output={userData.phoneNumber} icon="phone" />
