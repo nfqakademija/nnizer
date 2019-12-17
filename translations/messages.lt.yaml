@@ -145,6 +145,7 @@ settings_form:
   Sunday: Sekmadienis
   visitDuration: Vizito trukmė
   submit: Pateikti
+  submitted: Jūsų darbo valandos atnaujintos. Nepamirškite atnaujinti ir savo paskyros detalių.
 
 detailsForm:
   edit: Redaguoti paskyrą
@@ -267,11 +268,11 @@ contractor:
     Sunday: Sekmadienis
   book: Užsirezervuoti
   booking:
-    success: Rezervacija sėkmiga!
+    success: Rezervacija sėkminga!
     send: Siunčiamos rezervacijos detalės
   error:
     provider: Nepasiekiama tiekėjo informacija. Bandykite dar kartą arba susisiekite su mumis!
-    failed: Rezervacija nepavyko
+    failed: Rezervacija nepavyko!
     chosen: Pasirinktas laikas negalimas! Pasirinkite kitą datą
     error: Kažkas įvyko negerai. Bandykite dar kartą
 datepicker:
@@ -293,3 +294,11 @@ errors:
     title: Nenumatyta klaida
     description: Atsiprašome, kažkas nutiko ne taip. Mes apie tai jau informuoti ir klaidą sutvarkysime kaip galėdami greičiau.
     link: Grįžti į pagrindinį
+
+reviews_page:
+  title: Ačiū!
+  text: Ačiū už paliktą įvertinimą. Dabar, jeigu norite, galite palikti papildomą komentarą apie jums suteiktą paslaugą arba
+  homepage: grįžti į pagrindinį.
+  submit: Pateikti
+  description: Jūsų komentaras
+  done: Ačiū Jums už paliktą įvertinimą!

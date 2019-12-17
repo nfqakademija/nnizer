@@ -9,6 +9,7 @@ const PanelHeader = (props) => {
     avatar,
     name,
     setSearchTerm,
+    searchTerm
   } = props;
   const searchInput = React.createRef();
 
@@ -39,6 +40,7 @@ const PanelHeader = (props) => {
           ref={searchInput}
           placeholder={getTranslation('crm.search')}
           onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm}
           className="js-search-input"
         />
       </div>
@@ -60,6 +62,7 @@ PanelHeader.propTypes = {
   setSearchTerm: PropTypes.func.isRequired,
   avatar: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  searchTerm: PropTypes.string.isRequired,
 };
 
 export default PanelHeader;

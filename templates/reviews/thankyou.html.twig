@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ "reviews_page.title"|trans }} {% endblock %}
+
+{% block body %}
+    <div class="login">
+        <div class="container">
+            <div class="login__window col-lg-5">
+                <form method="post" class="form" action="{{ url('review_description', {key: key}) }}">
+
+                    <h1>{{ "reviews_page.title"|trans }}</h1>
+                    <p style="font-size: 0.875rem; margin-bottom: 5%">{{ "reviews_page.text"|trans }} <a class="link -underline" href="{{ url('home') }}">{{ "reviews_page.homepage"|trans }}</a></p>
+
+                    <div class="form__field">
+                        <textarea type="text" height="200px" name="description" id="description" placeholder="{{ "reviews_page.description"|trans }}" }}class="form-control" required></textarea>
+                    </div>
+
+                    <button class="btn -full" type="submit">
+                        {{ "reviews_page.submit"|trans }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

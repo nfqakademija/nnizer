@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
-import { ToastContainer } from 'react-toastify';
 
 import Loader from '../contractor/Loader';
 import Sidenav from './Sidenav';
@@ -10,7 +9,7 @@ import Reservations from './reservations/Reservations';
 import Reviews from './reviews/Reviews';
 import Settings from './settings/Settings';
 
-import { showAlert } from '../../Utils/NotificationUtils';
+import { Alert, showAlert } from '../../Utils/NotificationUtils';
 import getTranslation from "../../Utils/TranslationService";
 
 const Panel = () => {
@@ -65,7 +64,7 @@ const Panel = () => {
 
   return (
     <Router>
-      <ToastContainer closeButton={<CloseButton />} />
+      <Alert />
       {!data.isFetched ? (
         <Loader />
       ) : (
@@ -95,7 +94,8 @@ const Panel = () => {
                     ? `${data.users.firstname} ${data.users.lastname}`
                     : data.users.username
                   : ''
-              }
+              } 
+              searchTerm={searchTerm}
             />
             <Switch>
               <Route
@@ -106,6 +106,7 @@ const Panel = () => {
                     userName={data.users.username}
                     reservations={reservations}
                     searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
                     fetchData={fetchData}
                   />
                 )}
@@ -120,6 +121,7 @@ const Panel = () => {
                     userName={data.users.username}
                     reservations={reservations}
                     searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
                     fetchData={fetchData}
                   />
                 )}

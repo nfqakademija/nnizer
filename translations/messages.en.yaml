@@ -145,6 +145,7 @@ settings_form:
   Sunday: Sunday
   visitDuration: Visit duration
   submit: Submit
+  submitted: Your working hours are now submitted. Don't forget to update your details as well!
 
 detailsForm:
   edit: Edit account
@@ -294,3 +295,11 @@ errors:
     title: Unexpected Error
     description: Sorry, something went wrong. No worries though, we are already informed about this and we will fix it as soon as possible.
     link: Visit homepage
+
+reviews_page:
+  title: Thank you!
+  text: Thank you for your evaluation. Now, if you wish, you can leave a description of the service that you have been provided or
+  homepage: go back to the homepage.
+  submit: Submit
+  description: Your comment
+  done: Thank you for your review!

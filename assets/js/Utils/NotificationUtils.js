@@ -1,4 +1,5 @@
-import { toast } from 'react-toastify';
+import React from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 let toastId = null;
 
@@ -17,4 +18,14 @@ export const updateAlert = (message, status, closeTime) => {
     autoClose: closeTime,
     type: toast.TYPE.INFO,
   });
+};
+
+export const Alert = () => {
+  const CloseButton = (closeToast) => (
+    <i className="icon-cross notification__close" onClick={() => closeToast} />
+  );
+
+  return (
+    <ToastContainer closeButton={<CloseButton />} />
+  );
 };

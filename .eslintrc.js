@@ -23,6 +23,7 @@ module.exports = {
         "no-console": 0,
         "no-unused-vars": 0,
         "no-plusplus": [2, { allowForLoopAfterthoughts: true }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "no-param-reassign": 0,
         "object-curly-newline": ["error", {
             "ObjectExpression": { "multiline": true, "minProperties": 5, "consistent": true},
