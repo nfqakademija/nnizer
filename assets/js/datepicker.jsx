@@ -9,14 +9,25 @@ import {
   subMinutes,
   isPast,
 } from 'date-fns';
+import Translator from 'bazinga-translator';
 import { setHours, setMinutes } from 'date-fns/esm';
 import en from 'date-fns/locale/en-GB';
+import lt from 'date-fns/locale/lt';
 
 import { showAlert } from './Utils/NotificationUtils';
-import getTranslation from "./Utils/TranslationService";
+import getTranslation from './Utils/TranslationService';
 
-registerLocale('en', en);
-setDefaultLocale(en);
+
+let isEn = true;
+
+if (Translator.locale === 'lt') {
+  registerLocale('lt', lt);
+  setDefaultLocale(lt);
+  isEn = false;
+} else {
+  registerLocale('en', en);
+  setDefaultLocale(en);
+}
 
 const Datepicker = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -114,6 +125,8 @@ const Datepicker = () => {
       });
   };
 
+
+
   useEffect(() => {
     fetchData();
     setAvailableDay(data.workingDays);
@@ -122,7 +135,7 @@ const Datepicker = () => {
 
   return (
     <DatePicker
-      locale="en"
+      locale={isEn ? 'en' : 'lt'}
       selected={startDate}
       onChange={(date) => setStartDate(date)}
       onChangeRaw={handleDateChangeRaw}
@@ -137,11 +150,10 @@ const Datepicker = () => {
       maxTime={isFetched && getEndTime()}
       timeFormat="HH:mm"
       timeIntervals={data.visitDuration}
-      timeCaption="time"
+      timeCaption={isEn ? 'Time' : 'Laikas'}
       dateFormat="yyyy-MM-dd HH:mm"
       name="visitDate"
       disabled={!isFetched}
-      placeholderText={isFetched ? 'Select Date' : 'Loading...'}
     />
   );
 };
