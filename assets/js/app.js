@@ -16,7 +16,7 @@ const displayBackendAlert = () => {
   const backendAlert = document.querySelector('.js-backend-alert');
   if (document.body.contains(backendAlert)) {
     const msg = backendAlert.innerHTML;
-    showAlert(msg);
+    showAlert(msg, '', false);
   }
 };
 

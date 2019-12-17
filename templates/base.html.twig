@@ -19,7 +19,7 @@
         <div id="backend-alert-container"></div>
         {% for message in app.flashes('notice')|slice(0, 1) %}
             <p class="js-backend-alert" style="display:none">
-                {{ message }}
+                {{ message|trans }}
             </p>
         {% endfor %}
 
