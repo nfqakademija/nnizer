@@ -24,10 +24,14 @@
   &__heart {
     animation: pulse 1s infinite;
     margin: 0 rem(2px);
+    opacity: 0.8;
   }
 
   @keyframes pulse {
-    10% {transform: scale(1.2)}
+    10% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
   }
   
 }
