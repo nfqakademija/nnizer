@@ -107,7 +107,7 @@ email:
     lostpassword: Slaptažodžio atstatymas
   signup:
     verify-email: Patvirtinti e. paštą
-    text: Džiaugemės, kad prisijungėte prie NNIZER komandos! Tikimės, kad mėgausitės naudodamiesi šia platforma. Norėdami pradėti savo veiklą, patvirtinkite paštą paspaudę mygtuką žemiau.
+    text: Džiaugiamės, kad prisijungėte prie NNIZER komandos! Tikimės, kad mėgausitės naudodamiesi šia platforma. Norėdami pradėti savo veiklą, patvirtinkite paštą paspaudę mygtuką žemiau.
   verification:
     text: Viskas! Daugiau niekuo jums nereikia rūpintis - viskuo pasirūpinsime mes. Vis dėlto, jeigu nuspręsite, kad pasirinktu laiku atvykti negalėsite, prašome pranešti savo paslaugos teikėjui ir atšaukti savo rezervaciją.
   registration:
@@ -145,6 +145,7 @@ settings_form:
   Sunday: Sekmadienis
   visitDuration: Vizito trukmė
   submit: Pateikti
+  submitted: Jūsų darbo valandos atnaujintos. Nepamirškite atnaujinti ir savo paskyros detalių.
 
 detailsForm:
   edit: Redaguoti paskyrą
@@ -287,3 +288,11 @@ errors:
     title: Nenumatyta klaida
     description: Atsiprašome, kažkas nutiko ne taip. Mes apie tai jau informuoti ir klaidą sutvarkysime kaip galėdami greičiau.
     link: Grįžti į pagrindinį
+
+reviews_page:
+  title: Ačiū!
+  text: Ačiū už paliktą įvertinimą. Dabar, jeigu norite, galite palikti papildomą komentarą apie jums suteiktą paslaugą arba
+  homepage: grįžti į pagrindinį.
+  submit: Pateikti
+  description: Jūsų komentaras
+  done: Ačiū Jums už paliktą įvertinimą!

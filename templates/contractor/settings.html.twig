@@ -45,42 +45,74 @@
                     <div class="form__field js-day-field js-monday-field hidden">
                         {{ form_widget(settingsForm.Monday) }}
                         {{ form_label(settingsForm.Monday) }}
-                    </div> 
+                    </div>
+
+                    <div class="form__error">
+                        {{ form_errors(settingsForm.Monday) }}
+                    </div>
 
                     <div class="form__field js-day-field js-tuesday-field hidden">
                         {{ form_widget(settingsForm.Tuesday) }}
                         {{ form_label(settingsForm.Tuesday) }}
-                    </div> 
+                    </div>
+
+                    <div class="form__error">
+                        {{ form_errors(settingsForm.Tuesday) }}
+                    </div>
 
                     <div class="form__field js-day-field js-wednesday-field hidden">
                         {{ form_widget(settingsForm.Wednesday) }}
                         {{ form_label(settingsForm.Wednesday) }}
-                    </div> 
+                    </div>
+
+                    <div class="form__error">
+                        {{ form_errors(settingsForm.Wednesday) }}
+                    </div>
 
                     <div class="form__field js-day-field js-thursday-field hidden">
                         {{ form_widget(settingsForm.Thursday) }}
                         {{ form_label(settingsForm.Thursday) }}
-                    </div> 
+                    </div>
+
+                    <div class="form__error">
+                        {{ form_errors(settingsForm.Thursday) }}
+                    </div>
 
                     <div class="form__field js-day-field js-friday-field hidden">
                         {{ form_widget(settingsForm.Friday) }}
                         {{ form_label(settingsForm.Friday) }}
-                    </div> 
+                    </div>
+
+                    <div class="form__error">
+                        {{ form_errors(settingsForm.Friday) }}
+                    </div>
 
                     <div class="form__field js-day-field js-saturday-field hidden">
                         {{ form_widget(settingsForm.Saturday) }}
                         {{ form_label(settingsForm.Saturday) }}
-                    </div> 
+                    </div>
+
+                    <div class="form__error">
+                        {{ form_errors(settingsForm.Saturday) }}
+                    </div>
 
                     <div class="form__field js-day-field js-sunday-field hidden">
                         {{ form_widget(settingsForm.Sunday) }}
                         {{ form_label(settingsForm.Sunday) }}
-                    </div> 
+                    </div>
+
+                    <div class="form__error">
+                        {{ form_errors(settingsForm.Sunday) }}
+                    </div>
 
                     <div class="form__field">
                         {{ form_widget(settingsForm.visitDuration) }}
                         {{ form_label(settingsForm.visitDuration) }}
-                    </div> 
+                    </div>
+
+                    <div class="form__error">
+                        {{ form_errors(settingsForm.visitDuration) }}
+                    </div>
 
                     <button class="btn">{{ "settings_form.submit"|trans }}</button>
                 {{ form_end(settingsForm) }}
@@ -92,33 +124,60 @@
                         <div class="form__field">
                             {{ form_widget(detailsForm.firstname) }}
                             {{ form_label(detailsForm.firstname) }}
-                        </div> 
+                        </div>
+                        <div class="form__error">
+                            {{ form_errors(detailsForm.firstname) }}
+                        </div>
                         <div class="form__field">
                             {{ form_widget(detailsForm.lastname) }}
                             {{ form_label(detailsForm.lastname) }}
-                        </div> 
+                        </div>
+                        <div class="form__error">
+                            {{ form_errors(detailsForm.lastname) }}
+                        </div>
                         <div class="form__field">
                             {{ form_widget(detailsForm.phoneNumber) }}
                             {{ form_label(detailsForm.phoneNumber) }}
-                        </div> 
+                        </div>
+                        <div class="form__error">
+                            {{ form_errors(detailsForm.phoneNumber) }}
+                        </div>
                         <div class="form__field">
                             {{ form_widget(detailsForm.title) }}
                             {{ form_label(detailsForm.title) }}
-                        </div> 
+                        </div>
+                        <div class="form__error">
+                            {{ form_errors(detailsForm.title) }}
+                        </div>
                         <div class="form__field">
                             {{ form_widget(detailsForm.address) }}
                             {{ form_label(detailsForm.address) }}
+                        </div>
+                        <div class="form__error">
+                            {{ form_errors(detailsForm.address) }}
                         </div>
                         <div class="form__field">
                             {{ form_widget(detailsForm.facebook) }}
                             {{ form_label(detailsForm.facebook) }}
                         </div>
+                        <div class="form__error">
+                            {{ form_errors(detailsForm.facebook) }}
+                        </div>
 
                         <div class="form__other-fields">
                             {{ form_row(detailsForm.description) }}
+                            <div class="form__error">
+                                {{ form_errors(detailsForm.description) }}
+                            </div>
                             {{ form_row(detailsForm.services) }}
                             {{ form_row(detailsForm.coverPhoto) }}
+                            <div class="form__error">
+                                {{ form_errors(detailsForm.coverPhoto) }}
+                            </div>
                             {{ form_row(detailsForm.profilePhoto) }}
+                            <div class="form__error">
+                                {{ form_errors(detailsForm.profilePhoto) }}
+                            </div>
                         </div>
 
                         <button class="btn">{{ "detailsForm.submit"|trans }}</button>

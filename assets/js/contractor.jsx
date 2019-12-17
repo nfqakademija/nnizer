@@ -22,9 +22,9 @@ const handleFormResponse = (response) => {
   }
   // 206 - form validation failed
   if (response.status === 206) {
-    const missingField = response.data[0].replace('.', ' ');
+    const missingField = response.data[0];
     updateAlert(
-      `${getTranslation('contractor.error.failed')} ${missingField}`,
+      `${getTranslation('contractor.error.failed')}: ${getTranslation(missingField, 'validators')}`,
       'error',
       4000,
     );
