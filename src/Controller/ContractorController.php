@@ -97,28 +97,9 @@ class ContractorController extends AbstractController
             return $this->redirectToRoute('contractor');
         }
 
-        return $this->render('contractor/settings.html.twig', [
-            'settingsForm' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/contractor/details", name="contractor_details")
-     * @param Request $request
-     * @param ContractorRepository $contractorRepository
-     * @return Response
-     * @throws ORMException
-     */
-    public function details(Request $request, ContractorRepository $contractorRepository): Response
-    {
-        $contractor = $contractorRepository->findOneBy([
-            'id' => $this->getUser()->getId()
-        ]);
-
-        $form = $this->createForm(ContractorDetailsFormType::class, $contractor);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        $detailsForm = $this->createForm(ContractorDetailsFormType::class, $contractor);
+        $detailsForm->handleRequest($request);
+        if ($detailsForm->isSubmitted() && $detailsForm->isValid()) {
             $contractorRepository->save($contractor);
 
             return $this->redirectToRoute('contractor');
