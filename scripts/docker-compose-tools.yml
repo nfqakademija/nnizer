@@ -3,7 +3,7 @@ version: "2"
 
 services:
   frontend.symfony:
-    image: nfqakademija/docker:frontend-latest
+    image: docker/frontend
     container_name: frontend.symfony
     volumes:
       - ../:/code # Mount your code, so JavaScript tools could see it
