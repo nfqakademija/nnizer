@@ -55,7 +55,7 @@ reset_password:
 
 navigation:
   login: Login
-  signup: Get 
+  signup: Get started
   logout: Log out
   reservations: My reservations
 

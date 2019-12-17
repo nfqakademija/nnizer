@@ -74,9 +74,6 @@ class SendReviewFormsCommand extends Command
         $context = $this->router->getContext();
         $context->setHost('nnizer.projektai.nfqakademija.lt');
 
-        $reservations = $this->em->getRepository(Reservation::class)
-            ->findByInComplete(new \DateTime('now'));
-
         foreach ($reservations as $reservation) {
             $this->mailer->sendReviewEmail($reservation);
             $reservation->setIsCompleted(true);
