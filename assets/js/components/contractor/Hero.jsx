@@ -34,7 +34,7 @@ const Hero = (props) => {
 
   return (
     <section
-      className="contracot-rhero"
+      className="contractor-hero"
       style={heroImage}
     >
       <div className="container">
