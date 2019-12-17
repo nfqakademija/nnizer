@@ -16,8 +16,15 @@
         {% endblock %}
     </head>
     <body>
+        <div id="backend-alert-container"></div>
+        {% for message in app.flashes('notice')|slice(0, 1) %}
+            <p class="js-backend-alert" style="display:none">
+                {{ message|trans }}
+            </p>
+        {% endfor %}
+
         <header class="header">
-            <n class="container">
+            <div class="container">
                 <div class="header__left">
                     <a href="{{ path('home') }}">
                         <img src="{{ asset('build/images/nnizer-logo.svg') }}" alt="nnizer type logotype" class="header__logo">
@@ -50,6 +57,8 @@
                 </div>
             </div>
         </header>
+
+
         {% block body %}{% endblock %}
 
         <footer class="footer">

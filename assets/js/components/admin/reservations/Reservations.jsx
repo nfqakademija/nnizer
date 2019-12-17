@@ -13,7 +13,14 @@ import { getTranslation } from '../../../Utils/TranslationService';
 import axios from 'axios';
 
 const Reservations = (props) => {
-  const { reservations, userName, userKey, fetchData, searchTerm } = props;
+  const {
+    reservations,
+    userName,
+    userKey,
+    fetchData,
+    searchTerm,
+    setSearchTerm,
+  } = props;
   const baseURL = `${window.location.protocol}//${window.location.host}`;
 
   const [isTodayFilter, setTodayFilter] = useState(false);
@@ -65,6 +72,7 @@ const Reservations = (props) => {
     setPendingFilter(false);
     setConfirmedFilter(false);
     setExpiredFilter(false);
+    setSearchTerm('');
   };
 
   const removeDublicateReversations = (filteredReservations) => (
@@ -251,6 +259,7 @@ Reservations.propTypes = {
   userKey: PropTypes.string.isRequired,
   fetchData: PropTypes.func.isRequired,
   searchTerm: PropTypes.string.isRequired,
+  setSearchTerm: PropTypes.func.isRequired,
 };
 
 export default Reservations;
