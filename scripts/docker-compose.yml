@@ -4,7 +4,6 @@ services:
   nginx.symfony:
     container_name: nginx.symfony
     build: docker/nginx
-    image: nfqakademija/docker:nginx-latest
     volumes:
       - ../:/code # Mount your code, so nginx/phpcould see it
     ports:
@@ -13,14 +12,12 @@ services:
   php.symfony:
     container_name: php.symfony
     build: docker/php
-    image: nfqakademija/docker:php-latest
     volumes:
       - ../:/code # Mount your code, so nginx/phpcould see it
 
   mysql.symfony:
     container_name: mysql.symfony
     build: docker/mysql
-    image: nfqakademija/docker:mysql-latest
     volumes:
       - ../.docker/mysql-data/:/var/lib/mysql # To persist data between restarts
     ports:
