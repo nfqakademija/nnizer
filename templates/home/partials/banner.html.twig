@@ -1,0 +1,30 @@
+<section class="banner section-mt">
+  <div class="container">
+    <div class="banner__content row">
+      <div class="banner__info col-12 col-xl-8">
+        <img
+          src="{{ asset('build/images/home/emoji/emoji-sandwatch.png') }}"
+          alt=""
+          class="banner__emoji"
+        />
+        <h2 class="banner__title -home">
+          {{ "home.banner_title"|trans|raw }}
+        </h2>
+
+        <p class="banner__text">
+          {{ "home.banner_text"|trans }}
+        </p>
+
+        <a class="banner__cta" href={{  path('app_register')  }}>
+          {{ "home.cta"|trans }}
+        </a>  
+      </div>
+    </div>
+  </div>
+  <img 
+    src="{{ asset('build/images/home/banner/illustration-waiting-man.svg') }}"
+    alt="man sitting near sandwatch"
+    class="banner__image"
+  />
+  </div>
+</section>

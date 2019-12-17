@@ -34,20 +34,20 @@ const Hero = (props) => {
 
   return (
     <section
-      className="hero"
+      className="contractor-hero"
       style={heroImage}
     >
       <div className="container">
-        <div className="hero__left col-12 col-md-8">
-          <h1 className="hero__title">{title}</h1>
+        <div className="contractor-hero__left col-12 col-md-8">
+          <h1 className="contractor-hero__title">{title}</h1>
           {address !== null && (
-            <address className="hero__address">
+            <address className="contractor-hero__address">
               <i className="icon-location" />
               {address}
             </address>
           )}
         </div>
-        <div className="hero__right col-12 col-md-4">
+        <div className="contractor-hero__right col-12 col-md-4">
           <Stars reviews={reviews} />
           <BookBtn />
         </div>

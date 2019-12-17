@@ -19,6 +19,50 @@
   }
 
   &__logo {
-    height: rem(24px);
+    height: rem(64px);
+  }
+
+  &__link {
+    border-radius: rem(2px);
+    color: $color-black;
+    font-size: rem(14px);
+    letter-spacing: rem(2px);
+    padding: rem(12px);
+    text-decoration: none;
+    text-transform: uppercase;
+
+    @include z-index(link);
+    @include transition(transform 0.2s);
+
+    &.-primary {
+      background-color: $color-black;
+      box-shadow: 0 rem(8px) rem(24px) rgba(0, 0, 0, 0.25);
+      color: $color-white;
+      display: inline-block;
+      position: relative;
+
+      &::after {
+        border: 2px solid $color-black;
+        border-radius: rem(2px);
+        content: '';
+        height: 100%;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+
+        @include transition(transform 0.2s, opacity 0.2s);
+      }
+
+      &:hover {
+        transform: translate(rem(-8px), rem(8px));
+
+        &::after {
+          opacity: 1;
+          transform: translate(rem(8px), rem(-8px));
+        }
+      }
+    }
   }
 }

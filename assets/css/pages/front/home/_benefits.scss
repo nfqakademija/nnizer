@@ -1,0 +1,46 @@
+.benefits {
+  &__title {
+    text-align: center;
+  }
+
+  .benefit {
+    flex-direction: column;
+    margin-top: rem(64px);
+
+    &.-col-reverse {
+      flex-direction: column-reverse;
+
+      @include breakpoint(md) {
+        flex-direction: row;
+      }
+    }
+
+    &.-row-reverse {
+      @include breakpoint(md) {
+        flex-direction: row-reverse;
+      }
+    }
+
+    &__info {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: rem(24px);
+
+      @include breakpoint(md) {
+        margin-top: 0;
+      }
+    }
+
+    &__emoji {
+      margin-bottom: rem(12px);
+    }
+
+    &__title {
+      font-size: rem(36px);
+      line-height: calc(2.25rem * 1.25);
+      margin-bottom: rem(16px);
+    }
+  }
+}

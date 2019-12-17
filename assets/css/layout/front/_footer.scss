@@ -1,6 +1,36 @@
 .footer {
+  align-items: center;
+  background-color: $color-black;
+  display: flex;
+  flex-direction: column;
+  margin-top: rem(96px);
+  padding: rem(32px) 0;
+
   &__lang-switcher {
     margin-right: rem(8px);
     text-decoration: none;
+  }
+
+  &__logo {
+    height: rem(50px);
+    margin-top: rem(16px);
+  }
+
+  &__message {
+    color: $color-white;
+    margin-top: rem(16px);
+  }
+
+  &__heart {
+    animation: pulse 1s infinite;
+    margin: 0 rem(2px);
+    opacity: 0.8;
+  }
+
+  @keyframes pulse {
+    10% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
   }
 }

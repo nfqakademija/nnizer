@@ -1,0 +1,52 @@
+<section class="benefits section-mt">
+	<div class="container">
+		<h2 class="benefits__title -home">
+			{{  "home.benefits_title"|trans|raw }}
+		</h2>
+		<div class="benefits__wrapper">
+      {{ include( 'home/partials/benefit.html.twig', {
+          emoji: asset('build/images/home/emoji/emoji-bag.png'),
+          img: asset('build/images/home/benefits/benefit-one-place.svg'),
+          alt: 'floating reservations window',
+          title: "home.benefit1_title"|trans,
+          text: "home.benefit1_text"|trans,
+          row_reverse: false,
+          col_reverse: true
+        })
+      }}
+
+      {{ include( 'home/partials/benefit.html.twig', {
+          emoji: asset('build/images/home/emoji/emoji-confetti.png'),
+          img: asset('build/images/home/benefits/benefit-simple-crm.svg'),
+          alt: 'man pouring confetti on the phone screeen',
+          title: "home.benefit2_title"|trans,
+          text: "home.benefit2_text"|trans,
+          row_reverse: true,
+          col_reverse: true
+        })
+      }}
+
+        {{ include( 'home/partials/benefit.html.twig', {
+          emoji: asset('build/images/home/emoji/emoji-blown.png'),
+          img: asset('build/images/home/benefits/benefit-design-process.png'),
+          alt: 'woman with multiple hands designing page',
+          title: "home.benefit3_title"|trans,
+          text: "home.benefit3_text"|trans,
+          row_reverse: false,
+          col_reverse: true
+        })
+      }}
+
+       {{ include( 'home/partials/benefit.html.twig', {
+            emoji: asset('build/images/home/emoji/emoji-flags.png'),
+            img: asset('build/images/home/benefits/benefit-miscommunication.svg'),
+            alt: 'two women speaking through cups',
+            title: "home.benefit4_title"|trans,
+            text: "home.benefit4_text"|trans,
+            row_reverse: true,
+            col_reverse: true
+          })
+        }}
+		</div>
+	</div>
+</section>

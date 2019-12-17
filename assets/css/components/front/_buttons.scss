@@ -44,6 +44,18 @@ button[disabled] {
     }
   }
 
+  &.-black {
+    background-color: $color-black;
+    border-radius: rem(2px);
+    color: white;
+
+    @include z-index(link);
+
+    &::after {
+      border-color: $color-black;
+    }
+  }
+
   &.-secondary {
     background: none;
 

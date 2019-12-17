@@ -29,7 +29,7 @@ $react-rater-active: $color-yellow !default; // color of star rated
   }
 
   &__score {
-    @extend .hero__title;
+    @extend .contractor-hero__title;
     @extend .flex-xy-center;
 
     color: $color-yellow;

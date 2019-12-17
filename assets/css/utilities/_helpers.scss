@@ -49,3 +49,16 @@
   display: flex;
   justify-content: center;
 }
+
+.section-mt {
+  margin-top: rem(96px);
+}
+
+.yellow-text {
+  color: $color-yellow;
+}
+
+.orange-nfq-text {
+  color: #ff6100;
+  font-weight: 600;
+}

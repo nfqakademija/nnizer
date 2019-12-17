@@ -10,6 +10,7 @@ parameters:
     cover_images: /uploads/cover
     site_name: 'NNIZER'
     admin_email: 'dominykasmurauskas1@gmail.com'
+    router.request_context.scheme: 'https'
 
 services:
     # default configuration for services in *this* file

@@ -1,0 +1,22 @@
+<div 
+	class="benefit row {{ row_reverse ? '-row-reverse' }}  {{  col_reverse ? '-col-reverse' }}"
+>
+	<div class="benefit__info col-12 col-md-6">
+		<img
+      src="{{ emoji }}"
+      alt=""
+      class="benefit__emoji"
+    />
+		<h3 class="benefit__title">
+			{{ title|raw }}
+		</h3>
+		<p class="benefit__text">
+			{{ text }}
+		</p>
+	</div>
+	<img
+    src="{{ img }}"
+    alt="{{ alt }}"
+    class="benefit__img col-12 col-md-6"
+  />
+</div>
