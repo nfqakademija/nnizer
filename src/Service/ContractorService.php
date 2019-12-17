@@ -4,7 +4,9 @@
 namespace App\Service;
 
 use App\Entity\Contractor;
+use App\Entity\Reservation;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 class ContractorService
 {
@@ -25,10 +27,11 @@ class ContractorService
     /**
      * @param Contractor $contractor
      * @return array|null
+     * @throws ExceptionInterface
      */
     public function generateContractorCalendarResponse(Contractor $contractor): ?array
     {
-        if ($contractor && $settings = $contractor->getSettings()) {
+        if ($contractor != null && $settings = $contractor->getSettings()) {
             $reservations = $contractor->getReservations();
             $contractorDetails = $this->json->getResponse($contractor, ['frontPage']);
             $contractorDetails['reviews'] = $this->hideReviewerPersonalDetails($contractorDetails['reviews']);
@@ -37,6 +40,7 @@ class ContractorService
             $workingDays = ['workingDays' => $this->getWorkingDaysArray($days['days'])];
             $takenTimes = ['takenDates' => $this->toDatesArray($reservations)];
             $result = $contractorDetails + $workingDays + $days + $settings + $takenTimes;
+
             return $result;
         } else {
             return null;
@@ -101,7 +105,7 @@ class ContractorService
     }
 
     /**
-     * @param Collection $reservations
+     * @param Collection<Reservation> $reservations
      * @return array
      */
     private function toDatesArray(Collection $reservations): array

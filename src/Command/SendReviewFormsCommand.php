@@ -4,6 +4,8 @@
 namespace App\Command;
 
 use App\Entity\Reservation;
+use App\Repository\ReservationRepository;
+use App\Repository\UserRepository;
 use App\Service\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -24,6 +26,12 @@ class SendReviewFormsCommand extends Command
      * @var MailerService
      */
     private $mailer;
+
+    /**
+     * @var ReservationRepository
+     */
+    private $reservationRepository;
+
     /**
      * @var RouterInterface
      */
@@ -33,13 +41,19 @@ class SendReviewFormsCommand extends Command
      * SendReviewFormsCommand constructor.
      * @param EntityManagerInterface $em
      * @param MailerService $mailer
+     * @param ReservationRepository $reservationRepository
      * @param RouterInterface $router
      */
-    public function __construct(EntityManagerInterface $em, MailerService $mailer, RouterInterface $router)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        MailerService $mailer,
+        ReservationRepository $reservationRepository,
+        RouterInterface $router
+    ) {
         parent::__construct();
         $this->em = $em;
         $this->mailer = $mailer;
+        $this->reservationRepository = $reservationRepository;
         $this->router = $router;
     }
 
@@ -52,11 +66,11 @@ class SendReviewFormsCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return int|void|null
      * @throws Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $reservations = $this->reservationRepository->findByInComplete(new \DateTime('now'));
         $context = $this->router->getContext();
         $context->setHost('nnizer.projektai.nfqakademija.lt');
 

@@ -45,7 +45,7 @@ class Contractor implements UserInterface
     private $roles = [];
 
     /**
-     * @var string
+     * @var string|null
      */
     private $plainPassword = null;
 

@@ -4,15 +4,16 @@ namespace App\Validator;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validation;
 
 class ReservationValidator
 {
 
     /**
-     * @var array
+     * @var ConstraintViolationListInterface
      */
-    protected $constraints = [];
+    protected $constraints;
 
     /**
      * @param Request $request
@@ -48,7 +49,6 @@ class ReservationValidator
                 new Assert\Email(['message' => 'email.invalid']),
                 new Assert\NotBlank(['message' => 'email.blank']),
             ],
-            'contractor' => new Assert\NotBlank(['message' => 'provider.empty']),
             'visitDate' => [
                 new Assert\NotBlank(['message' => 'date.unchosen']),
                 new Assert\Regex([

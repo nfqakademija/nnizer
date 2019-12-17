@@ -163,10 +163,10 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $contractor->setLastName($lastname);
             $contractor->setUsername($firstname . $i);
             $contractor->setEmail($firstname . '@' . $lastname . '.com');
-            $contractor->setPhoneNumber(random_int(860000000, 869999999));
+            $contractor->setPhoneNumber((string) random_int(860000000, 869999999));
             $contractor->setVerificationKey();
             $contractor->setAddress('Brastos g. 15, Kaunas');
-            $contractor->setIsVerified(random_int(0, 1));
+            $contractor->setIsVerified(true);
             $contractor->setDescription($description);
             $this->loadService($contractor, $manager);
             $service = $contractor->getServices()->getName();
@@ -243,8 +243,8 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $reservation->setFirstname($contractor->getUsername() . 'client' . $i);
             $reservation->setLastname('fixture');
             $reservation->setEmail($reservation->getFirstname() . '@' . $i . '.com');
-            $reservation->setIsVerified(random_int(0, 1));
-            $reservation->setPhoneNumber(random_int(860000000, 869999999));
+            $reservation->setIsVerified((boolean) random_int(0, 1));
+            $reservation->setPhoneNumber((string) random_int(860000000, 869999999));
             $reservation->setVerificationKey($reservation->generateActivationKey());
             $reservation->setContractor($contractor);
             $reservation->setVisitDate(

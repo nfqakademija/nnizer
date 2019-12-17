@@ -33,7 +33,6 @@ class ExceptionListener
 
     /**
      * @param ExceptionEvent $event
-     * @return string|Response
      */
     public function onKernelException(ExceptionEvent $event)
     {

@@ -33,7 +33,7 @@ class ProfilePhoto implements Serializable
     /**
      * @Vich\UploadableField(mapping="contractorsProfile", fileNameProperty="filename")
      *
-     * @var File
+     * @var File|string
      */
     private $profilePhoto;
 

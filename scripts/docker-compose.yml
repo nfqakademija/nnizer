@@ -11,7 +11,7 @@ services:
 
   php.symfony:
     container_name: php.symfony
-    image: nfqakademija/docker:php-latest
+    build: docker/php
     volumes:
       - ../:/code # Mount your code, so nginx/phpcould see it
 
