@@ -176,7 +176,13 @@ crm:
   date: Data
   name: Vardas
   email: El. paštas
+  address: Adresas
   phone: Tel. nr.
+  facebook: Facebook'as
+  service_title: Paslaugos pavadinimas
+  service_description: Paslaugos aprašymas
+  change_settings: Keisti nustatymus
+  no_facebook: Nėra pridėto facebook'o
   status: Būsena
   reservations: Rezervacijos
   search: Paieška

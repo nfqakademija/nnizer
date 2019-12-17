@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {getTranslation} from "../../../Utils/TranslationService";
 
 const Settings = (props) => {
   const {
@@ -16,7 +17,7 @@ const Settings = (props) => {
         { icon !== ''
           && <i className={`field__icon icon-${icon}`} /> }
         { output === null
-          ? 'Facebook is not added'
+          ? getTranslation('crm.no_facebook')
           : output }
       </div>
     </div>
