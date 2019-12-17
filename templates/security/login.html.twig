@@ -7,12 +7,6 @@
         <div class="container">
             <div class="login__window col-lg-5">
                 <form method="post" class="form">
-                    {% if error %}
-                        <div class="form__error">
-                            {{ error.messageKey|trans(error.messageData, 'security') }}
-                        </div>
-                    {% endif %}
-
                     {% if app.user %}
                         <div class="mb-3">
                             {{ "login_page.logged_in_as"|trans({'%user%': app.user.username}, "messages") }}, <a href="{{ path('app_logout') }}">{{ "login_page.logout"|trans }}</a>
@@ -21,6 +15,12 @@
 
                     <a href="{{ path('app_register') }}" class="login__register-link link -underline">{{ "login_page.not_registered"|trans }}</a>
                     <h1>{{ "login_page.login"|trans }}</h1>
+
+                    {% if error %}
+                        <div class="form__error" style="margin-bottom: 3%">
+                            {{ error.messageKey|trans(error.messageData, 'messages') }}
+                        </div>
+                    {% endif %}
 
                     <div class="form__field">
                         <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
@@ -32,7 +32,7 @@
                         <label for="inputPassword" class="sr-only">{{ "login_page.password"|trans }}</label>
                     </div>
 
-                    <a href="#" class="login__forgot-link link">{{ "login_page.forgot_pass"|trans }}</a>
+                    <a href="{{ path('app_lost-password-page') }}" class="login__forgot-link link">{{ "login_page.forgot_pass"|trans }}</a>
 
 
                     <input type="hidden" name="_csrf_token"

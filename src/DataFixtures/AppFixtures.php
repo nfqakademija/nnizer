@@ -8,9 +8,11 @@ use App\Entity\CoverPhoto;
 use App\Entity\ProfilePhoto;
 use App\Entity\Reservation;
 use App\Entity\Review;
+use App\Entity\ServiceType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Exception;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture implements FixtureGroupInterface
@@ -44,16 +46,6 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         'dark.png',
         'blue.jpg',
         'pink.png',
-    ];
-
-    /**
-     * @var array
-     */
-    private $coverPhotos = [
-        'cover1.jpg',
-        'dark.jpg',
-        'circles.png',
-        'leafs.png',
     ];
 
     /**
@@ -104,6 +96,17 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     /**
      * @var array
      */
+    private $services = [
+        'Massages',
+        'Hairdressing',
+        'Driver',
+        'Fitness',
+        'Teaching'
+    ];
+
+    /**
+     * @var array
+     */
     private $descriptions = [
         'Hey there! I\'m a professional that you certainly need. With experience of over 10 years in the industry' .
         ' I\'m proud to say that I am one of the best. Here\'s the best part - if you do not really like my ' . '
@@ -134,6 +137,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
 
     /**
      * @param ObjectManager $manager
+     * @throws Exception
      */
     public function load(ObjectManager $manager)
     {
@@ -145,147 +149,156 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     /**
      * @param ObjectManager $manager
      * @param UserPasswordEncoderInterface $encoder
+     * @throws Exception
      */
     private function loadContractors(ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
-        $services = ['Massages', 'Hairdressing', 'Driving services', 'Teaching'];
-
         for ($i = 1; $i < 51; $i++) {
-            try {
-                $firstname = $this->firstnames[random_int(0, 9)];
-                $lastname = $this->lastnames[random_int(0, 9)];
-                $serviceTitle = $services[random_int(0, 3)];
-                $description = $this->descriptions[random_int(0, 3)];
+            $firstname = $this->firstnames[random_int(0, 9)];
+            $lastname = $this->lastnames[random_int(0, 9)];
+            $description = $this->descriptions[random_int(0, 3)];
+            $contractor = new Contractor();
+            $contractor->setPassword($encoder->encodePassword($contractor, 'fixture'));
+            $contractor->setFirstname($firstname);
+            $contractor->setLastName($lastname);
+            $contractor->setUsername($firstname . $i);
+            $contractor->setEmail($firstname . '@' . $lastname . '.com');
+            $contractor->setPhoneNumber(random_int(860000000, 869999999));
+            $contractor->setVerificationKey();
+            $contractor->setAddress('Brastos g. 15, Kaunas');
+            $contractor->setIsVerified(random_int(0, 1));
+            $contractor->setDescription($description);
+            $this->loadService($contractor, $manager);
+            $service = $contractor->getServices()->getName();
+            $contractor->setTitle($service . $i . ' services');
+            $this->addCoverPhoto($contractor, $manager, strtolower($service) . '.jpg');
+            $this->addProfilePhoto($contractor, $manager);
+            $this->loadSettings($contractor, $manager);
+            $this->loadReservations($contractor, $manager);
+            $this->loadReviews($contractor, $manager);
 
-                $contractor = new Contractor();
-                $contractor->setPassword($encoder->encodePassword($contractor, 'fixture'));
-                $contractor->setFirstname($firstname);
-                $contractor->setLastName($lastname);
-                $contractor->setUsername($firstname . $i);
-                $contractor->setEmail($firstname . '@' . $lastname . '.com');
-                $contractor->setPhoneNumber(random_int(860000000, 869999999));
-                $contractor->setVerificationKey();
-                $contractor->setAddress('Brastos g. 15, Kaunas');
-                $contractor->setIsVerified(random_int(0, 1));
-                $contractor->setTitle($serviceTitle);
-                $contractor->setDescription($description);
-                $this->addCoverPhoto($contractor, $manager);
-                $this->addProfilePhoto($contractor, $manager);
-                $this->loadSettings($contractor, $manager);
-                $this->loadReservations($contractor, $manager);
-                $this->loadReviews($contractor, $manager);
-
-                $manager->persist($contractor);
-            } catch (\Exception $e) {
-            }
+            $manager->persist($contractor);
         }
     }
 
     /**
      * @param Contractor $contractor
      * @param ObjectManager $manager
+     * @param string $filename
      */
-    private function addCoverPhoto(Contractor $contractor, ObjectManager $manager)
+    private function addCoverPhoto(Contractor $contractor, ObjectManager $manager, string $filename)
     {
         $coverPhoto = new CoverPhoto();
-        try {
-            $coverPhoto->setContractor($contractor);
-            $coverPhoto->setFilename($this->coverPhotos[random_int(0, 3)]);
-            $manager->persist($coverPhoto);
-            $contractor->setCoverPhoto($coverPhoto);
-        } catch (\Exception $e) {
-        }
+        $coverPhoto->setContractor($contractor);
+        $coverPhoto->setFilename($filename);
+        $manager->persist($coverPhoto);
+        $contractor->setCoverPhoto($coverPhoto);
     }
 
     /**
      * @param Contractor $contractor
      * @param ObjectManager $manager
+     * @throws Exception
      */
     private function addProfilePhoto(Contractor $contractor, ObjectManager $manager)
     {
         $profilePhoto = new ProfilePhoto();
-        try {
-            $profilePhoto->setContractor($contractor);
-            $profilePhoto->setFilename($this->profilePhotos[random_int(0, 3)]);
-            $manager->persist($profilePhoto);
-            $contractor->setProfilePhoto($profilePhoto);
-        } catch (\Exception $e) {
-        }
+        $profilePhoto->setContractor($contractor);
+        $profilePhoto->setFilename($this->profilePhotos[random_int(0, 3)]);
+        $manager->persist($profilePhoto);
+        $contractor->setProfilePhoto($profilePhoto);
     }
 
 
     /**
      * @param Contractor $contractor
      * @param ObjectManager $manager
+     * @throws Exception
      */
     private function loadSettings(Contractor $contractor, ObjectManager $manager)
     {
         $settings = new ContractorSettings();
-        try {
-            $settings->setMonday($this->workingHours[random_int(0, 4)]);
-            $settings->setTuesday($this->workingHours[random_int(0, 4)]);
-            $settings->setWednesday($this->workingHours[random_int(0, 4)]);
-            $settings->setThursday($this->workingHours[random_int(0, 4)]);
-            $settings->setFriday($this->workingHours[random_int(0, 4)]);
-            $settings->setSaturday($this->workingHours[random_int(0, 4)]);
-            $settings->setSunday($this->workingHours[random_int(0, 4)]);
-            $settings->setVisitDuration($this->visitDurations[random_int(0, 3)]);
-            $settings->setContractor($contractor);
-            $manager->persist($settings);
-            $contractor->setSettings($settings);
-        } catch (\Exception $e) {
-        }
+        $settings->setMonday($this->workingHours[random_int(0, 4)]);
+        $settings->setTuesday($this->workingHours[random_int(0, 4)]);
+        $settings->setWednesday($this->workingHours[random_int(0, 4)]);
+        $settings->setThursday($this->workingHours[random_int(0, 4)]);
+        $settings->setFriday($this->workingHours[random_int(0, 4)]);
+        $settings->setSaturday($this->workingHours[random_int(0, 4)]);
+        $settings->setSunday($this->workingHours[random_int(0, 4)]);
+        $settings->setVisitDuration($this->visitDurations[random_int(0, 3)]);
+        $settings->setContractor($contractor);
+        $manager->persist($settings);
+        $contractor->setSettings($settings);
     }
 
     /**
      * @param Contractor $contractor
      * @param ObjectManager $manager
+     * @throws Exception
      */
     private function loadReservations(Contractor $contractor, ObjectManager $manager)
     {
         for ($i = 1; $i < 20; $i++) {
             $reservation = new Reservation();
-            try {
-                $reservation->setFirstname($contractor->getUsername() . 'client' . $i);
-                $reservation->setLastname('fixture');
-                $reservation->setEmail($reservation->getFirstname() . '@' . $i . '.com');
-                $reservation->setIsVerified(random_int(0, 1));
-                $reservation->setPhoneNumber(random_int(860000000, 869999999));
-                $reservation->setVerificationKey($reservation->generateActivationKey());
-                $reservation->setContractor($contractor);
-                $reservation->setVisitDate(
-                    (new \DateTime('now'))
-                        ->modify(
-                            '+'. $contractor->getSettings()->getVisitDuration() * $i . ' minutes'
-                        )
-                );
-                $reservation->setIsCompleted(true);
-                $manager->persist($reservation);
-                $contractor->addReservation($reservation);
-            } catch (\Exception $e) {
-            }
+            $reservation->setFirstname($contractor->getUsername() . 'client' . $i);
+            $reservation->setLastname('fixture');
+            $reservation->setEmail($reservation->getFirstname() . '@' . $i . '.com');
+            $reservation->setIsVerified(random_int(0, 1));
+            $reservation->setPhoneNumber(random_int(860000000, 869999999));
+            $reservation->setVerificationKey($reservation->generateActivationKey());
+            $reservation->setContractor($contractor);
+            $reservation->setVisitDate(
+                (new \DateTime('now'))
+                    ->modify(
+                        '+'. $contractor->getSettings()->getVisitDuration() * $i . ' minutes'
+                    )
+            );
+            $reservation->setIsCompleted(true);
+            $manager->persist($reservation);
+            $contractor->addReservation($reservation);
         }
     }
 
     /**
      * @param Contractor $contractor
      * @param ObjectManager $manager
+     * @throws Exception
      */
     private function loadReviews(Contractor $contractor, ObjectManager $manager)
     {
         $reservations = $contractor->getReservations();
         foreach ($reservations as $reservation) {
             $review = new Review();
-            try {
-                $review->setContractor($contractor);
-                $review->setDescription('The rating tells it all!');
-                $review->setReservation($reservation);
-                $review->setStars(random_int(1, 5));
-                $manager->persist($review);
-                $contractor->addReview($review);
-            } catch (\Exception $e) {
-            }
+            $review->setContractor($contractor);
+            $review->setDescription('The rating tells it all!');
+            $review->setReservation($reservation);
+            $review->setStars(random_int(1, 5));
+            $manager->persist($review);
+            $contractor->addReview($review);
         }
+    }
+
+    /**
+     * @param Contractor $contractor
+     * @param ObjectManager $manager
+     * @throws \Exception
+     */
+    private function loadService(Contractor $contractor, ObjectManager $manager)
+    {
+        $serviceName = $this->services[random_int(0, 4)];
+        $service = $manager->getRepository(ServiceType::class)->findOneBy(['name' => $serviceName]);
+        if ($service) {
+            $service->addContractor($contractor);
+            $manager->persist($service);
+            $contractor->setServices($service);
+        } else {
+            $service = new ServiceType();
+            $service->setName($serviceName);
+            $service->addContractor($contractor);
+            $manager->persist($service);
+            $contractor->setServices($service);
+        }
+        $manager->flush();
     }
 
     /**

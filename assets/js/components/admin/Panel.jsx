@@ -11,6 +11,7 @@ import Reviews from './reviews/Reviews';
 import Settings from './settings/Settings';
 
 import { showAlert } from '../../Utils/NotificationUtils';
+import getTranslation from "../../TranslationService";
 
 const Panel = () => {
   const [isNavOpen, toggleNav] = useState(false);
@@ -32,7 +33,7 @@ const Panel = () => {
     axios({
       method: 'get',
       baseURL,
-      url: `/api/profile/${username}/`,
+      url: `/api/profile/${username}`,
     })
       .then((response) => {
         setData({
@@ -41,7 +42,7 @@ const Panel = () => {
         });
       })
       .catch((error) => {
-        showAlert('Can\'t load profile data. Try again or contact us!', 'error', 4000); // TODO translation
+        showAlert(getTranslation('crm.error.profile'), 'error', 4000);
       });
 
     axios({
@@ -53,7 +54,7 @@ const Panel = () => {
         setReservations(response.data);
       })
       .catch((error) => {
-        showAlert('Can\'t load reservations. Try again or contact us!', 'error', 4000); // TODO translation
+        showAlert(getTranslation('crm.error.reservations'), 'error', 4000);
       });
   };
 
@@ -88,7 +89,7 @@ const Panel = () => {
               }
               name={
                 data.isFetched
-                  ? data.users.firstname != null
+                  ? data.users.firstname
                     ? `${data.users.firstname} ${data.users.lastname}`
                     : data.users.username
                   : ''

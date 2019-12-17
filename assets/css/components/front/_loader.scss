@@ -4,11 +4,11 @@
   left: 50%;
   margin-left: -40px;
   margin-top: -40px;
+  opacity: 1;
   position: absolute;
   top: 50%;
-  width: 80px;
-  opacity: 1;
   transform: translateY(0);
+  width: 80px;
 
   @include transition(opacity 0.2s, transform 0.2s);
 
@@ -16,6 +16,7 @@
     opacity: 0;
     transform: translateY(rem(-50px));
   }
+
   div {
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
     background: $color-yellow;

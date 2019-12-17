@@ -13,6 +13,7 @@ import { setHours, setMinutes } from 'date-fns/esm';
 import en from 'date-fns/locale/en-GB';
 
 import { showAlert } from './Utils/NotificationUtils';
+import getTranslation from "./TranslationService";
 
 registerLocale('en', en);
 setDefaultLocale(en);
@@ -109,7 +110,7 @@ const Datepicker = () => {
       setFetched(true);
     })
       .catch((error) => {
-        showAlert('Can\'t get available dates. Try again or contact us!', 'error', 4000); // TODO translation
+        showAlert(getTranslation('datepicker.error.dates'), 'error', 4000);
       });
   };
 

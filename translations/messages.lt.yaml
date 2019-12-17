@@ -3,15 +3,65 @@ contractor_page:
 
 home:
   header: NNIZER projektas
+  cta: Get started
+  hero_title: Rezervacijų valdymas lengviau
+  hero_text: The tool which will help you automate client’s management effortless way and most importantly - absolutely FREE! 
+  steps_title: How nnizer works?
+  steps_subtitle: Easy as 1-2-3
+  step1_title: 1. Sign up in 20 seconds
+  step1_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  step2_title: 2. Setup and verify profile
+  step2_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  step3_title: 3. Go get your moooney!
+  step3_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  benefits_title: Meet nnizer, tool that <br> you’ll fall in 💛 with.
+  benefit1_title: All your client’s reservation and data in <span class="yellow-text">one place</span>.
+  benefit1_text:  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  benefit2_title: CRM built to be as <span class="yellow-text">simple</span> and <span class="yellow-text">straightforward</span> as possible.  
+  benefit2_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  benefit3_title: Don’t spend any <span class"yellow-text">money</span> on website, we got <span class"yellow-text">you.</span>
+  benefit3_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  benefit4_title: Never miss a chance because of <span class"yellow-text">language</span> barrier.
+  benefit4_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  team_title: Team behind nnizer
+  dominykas_position: 
+  tadas_position:
+  migle_position:
+  kornelijus_position:
+  banner_title: 
+  banner_text:
+  footer_text1: Made with 
+  footer_text2: at <span class="orange">NFQ</span> academy
+
+lost_password:
+  title: Pamiršote slaptažodį?
+  description: Įveskite el. paštą, kuriuo registravotes sistemoje. Mes jums išsiųsime slaptažodžio atstatymo nuorodą.
+  email: El. paštas
+  submit: Pateikti
+  nonexisting: Vartotojas, registruotas šiuo paštu, neegzistuoja.
+  invalid:
+    email: Įvestas neteisingas el. pašto adresas
+  blank:
+    email: Įveskite savo el. paštą
+  sent: Slaptažodžio atstatymo instrukcija buvo išsiųsta el. paštu.
+  existing: Slaptažodžio atstatymo funkcija šiai paskyrai jau iškviesta. Jeigu laiško negavote, pabandykite iš naujo po 60 min.
+
+reset_password:
+  title: Slaptažodžio atstatymas
+  description: Įveskite naują slaptažodį į abu laukelius
+  password: Slaptažodis
+  submit: Pateikti
+  mismatch: Slaptažodžiai privalo sutapti ir jie negali būti tušti!
 
 navigation:
   login: Prisijungti
   signup: Užsiregistruoti
   logout: Atsijungti
+  reservations: Mano rezervacijos
 
 login_page:
   login: Prisijungimas
-  login_admin: Administratoriaus prisijungimas
+  login_admin: Admin skydelis
   email: El. paštas
   logged_in_as: Jūs šiuo metu esate prisijungęs kaip %user%
   logout: Atsijungti
@@ -20,6 +70,9 @@ login_page:
   signin: Prisijungti
   forgot_pass: Pamiršote slaptažodį?
   not_registered: Dar neturite paskyros? Užsiregistruokite!
+  notfound: Vartotojo vardas nerastas.
+  unverified: Jūsų paskyra dar nepatvirtinta. Norėdami patvirtinti, patikrinkite savo el. paštą ir paspauskite patvirtinimo nuorodą.
+  register-success: Jūsų registracija sėkminga. Prieš prisijungdami, patikrinkite savo el. paštą ir aktyvuokite savo paskyrą.
 
 registration_form:
   already-registered: Jau užsiregistravote? Prisijunkite!
@@ -49,6 +102,7 @@ email:
     verified: Sėkmingai patvirtinote savo rezervaciją!
     cancelled: Jūsų rezervacija buvo atšaukta
     review: Kaip praėjo jūsų vizitas?
+    lostpassword: Slaptažodžio atstatymas
   signup:
     verify-email: Patvirtinti e. paštą
     text: Džiaugemės, kad prisijungėte prie NNIZER komandos! Tikimės, kad mėgausitės naudodamiesi šia platforma. Norėdami pradėti savo veiklą, patvirtinkite paštą paspaudę mygtuką žemiau.
@@ -62,6 +116,8 @@ email:
   details:
     provider: Paslaugos teikėjas - %provider%
     date: Rezervacijos data - %date%
+  lostpassword:
+    text: Mes gavome jūsų paskyros slaptažodžio atstatymo užklausą. Jeigu tai buvote ne jūs, šį laišką galite ignoruoti. Jei iš tikrųjų norite atstatyti slaptažodį, spauskite nuorodą žemiau.
   privacy: Privatumo politika
   unsubscribe: Neprenumeruoti
   copyright: NNIZER Inc., visos teisės saugomos.
@@ -72,6 +128,7 @@ email:
     verify: Patvirtinti rezervaciją
     cancel: Atšaukti rezervaciją
     home: NNIZER
+    reset: ATSTATYTI
 
 settings_form:
   choosedays: Pasirinkite dienas, kuriomis dirbate
@@ -93,6 +150,7 @@ detailsForm:
   service:
     title: Paslaugos pavadinimas
     placeholder: Asmeninis vairuotojas
+    type: Paslaugų sritis
   description:
     title: Paslaugos aprašymas
     placeholder: Išbandyk mano paslaugas ir nepasigailėk!
@@ -111,14 +169,11 @@ detailsForm:
 locales:
   lt: Lietuvių k.
   en: Anglų k.
-
 crm:
   date: Data
   name: Vardas
   email: El. paštas
   phone: Tel. nr.
-  missing:
-    phone: nenurodyta
   status: Būsena
   reservations: Rezervacijos
   search: Paieška
@@ -130,6 +185,40 @@ crm:
   unconfirmed: Nepatvirtinta
   done: Įvykdyta
   actions: Veiksmai
+  removal:
+    progress: Pašalinimas vykdomas
+    success: Pašalinimas sėkmingas
+    error: Pašalinti nepavyko. Bandykite dar kartą.
+    approval: Ar tikrai norite VISAM LAIKUI pašalinti rezervaciją?
+  delete: Pašalinti
+  cancellation:
+    progress: Atšaukimas vykdoma
+    success: Atšaukimas sėkmingas
+    error: Atšaukti nepavyko. Bandykite dar kartą.
+    approval: Ar tikrai norite ATŠAUKTI rezervaciją?
+  cancel: Atšaukti
+  approval:
+    progress: Patvirtinimas vykdomas
+    success: Patvirtinimas sėkmingas
+    error: Patvirtinti nepavyko. Bandykite dar kartą.
+  approve: Patvirtinti
+  no_reservations: Kol kas neturite jokių!
+  no_reservations_matching: Nėra rezervacijų tenkinančių jūsų pasirinktus kriterijus.
+  reset_filters: Nuimti filtrus
+  error:
+    profile: Nepasiekiami profilio duomenys. Bandykite dar kartą arba susisiekite su mumis!
+    reservations: Nepasiekiamos rezervacijos. Bandykite dar kartą arba susisiekite su mumis!
+  time_left: Likęs laikas
+  time:
+    expired: Pasibaigė
+    hour: valanda
+    hours: valandos
+    day: diena
+    days: dienos
+    today: Šiandien
+    today_is: Šiandien yra
+    this_week: Ši savaitė
+
 
 contractor:
   title: paslaugos
@@ -143,6 +232,7 @@ contractor:
   facebook: Facebook
   phone: Telefono numeris
   reviews:
+    no_reviews: Kol kas neturite jokių atsiliepimų.
     singular: atsiliepimas
     plural1: atsiliepimų
     plural2: atsiliepimai
@@ -164,3 +254,30 @@ contractor:
     Saturday: Šeštadienis
     Sunday: Sekmadienis
   book: Užsirezervuoti
+  booking:
+    success: Rezervacija sėkmiga!
+    send: Siunčiamos rezervacijos detalės
+  error:
+    provider: Nepasiekiama tiekėjo informacija. Bandykite dar kartą arba susisiekite su mumis!
+    failed: Rezervacija nepavyko
+    chosen: Pasirinktas laikas negalimas! Pasirinkite kitą datą
+    error: Kažkas įvyko negerai. Bandykite dar kartą
+datepicker:
+  error:
+    dates: Nėra prieinamų datų. Bandykite dar kartą arba susisiekite su mumis!
+
+Massages: Masažai
+Teaching: Privatus mokymas
+Fitness: Fitnesas
+Driver: Asmeninio vairuotojo paslaugos
+Hairdressing: Kirpimo paslaugos
+
+errors:
+  notfound:
+    title: Puslapis nerastas
+    description: Puslapis, kurį bandėte atidaryti, nerastas. Patikrinkite, ar teisinga nuoroda, arba
+    link: grįžkite į pagrindinį
+  internal:
+    title: Nenumatyta klaida
+    description: Atsiprašome, kažkas nutiko ne taip. Mes apie tai jau informuoti ir klaidą sutvarkysime kaip galėdami greičiau.
+    link: Grįžti į pagrindinį

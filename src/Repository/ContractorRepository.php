@@ -16,6 +16,11 @@ use Doctrine\ORM\ORMException;
  */
 class ContractorRepository extends ServiceEntityRepository
 {
+
+    /**
+     * ContractorRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Contractor::class);
@@ -37,14 +42,12 @@ class ContractorRepository extends ServiceEntityRepository
 
     /**
      * @param Contractor $contractor
+     * @throws ORMException
      */
     public function save(Contractor $contractor): void
     {
-        try {
-            $this->_em->persist($contractor);
-            $this->_em->flush();
-        } catch (ORMException $e) {
-        }
+        $this->_em->persist($contractor);
+        $this->_em->flush();
     }
 
     // /**

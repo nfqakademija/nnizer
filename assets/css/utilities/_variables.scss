@@ -1,6 +1,3 @@
-$base-line-height: 1.45;
-$base-font-size: 16px;
-
 // Responsive breakpoints
 $breakpoint-xl: 1200px;
 $breakpoint-lg: 992px;
@@ -17,9 +14,10 @@ $container-xl: 1140px;
 $z-index: (
   above: 100,
   modal: 50,
-  overlay: 20,
+  sidenav: 20,
   dropdown: 10,
-  sidenav: 5,
-  link: 1,
+  overlay: 5,
+  link: 2,
+  header: 1,
   below: -1
 );

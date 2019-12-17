@@ -1,0 +1,57 @@
+.team {
+  &__title {
+    position: relative;
+    text-align: center;
+
+    h2 {
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+    }
+  }
+
+  .member {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: rem(24px);
+    text-align: center;
+
+    &:last-child {
+      img {
+        transform: translateX(#{rem(32px)});
+
+        @include breakpoint(lg) {
+          margin-top: rem(-35px);
+        }
+      }
+    }
+
+    &:nth-child(3) {
+      margin-top: rem(24px);
+
+      @include breakpoint(md) {
+        margin-top: rem(59px);
+      }
+
+      @include breakpoint(lg) {
+        margin-top: rem(24px);
+      }
+    }
+
+    &__name {
+      font-size: rem(20px);
+      margin-top: rem(32px);
+      white-space: nowrap;
+    }
+
+    &__position {
+      color: $color-grey-1;
+      font-size: rem(14px);
+      letter-spacing: rem(2px);
+    }
+  }
+}

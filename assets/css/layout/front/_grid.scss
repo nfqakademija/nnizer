@@ -8,9 +8,9 @@
     max-width: none;
   }
 
-  &--top-spacing {
-    margin-bottom: rem(112px);
-    margin-top: rem(112px);
+  &.-top-spacing {
+    padding-bottom: rem(112px);
+    padding-top: rem(112px);
   }
 
   .row {

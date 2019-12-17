@@ -13,6 +13,7 @@ const ReservationRow = (props) => {
 
   const [isCancelDisabled, setCancel] = useState(false);
   const [isApprovalDisabled, setApproval] = useState(false);
+  const [isDeletionDisabled, setDeletion] = useState(false);
 
   const {
     id,
@@ -51,34 +52,48 @@ const ReservationRow = (props) => {
   };
 
   const buttonClicked = (msg, setBtn) => {
-    showAlert(msg, '', 20000);
+    showAlert(msg, '', 10000);
     editToggle(!editOpen);
     setBtn(true);
   };
 
+  const deleteReservation = () => {
+    // @Route("/api/contractor/{contractorKey}/delete/{reservationId}", methods="DELETE")
+    buttonClicked(`${getTranslation('crm.removal.progress')} 🗑`, setDeletion);
+    axios
+      .delete(`/api/contractor/${userKey}/delete/${id}`)
+      .then((response) => {
+        fetchData();
+        updateAlert(`${getTranslation('crm.removal.success')} ✅`, 'success', 4000);
+      })
+      .catch((error) => {
+        updateAlert(getTranslation('crm.removal.error'), 'error', 4000);
+      });
+  };
+
   const cancelReservation = () => {
-    buttonClicked('Cancellation in progress 👨🏼‍💻', setCancel);
+    buttonClicked(`${getTranslation('crm.cancellation.progress')} 👨🏼‍💻`, setCancel);
     axios
       .patch(`/api/contractor/${userKey}/cancel/${id}`)
       .then((response) => {
         fetchData();
-        updateAlert('Cancellation was successful ✅', 'success', 4000); // TODO translation
+        updateAlert(`${getTranslation('crm.cancellation.success')} ✅`, 'success', 4000);
       })
       .catch((error) => {
-        updateAlert('Cancellation failed. Please try again.', 'error', 4000); // TODO translation
+        updateAlert(getTranslation('crm.cancellation.error'), 'error', 4000);
       });
   };
 
   const approveReservation = () => {
-    buttonClicked('Approval in progress 👨🏼‍💻', setApproval);
+    buttonClicked(`${getTranslation('crm.approval.progress')} 👨🏼‍💻`, setApproval);
     axios
       .patch(`/api/contractor/${userKey}/verify/${id}`)
       .then((response) => {
         fetchData();
-        updateAlert('Approval was successful ✅', 'success', 4000); // TODO translation
+        updateAlert(`${getTranslation('crm.approval.success')} ✅`, 'success', 4000);
       })
       .catch((error) => {
-        updateAlert('Approval failed. Please try again.', 'error', 4000); // TODO translation
+        updateAlert(getTranslation('crm.approval.error'), 'error', 4000);
       });
   };
 
@@ -87,13 +102,13 @@ const ReservationRow = (props) => {
     const currentDate = new Date();
 
     if (isExpired || isCancelled) {
-      timeLeft = 'Expired'; // TODO: translations
+      timeLeft = getTranslation('crm.time.expired');
     } else if (isSameDay(reservationDate, currentDate)) {
       const diffInHours = differenceInHours(reservationDate, currentDate);
-      timeLeft = diffInHours + (diffInHours === 1 ? ' hour' : ' hours'); // TODO: translations
+      timeLeft = diffInHours + ' ' +(diffInHours === 1 ? getTranslation('crm.time.hour') : getTranslation('crm.time.hours'));
     } else {
       const diffInDays = differenceInDays(reservationDate, currentDate);
-      timeLeft = diffInDays + (diffInDays === 1 ? ' day' : ' days'); // TODO: translations
+      timeLeft = diffInDays + ' '+(diffInDays === 1 ? getTranslation('crm.time.day') : getTranslation('crm.time.days'));
     }
     return timeLeft;
   };
@@ -112,7 +127,7 @@ const ReservationRow = (props) => {
   const formatDate = () => {
     const day = parseISO(date);
     if (isSameDay(new Date(), day)) {
-      return `Today, ${format(day, 'HH:mm')}`; // TODO translation
+      return `${getTranslation('crm.time.today')}, ${format(day, 'HH:mm')}`;
     }
     return format(day, 'yyyy-MM-dd, HH:mm');
   };
@@ -130,7 +145,8 @@ const ReservationRow = (props) => {
         className={`reservations__btn -mobile js-edit ${editOpen && '-open'}`}
         onClick={() => editToggle(!editOpen)}
       >
-        <i className={`btn__icon icon-${editOpen ? 'cross' : 'edit'}`} />
+        <i className="icon-edit btn__icon" />
+        { !isVerified && !isExpired && !isCancelled && <div className="circle -pending">1</div> }
       </button>
       <div className="row">
         <div className="reservations__item col-lg-1">{formatDate()}</div>
@@ -156,6 +172,7 @@ const ReservationRow = (props) => {
             onClick={() => editToggle(!editOpen)}
           >
             <i className={`btn__icon icon-${editOpen ? 'cross' : 'edit'}`} />
+            { !isVerified && !isExpired && !isCancelled && <div className="circle -pending">1</div> }
           </button>
         </div>
       </div>
@@ -165,28 +182,38 @@ const ReservationRow = (props) => {
             editOpen ? '-open' : ''
           }`}
         >
-          <span className="edit__heading">Time left</span>
+          <span className="edit__heading">{getTranslation('crm.time_left')}</span>
           <span className="edit__time-left">{getLeftTime(parseISO(date))}</span>
           <div className="edit__actions">
+            <button
+              type="button"
+              className="edit__action panel-btn -delete"
+              // eslint-disable-next-line no-alert
+              onClick={(e) => window.confirm(getTranslation('crm.removal.approval')) && deleteReservation()}
+              disabled={isDeletionDisabled}
+            >
+              {getTranslation('crm.delete')}
+            </button>
+            
             {!isCancelled && !isExpired && (
               <button
                 type="button"
-                className="panel-btn -cancel"
+                className="edit__action panel-btn -cancel"
                 // eslint-disable-next-line no-alert
-                onClick={(e) => window.confirm('Are you sure to cancel this reservation?') && cancelReservation()}
+                onClick={(e) => window.confirm(getTranslation('crm.cancellation.approval')) && cancelReservation()}
                 disabled={isCancelDisabled}
               >
-                Cancel
+                {getTranslation('crm.cancel')}
               </button>
             )}
             {!isVerified && !isExpired && !isCancelled && (
               <button
                 type="button"
-                className="panel-btn -success"
+                className="edit__action panel-btn -success"
                 onClick={approveReservation}
                 disabled={isApprovalDisabled}
               >
-                Approve
+                {getTranslation('crm.approve')}
               </button>
             )}
           </div>

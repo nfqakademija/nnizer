@@ -9,6 +9,8 @@ parameters:
     profile_images: /uploads/profile
     cover_images: /uploads/cover
     site_name: 'NNIZER'
+    admin_email: 'dominykasmurauskas1@gmail.com'
+    router.request_context.scheme: 'https'
 
 services:
     # default configuration for services in *this* file
@@ -33,3 +35,8 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+        arguments:
+            - '%kernel.environment%'

@@ -39,6 +39,7 @@ class PromoteUserCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

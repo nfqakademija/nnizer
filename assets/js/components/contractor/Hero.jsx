@@ -15,10 +15,16 @@ const Hero = (props) => {
   const url = `${window.location.protocol}//${window.location.host}`;
 
   const heroImage = {
-    background: `
-      linear-gradient(180deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%),
-      url('${url}/uploads/cover/${coverPath}')
-    `,
+    background:
+      coverPath !== null
+        ?
+          `
+        linear-gradient(180deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%),
+        url('${url}/uploads/cover/${coverPath}')
+          `
+        :
+        'none'
+    ,
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -28,14 +34,14 @@ const Hero = (props) => {
 
   return (
     <section
-      className="hero"
+      className="contracot-rhero"
       style={heroImage}
     >
       <div className="container">
-        <div className="hero__left col-12 col-md-8">
-          <h1 className="hero__title">{title}</h1>
+        <div className="contractor-hero__left col-12 col-md-8">
+          <h1 className="contractor-hero__title">{title}</h1>
           {address !== null && (
-            <address className="hero__address">
+            <address className="contractor-hero__address">
               <i className="icon-location" />
               <a className="link -hover-underline -dark" href={`https://maps.google.com/?q=${address}`}>
                 {address}
@@ -43,7 +49,7 @@ const Hero = (props) => {
             </address>
           )}
         </div>
-        <div className="hero__right col-12 col-md-4">
+        <div className="contractor-hero__right col-12 col-md-4">
           <Stars reviews={reviews} />
           <BookBtn />
         </div>

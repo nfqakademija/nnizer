@@ -17,6 +17,11 @@ use Doctrine\ORM\ORMException;
  */
 class ReviewRepository extends ServiceEntityRepository
 {
+
+    /**
+     * ReviewRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Review::class);
@@ -38,14 +43,12 @@ class ReviewRepository extends ServiceEntityRepository
 
     /**
      * @param Review $review
+     * @throws ORMException
      */
     public function save(Review $review): void
     {
-        try {
-            $this->_em->persist($review);
-            $this->_em->flush();
-        } catch (ORMException $e) {
-        }
+        $this->_em->persist($review);
+        $this->_em->flush();
     }
 
     // /**

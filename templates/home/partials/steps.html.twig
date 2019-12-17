@@ -1,0 +1,38 @@
+<section class="steps section-mt">
+  <div class="container">
+    <span class="steps__subtitle -subtitle">
+      {{ "home.steps_subtitle"|trans }}
+    </span>
+    <h2 class="steps__title -home -underline">
+      {{ "home.steps_title"|trans }}
+    </h2>
+    <div class="steps__wrapper">
+      <div class="row">
+        {{ include( 'home/partials/step.html.twig', {
+              img: asset('build/images/home/steps/icon-signup.svg'),
+              alt: 'two connected puzzle details',
+              title: "home.step1_title"|trans,
+              text: "home.step1_text"|trans,
+            })
+        }}
+
+        {{ include( 'home/partials/step.html.twig', {
+              img: asset('build/images/home/steps/icon-setup.svg'),
+              alt: 'floating closed envelop',
+              title: "home.step2_title"|trans,
+              text: "home.step2_text"|trans,
+            })
+        }}
+
+
+        {{ include( 'home/partials/step.html.twig', {
+              img: asset('build/images/home/steps/icon-coins.svg'),
+              alt: 'few coins laying on the ground',
+              title: "home.step3_title"|trans,
+              text: "home.step3_text"|trans,
+            })
+        }}
+      </div>
+    </div>
+  </div>  
+</section>
