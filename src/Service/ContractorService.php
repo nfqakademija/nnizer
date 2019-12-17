@@ -105,10 +105,10 @@ class ContractorService
     }
 
     /**
-     * @param Reservation[] $reservations
+     * @param Collection<Reservation> $reservations
      * @return array
      */
-    private function toDatesArray(array $reservations): array
+    private function toDatesArray(Collection $reservations): array
     {
         $dates = [];
         foreach ($reservations as $reservation) {

@@ -36,8 +36,5 @@ RUN useradd -c 'PHP user' -m -d /home/php -s /bin/bash php
 USER php
 ENV HOME /home/php
 
-# xDebug configuration
-ENV PHP_IDE_CONFIG serverName=nfqKickStartDocker
-
 WORKDIR /code
 VOLUME /code
