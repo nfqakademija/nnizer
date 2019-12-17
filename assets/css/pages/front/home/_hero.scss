@@ -1,16 +1,14 @@
 .hero {
   background-color: $color-yellow;
-  min-height: rem(640px);
+  font-size: rem(36px);
   position: relative;
   text-align: center;
-  font-size: rem(36px);
 
   @include breakpoint(md) {
     font-size: rem(60px);
   }
 
   @include breakpoint(xl) {
-    min-height: 60vh;
   }
 
   .container {
@@ -34,35 +32,35 @@
     }
   }
 
-  &__wave {
-    display: block;
-    bottom: 0;
-    left: 0;
-    position: absolute;
+  &__cta {
+    margin-top: rem(36px);
+  
+    @extend .header__link;
+    @extend .header__link.-primary;
   }
 }
 
 .demo {
-  margin-top: -40%;
+  position: relative;
 
-  @include breakpoint(sm) {
-    margin-top: -30%;
+  &__wave {
+    display: block;
+    left: 0;
+    position: absolute;
+    top: 0;
   }
-
-  @include breakpoint(md) {
-    margin-top: -35%;
-  }
-
-  @include breakpoint(xl) {
-    margin-top: -30%;
-  }
-
-  @include breakpoint(1700px) {
-    margin-top: -20%;
-  }
-
 
   &__img {
+    margin-top: rem(-80px);
+
+    @include breakpoint(md) {
+      margin-top: rem(-160px);
+    }
+
+    @include breakpoint(lg) {
+      margin-top: rem(-200px);
+    }
+
     &.-desktop {
       display: none;
 

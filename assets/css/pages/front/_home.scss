@@ -1,3 +1,9 @@
+@import './home/hero';
+@import './home/steps';
+@import './home/benefits';
+@import './home/team';
+@import './home/banner';
+
 .home {
   background-color: $color-grey-4;
 }

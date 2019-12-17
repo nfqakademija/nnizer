@@ -1,0 +1,75 @@
+.banner {
+  background-color: $color-yellow;
+  margin-bottom: rem(-96px);
+  margin-top: rem(96px);
+  min-height: rem(400px);
+  position: relative;
+
+  .container {
+    align-items: flex-end;
+  }
+
+  &__cta {
+    @extend .hero__cta;
+    
+    @include z-index(above);
+  }
+
+  &__image {
+    display: none;
+    height: 100%;
+
+    @include breakpoint(xl) {
+      display: block;
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+  }
+
+  &__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: rem(48px) 0;
+
+    @include breakpoint(xl) {
+      align-items: flex-end;
+    }
+
+    @include breakpoint(1940px) {
+      align-items: center;
+    }
+  }
+
+  &__info {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    @include breakpoint(xl) {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    @include breakpoint(1940px) {
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  &__title {
+    margin-bottom: rem(24px);
+  }
+
+  &__emoji {
+    margin-bottom: rem(12px);
+  }
+
+  &__text {
+    max-width: 70ch;
+  }
+}

@@ -4,7 +4,10 @@
 
 {% block body %}
     <main class="home">
-        {% include 'home/partials/hero.html.twig' %}
-        
+        {% include('home/partials/hero.html.twig') %}
+        {% include('home/partials/steps.html.twig') %}
+        {% include('home/partials/benefits.html.twig') %}
+        {% include('home/partials/team.html.twig') %}
+        {% include('home/partials/banner.html.twig') %}
     </main>
 {% endblock %}

@@ -11,27 +11,42 @@
     </head>
     <body>
         <header class="header">
-            <div class="container">
+            <n class="container">
                 <div class="header__left">
-                    <a href="{{ path('home') }}"><img src="{{ asset('build/images/nnizer-logo.svg') }}" alt="nnizer type logotype" class="header__logo"></a>
+                    <a href="{{ path('home') }}">
+                        <img src="{{ asset('build/images/nnizer-logo.svg') }}" alt="nnizer type logotype" class="header__logo">
+                    </a>
                 </div>
                 <div class="header__right">
+                    <ul class="header__nav">
                     {% if is_granted('ROLE_CONTRACTOR') %}
-                        <a class="btn -header" href="{{ path('app_logout') }}">{{ "navigation.logout"|trans }}</a>
+                        <a class="header__link" href="{{ path('app_logout') }}">{{ "navigation.logout"|trans }}</a>
                     {% else %}
-                        {% if app.request.pathinfo != "/register" %}
-                            <a href="{{ path('app_register') }}" class="btn -header">{{ "navigation.signup"|trans }}</a>
-                        {% endif %}    
                         {% if app.request.pathinfo != "/login" %}
-                            <a href="{{ path('app_login') }}" class="btn -secondary -header">{{ "navigation.login"|trans }}</a>
+                            <a
+                                href="{{ path('app_login') }}"
+                                class="header__link"
+                            >
+                            {{ "navigation.login"|trans }}
+                            </a>
                         {% endif %}
+                        {% if app.request.pathinfo != "/register" %}
+                            <a 
+                                href="{{ path('app_register') }}"
+                                class="header__link -primary"
+                            >
+                            {{ "navigation.signup"|trans }}
+                            </a>
+                        {% endif %}    
                     {% endif %}
+                    </ul>
                 </div>
             </div>
         </header>
         {% block body %}{% endblock %}
-         <footer style="position: fixed; bottom: 10%; left: 20px; width: 100%; font-size: 20px">
-            <div class="container">
+
+        <footer class="footer">
+            <div class="footer__languages">
                 <a class="footer__lang-switcher" href="{{ path('language', {lang: 'lt'}) }}">
                     <img src="{{ asset('build/images/LT-flag.svg')}}" alt="Lithuanian flag">
                 </a>
@@ -39,7 +54,20 @@
                     <img src="{{ asset('build/images/EN-flag.svg')}}" alt="Great Britain flag">
                 </a>
             </div>
+
+            <img
+                src="{{ asset('build/images/nnizer-logo-light.svg') }}"
+                alt="nnizer light logo"
+                class="footer__logo"
+            >
+
+            <p class="footer__message">
+                {{ "home.footer_text1"|trans }}
+                <img class="footer__heart" src="{{ asset('build/images/heart.svg') }}" alt="orange heart icon">
+                {{ "home.footer_text2"|trans|raw }}
+            </p>
         </footer>
+
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
