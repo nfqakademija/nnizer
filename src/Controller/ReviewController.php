@@ -6,6 +6,7 @@ use App\Entity\Contractor;
 use App\Entity\Reservation;
 use App\Entity\Review;
 use App\Repository\ContractorRepository;
+use App\Repository\ReservationRepository;
 use App\Repository\ReviewRepository;
 use App\Service\SerializerService;
 use Doctrine\ORM\NonUniqueResultException;
@@ -77,15 +78,18 @@ class ReviewController extends AbstractController
      * @param Request $request
      * @param string $key
      * @param ReviewRepository $reviewRepository
+     * @param ReservationRepository $reservationRepository
      * @return Response
      * @throws NonUniqueResultException
      * @throws ORMException
-     * @throws \Exception
      */
-    public function addDescription(Request $request, string $key, ReviewRepository $reviewRepository): Response
-    {
+    public function addDescription(Request $request,
+        string $key,
+        ReviewRepository $reviewRepository,
+        ReservationRepository $reservationRepository
+    ): Response {
         $description = $request->get('description');
-        $reservation = $this->getReservationByKey($key);
+        $reservation = $reservationRepository->findOneBy(['verificationKey' => $key, 'isVerified' => 1]);
         if ($description === null || $reservation === null) {
             return $this->redirectToRoute('home');
         }
@@ -112,17 +116,5 @@ class ReviewController extends AbstractController
             ->findOneBy(['reservation' => $reservation]);
 
         return $review !== null;
-    }
-
-    /**
-     * @param string $key
-     * @return Reservation|null
-     * @throws \Exception
-     */
-    private function getReservationByKey(string $key): ?Reservation
-    {
-        return $this->getDoctrine()
-            ->getRepository(Reservation::class)
-            ->findOneBy(['verificationKey' => $key]);
     }
 }
