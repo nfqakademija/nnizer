@@ -26,8 +26,12 @@
                 <div class="header__right">
                     <ul class="header__nav">
                     {% if is_granted('ROLE_CONTRACTOR') %}
+<<<<<<< HEAD
                         <a class="header__link" href="{{ path('contractor') }}">{{ "navigation.reservations"|trans }}</a>
                         <a class="header__link -primary" href="{{ path('app_logout') }}">{{ "navigation.logout"|trans }}</a>
+=======
+                        <a class="header__link" href="{{ path('app_logout') }}">{{ "navigation.logout"|trans }}</a>
+>>>>>>> 6eac0f549f3f118d1803db5b9e85c74d3bd7adbd
                     {% else %}
                         {% if app.request.pathinfo != "/login" %}
                             <a
