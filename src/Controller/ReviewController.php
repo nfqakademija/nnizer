@@ -73,7 +73,7 @@ class ReviewController extends AbstractController
     }
 
     /**
-     * @Route("/api/reservation/{key}/review", name="review_description", methods="POST", schemes={"https"})
+     * @Route("/api/reservation/{key}/review", name="review_description", methods="POST")
      * @param Request $request
      * @param string $key
      * @param ReviewRepository $reviewRepository
