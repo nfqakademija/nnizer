@@ -94,7 +94,7 @@ class ContractorController extends AbstractController
         if ($settingsForm->isSubmitted() && $settingsForm->isValid()) {
             $settings->setContractor($contractor);
             $this->getDoctrine()->getRepository(ContractorSettings::class)->save($settings);
-            $this->addFlash('notice', 'settings.submitted');
+            $this->addFlash('notice', 'settings_form.submitted');
 
             return $this->redirectToRoute('contractor_settings');
         }
