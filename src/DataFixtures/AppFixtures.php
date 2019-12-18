@@ -44,7 +44,6 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     private $profilePhotos = [
         'twitter.jpg',
         'dark.png',
-        'blue.jpg',
         'pink.png',
     ];
 
@@ -163,7 +162,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $contractor->setLastName($lastname);
             $contractor->setUsername($firstname . $i);
             $contractor->setEmail($firstname . '@' . $lastname . '.com');
-            $contractor->setPhoneNumber((string) random_int(860000000, 869999999));
+            $contractor->setPhoneNumber((string)random_int(860000000, 869999999));
             $contractor->setVerificationKey();
             $contractor->setAddress('Brastos g. 15, Kaunas');
             $contractor->setIsVerified(true);
@@ -171,7 +170,8 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $this->loadService($contractor, $manager);
             $service = $contractor->getServices()->getName();
             $contractor->setTitle($service . $i . ' services');
-            $this->addCoverPhoto($contractor, $manager, strtolower($service) . '.jpg');
+            $id = random_int(1, 10);
+            $this->addCoverPhoto($contractor, $manager, strtolower($service) . '-' . $id . '.jpg');
             $this->addProfilePhoto($contractor, $manager);
             $this->loadSettings($contractor, $manager);
             $this->loadReservations($contractor, $manager);
@@ -204,7 +204,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     {
         $profilePhoto = new ProfilePhoto();
         $profilePhoto->setContractor($contractor);
-        $profilePhoto->setFilename($this->profilePhotos[random_int(0, 3)]);
+        $profilePhoto->setFilename($this->profilePhotos[random_int(0, 2)]);
         $manager->persist($profilePhoto);
         $contractor->setProfilePhoto($profilePhoto);
     }
@@ -243,15 +243,15 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $reservation->setFirstname($contractor->getUsername() . 'client' . $i);
             $reservation->setLastname('fixture');
             $reservation->setEmail($reservation->getFirstname() . '@' . $i . '.com');
-            $reservation->setIsVerified((boolean) random_int(0, 1));
-            $reservation->setPhoneNumber((string) random_int(860000000, 869999999));
+            $reservation->setIsVerified((boolean)random_int(0, 1));
+            $reservation->setPhoneNumber((string)random_int(860000000, 869999999));
             $reservation->setVerificationKey($reservation->generateActivationKey());
             $reservation->setContractor($contractor);
             $reservation->setVisitDate(
                 (new \DateTime('now'))
                     ->setTime(11, 00)
                     ->modify(
-                        '+'. $i . ' days'
+                        '+' . $i . ' days'
                     )
             );
             $reservation->setIsCompleted(true);
@@ -269,15 +269,13 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     {
         $reservations = $contractor->getReservations();
         foreach ($reservations as $reservation) {
-            if ($reservation->getVisitDate() < new \DateTime('now')) {
-                $review = new Review();
-                $review->setContractor($contractor);
-                $review->setDescription('The rating tells it all!');
-                $review->setReservation($reservation);
-                $review->setStars(random_int(1, 5));
-                $manager->persist($review);
-                $contractor->addReview($review);
-            }
+            $review = new Review();
+            $review->setContractor($contractor);
+            $review->setDescription('The rating tells it all!');
+            $review->setReservation($reservation);
+            $review->setStars(random_int(1, 5));
+            $manager->persist($review);
+            $contractor->addReview($review);
         }
     }
 

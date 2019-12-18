@@ -31,7 +31,11 @@ class CoverPhotoType extends AbstractType
                 'constraints' => [
                     new Image([
                         'mimeTypes' => ['image/png', 'image/jpeg'],
-                        'mimeTypesMessage' => 'detailsForm.image.invalid'
+                        'mimeTypesMessage' => 'detailsForm.image.invalid',
+                        'minHeight' => 1000,
+                        'minHeightMessage' => 'detailsForm.image.small.height',
+                        'minWidth' => 2048,
+                        'minWidthMessage' => 'detailsForm.image.small.width'
                     ]),
                     new File([
                         'maxSize' => '2M',

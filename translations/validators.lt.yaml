@@ -38,3 +38,6 @@ detailsForm:
   image:
     invalid: Paveikslėlio formatas privalo būti JPG/PNG
     large: Maksimalus paveikslėlio dydis yra 2 Mb
+    small:
+      height: Paveikslėlio aukštis privalo būti bent 1000px
+      width: Paveikslėlio plotis privalo būti bent 2048px

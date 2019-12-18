@@ -38,3 +38,6 @@ detailsForm:
   image:
     invalid: Your image must be in JPG/PNG format
     large: Your image must not exceed 2 Mb size limit
+    small:
+      height: Your image should be at least 1000px in height
+      width: Your image should be at least 2048px wide

@@ -56,14 +56,14 @@ class ReservationRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->where('c.contractor = :contractor')
-            ->andWhere('c.visitDate >= :from')
-            ->andWhere('c.visitDate < :visitEnding')
+            ->andWhere('c.visitDate <= :from')
+            ->andWhere('c.visitDate > :visitEnding')
             ->setParameters(
                 [
                     'contractor' => $contractor,
+                    'from' => $from,
                     'visitEnding' => (clone $from)
-                        ->modify('+' . $contractor->getSettings()->getVisitDuration() . ' minutes'),
-                    'from' => $from
+                        ->modify('-' . $contractor->getSettings()->getVisitDuration() . ' minutes')
                 ]
             )
             ->getQuery()
