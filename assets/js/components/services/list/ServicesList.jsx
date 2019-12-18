@@ -22,7 +22,6 @@ const ServicesList = (props) => {
     }).then((response) => {
       setAllServices(response.data);
       setFetching(false);
-      console.log(response.data);
     })
       .catch((error) => {
         showAlert(getTranslation('services.error'), 'error', 4000);
@@ -30,7 +29,6 @@ const ServicesList = (props) => {
   };
 
   useEffect(() => {
-    console.log(selectedService);
     getSelectedServices();
   },
   [selectedService]);
