@@ -3,6 +3,7 @@ username:
   short: Your username must be at least 4 letters long
   long: Your username must not exceed 32 characters limit
   existing: This username is already taken
+  invalid: Your username must only contain letters and numbers
 password:
   empty: Please fill in the password
   short: The password is too short

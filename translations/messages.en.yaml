@@ -44,7 +44,7 @@ services:
   driver: driver
   teaching: teaching
   massages: massages
-  profile: profile
+  book: Book now
   cta: Services
 
 lost_password:

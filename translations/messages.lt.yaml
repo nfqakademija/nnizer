@@ -44,7 +44,7 @@ services:
   driver: Vairuotojai (-ės)
   teaching: Mentoriai (-ės)
   massages: Masažistai (-ės)
-  profile: profilis
+  book: Užsirezervuoti
   cta: Paslaugų teikėjai
 
 lost_password:
