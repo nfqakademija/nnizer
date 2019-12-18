@@ -85,7 +85,9 @@ const Panel = () => {
               setSearchTerm={setSearchTerm}
               avatar={
                 data.isFetched
-                  ? `${baseURL}/uploads/profile/${data.users.profilePhoto.filename}`
+                  ? data.users.profilePhoto.filename != null
+                    ? `${baseURL}/uploads/profile/${data.users.profilePhoto.filename}`
+                    : `${baseURL}/uploads/profile/default.png`
                   : ''
               }
               name={

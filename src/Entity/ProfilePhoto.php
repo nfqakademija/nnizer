@@ -38,7 +38,7 @@ class ProfilePhoto implements Serializable
     private $profilePhoto;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Contractor", inversedBy="profilePhoto", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Contractor", inversedBy="profilePhoto", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $Contractor;
