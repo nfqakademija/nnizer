@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import getTranslation from '../../Utils/TranslationService';
 import { Alert, showAlert } from '../../Utils/NotificationUtils';
+
 import ServicesFilters from './filters/ServicesFilters';
 import ServicesList from './list/ServicesList';
 
@@ -10,7 +11,6 @@ const Template = () => {
   const [isFetched, setFetched] = useState(false);
   const [servicesList, setServicesList] = useState([]);
   const [selectedService, setSelectedService] = useState('Hairdressing');
-  const [allServices, setAllServices] = useState([]);
 
   const baseURL = `${window.location.protocol}//${window.location.host}`;
 
