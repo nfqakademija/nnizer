@@ -40,7 +40,7 @@ const ServiceCard = (props) => {
             href={`${baseURL}/service/${service.username}`}
             className="service-card__link btn -full"
           >
-            {getTranslation('service.profile')}
+            {getTranslation('services.profile')}
           </a>
         </div>
       </div>
