@@ -45,7 +45,7 @@ class Contractor implements UserInterface
     private $roles = [];
 
     /**
-     * @var string
+     * @var string|null
      */
     private $plainPassword = null;
 
@@ -137,7 +137,7 @@ class Contractor implements UserInterface
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\CoverPhoto", mappedBy="Contractor", cascade={"persist", "remove"})
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $coverPhoto;
 

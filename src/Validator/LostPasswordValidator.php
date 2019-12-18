@@ -3,15 +3,16 @@
 namespace App\Validator;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validation;
 
 class LostPasswordValidator
 {
 
     /**
-     * @var array
+     * @var ConstraintViolationListInterface
      */
-    protected $constraints = [];
+    protected $constraints;
 
     /**
      * @param String $email
@@ -27,6 +28,28 @@ class LostPasswordValidator
             'email' => [
                 new Assert\Email(['message' => 'lost_password.invalid.email']),
                 new Assert\NotBlank(['message' => 'lost_password.blank.email'])
+            ]
+        ]);
+
+        $this->constraints = $validator->validate($input, $constraints);
+
+        return $this->getErrorMessages();
+    }
+
+    /**
+     * @param String $username
+     * @return array
+     */
+    public function validateUsername(String $username): array
+    {
+        $validator = Validation::createValidator();
+
+        $input = ['username' => $username];
+
+        $constraints = new Assert\Collection([
+            'username' => [
+                new Assert\Type(['type' => 'alnum', 'message' => 'lost_password.invalid.username']),
+                new Assert\NotBlank(['message' => 'lost_password.blank.username'])
             ]
         ]);
 

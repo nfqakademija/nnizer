@@ -21,8 +21,9 @@ class NewAdminCommand extends Command
      * @var AdminFactory
      */
     private $adminFactory;
+
     /**
-     * @var EntityManagerInterface
+     * @var UserRepository
      */
     private $userRepository;
 
@@ -46,16 +47,16 @@ class NewAdminCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Create a new admin account')
-            ->addArgument('email', InputArgument::REQUIRED, 'New admin account email')
-            ->addArgument('password', InputArgument::REQUIRED, 'New admin account password');
+            ->setDescription('Create a new super admin account')
+            ->addArgument('email', InputArgument::REQUIRED, 'New super admin account email')
+            ->addArgument('password', InputArgument::REQUIRED, 'New super admin account password');
     }
 
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return int|void|null
      * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\ORMException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

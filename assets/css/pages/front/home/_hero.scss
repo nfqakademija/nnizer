@@ -8,9 +8,6 @@
     font-size: rem(60px);
   }
 
-  @include breakpoint(xl) {
-  }
-
   .container {
     align-items: center;
     display: flex;
@@ -33,10 +30,25 @@
   }
 
   &__cta {
+    border: 1px solid $color-black;
     margin-top: rem(36px);
-  
+    min-width: rem(108px);
+
     @extend .header__link;
-    @extend .header__link.-primary;
+    @extend .header__link.-cta;
+
+    &.-no-bg {
+      background: none;
+      box-shadow: none;
+      color: $color-black;
+
+      @include transition(transform 0.2s, background 0.1s, color 0.2s);
+
+      &:hover {
+        background: $color-black;
+        color: $color-white;
+      }
+    }
   }
 }
 

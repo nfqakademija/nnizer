@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Type;
 
 class RegistrationFormType extends AbstractType
 {
@@ -23,6 +24,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'registration_form.username',
                 'empty_data' => '',
                 'constraints' => [
+                    new Type(['type' => 'alnum', 'message' => 'username.invalid']),
                     new NotBlank([
                         'message' => 'username.empty',
                     ]),

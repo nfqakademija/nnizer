@@ -1,6 +1,10 @@
+.hidden {
+  display: none;
+}
+
 .form {
   font-size: 1rem;
-  margin: 0 rem(1px);
+  margin: rem(16px) 0;
 
   @include transition(opacity 0.2s);
 
@@ -46,19 +50,57 @@
     top: rem(-12px);
   }
 
+  &__message {
+    margin-bottom: rem(16px);
+  }
+
   input {
-    border: 1px solid $color-grey-2;
-    border-radius: rem(2px);
-    box-shadow: 0 0 rem(2px) rgba(0, 0, 0, 0.5);
-    min-height: rem(40px);
-    padding-left: rem(12px);
-    width: 100%;
+    &[type='text'],
+    &[type='tel'],
+    &[type='email'],
+    &[type='password'] {
+      border: 1px solid $color-grey-2;
+      border-radius: rem(2px);
+      box-shadow: 0 0 rem(2px) rgba(0, 0, 0, 0.5);
+      min-height: rem(40px);
+      padding-left: rem(12px);
+      width: 100%;
+
+      &::placeholder {
+        opacity: 0;
+
+        @include transition(opacity 0.15s);
+      }
+
+      &:focus,
+      &:valid {
+        border: 1px solid $color-yellow;
+        box-shadow: none;
+
+        &::placeholder {
+          opacity: 1;
+        }
+
+        ~ label {
+          font-size: rem(12px);
+          padding: 0 rem(2px);
+          top: 0;
+        }
+      }
+    }
+
+    &[type='file'] {
+      border: none;
+      display: flex;
+      padding: rem(16px) 0;
+    }
   }
 
   label {
     background: white;
     color: $color-grey-1;
     left: rem(14px);
+    padding: 0 rem(2px);
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -66,15 +108,39 @@
     @include transition(font-size 0.2s, padding 0.2s, top 0.2s);
   }
 
-  input:focus,
-  input:valid {
-    border: 1px solid $color-yellow;
-    box-shadow: none;
+  &__other-fields {
+    label {
+      position: static;
+    }
+  }
 
-    ~ label {
-      font-size: rem(12px);
-      padding: 0 rem(2px);
-      top: 0;
+  textarea {
+    background: white;
+    border: 1px solid $color-grey-2;
+    border-radius: rem(2px);
+    box-shadow: 0 0 rem(2px) rgba(0, 0, 0, 0.5);
+    margin: rem(16px) 0;
+    min-height: rem(196px);
+    padding: rem(12px);
+    width: 100%;
+  }
+
+  &__checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: rem(24px);
+  }
+
+  &__checkbox {
+    display: flex;
+    margin-bottom: rem(16px);
+    width: 30%;
+
+    input {
+      margin-right: rem(8px);
+      min-height: 0;
+      width: auto;
     }
   }
 }

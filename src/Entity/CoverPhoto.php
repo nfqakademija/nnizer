@@ -26,14 +26,14 @@ class CoverPhoto implements Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $filename;
 
     /**
      * @Vich\UploadableField(mapping="contractorsCover", fileNameProperty="filename")
      *
-     * @var File
+     * @var File|string
      */
     private $coverPhoto;
 

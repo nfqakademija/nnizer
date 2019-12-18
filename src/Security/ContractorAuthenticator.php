@@ -59,7 +59,7 @@ class ContractorAuthenticator extends AbstractFormLoginAuthenticator
 
     /**
      * @param Request $request
-     * @return array|mixed
+     * @return array
      */
     public function getCredentials(Request $request): array
     {
@@ -116,7 +116,7 @@ class ContractorAuthenticator extends AbstractFormLoginAuthenticator
      * @param Request $request
      * @param TokenInterface $token
      * @param string $providerKey
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response|null
+     * @return RedirectResponse
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): RedirectResponse
     {

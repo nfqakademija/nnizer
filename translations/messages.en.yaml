@@ -8,41 +8,61 @@ home:
   hero_text: The tool which will help you automate client’s management effortless way and most importantly - absolutely FREE! 
   steps_title: How nnizer works?
   steps_subtitle: Easy as 1-2-3
-  step1_title: 1. Sign up in 20 seconds
-  step1_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
-  step2_title: 2. Setup and verify profile
-  step2_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
-  step3_title: 3. Go get your moooney!
-  step3_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  steps:
+    step1_title: 1. Sign up in 30 seconds
+    step1_text: Simply fill in registration form and verify your email.
+    step2_title: 2. Set up profile
+    step2_text: After verification, set up your working hours and you are ready to use your reservation management system.
+    step3_title: 3. Go get your moooney!
+    step3_text: Brag about it in social media or wherever you want and wait for your customers reservations.
   benefits_title: Meet nnizer, tool that <br> you’ll fall in 💛 with.
-  benefit1_title: All your client’s reservation and data in <span class="yellow-text">one place</span>.
-  benefit1_text:  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
-  benefit2_title: CRM built to be as <span class="yellow-text">simple</span> and <span class="yellow-text">straightforward</span> as possible.  
-  benefit2_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
-  benefit3_title: Don’t spend any <span class="yellow-text">money</span> on website, we got <span class="yellow-text">you.</span>
-  benefit3_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
-  benefit4_title: Never miss a chance because of <span class="yellow-text">language</span> barrier.
-  benefit4_text: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+  benefits:
+    benefit1_title: All your client’s reservation and data in <span class="yellow-text">one place</span>.
+    benefit1_text:  Customers' bookings, their data, time and other customer details are displayed in simple and understandable way.
+    benefit2_title: CRM built to be as <span class="yellow-text">simple</span> and <span class="yellow-text">straightforward</span> as possible.
+    benefit2_text: Confirmation or cancellation of the reservation doesn't require notifying customers about it, everything is taken care of in advance.
+    benefit3_title: Don’t spend any <span class="yellow-text">money</span> on website, we got <span class="yellow-text">you.</span>
+    benefit3_text: Everything is free, no premium versions, no deceptions. Just sign up and use.
+    benefit4_title: Never miss a chance because of <span class="yellow-text">language</span> barrier.
+    benefit4_text: Reservation management is available in both Lithuanian and English.
   team_title: Team behind nnizer
   dominykas_position: Back-end developer
   tadas_position: Team Lead / Mentor
   migle_position: Back-end developer
   kornelijus_position: Front-end / Design
   banner_title: What're you waiting for? <br> Let's save some time!
-  banner_text: The tool which will help you automate client’s management effortless way and most importantly - absolutely FREE! 
+  banner_text: Simple and convenient registration management completely free
   footer_text1: Made with 
   footer_text2: at <span class="orange-nfq-text">NFQ</span> academy
     
+services:
+  header: NNIZER - services list
+  error: Can't load services. Try again or contact us!
+  select_filters: Select one of most popular services
+  hairdressing: hairdressing
+  fitness: fitness
+  driver: driver
+  teaching: teaching
+  massages: massages
+  book: Book now
+  cta: Services
+  reviews_plural: reviews
+  reviews_plural2: reviews
+  review_singular: review
+
 lost_password:
   title: Lost your password?
-  description: Enter your email that you have used to register on NNIZER. We will send you a mail with password reset details.
+  description: Enter your username on NNIZER. We will send you a mail with password reset details.
   email: Email Address
+  username: Username
   submit: Submit
   nonexisting: There is no associated contractor account
   invalid:
     email: Please make sure your email contains '@' and '.'
+    username: Your username may only contain alphanumerical symbols
   blank:
     email: Please enter your email
+    username: Please enter your username
   sent: An email has been sent
   existing: There is an active lost password attempt. If you did not receive the email, try again in 60 minutes.
 
@@ -55,7 +75,7 @@ reset_password:
 
 navigation:
   login: Login
-  signup: Get 
+  signup: Get started
   logout: Log out
   reservations: My reservations
 
@@ -131,18 +151,22 @@ email:
     reset: RESET
 
 settings_form:
-  title: Your working hours
-  Monday-workhours: Working hours on Monday
-  Tuesday-workhours: Working hours on Tuesday
-  Wednesday-workhours: Working hours on Wednesday
-  Thursday-workhours: Working hours on Thursday
-  Friday-workhours: Working hours on Friday
-  Saturday-workhours: Working hours on Saturday
-  Sunday-workhours: Working hours on Sunday
+  choosedays: Please select your work days!
+  days_title: Your working hours
+  info_title: Other information
+  Monday: Monday
+  Tuesday: Tuesday
+  Wednesday: Wednesday
+  Thursday: Thursday
+  Friday: Friday
+  Saturday: Saturday
+  Sunday: Sunday
   visitDuration: Visit duration
   submit: Submit
+  submitted: Your working hours are now submitted. Don't forget to update your details as well!
 
 detailsForm:
+  edit: Edit account
   title: Details
   submit: Submit
   service:
@@ -163,6 +187,7 @@ detailsForm:
   firstname: First Name
   lastname: Last Name
   phoneNumber: Phone Number
+  missing: Before accessing your reservations, you must fill in the details about yourself.
 
 
 locales:
@@ -173,7 +198,13 @@ crm:
   date: Date
   name: Name
   email: Email address
+  address: Address
   phone: Phone number
+  facebook: Facebook
+  service_title: Service title
+  service_description: Service description
+  change_settings: Change settings
+  no_facebook: Facebook is not added
   status: Status
   reservations: Reservations
   search: Type in to search...
@@ -185,6 +216,7 @@ crm:
   unconfirmed: Unconfirmed
   done: Completed
   actions: Actions
+  missing.phone: Missing phone
   removal:
     progress: Removal in progress
     success: Removal was successful
@@ -202,7 +234,9 @@ crm:
     success: Approval was successful
     error: Approval failed. Please try again.
   approve: Approve
-  no_reservations: You don't have any reservations yet!
+  no_reservations_text1: You don't have any reservations yet! Share this
+  no_reservations_link: link
+  no_reservations_text2: to get your first reservation in nnizer platform!
   no_reservations_matching: No reservations matching your criteria.
   reset_filters: Reset filters
   error:
@@ -233,7 +267,7 @@ contractor:
   reviews:
     no_reviews: You don't have reviews yet.
     title: Reviews
-    singular: review
+    singular: reviews
     plural1: reviews
     plural2: reviews
     filter:
@@ -243,7 +277,7 @@ contractor:
     none: No reviews
     load: Load more
   days:
-    title: Work hours
+    title: Working hours
     closed: Closed
     Monday: Monday
     Tuesday: Tuesday
@@ -254,7 +288,7 @@ contractor:
     Sunday: Sunday
   book: Book now
   booking:
-    success: Successfully booked!
+    success: Successfully booked! Now don't forget to check your email for verification link.
     send: Sending booking details
   error:
     provider: Can't get provider information. Try again or contact us!
@@ -280,3 +314,11 @@ errors:
     title: Unexpected Error
     description: Sorry, something went wrong. No worries though, we are already informed about this and we will fix it as soon as possible.
     link: Visit homepage
+
+reviews_page:
+  title: Thank you!
+  text: Thank you for your evaluation. Now, if you wish, you can leave a description of the service that you have been provided or
+  homepage: go back to the homepage.
+  submit: Submit
+  description: Your comment
+  done: Thank you for your review!

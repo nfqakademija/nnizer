@@ -65,11 +65,6 @@
         args:
             chdir: "{{ deploy_helper.new_release_path }}"
 
-      - name: Dump translation files
-        shell: bin/console bazinga:js-translation:dump assets/js --format=json --merge-domains --quiet --env=prod
-        args:
-            chdir: "{{ deploy_helper.new_release_path }}"
-
       - name: "Warm up application cache" # <-- Symfony specific task, to be ready for new version
         shell: bin/console cache:warmup --env=prod --no-debug
         args:

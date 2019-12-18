@@ -1,0 +1,7 @@
+@import './services/service-card';
+
+.services {
+  &__cards {
+    margin-top: rem(36px);
+  }
+}

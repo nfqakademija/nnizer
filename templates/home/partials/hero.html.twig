@@ -6,10 +6,17 @@
       <p class="hero__text">
           {{ "home.hero_text"|trans }}
       </p>
-      
-      <a class="hero__cta" href={{ path('app_login') }}>
-          {{ "home.cta"|trans }}
-      </a>  
+
+      <div class="hero__links">
+        <a class="hero__cta -no-bg" href={{ path('services') }}>
+            {{ "services.cta"|trans }}
+        </a>  
+        
+        <a class="hero__cta " href={{ path('app_register') }}>
+            {{ "home.cta"|trans }}
+        </a> 
+      </div>
+       
 
   </div>
 </section>

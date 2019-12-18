@@ -35,11 +35,15 @@ security:
         invalidate_session: false
         success_handler: App\Security\LogoutHandler
 
+  role_hierarchy:
+    ROLE_ADMIN: ROLE_USER
+    ROLE_SUPER_ADMIN: ROLE_ADMIN
+
   access_control:
-    - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin, role: ROLE_ADMIN }
     - { path: ^/contractor/activate/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/contractor, roles: ROLE_CONTRACTOR }
     - { path: ^/api/contractor, roles: ROLE_CONTRACTOR }
     - { path: ^/api/profile, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }

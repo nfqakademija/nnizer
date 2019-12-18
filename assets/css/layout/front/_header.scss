@@ -10,35 +10,27 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-  }
-
-  &__right {
-    a:first-child {
-      margin-right: rem(16px);
-    }
-  }
-
-  &__logo {
-    height: rem(64px);
+    position: relative;
   }
 
   &__link {
+    border-radius: rem(2px);
+    color: $color-black;
     font-size: rem(14px);
     letter-spacing: rem(2px);
-    color: $color-black;
-    text-transform: uppercase;
-    text-decoration:  none;
     padding: rem(12px);
-    border-radius: rem(2px);
+    text-decoration: none;
+    text-transform: uppercase;
 
+    @include z-index(link);
     @include transition(transform 0.2s);
 
-    &.-primary {
+    &.-cta {
       background-color: $color-black;
-      color: $color-white;
       box-shadow: 0 rem(8px) rem(24px) rgba(0, 0, 0, 0.25);
-      position: relative;
+      color: $color-white;
       display: inline-block;
+      position: relative;
 
       &::after {
         border: 2px solid $color-black;
@@ -50,18 +42,118 @@
         position: absolute;
         top: 0;
         width: 100%;
-    
+
         @include transition(transform 0.2s, opacity 0.2s);
       }
-    
+
       &:hover {
         transform: translate(rem(-8px), rem(8px));
-    
+
         &::after {
           opacity: 1;
           transform: translate(rem(8px), rem(-8px));
         }
       }
     }
+
+    &.-secondary {
+      display: inline-block;
+
+      &:hover {
+        transform: translateY(rem(-4px));
+      }
+    }
+  }
+
+  &__toggler {
+    border: none;
+
+    @include breakpoint(md) {
+      display: none;
+    }
+  }
+
+  &__nav {
+    background-color: $color-black;
+    border-radius: rem(6px);
+    box-shadow: 0 0 rem(5px) rgba(0, 0, 0, 0.25);
+    margin-top: rem(32px);
+    opacity: 0;
+    padding: rem(24px) rem(32px);
+    pointer-events: none;
+    position: absolute;
+    right: rem(15px);
+    transform: translateY(rem(32px));
+
+    @include z-index(mobileNavHidden);
+    @include transition(opacity 0.2s, transform 0.2s);
+
+    @include breakpoint(sm) {
+      right: 0;
+    }
+
+    .header__link {
+      color: $color-white;
+      margin-right: 0;
+      width: 100%;
+      padding: rem(24px);
+      white-space: nowrap;
+    }
+
+    li {
+      margin-top: rem(16px);
+
+      &:last-child {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    &.-active {
+      opacity: 1;
+      pointer-events: initial;
+      transform: translateY(0);
+
+      @include z-index(mobileNavVisible);
+    }
+
+    @include breakpoint(md) {
+      align-items: center;
+      pointer-events: initial;
+      background: none;
+      box-shadow: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      opacity: 1;
+      padding: 0;
+      position: static;
+      transform: translateY(0);
+
+      @include z-index(header);
+
+      .header__link {
+        margin-right: rem(16px);
+        margin-top: 0;
+        width: auto;
+        padding: rem(16px) rem(12px);
+
+        &.-secondary {
+          color: $color-black;
+        }
+
+        &.-logout {
+          color: $color-error-text;
+        }
+      }
+
+      li {
+        margin: 0;
+      }
+    }
+  }
+
+  &__logo {
+    height: rem(64px);
   }
 }

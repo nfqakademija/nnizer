@@ -4,15 +4,16 @@ namespace App\Validator;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validation;
 
 class ReservationValidator
 {
 
     /**
-     * @var array
+     * @var ConstraintViolationListInterface
      */
-    protected $constraints = [];
+    protected $constraints;
 
     /**
      * @param Request $request
@@ -32,23 +33,28 @@ class ReservationValidator
         ];
 
         $constraint = new Assert\Collection([
-            'firstname' => new Assert\Length([
+            'firstname' => [
+                new Assert\NotBlank(['message' => 'firstname.empty']),
+                new Assert\Length([
                 'min' => 2,
                 'minMessage' => 'firstname.short',
                 'max' => 32,
                 'maxMessage' => 'firstname.long',
-            ]),
-            'lastname' => new Assert\Length([
-                'min' => 2,
-                'minMessage' => 'lastname.short',
-                'max' => 32,
-                'maxMessage' => 'lastname.long',
-            ]),
+                ]),
+            ],
+            'lastname' => [
+                new Assert\NotBlank(['message' => 'lastname.empty']),
+                new Assert\Length([
+                    'min' => 2,
+                    'minMessage' => 'lastname.short',
+                    'max' => 32,
+                    'maxMessage' => 'lastname.long',
+                ]),
+            ],
             'email' => [
                 new Assert\Email(['message' => 'email.invalid']),
                 new Assert\NotBlank(['message' => 'email.blank']),
             ],
-            'contractor' => new Assert\NotBlank(['message' => 'provider.empty']),
             'visitDate' => [
                 new Assert\NotBlank(['message' => 'date.unchosen']),
                 new Assert\Regex([
@@ -57,6 +63,9 @@ class ReservationValidator
                     'message' => 'date.invalid',
                 ]),
             ],
+            'contractor' => [
+                new Assert\NotBlank(['message' => 'provider.empty']),
+            ]
         ]);
 
         $this->constraints = $validator->validate($input, $constraint);

@@ -29,6 +29,8 @@ Encore
   .addEntry('admin', './assets/js/admin.jsx')
   .addEntry('contractor', './assets/js/contractor.jsx')
   .addEntry('datepicker', './assets/js/datepicker.jsx')
+  .addEntry('settings', './assets/js/Utils/ContractorSettings.js')
+  .addEntry('services', './assets/js/services.jsx')
 
   // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
   .splitEntryChunks()
@@ -46,7 +48,7 @@ Encore
    */
   .cleanupOutputBeforeBuild()
   .enableBuildNotifications()
-  // .enableSourceMaps(!Encore.isProduction()) // TODO enable later
+  .enableSourceMaps(!Encore.isProduction())
   // enables hashed filenames (e.g. app.abc123.css)
   .enableVersioning(Encore.isProduction())
 

@@ -65,6 +65,7 @@ button[disabled] {
   }
 
   &.-full {
+    text-align: center;
     width: 100%;
   }
 
@@ -78,6 +79,10 @@ button[disabled] {
       margin-top: 0;
       padding: rem(16px) rem(24px);
     }
+  }
+
+  &.-no-margin {
+    margin: 0;
   }
 }
 
@@ -113,6 +118,7 @@ button[disabled] {
   &.-cancel {
     border: 2px solid $color-error-bg;
     color: $color-error-text;
+    margin-top: rem(16px);
 
     &::before {
       content: '\e909';

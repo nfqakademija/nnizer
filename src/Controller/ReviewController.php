@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
-use App\Entity\Contractor;
 use App\Entity\Reservation;
 use App\Entity\Review;
 use App\Repository\ContractorRepository;
+use App\Repository\ReservationRepository;
 use App\Repository\ReviewRepository;
 use App\Service\SerializerService;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 
 class ReviewController extends AbstractController
 {
@@ -24,6 +26,7 @@ class ReviewController extends AbstractController
      * @param ContractorRepository $contractorRepository
      * @return JsonResponse
      * @throws NonUniqueResultException
+     * @throws ExceptionInterface
      */
     public function getReviews(
         string $contractorKey,
@@ -44,11 +47,17 @@ class ReviewController extends AbstractController
      * @param string $key
      * @param int $starCount
      * @param ReviewRepository $reviewRepository
+     * @param ReservationRepository $reservationRepository
      * @return Response
+     * @throws ORMException
      */
-    public function setStars(string $key, int $starCount, ReviewRepository $reviewRepository): Response
-    {
-        $reservation = $this->getReservationByKey($key);
+    public function setStars(
+        string $key,
+        int $starCount,
+        ReviewRepository $reviewRepository,
+        ReservationRepository $reservationRepository
+    ): Response {
+        $reservation = $reservationRepository->findOneByKey($key);
         if ($reservation === null) {
             return $this->redirectToRoute('home');
         }
@@ -64,21 +73,28 @@ class ReviewController extends AbstractController
         $review->setStars($starCount);
         $reviewRepository->save($review);
 
-        return $this->redirectToRoute('home');
+
+        return $this->render('reviews/thankyou.html.twig', ['key' => $key]);
     }
 
     /**
-     * @Route("/api/reservation/{key}/review", name="review_description", methods="GET")
+     * @Route("/api/reservation/{key}/review", name="review_description", methods="POST")
      * @param Request $request
      * @param string $key
      * @param ReviewRepository $reviewRepository
+     * @param ReservationRepository $reservationRepository
      * @return Response
      * @throws NonUniqueResultException
+     * @throws ORMException
      */
-    public function addDescription(Request $request, string $key, ReviewRepository $reviewRepository): Response
-    {
+    public function addDescription(
+        Request $request,
+        string $key,
+        ReviewRepository $reviewRepository,
+        ReservationRepository $reservationRepository
+    ): Response {
         $description = $request->get('description');
-        $reservation = $this->getReservationByKey($key);
+        $reservation = $reservationRepository->findOneByKey($key);
         if ($description === null || $reservation === null) {
             return $this->redirectToRoute('home');
         }
@@ -87,7 +103,7 @@ class ReviewController extends AbstractController
         if ($review !== null) {
             $review->setDescription($description);
             $reviewRepository->save($review);
-            return new JsonResponse();
+            $this->addFlash('notice', 'reviews_page.done');
         }
 
         return $this->redirectToRoute('home');
@@ -105,16 +121,5 @@ class ReviewController extends AbstractController
             ->findOneBy(['reservation' => $reservation]);
 
         return $review !== null;
-    }
-
-    /**
-     * @param string $key
-     * @return Reservation|null
-     */
-    private function getReservationByKey(string $key): ?Reservation
-    {
-        return $this->getDoctrine()
-            ->getRepository(Reservation::class)
-            ->findOneBy(['verificationKey' => $key]);
     }
 }

@@ -1,4 +1,8 @@
 .reviews {
+  @include breakpoint(md) {
+    padding-bottom: rem(96px);
+  }
+
   .rating {
     margin-top: 16px;
   }
@@ -22,8 +26,13 @@
 
   &__filter {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    // flex-wrap: wrap;
     margin-bottom: rem(24px);
+
+    @include breakpoint(sm) {
+      justify-content: flex-start;
+    }
   }
 
   .filter {
@@ -39,10 +48,15 @@
       border-radius: rem(2px);
       cursor: pointer;
       display: inline;
-      margin: rem(8px) rem(16px) 0 0;
-      padding: rem(8px) rem(16px);
+      margin: rem(8px) rem(4px) 0 0;
+      padding: rem(8px) rem(10px);
 
       @include transition(background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s);
+
+      @include breakpoint(sm) {
+        margin: rem(8px) rem(16px) 0 0;
+        padding: rem(8px) rem(16px);
+      }
 
       &:hover,
       &.-active {

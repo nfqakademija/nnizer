@@ -8,7 +8,10 @@
   text-decoration: none;
 
   @include transition(color 0.2s);
-  @include z-index(link);
+  
+  @include breakpoint(md) {
+    @include z-index(link);
+  }
 
   &:hover {
     color: $color-grey-1;
@@ -36,6 +39,11 @@
     }
   }
 
+  &.-contractor {
+    font-size: rem(16px);
+    margin: 0 rem(4px);
+  }
+
   &.-hover-underline {
     @extend .-underline;
 
@@ -52,6 +60,14 @@
       &::after {
         width: calc(100% + 4px);
       }
+    }
+  }
+
+  &.-dark {
+    color: $color-black;
+
+    &:hover {
+      color: $color-grey-1;
     }
   }
 }

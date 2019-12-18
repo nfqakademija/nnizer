@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { ToastContainer } from 'react-toastify';
 
 import Loader from './Loader';
 import Hero from './Hero';
 import Content from './Content';
 
-import { showAlert } from '../../Utils/NotificationUtils';
-import getTranslation from "../../TranslationService";
+import { showAlert, Alert } from '../../Utils/NotificationUtils';
+import getTranslation from '../../Utils/TranslationService';
 
 const Template = () => {
   const [userData, setUserData] = useState();
   const [isFetched, setFetched] = useState(false);
-
-  const CloseButton = (closeToast) => (
-    <i className="icon-cross notification__close" onClick={() => closeToast} />
-  );
 
   const fetchData = () => {
     const contractorName = window.location.href.split('/').pop();
@@ -58,7 +53,7 @@ const Template = () => {
 
   return (
     <section className="contractor">
-      <ToastContainer closeButton={<CloseButton />} />
+      <Alert />
       {loadContent()}
     </section>
   );

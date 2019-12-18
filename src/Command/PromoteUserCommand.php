@@ -1,9 +1,8 @@
 <?php
 namespace App\Command;
 
-use App\Entity\User;
 use App\Enumerator\UserRoles;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\UserRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,18 +13,18 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class PromoteUserCommand extends Command
 {
     protected static $defaultName = 'app:promote-user';
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    /** @var UserRepository */
+    private $userRepository;
     private $adminRole;
 
     /**
      * PromoteUserCommand constructor.
-     * @param EntityManagerInterface $entityManager
+     * @param UserRepository $userRepository
      * @param string $adminRole
      */
-    public function __construct(EntityManagerInterface $entityManager, $adminRole = UserRoles::ADMIN)
+    public function __construct(UserRepository $userRepository, $adminRole = UserRoles::ADMIN)
     {
-        $this->entityManager = $entityManager;
+        $this->userRepository = $userRepository;
         $this->adminRole = $adminRole;
         parent::__construct();
     }
@@ -40,6 +39,7 @@ class PromoteUserCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\ORMException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -48,7 +48,7 @@ class PromoteUserCommand extends Command
         $email = $input->getArgument('email');
         // Getting user
         $this->info("Searching for user", $email, $io);
-        $user = $this->entityManager->getRepository(User::class)->findByEmail($email);
+        $user = $this->userRepository->findByEmail($email);
         if (!$user) {
             $io->error("Cannot find user by e-mail: " . $email);
             return;
@@ -64,8 +64,7 @@ class PromoteUserCommand extends Command
         $roles[] = $this->adminRole;
         $user->setRoles(array_unique($roles));
         // Storing user
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        $this->userRepository->save($user);
         $this->printUserRoles($user, $output);
         $io->success('Admin role successfully added');
     }

@@ -1,0 +1,80 @@
+.profile-settings {
+  @extend .flex-xy-center;
+
+  flex-direction: column;
+
+  @include breakpoint(md) {
+    margin: 0 auto;
+  }
+
+  &__avatar {
+    border-radius: rem(8px);
+    height: rem(100px);
+    object-fit: cover;
+    width: rem(100px);
+  }
+
+  &__name {
+    font-size: rem(24px);
+    margin: rem(24px) 0 rem(12px) 0;
+  }
+
+  &__website {
+    @extend .flex-xy-center;
+
+    color: $color-black;
+    margin-bottom: rem(24px);
+    text-decoration: none;
+
+    @include transition(color 0.2s);
+
+    i {
+      color: $color-grey-1;
+      margin-bottom: rem(4px);
+      margin-right: rem(16px);
+
+      @include transition(color 0.2s);
+    }
+
+    &:hover {
+      color: $color-yellow;
+
+      i {
+        color: $color-yellow;
+      }
+    }
+  }
+
+  &__fields {
+    margin: rem(24px) 0;
+    width: 100%;
+
+    .field {
+      &__label {
+        color: $color-grey-1;
+        font-size: rem(14px);
+        margin-left: rem(16px);
+      }
+
+      &__output {
+        align-items: center;
+        background: $color-white;
+        display: flex;
+        line-height: 1.5;
+        margin: rem(8px) 0 rem(24px);
+        padding: rem(16px);
+        width: 100%;
+
+        @include breakpoint(md) {
+          justify-content: center;
+        }
+      }
+
+      &__icon {
+        color: $color-grey-1;
+        font-size: rem(16px);
+        margin-right: rem(16px);
+      }
+    }
+  }
+}

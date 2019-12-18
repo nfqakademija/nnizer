@@ -21,6 +21,7 @@ class ProfilePhotoType extends AbstractType
     {
         $builder
             ->add('profilePhoto', VichImageType::class, [
+                'label' => 'detailsForm.profilePhoto',
                 'mapped' => true,
                 'required' => false,
                 'allow_delete' => false,

@@ -32,7 +32,11 @@ class LostPasswordController extends AbstractController
         $request->getSession()->remove('errors');
         $request->getSession()->remove('success');
 
-        return $this->render('contractor/lostpassword.html.twig', ['errors' => $errors, 'success' => $success]);
+        if ($success != null) {
+            $this->addFlash('notice', $success[0]);
+            return $this->redirectToRoute('home')   ;
+        }
+        return $this->render('contractor/lostpassword.html.twig', ['errors' => $errors]);
     }
 
     /**
@@ -55,8 +59,8 @@ class LostPasswordController extends AbstractController
         LostPasswordFactory $lostPasswordFactory,
         MailerService $mailer
     ): Response {
-        $email = $request->get('email');
-        $errors = $validator->validateEmail($email);
+        $username = $request->get('username');
+        $errors = $validator->validateUsername($username);
 
         if (count($errors) != 0) {
             $request->getSession()->set('errors', $errors);
@@ -64,7 +68,7 @@ class LostPasswordController extends AbstractController
             return $this->redirectToRoute('app_lost-password-page');
         }
 
-        $contractor = $contractorRepository->findOneBy(['email' => $email]);
+        $contractor = $contractorRepository->findOneBy(['username' => $username]);
 
         if ($contractor) {
             $lostPassword = $lostPasswordRepository->findActiveEntry($contractor);

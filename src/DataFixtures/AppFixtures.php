@@ -24,7 +24,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         '08:00 - 17:00',
         '11:00 - 16:00',
         '09:00 - 21:00',
-        '12:00 - 12:00',
+        '10:00 - 12:00',
         '-1',
     ];
 
@@ -163,10 +163,10 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $contractor->setLastName($lastname);
             $contractor->setUsername($firstname . $i);
             $contractor->setEmail($firstname . '@' . $lastname . '.com');
-            $contractor->setPhoneNumber(random_int(860000000, 869999999));
+            $contractor->setPhoneNumber((string) random_int(860000000, 869999999));
             $contractor->setVerificationKey();
             $contractor->setAddress('Brastos g. 15, Kaunas');
-            $contractor->setIsVerified(random_int(0, 1));
+            $contractor->setIsVerified(true);
             $contractor->setDescription($description);
             $this->loadService($contractor, $manager);
             $service = $contractor->getServices()->getName();
@@ -243,14 +243,15 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $reservation->setFirstname($contractor->getUsername() . 'client' . $i);
             $reservation->setLastname('fixture');
             $reservation->setEmail($reservation->getFirstname() . '@' . $i . '.com');
-            $reservation->setIsVerified(random_int(0, 1));
-            $reservation->setPhoneNumber(random_int(860000000, 869999999));
+            $reservation->setIsVerified((boolean) random_int(0, 1));
+            $reservation->setPhoneNumber((string) random_int(860000000, 869999999));
             $reservation->setVerificationKey($reservation->generateActivationKey());
             $reservation->setContractor($contractor);
             $reservation->setVisitDate(
                 (new \DateTime('now'))
+                    ->setTime(11, 00)
                     ->modify(
-                        '+'. $contractor->getSettings()->getVisitDuration() * $i . ' minutes'
+                        '+'. $i . ' days'
                     )
             );
             $reservation->setIsCompleted(true);
@@ -268,13 +269,15 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     {
         $reservations = $contractor->getReservations();
         foreach ($reservations as $reservation) {
-            $review = new Review();
-            $review->setContractor($contractor);
-            $review->setDescription('The rating tells it all!');
-            $review->setReservation($reservation);
-            $review->setStars(random_int(1, 5));
-            $manager->persist($review);
-            $contractor->addReview($review);
+            if ($reservation->getVisitDate() < new \DateTime('now')) {
+                $review = new Review();
+                $review->setContractor($contractor);
+                $review->setDescription('The rating tells it all!');
+                $review->setReservation($reservation);
+                $review->setStars(random_int(1, 5));
+                $manager->persist($review);
+                $contractor->addReview($review);
+            }
         }
     }
 

@@ -21,6 +21,7 @@ class CoverPhotoType extends AbstractType
     {
         $builder
             ->add('coverPhoto', VichImageType::class, [
+                'label' => 'detailsForm.coverPhoto',
                 'mapped' => true,
                 'required' => false,
                 'allow_delete' => false,
