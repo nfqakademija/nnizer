@@ -138,9 +138,12 @@
         width: auto;
         padding: rem(16px) rem(12px);
 
-
         &.-secondary {
           color: $color-black;
+        }
+
+        &.-logout {
+          color: $color-error-text;
         }
       }
 
