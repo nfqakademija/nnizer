@@ -265,7 +265,7 @@ contractor:
   phone: Telefono numeris
   reviews:
     no_reviews: Kol kas neturite jokių atsiliepimų.
-    singular: atsiliepimas
+    singular: atsiliepimų
     plural1: atsiliepimų
     plural2: atsiliepimai
     title: Atsiliepimai
