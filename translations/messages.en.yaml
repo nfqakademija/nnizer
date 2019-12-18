@@ -48,7 +48,7 @@ services:
   cta: Services
   reviews_plural: reviews
   reviews_plural2: reviews
-  reviews_singular: review
+  review_singular: review
 
 lost_password:
   title: Lost your password?

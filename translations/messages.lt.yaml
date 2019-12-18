@@ -48,7 +48,7 @@ services:
   cta: Paslaugų teikėjai
   reviews_plural: atsiliepimų
   reviews_plural2: atsiliepimai
-  reviews_singular: atsiliepimas
+  review_singular: atsiliepimas
 
 lost_password:
   title: Pamiršote slaptažodį?
