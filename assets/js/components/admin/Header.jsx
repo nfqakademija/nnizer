@@ -1,6 +1,13 @@
 import React, { useLocation } from 'react';
 import PropTypes from 'prop-types';
+import Translator from 'bazinga-translator';
+
 import { getTranslation } from '../../Utils/TranslationService';
+
+const flags = {
+  lt:  require('../../../images/LT-flag.svg'),
+  en: require('../../../images/EN-flag.svg'),
+};
 
 const PanelHeader = (props) => {
   const {
@@ -12,6 +19,10 @@ const PanelHeader = (props) => {
     searchTerm,
   } = props;
   const searchInput = React.createRef();
+
+  const baseURL = `${window.location.protocol}//${window.location.host}`;
+  let { locale } = Translator;
+  locale = locale === 'lt' ? 'en' : 'lt';
 
   const handleSearch = () => {
     searchInput.current.focus();
@@ -52,6 +63,15 @@ const PanelHeader = (props) => {
         />
         <span className="person__name">{name}</span>
       </div>
+      <a
+        className="footer__lang-switcher"
+        href={`/lang/${locale}`}
+      >
+        <img
+          src={flags[locale]}
+          alt={`${locale} flag`}
+        />
+      </a>
     </header>
   );
 };
