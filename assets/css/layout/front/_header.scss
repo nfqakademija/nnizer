@@ -4,7 +4,8 @@
   position: absolute;
   top: 0;
   width: 100%;
-  z-index: 1;
+
+  @include z-index(header);
 
   .container {
     align-items: center;
@@ -95,9 +96,9 @@
     .header__link {
       color: $color-white;
       margin-right: 0;
-      width: 100%;
       padding: rem(24px);
       white-space: nowrap;
+      width: 100%;
     }
 
     li {
@@ -115,11 +116,21 @@
       transform: translateY(0);
 
       @include z-index(mobileNavVisible);
+
+      .header__link.-cta {
+        background: $color-yellow;
+        color: $color-black;
+
+        @include transition(background 0.2s, color 0.2s);
+
+        &::after {
+          border-color: $color-yellow;
+        }
+      }
     }
 
     @include breakpoint(md) {
       align-items: center;
-      pointer-events: initial;
       background: none;
       box-shadow: none;
       display: flex;
@@ -127,6 +138,7 @@
       margin: 0;
       opacity: 1;
       padding: 0;
+      pointer-events: initial;
       position: static;
       transform: translateY(0);
 
@@ -135,8 +147,8 @@
       .header__link {
         margin-right: rem(16px);
         margin-top: 0;
-        width: auto;
         padding: rem(16px) rem(12px);
+        width: auto;
 
         &.-secondary {
           color: $color-black;

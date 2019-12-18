@@ -1,8 +1,13 @@
 .login {
   background: linear-gradient(to right bottom, $color-white 50%, $color-yellow 50%);
   height: 100vh;
+  margin-top: 6rem;
   overflow: hidden;
   width: 100vw;
+
+  @include breakpoint(sm) {
+    margin-top: 0;
+  }
 
   .container {
     @extend .flex-xy-center;

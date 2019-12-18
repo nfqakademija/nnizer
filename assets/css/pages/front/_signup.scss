@@ -1,7 +1,12 @@
 .sign-up {
   height: 100vh;
+  margin-top: 6rem;
   overflow: hidden;
   width: 100vw;
+
+  @include breakpoint(sm) {
+    margin-top: 0;
+  }
 
   & .row {
     align-items: center;
