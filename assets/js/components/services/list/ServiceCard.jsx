@@ -9,14 +9,27 @@ const ServiceCard = (props) => {
   const { service } = props;
   const baseURL = `${window.location.protocol}//${window.location.host}`;
 
+  const getReviewsTranslation = () => {
+    const reviewsCount = service.reviews.totalReviews;
+    if (reviewsCount > 1 && reviewsCount < 10) {
+      return getTranslation('services.reviews_plurar2');
+    }
+
+    if (reviewsCount >= 10) {
+      return getTranslation('services.reviews_plurar');
+    }
+
+    return getTranslation('services.review_singular');
+  };
+
   return (
     <div className="col-12 col-md-6 col-lg-4">
       <div className="service-card">
         <a href={`${baseURL}/service/${service.username}`}>
           <img
-          src={`${baseURL}/uploads/cover/${service.coverPhoto.filename}`}
-          alt=""
-          className="service-card__image"
+            src={`${baseURL}/uploads/cover/${service.coverPhoto.filename}`}
+            alt=""
+            className="service-card__image"
           />
         </a>
         <div className="service-card__info">
@@ -24,7 +37,7 @@ const ServiceCard = (props) => {
             {service.reviews.average}
             <Rater total={5} rating={service.reviews.average} interactive={false} />
             <span className="service-card__reviews">
-              {`(${service.reviews.totalReviews} reviews)`}
+              { `(${service.reviews.totalReviews} ${getReviewsTranslation()})` }
             </span>
           </div>
           <h3 className="service-card__name">

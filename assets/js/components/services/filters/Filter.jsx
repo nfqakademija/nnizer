@@ -13,7 +13,6 @@ const Filter = (props) => {
       className={`filters__btn ${isSelected && '-active'}`}
       onClick={() => setSelectedService(name)}
     >
-      <i className="icon-cross" />
       { getTranslation(`services.${name.toLowerCase()}`) }
     </button>
   );
