@@ -66,6 +66,7 @@
                                 </a>
                             </li>
                         {% endif %}    
+                    {% endif %}
                         <li>
                             {%  if (app.request.locale == 'lt') %}
                                 <a class="footer__lang-switcher" href="{{ path('language', {lang: 'en'}) }}">
@@ -79,7 +80,6 @@
                                  </a>
                             {% endif %}
                         </li>
-                    {% endif %}
                     </ul>
                 </div>
             </div>
