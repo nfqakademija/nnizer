@@ -6,17 +6,19 @@ import getTranslation from '../../../Utils/TranslationService';
 
 
 const ServiceCard = (props) => {
-  const { service, selectedService } = props;
+  const { service } = props;
   const baseURL = `${window.location.protocol}//${window.location.host}`;
 
   return (
     <div className="col-12 col-md-6 col-lg-4">
       <div className="service-card">
-        <img
-          src={`${baseURL}/uploads/cover/${selectedService.toLowerCase()}.jpg`}
+        <a href={`${baseURL}/service/${service.username}`}>
+          <img
+          src={`${baseURL}/uploads/cover/${service.coverPhoto.filename}`}
           alt=""
           className="service-card__image"
-        />
+          />
+        </a>
         <div className="service-card__info">
           <div className="service-card__stars">
             {service.reviews.average}

@@ -26,7 +26,7 @@ class CoverPhoto implements Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"frontPage"})
+     * @Groups({"frontPage", "filtered"})
      */
     private $filename;
 
