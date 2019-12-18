@@ -44,7 +44,7 @@ services:
   driver: driver
   teaching: teaching
   massages: massages
-  profile: profile
+  book: Book now
   cta: Services
 
 lost_password:
@@ -181,6 +181,7 @@ detailsForm:
   firstname: First Name
   lastname: Last Name
   phoneNumber: Phone Number
+  missing: Before accessing your reservations, you must fill in the details about yourself.
 
 
 locales:

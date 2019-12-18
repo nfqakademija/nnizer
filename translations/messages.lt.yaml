@@ -44,7 +44,7 @@ services:
   driver: Vairuotojai (-ės)
   teaching: Mentoriai (-ės)
   massages: Masažistai (-ės)
-  profile: profilis
+  book: Užsirezervuoti
   cta: Paslaugų teikėjai
 
 lost_password:
@@ -181,6 +181,7 @@ detailsForm:
   firstname: Jūsų vardas
   lastname: Jūsų pavardė
   phoneNumber: Telefono numeris
+  missing: Prieš pradedant naudotis paslaugomis, privalote užpildyti savo paskyros informaciją.
 
 locales:
   lt: Lietuvių k.

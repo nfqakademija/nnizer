@@ -39,6 +39,7 @@ class ContractorController extends AbstractController
         $settings = $contractorSettingsRepository->findOneBy(['contractor' => $this->getUser()->getId()]);
 
         if ($settings === null) {
+            $this->addFlash('notice', 'detailsForm.missing');
             return $this->redirectToRoute('contractor_settings');
         }
 

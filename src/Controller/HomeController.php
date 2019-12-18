@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Contractor;
 use App\Repository\ContractorRepository;
 use App\Repository\ServiceTypeRepository;
 use App\Service\ReviewService;
 use App\Service\SerializerService;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,9 +85,25 @@ class HomeController extends AbstractController
         ReviewService $reviewsService
     ): JsonResponse {
         $contractors = $serviceTypeRepository->findOneBy(['name' => $service])->getContractors();
+        $contractors = $this->filterInactiveContractors($contractors);
         $json = $serializer->getResponse($contractors, ['filtered']);
         $json = $reviewsService->reformatReviews($json);
 
         return new JsonResponse($json);
+    }
+
+    /**
+     * @param Collection $contractors
+     * @return Contractor[]
+     */
+    private function filterInactiveContractors(Collection $contractors): array
+    {
+        $filteredData = [];
+        foreach ($contractors as $contractor) {
+            if ($contractor->getSettings() !== null) {
+                $filteredData[] = $contractor;
+            }
+        }
+        return $filteredData;
     }
 }
