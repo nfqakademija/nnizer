@@ -12,6 +12,7 @@ $container-xl: 1140px;
 
 // z-index with maps
 $z-index: (
+  mobileNavVisible: 200,
   above: 100,
   modal: 50,
   sidenav: 20,
@@ -19,5 +20,6 @@ $z-index: (
   overlay: 5,
   link: 2,
   header: 1,
-  below: -1
+  below: -1,
+  mobileNavHidden: -10,
 );

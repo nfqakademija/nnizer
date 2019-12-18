@@ -31,27 +31,54 @@
                     </a>
                 </div>
                 <div class="header__right">
-                    <ul class="header__nav">
+                    <button class="header__toggler js-header-toggler">
+                        <i class="icon-menu"></i>
+                    </button>
+                    <ul class="header__nav js-header-nav">
+                        <li>
+                            <a class="header__link -secondary" href="{{ path('services') }}">{{ "services.cta"|trans }}</a>
+                        </li>
                     {% if is_granted('ROLE_CONTRACTOR') %}
-                        <a class="header__link" href="{{ path('app_logout') }}">{{ "navigation.logout"|trans }}</a>
-                        <a class="header__link -cta" href="{{ path('contractor') }}">{{ "navigation.reservations"|trans }}</a>
+                        <li>
+                            <a class="header__link" href="{{ path('app_logout') }}">{{ "navigation.logout"|trans }}</a>
+                        </li>
+                        <li>
+                            <a class="header__link -cta" href="{{ path('contractor') }}">{{ "navigation.reservations"|trans }}</a>
+                        </li>
                     {% else %}
                         {% if app.request.pathinfo != "/login" %}
-                            <a
-                                href="{{ path('app_login') }}"
-                                class="header__link -secondary"
-                            >
-                            {{ "navigation.login"|trans }}
-                            </a>
+                            <li>
+                                <a
+                                    href="{{ path('app_login') }}"
+                                    class="header__link -secondary"
+                                >
+                                {{ "navigation.login"|trans }}
+                                </a>
+                            </li>
                         {% endif %}
                         {% if app.request.pathinfo != "/register" %}
-                            <a 
-                                href="{{ path('app_register') }}"
-                                class="header__link -cta"
-                            >
-                            {{ "navigation.signup"|trans }}
-                            </a>
+                            <li>
+                                <a 
+                                    href="{{ path('app_register') }}"
+                                    class="header__link -cta"
+                                >
+                                {{ "navigation.signup"|trans }}
+                                </a>
+                            </li>
                         {% endif %}    
+                        <li>
+                            {%  if (app.request.locale == 'lt') %}
+                                <a class="footer__lang-switcher" href="{{ path('language', {lang: 'en'}) }}">
+                                    <img src="{{ asset('build/images/EN-flag.svg')}}" alt="Great Britain flag">
+                                </a>
+                            {%  endif %}
+
+                            {%  if (app.request.locale == 'en') %}
+                                <a class="footer__lang-switcher" href="{{ path('language', {lang: 'lt'}) }}">
+                                    <img src="{{ asset('build/images/LT-flag.svg')}}" alt="Lithuanian flag">
+                                 </a>
+                            {% endif %}
+                        </li>
                     {% endif %}
                     </ul>
                 </div>
@@ -63,12 +90,17 @@
 
         <footer class="footer">
             <div class="footer__languages">
-                <a class="footer__lang-switcher" href="{{ path('language', {lang: 'lt'}) }}">
-                    <img src="{{ asset('build/images/LT-flag.svg')}}" alt="Lithuanian flag">
-                </a>
-                <a class="footer__lang-switcher" href="{{ path('language', {lang: 'en'}) }}">
-                    <img src="{{ asset('build/images/EN-flag.svg')}}" alt="Great Britain flag">
-                </a>
+                {%  if (app.request.locale == 'lt') %}
+                    <a class="footer__lang-switcher" href="{{ path('language', {lang: 'en'}) }}">
+                        <img src="{{ asset('build/images/EN-flag.svg')}}" alt="Great Britain flag">
+                    </a>
+                {%  endif %}
+
+                {%  if (app.request.locale == 'en') %}
+                    <a class="footer__lang-switcher" href="{{ path('language', {lang: 'lt'}) }}">
+                        <img src="{{ asset('build/images/LT-flag.svg')}}" alt="Lithuanian flag">
+                        </a>
+                {% endif %}
             </div>
 
             <img

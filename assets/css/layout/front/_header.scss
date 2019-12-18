@@ -10,16 +10,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-  }
-
-  &__right {
-    a:first-child {
-      margin-right: rem(16px);
-    }
-  }
-
-  &__logo {
-    height: rem(64px);
+    position: relative;
   }
 
   &__link {
@@ -72,5 +63,87 @@
         transform: translateY(rem(-4px));
       }
     }
+  }
+
+  &__toggler {
+    border: none;
+
+    @include breakpoint(md) {
+      display: none;
+    }
+  }
+
+  &__nav {
+    background-color: $color-black;
+    border-radius: rem(6px);
+    box-shadow: 0 0 rem(5px) rgba(0, 0, 0, 0.25);
+    margin-top: rem(32px);
+    opacity: 0;
+    padding: rem(24px) rem(32px);
+    pointer-events: none;
+    position: absolute;
+    right: rem(15px);
+    transform: translateY(rem(32px));
+
+    @include z-index(mobileNavHidden);
+    @include transition(opacity 0.2s, transform 0.2s);
+
+    @include breakpoint(sm) {
+      right: 0;
+    }
+
+    .header__link {
+      color: $color-white;
+      margin-right: 0;
+    }
+
+    li {
+      margin-top: rem(16px);
+
+      &:last-child {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    &.-active {
+      opacity: 1;
+      pointer-events: initial;
+      transform: translateY(0);
+
+      @include z-index(mobileNavVisible);
+    }
+
+    @include breakpoint(md) {
+      align-items: center;
+      background: none;
+      box-shadow: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      opacity: 1;
+      padding: 0;
+      position: static;
+      transform: translateY(0);
+
+      @include z-index(header);
+
+      .header__link {
+        margin-right: rem(16px);
+        margin-top: 0;
+
+        &.-secondary {
+          color: $color-black;
+        }
+      }
+
+      li {
+        margin: 0;
+      }
+    }
+  }
+
+  &__logo {
+    height: rem(64px);
   }
 }

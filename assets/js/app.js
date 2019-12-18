@@ -20,5 +20,12 @@ const displayBackendAlert = () => {
   }
 };
 
+const toggleMobileNav = () => {
+  const toggler = document.querySelector('.js-header-toggler');
+  const nav = document.querySelector('.js-header-nav');
+  toggler.addEventListener('click', () => nav.classList.toggle('-active'));
+};
+
 renderAlertContainer();
 displayBackendAlert();
+toggleMobileNav();

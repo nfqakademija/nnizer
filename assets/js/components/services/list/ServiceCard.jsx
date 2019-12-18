@@ -9,7 +9,6 @@ const ServiceCard = (props) => {
   const { service, selectedService } = props;
   const baseURL = `${window.location.protocol}//${window.location.host}`;
 
-  console.log(service);
   return (
     <div className="col-12 col-md-6 col-lg-4">
       <div className="service-card">

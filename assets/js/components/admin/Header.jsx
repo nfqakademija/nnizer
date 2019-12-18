@@ -9,7 +9,7 @@ const PanelHeader = (props) => {
     avatar,
     name,
     setSearchTerm,
-    searchTerm
+    searchTerm,
   } = props;
   const searchInput = React.createRef();
 
