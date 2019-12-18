@@ -101,10 +101,10 @@
     color: $color-grey-1;
     left: rem(14px);
     padding: 0 rem(2px);
+    pointer-events: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    pointer-events: none;
 
     @include transition(font-size 0.2s, padding 0.2s, top 0.2s);
   }
