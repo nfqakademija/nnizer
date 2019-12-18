@@ -58,7 +58,6 @@ const ReservationRow = (props) => {
   };
 
   const deleteReservation = () => {
-    // @Route("/api/contractor/{contractorKey}/delete/{reservationId}", methods="DELETE")
     buttonClicked(`${getTranslation('crm.removal.progress')} 🗑`, setDeletion);
     axios
       .delete(`/api/contractor/${userKey}/delete/${id}`)

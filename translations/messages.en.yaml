@@ -149,6 +149,7 @@ email:
     cancel: Cancel my reservation
     home: NNIZER
     reset: RESET
+  review: Let us know how was your experience!
 
 settings_form:
   choosedays: Please select your work days!
