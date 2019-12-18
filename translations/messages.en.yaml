@@ -52,14 +52,17 @@ services:
 
 lost_password:
   title: Lost your password?
-  description: Enter your email that you have used to register on NNIZER. We will send you a mail with password reset details.
+  description: Enter your username on NNIZER. We will send you a mail with password reset details.
   email: Email Address
+  username: Username
   submit: Submit
   nonexisting: There is no associated contractor account
   invalid:
     email: Please make sure your email contains '@' and '.'
+    username: Your username may only contain alphanumerical symbols
   blank:
     email: Please enter your email
+    username: Please enter your username
   sent: An email has been sent
   existing: There is an active lost password attempt. If you did not receive the email, try again in 60 minutes.
 

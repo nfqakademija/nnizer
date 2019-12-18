@@ -52,14 +52,17 @@ services:
 
 lost_password:
   title: Pamiršote slaptažodį?
-  description: Įveskite el. paštą, kuriuo registravotes sistemoje. Mes jums išsiųsime slaptažodžio atstatymo nuorodą.
+  description: Įveskite vartotojo vardą, kuriuo registravotės sistemoje. Mes jums išsiųsime slaptažodžio atstatymo nuorodą.
   email: El. paštas
+  username: Vartotojo vardas
   submit: Pateikti
   nonexisting: Vartotojas, registruotas šiuo paštu, neegzistuoja.
   invalid:
     email: Įvestas neteisingas el. pašto adresas
+    username: Jūsų vartotojo vardą sudaryti gali tik raidės ir skaičiai
   blank:
     email: Įveskite savo el. paštą
+    username: Įveskite savo vartotojo vardą
   sent: Slaptažodžio atstatymo instrukcija buvo išsiųsta el. paštu.
   existing: Slaptažodžio atstatymo funkcija šiai paskyrai jau iškviesta. Jeigu laiško negavote, pabandykite iš naujo po 60 min.
 

@@ -37,6 +37,28 @@ class LostPasswordValidator
     }
 
     /**
+     * @param String $username
+     * @return array
+     */
+    public function validateUsername(String $username): array
+    {
+        $validator = Validation::createValidator();
+
+        $input = ['username' => $username];
+
+        $constraints = new Assert\Collection([
+            'username' => [
+                new Assert\Type(['type' => 'alnum', 'message' => 'lost_password.invalid.username']),
+                new Assert\NotBlank(['message' => 'lost_password.blank.username'])
+            ]
+        ]);
+
+        $this->constraints = $validator->validate($input, $constraints);
+
+        return $this->getErrorMessages();
+    }
+
+    /**
      * @return array
      */
     public function getErrorMessages(): array
