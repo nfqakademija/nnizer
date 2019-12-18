@@ -28,8 +28,6 @@ const PanelHeader = (props) => {
     searchInput.current.focus();
   };
 
-  console.log(Translator.locale);
-
   return (
     <header className="panel__header admin-container">
       <button
