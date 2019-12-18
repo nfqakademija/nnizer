@@ -267,7 +267,7 @@ contractor:
   reviews:
     no_reviews: You don't have reviews yet.
     title: Reviews
-    singular: review
+    singular: reviews
     plural1: reviews
     plural2: reviews
     filter:
