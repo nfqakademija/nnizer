@@ -80,7 +80,7 @@
     margin-top: rem(32px);
     opacity: 0;
     padding: rem(24px) rem(32px);
-    //pointer-events: none;
+    pointer-events: none;
     position: absolute;
     right: rem(15px);
     transform: translateY(rem(32px));
@@ -95,6 +95,8 @@
     .header__link {
       color: $color-white;
       margin-right: 0;
+      width: 100%;
+      padding: rem(24px);
     }
 
     li {
@@ -116,6 +118,7 @@
 
     @include breakpoint(md) {
       align-items: center;
+      pointer-events: initial;
       background: none;
       box-shadow: none;
       display: flex;
@@ -131,6 +134,9 @@
       .header__link {
         margin-right: rem(16px);
         margin-top: 0;
+        width: auto;
+        padding: rem(16px) rem(12px);
+
 
         &.-secondary {
           color: $color-black;
