@@ -66,11 +66,21 @@
       padding-left: rem(12px);
       width: 100%;
 
+      &::placeholder {
+        opacity: 0;
+
+        @include transition(opacity 0.15s);
+      }
+
       &:focus,
       &:valid {
         border: 1px solid $color-yellow;
         box-shadow: none;
 
+        &::placeholder {
+          opacity: 1;
+        }
+        
         ~ label {
           font-size: rem(12px);
           padding: 0 rem(2px);
