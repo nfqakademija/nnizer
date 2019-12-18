@@ -46,8 +46,8 @@ services:
   massages: massages
   book: Book now
   cta: Services
-  reviews_plurar: reviews
-  reviews_plurar2: reviews
+  reviews_plural: reviews
+  reviews_plural2: reviews
   reviews_singular: review
 
 lost_password:

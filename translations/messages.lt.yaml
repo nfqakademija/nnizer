@@ -46,8 +46,8 @@ services:
   massages: Masažistai (-ės)
   book: Užsirezervuoti
   cta: Paslaugų teikėjai
-  reviews_plurar: atsiliepimų
-  reviews_plurar2: atsiliepimai
+  reviews_plural: atsiliepimų
+  reviews_plural2: atsiliepimai
   reviews_singular: atsiliepimas
 
 lost_password:

@@ -12,11 +12,11 @@ const ServiceCard = (props) => {
   const getReviewsTranslation = () => {
     const reviewsCount = service.reviews.totalReviews;
     if (reviewsCount > 1 && reviewsCount < 10) {
-      return getTranslation('services.reviews_plurar2');
+      return getTranslation('services.reviews_plural2');
     }
 
     if (reviewsCount >= 10) {
-      return getTranslation('services.reviews_plurar');
+      return getTranslation('services.reviews_plural');
     }
 
     return getTranslation('services.review_singular');
