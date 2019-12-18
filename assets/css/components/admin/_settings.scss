@@ -22,16 +22,16 @@
   &__website {
     @extend .flex-xy-center;
 
+    color: $color-black;
     margin-bottom: rem(24px);
     text-decoration: none;
-    color: $color-black;
 
     @include transition(color 0.2s);
 
     i {
       color: $color-grey-1;
-      margin-right: rem(16px);
       margin-bottom: rem(4px);
+      margin-right: rem(16px);
 
       @include transition(color 0.2s);
     }

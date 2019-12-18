@@ -17,6 +17,12 @@
     transform: translateY(rem(-50px));
   }
 
+  &.-static {
+    left: 0;
+    margin: 0;
+    position: relative;
+  }
+
   div {
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
     background: $color-yellow;

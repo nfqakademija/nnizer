@@ -26,4 +26,8 @@
       width: 80%;
     }
   }
+
+  & ~ .footer {
+    display: none;
+  }
 }

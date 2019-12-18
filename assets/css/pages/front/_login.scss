@@ -17,4 +17,8 @@
   &__forgot-link {
     float: right;
   }
+
+  & ~ footer {
+    display: none;
+  }
 }

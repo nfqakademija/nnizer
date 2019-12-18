@@ -80,17 +80,17 @@
     }
 
     &[type='file'] {
-      padding: rem(16px) 0;
-      display: flex;
       border: none;
+      display: flex;
+      padding: rem(16px) 0;
     }
   }
 
   label {
     background: white;
-    padding: 0 rem(2px);
     color: $color-grey-1;
     left: rem(14px);
+    padding: 0 rem(2px);
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -104,15 +104,15 @@
     }
   }
 
-  textarea { 
+  textarea {
     background: white;
-    margin: rem(16px) 0;
-    width: 100%;
+    border: 1px solid $color-grey-2;
     border-radius: rem(2px);
     box-shadow: 0 0 rem(2px) rgba(0, 0, 0, 0.5);
-    border: 1px solid $color-grey-2;
-    padding: rem(12px);
+    margin: rem(16px) 0;
     min-height: rem(196px);
+    padding: rem(12px);
+    width: 100%;
   }
 
   &__checkboxes {
@@ -124,13 +124,13 @@
 
   &__checkbox {
     display: flex;
-    width: 30%;
     margin-bottom: rem(16px);
+    width: 30%;
 
     input {
+      margin-right: rem(8px);
       min-height: 0;
       width: auto;
-      margin-right: rem(8px);
     }
   }
 }

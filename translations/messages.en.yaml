@@ -35,6 +35,18 @@ home:
   footer_text1: Made with 
   footer_text2: at <span class="orange-nfq-text">NFQ</span> academy
     
+services:
+  header: NNIZER - services list
+  error: Can't load services. Try again or contact us!
+  select_filters: Select one of most popular services
+  hairdressing: hairdressing
+  fitness: fitness
+  driver: driver
+  teaching: teaching
+  massages: massages
+  profile: profile
+  cta: Services
+
 lost_password:
   title: Lost your password?
   description: Enter your email that you have used to register on NNIZER. We will send you a mail with password reset details.

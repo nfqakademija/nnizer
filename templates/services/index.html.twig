@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ "services.header"|trans }} {% endblock %}
+
+{% block body %}
+    <main id="services-list"></main>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('services') }}
+    {% endblock %}
+{% endblock %}

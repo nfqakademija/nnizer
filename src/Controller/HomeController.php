@@ -25,6 +25,15 @@ class HomeController extends AbstractController
     }
 
     /**
+     * @Route("/services", name="services")
+     * @return Response
+     */
+    public function services()
+    {
+        return $this->render('services/index.html.twig');
+    }
+
+    /**
      * @Route("/lang/{lang}", name="language")
      * @param Request $request
      * @param string $lang

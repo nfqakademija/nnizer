@@ -35,6 +35,18 @@ home:
   footer_text1: Sukurta su
   footer_text2:  <span class="orange">NFQ</span> akademijoje
 
+services:
+  header: NNIZER - Paslaugų sąrašas
+  error: Paslaugos nepasiekiamos. Bandykite dar kartą arba susisiekite su mumis!
+  select_filters: Pasirinkite vieną iš populiariausių paslaugų
+  hairdressing: Kirpėjai (-os)
+  fitness: Treneriai (-ės)
+  driver: Vairuotojai (-ės)
+  teaching: Mentoriai (-ės)
+  massages: Masažistai (-ės)
+  profile: profilis
+  cta: Paslaugų teikėjai
+
 lost_password:
   title: Pamiršote slaptažodį?
   description: Įveskite el. paštą, kuriuo registravotes sistemoje. Mes jums išsiųsime slaptažodžio atstatymo nuorodą.

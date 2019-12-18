@@ -17,7 +17,6 @@ import lt from 'date-fns/locale/lt';
 import { showAlert } from './Utils/NotificationUtils';
 import getTranslation from './Utils/TranslationService';
 
-
 let isEn = true;
 
 if (Translator.locale === 'lt') {
@@ -124,8 +123,6 @@ const Datepicker = () => {
         showAlert(getTranslation('datepicker.error.dates'), 'error', 4000);
       });
   };
-
-
 
   useEffect(() => {
     fetchData();
