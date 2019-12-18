@@ -181,6 +181,7 @@ detailsForm:
   firstname: First Name
   lastname: Last Name
   phoneNumber: Phone Number
+  missing: Before accessing your reservations, you must fill in the details about yourself.
 
 
 locales:

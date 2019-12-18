@@ -3,6 +3,12 @@
 {% block title %}{{ "detailsForm.edit"|trans }}{% endblock %}
 
 {% block body %}
+    <div id="backend-alert-container"></div>
+    {% for message in app.flashes('notice')|slice(0, 1) %}
+        <p class="js-backend-alert" style="display:none">
+            {{ message|trans }}
+        </p>
+    {% endfor %}
     <div class="container -top-spacing">
         <div class="row">
             <div class="col-12 col-md-5">
@@ -187,6 +193,7 @@
     </div>
 
     {% block javascripts %}
-        {{ encore_entry_script_tags('settings') }} 
+        {{ encore_entry_script_tags('settings') }}
+        {{ encore_entry_script_tags('app') }}
     {% endblock %}
 {% endblock %}

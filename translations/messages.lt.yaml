@@ -181,6 +181,7 @@ detailsForm:
   firstname: Jūsų vardas
   lastname: Jūsų pavardė
   phoneNumber: Telefono numeris
+  missing: Prieš pradedant naudotis paslaugomis, privalote užpildyti savo paskyros informaciją.
 
 locales:
   lt: Lietuvių k.
