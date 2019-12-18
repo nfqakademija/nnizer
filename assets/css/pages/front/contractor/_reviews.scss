@@ -1,4 +1,8 @@
 .reviews {
+  @include breakpoint(md) {
+    padding-bottom: rem(96px);
+  }
+
   .rating {
     margin-top: 16px;
   }

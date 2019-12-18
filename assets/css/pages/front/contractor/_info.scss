@@ -1,4 +1,10 @@
 .info {
+  padding-bottom: rem(96px);
+
+  @include breakpoint(md) {
+    padding-bottom: 0;
+  }
+
   &__list {
     margin-top: rem(16px);
   }

@@ -7,10 +7,10 @@ import {
   isThisWeek,
   format,
 } from 'date-fns/esm';
+import axios from 'axios';
 
 import ReservationRow from './ReservationRow';
 import { getTranslation } from '../../../Utils/TranslationService';
-import axios from 'axios';
 
 const Reservations = (props) => {
   const {

@@ -18,14 +18,14 @@
         </div>
     </div>
 </header>
-<div class="login">
+<main class="login">
     <div class="container">
         <div class="login__window col-lg-5">
             <form method="post" class="form">
                 {% if app.user %}
                     <div class="mb-3">
                         {{ "login_page.logged_in_as"|trans({'%user%': app.user.email}, "messages") }}, <a
-                                href="{{ path('admin_logout') }}">{{ "login_page.logout"|trans }}</a>
+                                href="{{ path('admin_logout') }}">{{ "login_page.logout"|trans }}</main>
                     </div>
                 {% endif %}
                 <h1>{{ "login_page.login_admin"|trans }}</h1>
@@ -56,7 +56,7 @@
             </form>
         </div>
     </div>
-</div>
+</a>
 <footer style="position: fixed; bottom: 10%; left: 20px; width: 100%; font-size: 20px">
     <div class="container">
         <a class="footer__lang-switcher" href="{{ path('language', {lang: 'lt'}) }}">
