@@ -18,7 +18,7 @@ const Template = () => {
     axios({
       method: 'get',
       baseURL,
-      url: '/public-api/services/',
+      url: '/public-api/services',
     }).then((response) => {
       setServicesList(response.data);
       setFetched(true);
