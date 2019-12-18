@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Translator from 'bazinga-translator';
 import {
   parseISO,
   isPast,
@@ -7,10 +8,17 @@ import {
   isThisWeek,
   format,
 } from 'date-fns/esm';
+import lt from 'date-fns/locale/lt';
+import en from 'date-fns/locale/en-GB';
 import axios from 'axios';
 
 import ReservationRow from './ReservationRow';
 import { getTranslation } from '../../../Utils/TranslationService';
+
+let locale = en;
+if (Translator.locale === 'lt') {
+  locale = lt;
+}
 
 const Reservations = (props) => {
   const {
@@ -166,7 +174,7 @@ const Reservations = (props) => {
     <div className="panel__content admin-container">
       <p className="panel__time">
         📆
-        { `${getTranslation('crm.time.today_is')} ${format(new Date(), 'yyyy-MM-dd!')} `}
+        { `${getTranslation('crm.time.today_is')} ${format(new Date(), 'cccc, MMMM Lo!', { locale })} `}
       </p>
       <h2>{getTranslation('crm.reservations')}</h2>
       {/* TODO: do add new btn */}
