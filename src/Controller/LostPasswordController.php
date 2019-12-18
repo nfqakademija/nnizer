@@ -32,7 +32,11 @@ class LostPasswordController extends AbstractController
         $request->getSession()->remove('errors');
         $request->getSession()->remove('success');
 
-        return $this->render('contractor/lostpassword.html.twig', ['errors' => $errors, 'success' => $success]);
+        if ($success != null) {
+            $this->addFlash('notice', $success[0]);
+            return $this->redirectToRoute('home')   ;
+        }
+        return $this->render('contractor/lostpassword.html.twig', ['errors' => $errors]);
     }
 
     /**
