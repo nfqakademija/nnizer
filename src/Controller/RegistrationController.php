@@ -42,8 +42,6 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $user->setDefaultProfilePhoto();
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
