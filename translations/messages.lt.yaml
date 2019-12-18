@@ -281,7 +281,7 @@ contractor:
     Sunday: Sekmadienis
   book: Užsirezervuoti
   booking:
-    success: Rezervacija sėkminga!
+    success: Rezervacija sėkminga! Beliko patvirtinti ją paspaudus ant patvirtinimo nuorodos, kurią išsiuntėme el. paštu.
     send: Siunčiamos rezervacijos detalės
   error:
     provider: Nepasiekiama tiekėjo informacija. Bandykite dar kartą arba susisiekite su mumis!

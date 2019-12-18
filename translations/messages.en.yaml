@@ -282,7 +282,7 @@ contractor:
     Sunday: Sunday
   book: Book now
   booking:
-    success: Successfully booked!
+    success: Successfully booked! Now don't forget to check your email for verification link.
     send: Sending booking details
   error:
     provider: Can't get provider information. Try again or contact us!
