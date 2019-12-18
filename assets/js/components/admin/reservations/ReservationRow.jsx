@@ -160,7 +160,7 @@ const ReservationRow = (props) => {
         </div>
         <div className="reservations__item col-lg-2">
           <i className="icon-phone item__icon hide-lg" />
-          {phoneNumber === '' ? phoneNumber : getTranslation('crm.missing.phone')}
+          {phoneNumber !== '' ? phoneNumber : getTranslation('crm.missing.phone')}
         </div>
         <div className="reservations__item col-lg-2">
           <div className={`status -full -${statusClass}`}>{statusText}</div>
