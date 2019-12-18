@@ -9,6 +9,11 @@ set -x # Show commands being executed
 # Downloading dependencies and building frontend
 APP_ENV=prod composer install --no-dev --no-scripts --no-interaction --optimize-autoloader
 yarn
+
+# Generate trasnlation JSON files from YAML (to be used by Encore)
+bin/console bazinga:js-translation:dump assets/js --format=json --merge-domains --quiet --env=prod
+
+# Build JavaScript assets
 yarn run encore production
 
 # <-- This is a good place to add custom commands for your project
