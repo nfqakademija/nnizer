@@ -17,7 +17,7 @@ const Settings = (props) => {
         { icon !== ''
           && <i className={`field__icon icon-${icon}`} /> }
         { output === null
-          ? getTranslation('crm.no_facebook')
+          ? getTranslation('crm.no_details')
           : output }
       </div>
     </div>

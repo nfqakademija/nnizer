@@ -48,7 +48,7 @@ services:
   cta: Services
   reviews_plural: reviews
   reviews_plural2: reviews
-  review_singular: review
+  review_singular: reviews
 
 lost_password:
   title: Lost your password?
@@ -205,7 +205,7 @@ crm:
   service_title: Service title
   service_description: Service description
   change_settings: Change settings
-  no_facebook: Facebook is not added
+  no_details: Not added yet
   status: Status
   reservations: Reservations
   search: Type in to search...
