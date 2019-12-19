@@ -16,7 +16,7 @@ const Settings = (props) => {
       <h2>{getTranslation('crm.settings')}</h2>
       <div className="profile-settings col-md-12 col-lg-8">
         <img
-          src={userData.profilePhoto.filename != null
+          src={userData.profilePhoto != null && userData.profilePhoto.filename != null
               ? `${baseURL}/uploads/profile/${userData.profilePhoto.filename}`
               : `${baseURL}/uploads/profile/default.png`}
           alt={`${userData.username}'s profile picture`}
