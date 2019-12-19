@@ -106,6 +106,19 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     /**
      * @var array
      */
+    private $titles = [
+        'Top quality',
+        'Best in town',
+        'Top notch',
+        'Excellent',
+        'First-class',
+        'Highest quality',
+        'Superior'
+    ];
+
+    /**
+     * @var array
+     */
     private $descriptions = [
         'Hey there! I\'m a professional that you certainly need. With experience of over 10 years in the industry' .
         ' I\'m proud to say that I am one of the best. Here\'s the best part - if you do not really like my ' . '
@@ -118,6 +131,18 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         'doing. Sign up now and let me show you what kind of quality you deserve. ',
         'I\'ve learned everything from my mentors in my young days and now I provide top quality services in this' .
         'town. Feel free to check it out!',
+    ];
+
+    /**
+     * @var array
+     */
+    private $reviewMessages = [
+        'There\'s not much to tell, I think my rating tells it all',
+        'Thanks for your time',
+        'Thanks for your services',
+        'Didn\'t meet my expectations, but it was fine',
+        'I really liked you as a person',
+        'What I really liked is the location - got to the place in 5 minutes',
     ];
 
     /**
@@ -169,7 +194,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $contractor->setDescription($description);
             $this->loadService($contractor, $manager);
             $service = $contractor->getServices()->getName();
-            $contractor->setTitle($service . $i . ' services');
+            $contractor->setTitle($this->titles[random_int(0, 6)]  . ' ' . strtolower($service));
             $id = random_int(1, 10);
             $this->addCoverPhoto($contractor, $manager, strtolower($service) . '-' . $id . '.jpg');
             $this->addProfilePhoto($contractor, $manager);
@@ -240,8 +265,10 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
     {
         for ($i = 1; $i < 20; $i++) {
             $reservation = new Reservation();
-            $reservation->setFirstname($contractor->getUsername() . 'client' . $i);
-            $reservation->setLastname('fixture');
+            $username = $this->firstnames[random_int(0, 9)];
+            $lastname = $this->lastnames[random_int(0, 9)];
+            $reservation->setFirstname($username);
+            $reservation->setLastname($lastname);
             $reservation->setEmail($reservation->getFirstname() . '@' . $i . '.com');
             $reservation->setIsVerified((boolean)random_int(0, 1));
             $reservation->setPhoneNumber((string)random_int(860000000, 869999999));
@@ -271,7 +298,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         foreach ($reservations as $reservation) {
             $review = new Review();
             $review->setContractor($contractor);
-            $review->setDescription('The rating tells it all!');
+            $review->setDescription($this->reviewMessages[random_int(0, 5)]);
             $review->setReservation($reservation);
             $review->setStars(random_int(1, 5));
             $manager->persist($review);
