@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Contractor;
 use App\Repository\ContractorRepository;
 use App\Repository\ServiceTypeRepository;
+use App\Service\ContractorService;
 use App\Service\ReviewService;
 use App\Service\SerializerService;
 use Doctrine\Common\Collections\Collection;
@@ -74,6 +75,7 @@ class HomeController extends AbstractController
      * @param string $service
      * @param ServiceTypeRepository $serviceTypeRepository
      * @param SerializerService $serializer
+     * @param ContractorService $contractorService
      * @param ReviewService $reviewsService
      * @return JsonResponse
      * @throws ExceptionInterface
@@ -82,28 +84,14 @@ class HomeController extends AbstractController
         string $service,
         ServiceTypeRepository $serviceTypeRepository,
         SerializerService $serializer,
+        ContractorService $contractorService,
         ReviewService $reviewsService
     ): JsonResponse {
         $contractors = $serviceTypeRepository->findOneBy(['name' => $service])->getContractors();
-        $contractors = $this->filterInactiveContractors($contractors);
+        $contractors = $contractorService->filterInactiveContractors($contractors);
         $json = $serializer->getResponse($contractors, ['filtered']);
         $json = $reviewsService->reformatReviews($json);
 
         return new JsonResponse($json);
-    }
-
-    /**
-     * @param Collection $contractors
-     * @return Contractor[]
-     */
-    private function filterInactiveContractors(Collection $contractors): array
-    {
-        $filteredData = [];
-        foreach ($contractors as $contractor) {
-            if ($contractor->getSettings() !== null) {
-                $filteredData[] = $contractor;
-            }
-        }
-        return $filteredData;
     }
 }
