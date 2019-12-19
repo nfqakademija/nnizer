@@ -62,8 +62,7 @@ class ContractorController extends AbstractController
 
         if ($contractor !== null) {
             return $this->render('contractor/page.html.twig', [
-                'contractor' => $contractor,
-                'errors' => [], //TODO
+                'contractor' => $contractor
             ]);
         } else {
             return $this->redirectToRoute('home');

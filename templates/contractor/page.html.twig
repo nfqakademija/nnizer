@@ -15,11 +15,6 @@
 				</header>
 				<main class="modal__content" id="register-modal-content">
 					<form class="form js-book-form" method="POST" action="{{ path('app_new-reservation') }}">
-						{% if errors is defined %}
-							{% for error in errors %}
-								<p>{{ error|trans }}</p>
-							{% endfor %}
-						{% endif %}
 						<div class="form__field">
 							<div id="datepicker"></div>
 						</div>

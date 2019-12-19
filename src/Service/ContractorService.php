@@ -116,4 +116,20 @@ class ContractorService
         }
         return $dates;
     }
+
+
+    /**
+     * @param Collection<Contractor> $contractors
+     * @return Contractor[]
+     */
+    public function filterInactiveContractors(Collection $contractors): array
+    {
+        $filteredData = [];
+        foreach ($contractors as $contractor) {
+            if ($contractor->getSettings() !== null) {
+                $filteredData[] = $contractor;
+            }
+        }
+        return $filteredData;
+    }
 }
